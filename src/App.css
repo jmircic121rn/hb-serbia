@@ -1,38 +1,173 @@
-.App {
-  text-align: center;
+:root {
+  --hb-black: #000000;
+  --hb-white: #ffffff;
+  --hb-gray-bg: #fdfdfd;
+  --hb-gray-border: #eeeeee;
+  --hb-text-muted: #888888;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--hb-white);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.pd-split-container {
+  display: flex;
   min-height: 100vh;
+  background-color: #000; /* Osnova celog ekrana */
+  overflow: hidden;
+}
+
+/* SIDEBAR - CRNI DEO */
+.pd-sidebar {
+  width: 30%;
+ background-color: #050505; /* Malo tamnije od desne strane */
+  border-right: 1px solid rgba(255, 255, 255, 0.05); /* Skoro nevidljiva linija */
+  overflow: hidden;
+  color: var(--hb-white);
+  padding: 60px 40px;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.category-tag {
+  color: #666;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.sidebar-header h1 {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.sidebar-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-top: 20px;
+  border-left: 1px solid #444;
+  padding-left: 20px;
+  line-height: 1.6;
+  transition: all 0.5s ease;
+}
+
+.pd-sidebar:hover .sidebar-subtitle {
+  color: #fff;
+  border-left-color: #888;
+}
+
+/* CONTENT - BELI DEO */
+.pd-content {
+  width: 70%;
+  margin-left: 30%;
+  padding: 40px 100px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding-top: 100px;
+  flex: 1;
+  background-color: #0a0a0a;
+  position: relative;
+}
+
+/* KARTICE I ELEMENTI */
+.bars-question-container {
+  width: 100%;
+  max-width: 750px;
+}
+
+.question-text {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 40px;
+  line-height: 1.2;
+}
+
+.bars-option-btn {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--hb-gray-border);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  transition: all 0.2s ease;
+  text-align: left;
 }
 
-.App-link {
-  color: #61dafb;
+.bars-option-btn:hover {
+  border-color: #000;
+  transform: translateY(-3px);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bars-option-number {
+  font-weight: 900;
+  font-size: 12px;
+  margin-right: 20px;
+  color: #ccc;
+}
+
+.hb-primary-btn {
+  background: #000;
+  color: #fff;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #afafaf;
+}
+
+.hb-primary-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #888;
+}
+
+.hb-input {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid var(--hb-gray-border);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #ffffffbc;
+}
+
+.landing-scroll-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.assessment-card, .result-card, .form-container {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
 }
