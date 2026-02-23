@@ -164,9 +164,34 @@ const PersonalResponsibility = () => {
             <section style={{ padding: '100px 10%', backgroundColor: '#0a0a0a' }}>
                 <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '60px', textAlign: 'center' }}>Ko je tu za Vas?</h2>
                 <div style={{ display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', gap: '50px', alignItems: 'flex-start' }}>
-                    <div style={{ flexShrink: 0 }}>
-                        <div style={{ width: '250px', height: '300px', backgroundColor: '#111', border: '1px solid rgba(255,180,120,0.2)' }}>
-                            <img src="/ivana.jpg" alt="Ivana Bojović" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }} />
+                    {/* VIZUELNI DEO SA OKVIROM (Success Line stil) */}
+                    <div style={{ position: 'relative', width: '280px', height: '350px', flexShrink: 0, margin: window.innerWidth <= 992 ? '0 auto 40px auto' : '0' }}>
+                        {/* Narandžasti okvir u pozadini */}
+                        <div style={{ 
+                            position: 'absolute', 
+                            top: '15px', 
+                            left: '-15px', 
+                            width: '100%', 
+                            height: '100%', 
+                            border: '1px solid rgba(255, 180, 120, 0.4)', 
+                            zIndex: 0 
+                        }} />
+                        
+                        {/* Slika trenera */}
+                        <div style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            backgroundColor: '#111', 
+                            overflow: 'hidden',
+                            position: 'relative',
+                            zIndex: 1,
+                            border: '1px solid rgba(255,255,255,0.05)'
+                        }}>
+                            <img 
+                                src="/ivana.jpg" 
+                                alt="Ivana Bojović" 
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.9 }} 
+                            />
                         </div>
                     </div>
                     <div>

@@ -134,6 +134,7 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
 
 const EclipseIntro = ({ onProceed }) => {
     const [showOptions, setShowOptions] = useState(false);
+    const [menuLevel, setMenuLevel] = useState('main'); // 'main' ili 'assessment'
 
     return (
         <div style={{
@@ -169,8 +170,34 @@ const EclipseIntro = ({ onProceed }) => {
                 <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
                 <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
                 <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
-                <div style={{ position: 'relative', width: '280px', height: '280px', backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 15px rgba(0,0,0,1)' }} />
-            </motion.div>
+{/* Crni krug (Zemlja/Senka) */}
+<div style={{ 
+    position: 'relative', 
+    width: '280px', 
+    height: '280px', 
+    backgroundColor: '#000', 
+    borderRadius: '50%', 
+    zIndex: 5, 
+    boxShadow: '0 0 15px rgba(0,0,0,1)',
+    display: 'flex',            // Dodato za centriranje logoa
+    alignItems: 'center',       // Dodato
+    justifyContent: 'center',    // Dodato
+    overflow: 'hidden'
+}}>
+    {/* LOGO KOJI JE UNUTAR KRUGA */}
+    <motion.img 
+        src="/logo.png" 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }} // Suptilna vidljivost
+        transition={{ delay: 1, duration: 2 }}
+        style={{ 
+            width: '220px', // Veličina da lepo stane unutar 280px
+            height: 'auto',
+            objectFit: 'contain',
+            filter: 'grayscale(100%) brightness(1.5)' 
+        }} 
+    />
+</div>            </motion.div>
 
             <div style={{ textAlign: 'center', zIndex: 20 }}>
                 <motion.h1
@@ -205,11 +232,10 @@ const EclipseIntro = ({ onProceed }) => {
                         transition: 'all 0.3s ease'
                     }}
                 >
-                    {showOptions ? "Odaberite vaš sistem" : "Izaberite vašu destinaciju"}
-                </motion.p>
+{menuLevel === 'main' ? "Izaberite vašu destinaciju" : "Odaberite vaš sistem"}                </motion.p>
 
-                <AnimatePresence>
-                    {showOptions && (
+                <AnimatePresence mode="wait">
+                    {showOptions && menuLevel === 'main' && (
                         <motion.div 
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -220,29 +246,67 @@ const EclipseIntro = ({ onProceed }) => {
                                 justifyContent: 'center'
                             }}
                         >
-                            <SaturnPlanet 
-                                title="B2B Rešenja" 
-                                subtitle="Interni treninzi za kompanije" 
-                                glowColor="rgba(255, 180, 120, 0.6)" 
-                                delay={0.1}
-                                onClick={() => onProceed('INTERNAL')}
-                            />
-                            <SaturnPlanet 
-                                title="Individualni razvoj" 
-                                subtitle="Treninzi otvorenog tipa" 
-                                glowColor="rgba(255, 180, 120, 0.6)" 
-                                delay={0.2}
-                                onClick={() => onProceed('OPEN_TRAININGS')}
-                            />
-                            <SaturnPlanet 
-                                title="Analiza kompetencija" 
-                                subtitle="Profilisanje potencijala" 
-                                glowColor="rgba(255, 180, 120, 0.6)" 
-                                delay={0.3}
-                                onClick={() => onProceed('INTRO')}
-                            />
+                          <SaturnPlanet 
+                                    title="Hansen Beck" 
+                                    subtitle="Ko smo mi" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.1}
+                                    onClick={() => onProceed('ABOUT')}
+                                />
+                                <SaturnPlanet 
+                                    title="Eksperti" 
+                                    subtitle="Naši treneri" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.2}
+                                    onClick={() => onProceed('TRAINERS')}
+                                />
+                                <SaturnPlanet 
+                                    title="Personalizacija" 
+                                    subtitle="Želim da saznam o sebi" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.3}
+                                    onClick={() => setMenuLevel('assessment')} // Menja set planeta
+                                />
                         </motion.div>
                     )}
+                    {showOptions && menuLevel === 'assessment' && (
+                            <motion.div 
+                                key="assessment-menu"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
+                            >
+                                <SaturnPlanet 
+                                    title="B2B Rešenja" 
+                                    subtitle="Interni treninzi za kompanije" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.1}
+                                    onClick={() => onProceed('INTERNAL')}
+                                />
+                                <SaturnPlanet 
+                                    title="Individualni razvoj" 
+                                    subtitle="Treninzi otvorenog tipa" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.2}
+                                    onClick={() => onProceed('OPEN_TRAININGS')}
+                                />
+                                <SaturnPlanet 
+                                    title="Analiza kompetencija" 
+                                    subtitle="Profilisanje potencijala" 
+                                    glowColor="rgba(255, 180, 120, 0.6)" 
+                                    delay={0.3}
+                                    onClick={() => onProceed('INTRO')}
+                                />
+                                {/* Dugme za povratak (opciono) */}
+                                <div 
+                                    onClick={() => setMenuLevel('main')}
+                                    style={{ position: 'absolute', bottom: '-40px', cursor: 'pointer', fontSize: '10px', opacity: 0.5 }}
+                                >
+                                    ← NAZAD
+                                </div>
+                            </motion.div>
+                        )}
                 </AnimatePresence>
             </div>
         </div>
