@@ -204,16 +204,20 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
 
       <div style={{ textAlign: 'center', zIndex: 20 }}>
         <motion.h1
-          animate={{ y: showOptions ? -40 : 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontSize: '64px',
-            fontWeight: '900',
-            lineHeight: '0.9',
-            letterSpacing: '-2px',
-            margin: 0
-          }}
-        >
+  animate={{ 
+    y: showOptions ? -40 : 0,
+    opacity: showOptions ? 0.45 : 1, // Smanjuje vidljivost na 15% kada se pojave planete
+    scale: showOptions ? 0.95 : 1    // Blago se smanji da bi delovalo kao da odlazi u pozadinu
+  }}
+  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+  style={{
+    fontSize: '64px',
+    fontWeight: '900',
+    lineHeight: '0.9',
+    letterSpacing: '-2px',
+    margin: 0
+  }}
+>
           Great Conquests <br />
           Are Won in the <span style={{ color: '#444' }}>Backseat.</span>
         </motion.h1>
