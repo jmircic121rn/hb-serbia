@@ -108,7 +108,7 @@ const OpenTrainings = ({ onNavigate }) => {
                 <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
                 <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
               </>
-            } onClick={() => onNavigate('VALUE_BASED_CLOSING')}
+            } onClick={() => onNavigate('/value-based-closing')}
           />
 
           {/* NOVI TRENING 2 */}
@@ -121,7 +121,7 @@ const OpenTrainings = ({ onNavigate }) => {
                 <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
                 <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
               </>
-            } onClick={() => onNavigate('PERCEPTION_BASED')}
+            } onClick={() => onNavigate('/perception-based')}
           />
 
           {/* NOVI TRENING 3 */}
@@ -134,7 +134,7 @@ const OpenTrainings = ({ onNavigate }) => {
                 <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
                 <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 100€ + PDV</div>
               </>
-            } onClick={() => onNavigate('PERSONAL_RESPONSIBILITY')}
+            } onClick={() => onNavigate('/personal-responsibility')}
           />
 
           <TrainingCard
@@ -142,7 +142,7 @@ const OpenTrainings = ({ onNavigate }) => {
             duration="Specijalni Masterclass"
             description="Od dobrog do nezaboravnog javnog nastupa. Zamislite da vaš glas pokreće promene."
             mentors="Vesna Damjanić, Goran Bogdan, Nikola Mirčić"
-            onClick={() => onNavigate('SUCCESS_LINE')}
+            onClick={() => onNavigate('/success-line')}
           />
           <TrainingCard
             title="Inspirativno Liderstvo 1.0"
