@@ -19,6 +19,68 @@ import AboutUs from './components/AboutUs'; // <--- DODATO
 import Trainers from './components/Trainers';
 import PrivacyPolicy from './components/PrivacyPolicy';
 
+const SidebarCompass = () => {
+  // Koristimo fiksnu rotaciju sa blagim nasumičnim odstupanjem (float efekat)
+  const [rotation, setRotation] = useState(0);
+
+  useEffect(() => {
+    // Efekat laganog ljuljanja igle (kao da je u tečnosti)
+    const driftInterval = setInterval(() => {
+      setRotation(prev => prev + (Math.random() - 0.5) * 2);
+    }, 2000);
+
+    const handleMouseMove = (e) => {
+      // Igla se samo blago "nagne" ka kursoru (max 15 stepeni), ne prati ga skroz
+      const x = (e.clientX / window.innerWidth - 0.5) * 15;
+      setRotation(x);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(driftInterval);
+    };
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', width: '100px', height: '100px', margin: '30px 0', opacity: 0.8 }}>
+      <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+        {/* Spoljni prsten sa stepenima */}
+        <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
+        
+        {/* Marker za Sever (N) - Fiksiran */}
+        <text x="50" y="8" fontSize="7" fill="#ffb478" textAnchor="middle" fontWeight="900" style={{ letterSpacing: '1px' }}>N</text>
+        
+        {/* Diskretne linije kompasa */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
+          <line 
+            key={deg}
+            x1="50" y1="15" x2="50" y2="20" 
+            transform={`rotate(${deg} 50 50)`} 
+            stroke="rgba(255,180,120,0.2)" 
+            strokeWidth="0.5" 
+          />
+        ))}
+
+        {/* IGRA IGLE */}
+        <motion.g 
+          animate={{ rotate: rotation }} 
+          transition={{ type: 'spring', stiffness: 15, damping: 20 }} 
+          style={{ originX: '50px', originY: '50px' }}
+        >
+          {/* Severni deo igle (Crveni/Narandžasti) */}
+          <path d="M50 15 L55 50 L45 50 Z" fill="#ffb478" />
+          {/* Južni deo igle (Tamni) */}
+          <path d="M50 85 L55 50 L45 50 Z" fill="rgba(255,255,255,0.1)" />
+          
+          {/* Centar igle */}
+          <circle cx="50" cy="50" r="2.5" fill="#0a0a0a" stroke="#ffb478" strokeWidth="1" />
+        </motion.g>
+      </svg>
+    </div>
+  );
+};
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -180,18 +242,42 @@ else if (choice === 'INTRO') setStep('INTRO');
               {showSidebar && (
                 <div className="pd-split-container" style={{ display: 'flex', width: '100%', minHeight: '100vh', flexDirection: window.innerWidth < 1024 ? 'column' : 'row' }}>
                   <div className="pd-sidebar" style={{
-                    width: window.innerWidth < 1024 ? '100%' : '380px', flexShrink: 0,
-                    backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
-                    color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                    padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
-                    top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100
-                  }}>
-                    <div className="sidebar-header">
-                      <img src="/logo.png" alt="Hansen Beck" style={{marginTop: '40px', width: '160px', opacity: 0.9, marginBottom: '50px' }} />
-                      <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px' }}>The Expedition</div>
-                      <h1 style={{ fontSize: '24px', fontWeight: '900', lineHeight: '1.2', letterSpacing: '-1px', color: '#fff' }}>Ideal Profile <br /> Assessment</h1>
-                    </div>
-                  </div>
+  width: window.innerWidth < 1024 ? '100%' : '380px', flexShrink: 0,
+  backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
+  color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+  padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
+  top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100,
+  overflow: 'hidden' // Da efekti ne vire napolje
+}}>
+  {/* BACKGROUND ŠUM/TEKSTURA */}
+  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.03, pointerEvents: 'none', backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
+
+  <div className="sidebar-header" style={{ position: 'relative', zIndex: 2 }}>
+    <img src="/logo.png" alt="Hansen Beck" style={{ marginTop: '20px', width: '160px', opacity: 0.9, marginBottom: '40px' }} />
+    
+    {/* DODATI KOMPAS */}
+    <SidebarCompass />
+
+    <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px', fontWeight: 'bold' }}>
+      The Expedition
+    </div>
+    <h1 style={{ fontSize: '28px', fontWeight: '900', lineHeight: '1.1', letterSpacing: '-1px', color: '#fff', marginBottom: '20px' }}>
+      Ideal Profile <br /> Assessment
+    </h1>
+    <div style={{ width: '40px', height: '2px', backgroundColor: '#ffb478', marginBottom: '30px' }} />
+  </div>
+
+  {/* DONJI DEO SIDEBARA - KOORDINATE I VERZIJA */}
+  <div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px' }}>
+    <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'rgba(255,180,120,0.4)', display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+      <span>LOC: 90°00′S 0°00′E</span>
+      <span>VER: 2.0.4</span>
+    </div>
+    <p style={{ fontSize: '11px', color: '#444', margin: 0, lineHeight: '1.5' }}>
+      Based on Amundsen-Scott South Pole Station Expedition Records.
+    </p>
+  </div>
+</div>
 
                   <div className="pd-content" style={{ flex: 1, backgroundColor: '#0a0a0a' }}>
                     {step === 'INTRO' && <LandingPage onStart={() => setStep('START')} />}
