@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-// Pomoćna komponenta za kartice treninga koja prati stil portala
+// MODIFIKOVANA KARTICA - Popravljen DOM nesting (p -> div)
 const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
   <motion.div
     whileHover={{ y: -10, boxShadow: '0 0 30px rgba(255,255,255,0.05)' }}
@@ -13,7 +13,7 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      minHeight: '350px',
+      minHeight: '420px',
       position: 'relative',
       overflow: 'hidden'
     }}
@@ -23,7 +23,12 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
     <div>
       <h4 style={{ color: '#666', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>{duration}</h4>
       <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '15px', letterSpacing: '-0.5px' }}>{title}</h3>
-      <p style={{ color: '#999', fontSize: '13px', lineHeight: '1.6', fontWeight: '300' }}>{description}</p>
+      
+      {/* OVDE JE PROMENA: p je zamenjen sa div-om */}
+      <div style={{ color: '#999', fontSize: '13px', lineHeight: '1.6', fontWeight: '300' }}>
+        {description}
+      </div>
+      
       {mentors && <p style={{ color: '#fff', fontSize: '11px', marginTop: '15px', fontStyle: 'italic' }}>Mentori: {mentors}</p>}
     </div>
 
@@ -49,6 +54,10 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
 );
 
 const OpenTrainings = ({ onNavigate }) => {
+  const commonLocation = "Radisson Collection Hotel, Old Mill Belgrade, Bulevar vojvode Mišića 15";
+  useEffect(() => {
+              window.scrollTo(0, 0);
+          }, []);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -89,12 +98,51 @@ const OpenTrainings = ({ onNavigate }) => {
           gap: '30px',
           marginBottom: '150px'
         }}>
+          {/* NOVI TRENING 1 */}
+          <TrainingCard
+            title="Zatvaranje prodaje zasnovano na vrednosti"
+            duration="30. april ili 23. jun | 09:00 - 17:00"
+            description={
+              <>
+                Pretvorite „Skupo je!“ i „Razmisliću!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude i transformišete otpor klijenta.
+                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
+              </>
+            } onClick={() => onNavigate('VALUE_BASED_CLOSING')}
+          />
+
+          {/* NOVI TRENING 2 */}
+          <TrainingCard
+            title="Razgovor zasnovan na percepciji"
+            duration="28. april ili 21. maj | 09:00 - 17:00"
+            description={
+              <>
+                Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta pre nego što se rešenje uopšte pomene.
+                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
+              </>
+            } onClick={() => onNavigate('PERCEPTION_BASED')}
+          />
+
+          {/* NOVI TRENING 3 */}
+          <TrainingCard
+            title="Vrednost lične odgovornosti"
+            duration="19. maj ili 25. jun | 09:00 - 13:00 / 14:00 - 18:00"
+            description={
+              <>
+                Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke i restruktuirajte način na koji posmatrate sopstveni uticaj.
+                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 100€ + PDV</div>
+              </>
+            } onClick={() => onNavigate('PERSONAL_RESPONSIBILITY')}
+          />
+
           <TrainingCard
             title="Moć uticaja: Tanka linija uspeha"
             duration="Specijalni Masterclass"
             description="Od dobrog do nezaboravnog javnog nastupa. Zamislite da vaš glas pokreće promene."
             mentors="Vesna Damjanić, Goran Bogdan, Nikola Mirčić"
-            onClick={() => onNavigate('SUCCESS_LINE')} 
+            onClick={() => onNavigate('SUCCESS_LINE')}
           />
           <TrainingCard
             title="Inspirativno Liderstvo 1.0"
