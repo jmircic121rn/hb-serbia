@@ -8,7 +8,7 @@ const Trainers = ({ onBack }) => {
       image: "/nikolamircic.jpeg", 
       title: "Suosnivač Hansen Beck | Master of Science in Global HRM",
       phone: "+381 63 221910",
-      linkedin: "https://www.linkedin.com/in/nikolamircic", 
+      linkedin: "https://www.linkedin.com/in/nikmir/", 
       bio: [
         "Master of Science in Global Human Resource Management, University of Liverpool.",
         "Suosnivač globalne kompanije za trening i razvoj zaposlenih Hansen Beck. Aktivan Hansen Beck trener.",
@@ -33,7 +33,7 @@ const Trainers = ({ onBack }) => {
       image: "/ivana.jpg", 
       title: "Biznis Trener | Magistar nauka internacionalnog menadžmenta",
       phone: "+381 64 151 34 30",
-      linkedin: "https://www.linkedin.com/in/ivanabojovic",
+      linkedin: "linkedin.com/in/ivana-bojovic-m-sc-04316326",
       bio: [
         "Magistar nauka internacionalnog menadžmenta (Beograd, London). Počev od 2003. godine skupljala je svoja iskustva kao šef prodaje mt:s u Telekom-u Srbija, uz učešće u različitim projektima kao što su uspostavljanje prodajnih kanala m:tel-a u Crnoj Gori ili kontakt centra Univerzijade u Beogradu. 2008. godine uspostavlja i rukovodi trening centrom u Telekom-u Srbija.",
         "Interno je sertifikovan trener za usluge mobilne i fiksne telefonije. 2010. godine prelazi u Orion telekom i bavi se prodajom, brigom o korisnicima, upravljanjem kvalitetom menadžmenta, treninzima, a zatim preuzima odgovornost izvršnog direktora operacija.",

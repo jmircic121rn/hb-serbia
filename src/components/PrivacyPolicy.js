@@ -9,11 +9,14 @@ const PrivacyPolicy = () => {
   return (
     <div style={{ 
       backgroundColor: '#0a0a0a', 
-      color: '#fff', 
-      minHeight: '100vh', 
-      padding: '120px 10% 60px 10%',
-      fontFamily: 'Inter, sans-serif',
-      lineHeight: '1.6'
+  color: '#fff', 
+  minHeight: '100vh', 
+  padding: '120px 10% 60px 10%',
+  fontFamily: 'Inter, sans-serif',
+  lineHeight: '1.6',
+  position: 'relative', // DODAJ OVO
+  zIndex: 100,          // DODAJ OVO
+  width: '100%'
     }}>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

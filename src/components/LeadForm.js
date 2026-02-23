@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 // 2. MORAŠ DA DODAŠ errorMsg u destrukturiranje props-a
-const LeadForm = ({ onNext, errorMsg }) => {
+const LeadForm = ({ onNext, errorMsg, onPrivacyClick }) => {
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', company: '', jobTitle: '', phoneNumber: ''
   });
@@ -84,16 +84,24 @@ const LeadForm = ({ onNext, errorMsg }) => {
             onChange={(e) => setAgreed(e.target.checked)}
             style={{ marginTop: '4px', cursor: 'pointer', accentColor: '#ffb478' }}
           />
-          <label htmlFor="gdpr-consent" style={{ fontSize: '12px', color: '#888', lineHeight: '1.5', cursor: 'pointer' }}>
-            I consent to the processing of my personal data for the purpose of generating this strategic analysis and receiving professional insights via email, in accordance with the <a
-              href="/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#ffb478', textDecoration: 'underline', marginLeft: '4px' }}
-            >
-              Privacy Policy
-            </a>.
-          </label>
+          <label htmlFor="gdpr-consent" style={{ fontSize: '12px', color: '#888', lineHeight: '1.6', cursor: 'pointer' }}>
+  {/* ZVEZDICA SA SJAJEM */}
+  <span style={{ color: '#ffb478', marginRight: '6px', fontWeight: 'bold' }}>*</span>
+  
+  I accept the data processing terms for my personalized report according to the
+  <span
+    onClick={onPrivacyClick}
+    style={{ 
+      color: '#ffb478', 
+      textDecoration: 'underline', 
+      marginLeft: '4px', 
+      cursor: 'pointer',
+      fontWeight: 'bold'
+    }}
+  >
+    Privacy Policy
+  </span>
+</label>
         </div>
 
         <button type="submit" className="hb-primary-btn" style={{ marginTop: '20px' }}>

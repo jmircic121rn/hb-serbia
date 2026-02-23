@@ -112,7 +112,7 @@ const PersonalResponsibility = () => {
                     </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '70px' }}>
+                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '83px' }}>
                         <strong>A sada, zamislite Vesnu.</strong> Vesna je, s druge strane, svesna da mnogo stvari zavise od nje. Ima jasne ciljeve i planove, ali kada dođe do akcije, kao da je nešto koči. “Znam da treba da prezentujem novi projekat, ali se bojim da neću biti dovoljno ubedljiva”, „Pozvaću klijenta, samo tražim savršen trenutak”. Unutrašnji glasovi sumnje i straha od neuspeha (ili čak uspeha) su preglasni. Vesna se bori da prevaziđe te unutrašnje blokade i pretoči znanje u akciju ali njen potencijal ostaje neiskorišćen, a osećaj frustracije raste.
                     </p>
                 </motion.div>
@@ -145,18 +145,15 @@ const PersonalResponsibility = () => {
                         { t: "Demontiranje vizija", d: "Transformisanje ograničavajućih vizija i prepreka u izvor snage, prebacujući fokus sa 'ne mogu' na 'kako mogu'." },
                         { t: "Upravljanje preprekama", d: "Alati za proaktivan način razmišljanja – kriviti okolnosti ili druge za sopstvene (ne)aktivnosti i rezultate nije produktivno." },
                         { t: "Premošćavanje jaza", d: "Strategija za jaz između namere i akcije – kada se postave, ciljevi treba da se dosledno i efikasno ostvaruju." },
-                        { t: "Arhitektura budućnosti", d: "Svesno upravljanje izborima i delovanjem – arhitektura sopstvene budućnosti." }
+                        { t: "Arhitektura budućnosti", d: "Svesno upravljanje izborima i delovanjem – arhitektura sopstvene budućnosti." },
+                         { t: "Rezultat?", d: "Više samopouzdanja, veća otpornost, dosledno istrajavanje nakon donetih odluka, razumevanje i koriššćenje uticaja u razgovorima, bolji rezultati." }
+
                     ].map((item, i) => (
                         <div key={i} style={{ borderLeft: '1px solid rgba(255,180,120,0.3)', paddingLeft: '20px' }}>
                             <h4 style={{ color: 'rgba(255,180,120,1)', marginBottom: '10px', fontSize: '18px' }}>{item.t}</h4>
                             <p style={{ color: '#888', fontSize: '14px', lineHeight: '1.6' }}>{item.d}</p>
                         </div>
                     ))}
-                </div>
-                <div style={{ textAlign: 'center', marginTop: '60px' }}>
-                    <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#fff', marginBottom: '20px' }}>
-                        <strong>Rezultat?</strong> Više samopouzdanja, veća otpornost, dosledno istrajavanje nakon donetih odluka, razumevanje i koriššćenje uticaja u razgovorima, bolji rezultati.
-                    </p>
                 </div>
             </section>
 
@@ -234,20 +231,21 @@ const PersonalResponsibility = () => {
                 <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '30px' }}>
                     <input name="ime" value={formData.ime} onChange={handleInputChange} placeholder="Ime" style={inputStyle} required />
                     <input name="prezime" value={formData.prezime} onChange={handleInputChange} placeholder="Prezime" style={inputStyle} required />
+                                        <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
+                    <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
+                    <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
+
                     <input name="trening" value={formData.trening} style={{...inputStyle, opacity: 0.7}} readOnly />
                     <select name="datum" value={formData.datum} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Datum treninga</option>
+                        <option value="" disabled>Izaberite datum</option>
                         <option value="19. maj">19. Maj</option>
                         <option value="25. jun">25. Jun</option>
                     </select>
                     <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Vreme treninga</option>
+                        <option value="" disabled>Izaberite vreme</option>
                         <option value="09:00 - 13:00">09:00 - 13:00 </option>
                         <option value="14:00 - 18:00">14:00 - 18:00 </option>
                     </select>
-                    <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
-                    <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
-                    <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
                     <textarea name="poruka" value={formData.poruka} onChange={handleInputChange} placeholder="Vaš komentar" style={{ ...inputStyle, gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', height: '100px' }} />
 
                     <button type="submit" style={{ gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', padding: '20px', background: 'rgba(255,180,120,1)', color: '#000', fontWeight: '900', border: 'none', cursor: 'pointer', marginTop: '20px', letterSpacing: '2px' }}>

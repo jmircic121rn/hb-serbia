@@ -24,6 +24,7 @@ function App() {
   const location = useLocation();
 
   const [step, setStep] = useState('PREINTRO');
+  const [eclipseMenu, setEclipseMenu] = useState('main'); // DODATO: Kontrola nivoa planeta
   const [userData, setUserData] = useState(null);
   const [report, setReport] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -43,31 +44,54 @@ function App() {
   };
 
   const goBack = () => {
-    // 1. Ako smo na nekoj specifičnoj ruti (npr. /success-line)
+    // 1. Ako smo na ruti koja nije "/" (npr. /success-line)
     if (location.pathname !== '/') {
-      // Vraćamo se na početnu, ali postavljamo step na 'OPEN_TRAININGS' 
-      // tako da korisnik vidi listu treninga, a ne eklipsu
       navigate('/');
       setStep('OPEN_TRAININGS');
+      setEclipseMenu('assessment'); // Vraća na druge tri planete
       return;
     }
 
-    // 2. Ako smo na "/" ruti, gledamo koji je "step" aktivan
-    if (step === 'ABOUT' || step === 'TRAINERS' || step === 'OPEN_TRAININGS') {
-      setStep('PREINTRO');
-    } 
-    else if (step === 'START') {
-      setStep('INTRO');
-    } 
-    else if (step === 'TEST') {
-      setStep('START');
-    } 
-    else if (step === 'INTRO') {
-      setStep('PREINTRO');
+    // 2. Logika za povratak unutar same eklipse (nivoi planeta)
+    if (step === 'PREINTRO' && eclipseMenu === 'assessment') {
+      setEclipseMenu('main');
+      return;
     }
-    else if (step === 'RESULT') {
-      // Opciono: vrati na početak testa ili na listu treninga
-      setStep('PREINTRO');
+
+    // 3. Logika za povratak sa stranica na eklipsu
+    switch (step) {
+      case 'ABOUT':
+      case 'TRAINERS':
+        setStep('PREINTRO');
+        setEclipseMenu('main'); // "Ko smo mi" i "Treneri" su na prvom nivou
+        break;
+      
+      case 'OPEN_TRAININGS':
+      case 'INTRO':
+        setStep('PREINTRO');
+        setEclipseMenu('assessment'); // OVO JE KLJUČ: Vraća na "zelim da znam o sebi" nivo
+        break;
+
+      case 'START':
+        setStep('INTRO'); // Sa forme na LandingPage (koji je vezan za assessment nivo)
+        break;
+
+      case 'PRIVACY':
+        setStep('START'); // Sa privatnosti na formu
+        break;
+
+      case 'TEST':
+        setStep('START');
+        break;
+
+      case 'RESULT':
+        setStep('PREINTRO');
+        setEclipseMenu('assessment');
+        break;
+
+      default:
+        setStep('PREINTRO');
+        setEclipseMenu('main');
     }
   };
 
@@ -77,7 +101,7 @@ function App() {
     else if (choice === 'TRAINERS') setStep('TRAINERS'); // <--- DODATO ZA TRENERA
     else if (choice === 'INTERNAL') setStep('INTRO');
     else if (choice === 'OPEN_TRAININGS') setStep('OPEN_TRAININGS');
-    else if (choice === 'INTRO') setStep('START'); // Za "Analiza kompetencija"
+else if (choice === 'INTRO') setStep('INTRO');
     else setStep('INTRO');
   };
 
@@ -110,8 +134,9 @@ function App() {
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
-      {/* NAZAD DUGME */}
-      {(step !== 'PREINTRO' || location.pathname !== '/') && step !== 'LOADING' && (
+      {/* GLAVNO NAZAD DUGME */}
+      {/* Prikazuje se ako nismo na eklipsi ILI ako smo na drugom nivou planeta */}
+      {((step !== 'PREINTRO' || eclipseMenu !== 'main') || location.pathname !== '/') && step !== 'LOADING' && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={goBack}
@@ -124,63 +149,67 @@ function App() {
             border: '1px solid rgba(255, 180, 120, 0.2)'
           }}
         >
-          <span>←</span> NAZAD
+          <span>←</span> BACK
         </motion.div>
       )}
 
       <Routes>
+        {/* OVE RUTE SU NEZAVISNE - Kada si na njima, "/" ruta se ignoriše */}
         <Route path="/success-line" element={<SuccessLine />} />
         <Route path="/value-based-closing" element={<ValueBasedClosing />} />
         <Route path="/perception-based" element={<PerceptionBasedConversation />} />
         <Route path="/personal-responsibility" element={<PersonalResponsibility />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
 
+        {/* GLAVNA RUTA - Sada sa dodatnom zaštitom unutra */}
         <Route path="/" element={
-          <>
-            {/* Dodaj uslov: location.pathname === '/' */}
-    {step === 'PREINTRO' && location.pathname === '/' && <EclipseIntro onProceed={handlePortalChoice} />}
+          location.pathname === '/' ? (
+            <div style={{ width: '100%', minHeight: '100vh' }}>
+              {/* 1. PORTAL LOGIKA */}
+              {step === 'PREINTRO' && location.pathname === '/' && <EclipseIntro 
+                  onProceed={handlePortalChoice} 
+                  menuLevel={eclipseMenu}      // PROSLEĐENO
+                  setMenuLevel={setEclipseMenu} // PROSLEĐENO
+                />}
+              {step === 'ABOUT' && location.pathname === '/' && <AboutUs onBack={() => setStep('PREINTRO')} />}
+              {step === 'TRAINERS' && location.pathname === '/' && <Trainers onBack={() => setStep('PREINTRO')} />}
+              {step === 'OPEN_TRAININGS' && location.pathname === '/' && <OpenTrainings onNavigate={handleNavigate} />}
+              {step === 'PRIVACY' && <PrivacyPolicy />}
 
-    {/* OVO RENDERUJE ABOUT US STRANICU */}
-    {step === 'ABOUT' && location.pathname === '/' && <AboutUs onBack={() => setStep('PREINTRO')} />}
+              {/* 2. ASSESSMENT LOGIKA */}
+              {showSidebar && (
+                <div className="pd-split-container" style={{ display: 'flex', width: '100%', minHeight: '100vh', flexDirection: window.innerWidth < 1024 ? 'column' : 'row' }}>
+                  <div className="pd-sidebar" style={{
+                    width: window.innerWidth < 1024 ? '100%' : '380px', flexShrink: 0,
+                    backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
+                    color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
+                    top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100
+                  }}>
+                    <div className="sidebar-header">
+                      <img src="/logo.png" alt="Hansen Beck" style={{marginTop: '40px', width: '160px', opacity: 0.9, marginBottom: '50px' }} />
+                      <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px' }}>The Expedition</div>
+                      <h1 style={{ fontSize: '24px', fontWeight: '900', lineHeight: '1.2', letterSpacing: '-1px', color: '#fff' }}>Ideal Profile <br /> Assessment</h1>
+                    </div>
+                  </div>
 
-    {/* OVO RENDERUJE STRANICU SA TRENERIMA */}
-    {step === 'TRAINERS' && location.pathname === '/' && <Trainers onBack={() => setStep('PREINTRO')} />}
-
-    {step === 'OPEN_TRAININGS' && location.pathname === '/' && (
-      <div style={{ width: '100vw', minHeight: '100vh' }}>
-        <OpenTrainings onNavigate={handleNavigate} />
-      </div>
-    )}
-
-            {showSidebar && (
-              <div className="pd-split-container" style={{ display: 'flex', width: '100%', minHeight: '100vh', flexDirection: window.innerWidth < 1024 ? 'column' : 'row' }}>
-
-                <div className="pd-sidebar" style={{
-                  width: window.innerWidth < 1024 ? '100%' : '380px', flexShrink: 0,
-                  backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
-                  color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                  padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
-                  top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100
-                }}>
-                  {/* ... (ostatak tvog sidebar koda koji je bio tu) ... */}
-                  <div className="sidebar-header">
-                    <img src="/logo.png" alt="Hansen Beck" style={{ width: '160px', opacity: 0.9, marginBottom: '50px' }} />
-                    <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px' }}>The Expedition</div>
-                    <h1 style={{ fontSize: '24px', fontWeight: '900', lineHeight: '1.2', letterSpacing: '-1px', color: '#fff' }}>Ideal Profile <br /> Assessment</h1>
-                    {/* ... kompas ... */}
+                  <div className="pd-content" style={{ flex: 1, backgroundColor: '#0a0a0a' }}>
+                    {step === 'INTRO' && <LandingPage onStart={() => setStep('START')} />}
+                    {step === 'START' && (
+                      <LeadForm
+                        errorMsg={errorMsg}
+                        onNext={handleLeadSubmit}
+                        onPrivacyClick={() => setStep('PRIVACY')} // <--- DODAJ OVU LINIJU
+                      />
+                    )}
+                    {step === 'TEST' && <Assessment onFinish={handleFinish} />}
+                    {step === 'LOADING' && <LoadingScreen />}
+                    {step === 'RESULT' && <ResultView report={report} userData={userData} />}
                   </div>
                 </div>
-
-                <div className="pd-content" style={{ flex: 1, backgroundColor: '#0a0a0a', position: 'relative', minWidth: 0, zIndex: 1 }}>
-                  {step === 'INTRO' && <LandingPage onStart={() => setStep('START')} />}
-                  {step === 'START' && <LeadForm errorMsg={errorMsg} onNext={handleLeadSubmit} />}
-                  {step === 'TEST' && <Assessment onFinish={handleFinish} />}
-                  {step === 'LOADING' && <LoadingScreen />}
-                  {step === 'RESULT' && <ResultView report={report} userData={userData} />}
-                </div>
-              </div>
-            )}
-          </>
+              )}
+            </div>
+          ) : null
         } />
       </Routes>
     </div>

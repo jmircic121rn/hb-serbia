@@ -114,7 +114,7 @@ const PerceptionBasedConversation = () => {
                     </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '70px' }}>
+                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '83px' }}>
                         <strong>A sada, zamislite Anu.</strong> Ana odlično ulazi u razgovor, prezentuje benefite. U jednom trenutku, klijent odmahuje glavom, zahvaljuje se i kaže da ne vidi potrebu za takvim rešenjem. Da li je to apsolutna istina ili samo trenutna perspektiva klijenta? Ana razmišlja o nastavku „borbe“ i kako da promeni tu perspektivu jer zna da klijenti retko odbijaju rešenja – odbijaju razgovore koji ne dovode u pitanje njihovu trenutnu i buduću situaciju. Ana razmišlja <strong>„Šta da pitam sada?“</strong>
                     </p>
                 </motion.div>
@@ -235,22 +235,20 @@ const PerceptionBasedConversation = () => {
                 <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '30px' }}>
                     <input name="ime" value={formData.ime} onChange={handleInputChange} placeholder="Ime" style={inputStyle} required />
                     <input name="prezime" value={formData.prezime} onChange={handleInputChange} placeholder="Prezime" style={inputStyle} required />
+                    <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
+                                        <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
+                                        <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
                     <input name="trening" value={formData.trening} style={{...inputStyle, opacity: 0.7}} readOnly />
-                    
                     <select name="datum" value={formData.datum} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Datum treninga</option>
+                        <option value="" disabled>Izaberite datum</option>
                         <option value="28. April">28. April</option>
                         <option value="21. Maj">21. Maj</option>
                     </select>
-
                     <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Vreme treninga</option>
+                        <option value="" disabled>Izaberite vreme</option>
                         <option value="09:00 - 17:00">09:00 - 17:00</option>
                     </select>
 
-                    <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
-                    <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
-                    <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
                     
                     <textarea 
                         name="poruka"

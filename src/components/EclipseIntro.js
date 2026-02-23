@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         scale: 1,
         // LEBDENJE: Pomera se gore-dole za 10px i blago se naginje
         y: [0, -10, 0],
-        rotate: [0, 1, -1, 0] 
+        rotate: [0, 1, -1, 0]
       }}
-      transition={{ 
+      transition={{
         // Ulazna animacija (fade i scale)
         opacity: { duration: 1, delay: delay },
         scale: { duration: 1, delay: delay },
         // Beskonačno lebdenje (kreće nakon što se pojavi)
-        y: { 
+        y: {
           duration: 4 + Math.random() * 2, // Različita brzina za svaku planetu
-          repeat: Infinity, 
+          repeat: Infinity,
           ease: "easeInOut",
-          delay: delay 
+          delay: delay
         },
         rotate: {
           duration: 5 + Math.random() * 3,
@@ -44,10 +44,10 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
       {/* PULSIRAJUĆI SJAJ - Ostaje isti */}
       <motion.div
         variants={{
-          hover: { 
-            opacity: [0.2, 0.5, 0.2], 
+          hover: {
+            opacity: [0.2, 0.5, 0.2],
             scale: [1, 1.3, 1],
-            transition: { repeat: Infinity, duration: 2 } 
+            transition: { repeat: Infinity, duration: 2 }
           }
         }}
         style={{
@@ -64,12 +64,12 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
       />
 
       {/* SATURN VIZUAL - Ostaje isti */}
-      <div style={{ 
-        position: 'relative', 
-        width: '140px', 
-        height: '100px', 
-        display: 'flex', 
-        alignItems: 'center', 
+      <div style={{
+        position: 'relative',
+        width: '140px',
+        height: '100px',
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '20px',
         zIndex: 2
@@ -116,12 +116,12 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
           {title}
         </h3>
         <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 8px' }} />
-        <span style={{ 
-          fontSize: '10px', 
-          fontWeight: '700', 
-          letterSpacing: '1px', 
-          color: '#fff', 
-          lineHeight: '1.4', 
+        <span style={{
+          fontSize: '10px',
+          fontWeight: '700',
+          letterSpacing: '1px',
+          color: '#fff',
+          lineHeight: '1.4',
           display: 'block',
           textTransform: 'uppercase'
         }}>
@@ -132,185 +132,181 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   );
 };
 
-const EclipseIntro = ({ onProceed }) => {
-    const [showOptions, setShowOptions] = useState(false);
-    const [menuLevel, setMenuLevel] = useState('main'); // 'main' ili 'assessment'
+const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
+  const [showOptions, setShowOptions] = useState(menuLevel !== 'main');
+  useEffect(() => {
+    if (menuLevel !== 'main') {
+      setShowOptions(true);
+    }
+  }, [menuLevel]);
+  return (
+    <div style={{
+      height: '100vh',
+      width: '100%',
+      backgroundColor: '#000',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#fff',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
 
-    return (
+      <motion.div
+        animate={{ y: showOptions ? -60 : 0 }}
+        style={{
+          position: 'relative',
+          width: '350px',
+          height: '350px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          scale: 1.2,
+          marginBottom: '-60px',
+          zIndex: 5,
+          transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+        }}
+      >
+        <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
+        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 200, 150, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
+        {/* Crni krug (Zemlja/Senka) */}
         <div style={{
-            height: '100vh',
-            width: '100%',
-            backgroundColor: '#000',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            position: 'relative',
-            overflow: 'hidden',
+          position: 'relative',
+          width: '280px',
+          height: '280px',
+          backgroundColor: '#000',
+          borderRadius: '50%',
+          zIndex: 5,
+          boxShadow: '0 0 15px rgba(0,0,0,1)',
+          display: 'flex',            // Dodato za centriranje logoa
+          alignItems: 'center',       // Dodato
+          justifyContent: 'center',    // Dodato
+          overflow: 'hidden'
         }}>
+          {/* LOGO KOJI JE UNUTAR KRUGA */}
+          <motion.img
+            src="/logo.png"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.2 }} // Suptilna vidljivost
+            transition={{ delay: 1, duration: 2 }}
+            style={{
+              width: '220px', // Veličina da lepo stane unutar 280px
+              height: 'auto',
+              objectFit: 'contain',
+              filter: 'grayscale(100%) brightness(1.5)'
+            }}
+          />
+        </div>            </motion.div>
 
-            <motion.div 
-                animate={{ y: showOptions ? -60 : 0 }}
-                style={{
-                    position: 'relative',
-                    width: '350px',
-                    height: '350px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    scale: 1.2,
-                    marginBottom: '-60px',
-                    zIndex: 5,
-                    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-                }}
+      <div style={{ textAlign: 'center', zIndex: 20 }}>
+        <motion.h1
+          animate={{ y: showOptions ? -40 : 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontSize: '64px',
+            fontWeight: '900',
+            lineHeight: '0.9',
+            letterSpacing: '-2px',
+            margin: 0
+          }}
+        >
+          Great Conquests <br />
+          Are Won in the <span style={{ color: '#444' }}>Backseat.</span>
+        </motion.h1>
+
+        <motion.p
+          onClick={() => !showOptions && setShowOptions(true)}
+          animate={{
+            opacity: showOptions ? 0.3 : 1,
+            marginBottom: showOptions ? '40px' : '50px'
+          }}
+          whileHover={!showOptions ? { color: '#fff', letterSpacing: '6px' } : {}}
+          style={{
+            fontSize: '11px',
+            color: '#666',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            marginTop: '20px',
+            cursor: showOptions ? 'default' : 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+        >
+          {menuLevel === 'main' ? "Izaberite vašu destinaciju" : "Odaberite vaš sistem"}                </motion.p>
+
+        <AnimatePresence mode="wait">
+          {showOptions && menuLevel === 'main' && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              style={{
+                display: 'flex',
+                gap: '30px',
+                justifyContent: 'center'
+              }}
             >
-                <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-                <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 200, 150, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-                <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
-{/* Crni krug (Zemlja/Senka) */}
-<div style={{ 
-    position: 'relative', 
-    width: '280px', 
-    height: '280px', 
-    backgroundColor: '#000', 
-    borderRadius: '50%', 
-    zIndex: 5, 
-    boxShadow: '0 0 15px rgba(0,0,0,1)',
-    display: 'flex',            // Dodato za centriranje logoa
-    alignItems: 'center',       // Dodato
-    justifyContent: 'center',    // Dodato
-    overflow: 'hidden'
-}}>
-    {/* LOGO KOJI JE UNUTAR KRUGA */}
-    <motion.img 
-        src="/logo.png" 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }} // Suptilna vidljivost
-        transition={{ delay: 1, duration: 2 }}
-        style={{ 
-            width: '220px', // Veličina da lepo stane unutar 280px
-            height: 'auto',
-            objectFit: 'contain',
-            filter: 'grayscale(100%) brightness(1.5)' 
-        }} 
-    />
-</div>            </motion.div>
-
-            <div style={{ textAlign: 'center', zIndex: 20 }}>
-                <motion.h1
-                    animate={{ y: showOptions ? -40 : 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ 
-                        fontSize: '64px',
-                        fontWeight: '900', 
-                        lineHeight: '0.9', 
-                        letterSpacing: '-2px', 
-                        margin: 0 
-                    }}
-                >
-                    Great Conquests <br />
-                    Are Won in the <span style={{ color: '#444' }}>Backseat.</span>
-                </motion.h1>
-
-                <motion.p
-                    onClick={() => !showOptions && setShowOptions(true)}
-                    animate={{ 
-                        opacity: showOptions ? 0.3 : 1,
-                        marginBottom: showOptions ? '40px' : '50px'
-                    }}
-                    whileHover={!showOptions ? { color: '#fff', letterSpacing: '6px' } : {}}
-                    style={{ 
-                        fontSize: '11px', 
-                        color: '#666', 
-                        letterSpacing: '4px', 
-                        textTransform: 'uppercase', 
-                        marginTop: '20px',
-                        cursor: showOptions ? 'default' : 'pointer',
-                        transition: 'all 0.3s ease'
-                    }}
-                >
-{menuLevel === 'main' ? "Izaberite vašu destinaciju" : "Odaberite vaš sistem"}                </motion.p>
-
-                <AnimatePresence mode="wait">
-                    {showOptions && menuLevel === 'main' && (
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
-                            style={{ 
-                                display: 'flex', 
-                                gap: '30px', 
-                                justifyContent: 'center'
-                            }}
-                        >
-                          <SaturnPlanet 
-                                    title="Hansen Beck" 
-                                    subtitle="Ko smo mi" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.1}
-                                    onClick={() => onProceed('ABOUT')}
-                                />
-                                <SaturnPlanet 
-                                    title="Eksperti" 
-                                    subtitle="Naši treneri" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.2}
-                                    onClick={() => onProceed('TRAINERS')}
-                                />
-                                <SaturnPlanet 
-                                    title="Personalizacija" 
-                                    subtitle="Želim da saznam o sebi" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.3}
-                                    onClick={() => setMenuLevel('assessment')} // Menja set planeta
-                                />
-                        </motion.div>
-                    )}
-                    {showOptions && menuLevel === 'assessment' && (
-                            <motion.div 
-                                key="assessment-menu"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
-                            >
-                                <SaturnPlanet 
-                                    title="B2B Rešenja" 
-                                    subtitle="Interni treninzi za kompanije" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.1}
-                                    onClick={() => onProceed('INTERNAL')}
-                                />
-                                <SaturnPlanet 
-                                    title="Individualni razvoj" 
-                                    subtitle="Treninzi otvorenog tipa" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.2}
-                                    onClick={() => onProceed('OPEN_TRAININGS')}
-                                />
-                                <SaturnPlanet 
-                                    title="Analiza kompetencija" 
-                                    subtitle="Profilisanje potencijala" 
-                                    glowColor="rgba(255, 180, 120, 0.6)" 
-                                    delay={0.3}
-                                    onClick={() => onProceed('INTRO')}
-                                />
-                                {/* Dugme za povratak (opciono) */}
-                                <div 
-                                    onClick={() => setMenuLevel('main')}
-                                    style={{ position: 'absolute', bottom: '-40px', cursor: 'pointer', fontSize: '10px', opacity: 0.5 }}
-                                >
-                                    ← NAZAD
-                                </div>
-                            </motion.div>
-                        )}
-                </AnimatePresence>
-            </div>
-        </div>
-    );
+              <SaturnPlanet
+                title="Hansen Beck"
+                subtitle="Ko smo mi"
+                glowColor="rgba(255, 180, 120, 0.6)"
+                delay={0.1}
+                onClick={() => onProceed('ABOUT')}
+              />
+              <SaturnPlanet
+                title="Personalizacija"
+                subtitle="Želim da istražim neotkriveni potencijal"
+                glowColor="rgba(255, 180, 120, 0.6)"
+                delay={0.3}
+                onClick={() => setMenuLevel('assessment')} // Menja set planeta
+              />
+            </motion.div>
+          )}
+          {showOptions && menuLevel === 'assessment' && (
+            <motion.div
+              key="assessment-menu"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
+            >
+              <SaturnPlanet
+                title="B2B Rešenja"
+                subtitle="Interni treninzi za kompanije"
+                glowColor="rgba(255, 180, 120, 0.6)"
+                delay={0.1}
+                onClick={() => onProceed('INTERNAL')}
+              />
+              <SaturnPlanet
+                title="Individualni razvoj"
+                subtitle="Treninzi otvorenog tipa"
+                glowColor="rgba(255, 180, 120, 0.6)"
+                delay={0.2}
+                onClick={() => onProceed('OPEN_TRAININGS')}
+              />
+              <SaturnPlanet
+                title="Analiza kompetencija"
+                subtitle="Profilisanje potencijala"
+                glowColor="rgba(255, 180, 120, 0.6)"
+                delay={0.3}
+                onClick={() => onProceed('INTRO')}
+              />
+              {/* Dugme za povratak (opciono) */}
+              <div
+                onClick={() => setMenuLevel('main')}
+                style={{ position: 'absolute', bottom: '-40px', cursor: 'pointer', fontSize: '10px', opacity: 0.5 }}
+              >
+                ← NAZAD
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
 };
 
 export default EclipseIntro;

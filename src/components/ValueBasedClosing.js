@@ -128,7 +128,7 @@ const handleFormSubmit = async (e) => {
                     </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '70px' }}>
+                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '83px' }}>
                         <strong>A sada, zamislite Janu.</strong> Jana je majstor u uspostavljanju kontakta i prezentovanju rešenja. Njen sastanak teče odlično; klijent oduševljeno prati svaku reč i slaže se da njena ponuda rešava probleme. U vazduhu se oseća da je posao završen, da samo treba čuti ono magično „Da!“. Ali Jana okleva. Umesto da samouvereno „zaključi“, nastavlja da priča, dodaje još detalja, očekujući da će klijent sam doneti odluku. Na kraju, klijent kaže: „Sve ovo zvuči sjajno. Razmisliću, pa ću vam se javiti.“ Nedelje prolaze. Jana šalje e-mailove, zove, ali odgovora nema.
                     </p>
                 </motion.div>
@@ -270,7 +270,7 @@ const handleFormSubmit = async (e) => {
             name="telefon"
             value={formData.telefon}
             onChange={handleInputChange}
-            placeholder="Telefon" 
+            placeholder="Broj telefon" 
             style={inputStyle} 
             required 
         />
@@ -278,7 +278,7 @@ const handleFormSubmit = async (e) => {
             name="kompanija"
             value={formData.kompanija}
             onChange={handleInputChange}
-            placeholder="Naziv Kompanije" 
+            placeholder="Naziv kompanije" 
             style={inputStyle} 
         />
 

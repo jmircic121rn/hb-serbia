@@ -21,14 +21,14 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent, #fff, transparent)', opacity: 0.2 }} />
 
     <div>
-      <h4 style={{ color: '#666', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>{duration}</h4>
+      <h4 style={{ color: '#b3b3b3', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>{duration}</h4>
       <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '15px', letterSpacing: '-0.5px' }}>{title}</h3>
-      
+
       {/* OVDE JE PROMENA: p je zamenjen sa div-om */}
       <div style={{ color: '#999', fontSize: '13px', lineHeight: '1.6', fontWeight: '300' }}>
         {description}
       </div>
-      
+
       {mentors && <p style={{ color: '#fff', fontSize: '11px', marginTop: '15px', fontStyle: 'italic' }}>Mentori: {mentors}</p>}
     </div>
 
@@ -56,8 +56,8 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
 const OpenTrainings = ({ onNavigate }) => {
   const commonLocation = "Radisson Collection Hotel, Old Mill Belgrade, Bulevar vojvode Mišića 15";
   useEffect(() => {
-              window.scrollTo(0, 0);
-          }, []);
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -84,10 +84,11 @@ const OpenTrainings = ({ onNavigate }) => {
             transition={{ delay: 0.2 }}
             style={{ fontSize: '56px', fontWeight: '900', maxWidth: '800px', lineHeight: '1.1', marginBottom: '40px' }}
           >
-            Uradite nešto za sebe sa našim <span style={{ color: '#444' }}>otvorenim treninzima.</span>
+            Izazivamo vas da probate
+i <span style={{ color: '#444' }}>ostanete ravnodušni.</span>
           </motion.h1>
           <p style={{ color: '#888', maxWidth: '700px', lineHeight: '1.8', fontSize: '16px' }}>
-            Hansen Beck otvoreni trening nije uobičajena obuka. Osmišljen je tako da podstakne transformaciju načina razmišljanja čije je krajnje odredište istinska profesionalna izvrsnost.
+Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obrasce, već i transformišemo vaše liderske, prodajne i komunikacione veštine i način razmišljanja, stvarajući nezaobilaznu prednost za današnji uspeh. Od kratkih, intenzivnih formi do celovitih razvojnih programa, ovo je investicija koja se višestruko isplati – donosi dugoročne, merljive rezultate koji oblikuju vašu profesionalnu budućnost.
           </p>
         </header>
 
@@ -101,7 +102,12 @@ const OpenTrainings = ({ onNavigate }) => {
           {/* NOVI TRENING 1 */}
           <TrainingCard
             title="Zatvaranje prodaje zasnovano na vrednosti"
-            duration="30. april ili 23. jun | 09:00 - 17:00"
+            duration={
+              <div>
+                <div>30. april 09:00 - 17:00 </div>
+                <div >23. jun 09:00 - 17:00</div>
+              </div>
+            }
             description={
               <>
                 Pretvorite „Skupo je!“ i „Razmisliću!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude i transformišete otpor klijenta.
@@ -114,7 +120,12 @@ const OpenTrainings = ({ onNavigate }) => {
           {/* NOVI TRENING 2 */}
           <TrainingCard
             title="Razgovor zasnovan na percepciji"
-            duration="28. april ili 21. maj | 09:00 - 17:00"
+            duration={
+              <div>
+                <div>28. april 09:00 - 17:00</div>
+                <div>21. maj 09:00 - 17:00</div>
+              </div>
+            }
             description={
               <>
                 Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta pre nego što se rešenje uopšte pomene.
@@ -127,7 +138,12 @@ const OpenTrainings = ({ onNavigate }) => {
           {/* NOVI TRENING 3 */}
           <TrainingCard
             title="Vrednost lične odgovornosti"
-            duration="19. maj ili 25. jun | 09:00 - 13:00 / 14:00 - 18:00"
+            duration={
+              <div>
+                <div>19. maj 09:00 - 13:00 / 14:00 - 18:00</div>
+                <div>25. jun 09:00 - 13:00 / 14:00 - 18:00</div>
+              </div>
+            }
             description={
               <>
                 Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke i restruktuirajte način na koji posmatrate sopstveni uticaj.
