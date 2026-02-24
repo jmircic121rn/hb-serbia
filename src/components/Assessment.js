@@ -109,7 +109,9 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
             <h2 style={{ fontSize: 'clamp(20px, 3.5vw, 28px)', fontWeight: '400', lineHeight: '1.4', marginBottom: '45px', color: '#f0f0f0' }}>
-              {currentQ.text}
+              {currentQ.text.includes(':') 
+    ? currentQ.text.split(':').slice(1).join(':').trim() 
+    : currentQ.text}
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
