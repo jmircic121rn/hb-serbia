@@ -7,9 +7,9 @@ const PersonalResponsibility = () => {
     }, []);
 
     const API_BASE_URL = process.env.REACT_APP_API_URL;
-    const formRef = React.useRef(null); // ili samo useRef(null) ako si importovao
+    const formRef = React.useRef(null);
     
-        const scrollToForm = () => {
+    const scrollToForm = () => {
         formRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -57,13 +57,14 @@ const PersonalResponsibility = () => {
         fontSize: '14px',
         outline: 'none',
         transition: 'border-color 0.3s',
-        appearance: 'none'
+        appearance: 'none',
+        cursor: 'pointer'
     };
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
             
-            {/* HERO SEKCIJA */}
+            {/* HERO SEKCIJA - EKLIPSA SAČUVANA */}
             <section style={{ 
                 height: '100vh', 
                 display: 'flex', 
@@ -96,7 +97,7 @@ const PersonalResponsibility = () => {
                 </motion.div>
 
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10 }}>
-                    <h4 style={{ color: 'rgba(255,180,120,0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
+                    <h4 style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
                         Intenzivna poludnevna radionica
                     </h4>
                     <h1 style={{ fontSize: 'clamp(30px, 6vw, 60px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1100px', marginBottom: '30px' }}>
@@ -111,13 +112,13 @@ const PersonalResponsibility = () => {
             {/* SEKCIJA NIKOLA I VESNA */}
             <section style={{ padding: '100px 10%', display: 'grid', gridTemplateColumns: window.innerWidth > 992 ? '1fr 1fr' : '1fr', gap: '80px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-                    <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '40px', color: 'rgba(255,180,120,1)' }}>Da li (pre)poznajete Nikolu i Vesnu?</h2>
+                    <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '40px', color: '#fff' }}>Da li (pre)poznajete Nikolu i Vesnu?</h2>
                     <p style={{ color: '#aaa', lineHeight: '1.8', marginBottom: '30px' }}>
                         <strong>Zamislite Nikolu.</strong> On je iskusan profesionalac ali kada se suoči sa potencijalnim propuštenanjem roka, njegova prva reakcija je da objasni <strong>zašto</strong> to nije njegova krivica. “Nisam mogao da završim jer mi IT nije poslao podatke, a i sistem to ne podržava“. Nikola veruje da su problemi uvek spoljni – u procesima, resursima, ili u drugim ljudima. Petar je često frustriran, a rešenje vidi u promeni okolnosti ili ponašanju drugih, nikada u svojoj ulozi ili unutrašnjim preprekama. Posledica? Stagnira, propušta prilike i oseća se kao žrtva okolnosti.
                     </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: '83px' }}>
+                    <p style={{ color: '#aaa', lineHeight: '1.8', marginTop: window.innerWidth > 992 ? '83px' : '0' }}>
                         <strong>A sada, zamislite Vesnu.</strong> Vesna je, s druge strane, svesna da mnogo stvari zavise od nje. Ima jasne ciljeve i planove, ali kada dođe do akcije, kao da je nešto koči. “Znam da treba da prezentujem novi projekat, ali se bojim da neću biti dovoljno ubedljiva”, „Pozvaću klijenta, samo tražim savršen trenutak”. Unutrašnji glasovi sumnje i straha od neuspeha (ili čak uspeha) su preglasni. Vesna se bori da prevaziđe te unutrašnje blokade i pretoči znanje u akciju ali njen potencijal ostaje neiskorišćen, a osećaj frustracije raste.
                     </p>
                 </motion.div>
@@ -130,18 +131,18 @@ const PersonalResponsibility = () => {
                         Ova intenzivna poludnevna radionica menja igru. Namenjena je svakom profesionalcu koji se prepoznaje u ovim scenarijima traženja izgovora i „prebacivanja“ odgovornost ili borbe sa strahom od neuspeha. Donosimo potpuno drugačiju perspektivu i konkretne alate za transformaciju vašeg pristupa ličnoj odgovornosti. Umesto izgovora, straha ili stagnacije, fokusiramo se na prepoznavanje unutrašnjih sabotera i njihovo pretvaranje u izvor snage.
                     </p>
                     <p 
-    onClick={scrollToForm} 
-    style={{ 
-        marginTop: '50px', 
-        fontSize: '22px', 
-        fontWeight: '800', 
-        color: 'rgba(255,180,120,1)', 
-        cursor: 'pointer' // Dodao sam pointer da korisnik zna da je klikabilno
-    }}
->
-    Prijavite se odmah!
-</p>
-                    <h3 style={{ marginTop: '50px', fontSize: '22px', fontWeight: '800', color: 'rgba(255,180,120,1)' }}>
+                        onClick={scrollToForm} 
+                        style={{ 
+                            marginTop: '50px', 
+                            fontSize: '22px', 
+                            fontWeight: '800', 
+                            color: '#fff', 
+                            cursor: 'pointer'
+                        }}
+                    >
+                        Prijavite se odmah!
+                    </p>
+                    <h3 style={{ marginTop: '50px', fontSize: '22px', fontWeight: '800', color: '#888' }}>
                         Jer, u svetu Vrednosti lične odgovornosti, kreiranje željene budućnosti ne zavisi od toga koliko savršen sistem ili okruženje imamo, već od unutrašnje moći i izbora koje svakodnevno pravimo.
                     </h3>
                     <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#fff' }}>
@@ -160,50 +161,46 @@ const PersonalResponsibility = () => {
                         { t: "Upravljanje preprekama", d: "Alati za proaktivan način razmišljanja – kriviti okolnosti ili druge za sopstvene (ne)aktivnosti i rezultate nije produktivno." },
                         { t: "Premošćavanje jaza", d: "Strategija za jaz između namere i akcije – kada se postave, ciljevi treba da se dosledno i efikasno ostvaruju." },
                         { t: "Arhitektura budućnosti", d: "Svesno upravljanje izborima i delovanjem – arhitektura sopstvene budućnosti." },
-                         { t: "Rezultat?", d: "Više samopouzdanja, veća otpornost, dosledno istrajavanje nakon donetih odluka, razumevanje i koriššćenje uticaja u razgovorima, bolji rezultati." }
-
+                        { t: "Rezultat?", d: "Više samopouzdanja, veća otpornost, dosledno istrajavanje nakon donetih odluka, razumevanje i koriššćenje uticaja u razgovorima, bolji rezultati." }
                     ].map((item, i) => (
-                        <div key={i} style={{ borderLeft: '1px solid rgba(255,180,120,0.3)', paddingLeft: '20px' }}>
-                            <h4 style={{ color: 'rgba(255,180,120,1)', marginBottom: '10px', fontSize: '18px' }}>{item.t}</h4>
+                        <div key={i} style={{ borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '20px' }}>
+                            <h4 style={{ color: '#fff', marginBottom: '10px', fontSize: '18px' }}>{item.t}</h4>
                             <p style={{ color: '#888', fontSize: '14px', lineHeight: '1.6' }}>{item.d}</p>
                         </div>
                     ))}
                 </div>
                 <p 
-    onClick={scrollToForm} 
-    style={{ 
-        marginTop: '50px', 
-        fontSize: '22px', 
-        fontWeight: '800', 
-        color: 'rgba(255,180,120,1)', 
-        cursor: 'pointer',
-        textAlign: 'center',        // Centriranje teksta unutar elementa
-        gridColumn: '1 / -1',      // Govori elementu da se protegne preko svih kolona grida
-        width: '100%'              // Osigurava da zauzima punu širinu
-    }}
->
-    Prijavite se odmah!
-</p>
+                    onClick={scrollToForm} 
+                    style={{ 
+                        marginTop: '50px', 
+                        fontSize: '22px', 
+                        fontWeight: '800', 
+                        color: '#fff', 
+                        cursor: 'pointer',
+                        textAlign: 'center',
+                        gridColumn: '1 / -1',
+                        width: '100%'
+                    }}
+                >
+                    Prijavite se odmah!
+                </p>
             </section>
 
             {/* TRENER SEKCIJA */}
             <section style={{ padding: '100px 10%', backgroundColor: '#0a0a0a' }}>
                 <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '60px', textAlign: 'center' }}>Ko je tu za Vas?</h2>
                 <div style={{ display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', gap: '50px', alignItems: 'flex-start' }}>
-                    {/* VIZUELNI DEO SA OKVIROM (Success Line stil) */}
                     <div style={{ position: 'relative', width: '280px', height: '350px', flexShrink: 0, margin: window.innerWidth <= 992 ? '0 auto 40px auto' : '0' }}>
-                        {/* Narandžasti okvir u pozadini */}
                         <div style={{ 
                             position: 'absolute', 
                             top: '15px', 
                             left: '-15px', 
                             width: '100%', 
                             height: '100%', 
-                            border: '1px solid rgba(255, 180, 120, 0.4)', 
+                            border: '1px solid rgba(255, 255, 255, 0.2)', 
                             zIndex: 0 
                         }} />
                         
-                        {/* Slika trenera */}
                         <div style={{ 
                             width: '100%', 
                             height: '100%', 
@@ -222,7 +219,7 @@ const PersonalResponsibility = () => {
                     </div>
                     <div>
                         <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '5px' }}>Ivana Bojović</h2>
-                        <p style={{ color: '#666', marginBottom: '20px' }}>Biznis trener</p>
+                        <p style={{ color: '#444', marginBottom: '20px' }}>Biznis trener</p>
                         <div style={{ color: '#aaa', fontSize: '14px', lineHeight: '1.7', maxWidth: '800px' }}>
                             <p style={{ marginBottom: '15px' }}>
                                 Magistar nauka internacionalnog menadžmenta (Beograd, London). Počev od 2003. godine skupljala je svoja iskustva kao šef prodaje mt:s u Telekom-u Srbija, uz učešće u različitim projektima kao što su uspostavljanje prodajnih kanala m:tel-a u Crnoj Gori ili kontakt centra Univerzijade u Beogradu. 2008. godine uspostavlja i rukovodi trening centrom u Telekom-u Srbija.
@@ -260,7 +257,7 @@ const PersonalResponsibility = () => {
                 <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '30px' }}>
                     <input name="ime" value={formData.ime} onChange={handleInputChange} placeholder="Ime" style={inputStyle} required />
                     <input name="prezime" value={formData.prezime} onChange={handleInputChange} placeholder="Prezime" style={inputStyle} required />
-                                        <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
+                    <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
                     <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
                     <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
 
@@ -277,7 +274,17 @@ const PersonalResponsibility = () => {
                     </select>
                     <textarea name="poruka" value={formData.poruka} onChange={handleInputChange} placeholder="Vaš komentar" style={{ ...inputStyle, gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', height: '100px' }} />
 
-                    <button type="submit" style={{ gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', padding: '20px', background: 'rgba(255,180,120,1)', color: '#000', fontWeight: '900', border: 'none', cursor: 'pointer', marginTop: '20px', letterSpacing: '2px' }}>
+                    <button type="submit" style={{ 
+                        gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', 
+                        padding: '20px', 
+                        background: '#fff', 
+                        color: '#000', 
+                        fontWeight: '900', 
+                        border: 'none', 
+                        cursor: 'pointer', 
+                        marginTop: '20px', 
+                        letterSpacing: '2px' 
+                    }}>
                         POŠALJI PRIJAVU
                     </button>
                 </form>

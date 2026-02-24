@@ -6,13 +6,16 @@ import { translations } from '../data/translations';
 // POMOĆNA KOMPONENTA ZA KARTICE NA POČETNOJ
 const RoleCard = ({ title, desc, onClick, icon, t }) => (
   <div onClick={onClick} style={{ 
-    padding: '30px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,180,120,0.1)',
-    cursor: 'pointer', transition: '0.3s'
+    padding: '30px', 
+    background: 'rgba(255,255,255,0.02)', 
+    border: '1px solid rgba(255,255,255,0.1)',
+    cursor: 'pointer', 
+    transition: '0.3s'
   }} className="role-card-hover">
     {icon}
     <h3 style={{ marginTop: '20px', marginBottom: '10px' }}>{title}</h3>
     <p style={{ color: '#666', fontSize: '14px' }}>{desc}</p>
-    <div style={{ marginTop: '20px', color: '#ffb478', fontSize: '12px', fontWeight: 'bold' }}>
+    <div style={{ marginTop: '20px', color: '#ffffff', fontSize: '12px', fontWeight: 'bold' }}> {/* Vraćeno na original narandžastu */}
       {t.common.learnMore}
     </div>
   </div>
@@ -24,12 +27,12 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
   
   return (
     <div style={{ maxWidth: '900px', padding: '40px 0' }}>
-      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#ffb478', cursor: 'pointer', marginBottom: '30px', fontWeight: 'bold' }}>
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', marginBottom: '30px', fontWeight: 'bold' }}>
         ← {t.common.back}
       </button>
       
       <h1 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{data.title}</h1>
-      <h3 style={{ color: '#ffb478', marginBottom: '30px' }}>{data.subtitle}</h3>
+      <h3 style={{ color: '#ffffff', marginBottom: '30px' }}>{data.subtitle}</h3>
       
       <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#ccc', marginBottom: '30px' }}>
         {data.mainDescription}
@@ -47,7 +50,7 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
       {/* Lista karakteristika / stubova */}
       <div style={{ display: 'grid', gap: '20px', marginBottom: '40px' }}>
         {(type === 'LEADER' ? data.capabilities : data.vbcFeatures).map((item, i) => (
-          <div key={i} style={{ padding: '20px', background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid #ffb478' }}>
+          <div key={i} style={{ padding: '20px', background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid #ffffff' }}>
             <strong style={{ color: '#fff', display: 'block', marginBottom: '5px' }}>{item.title}</strong>
             <span style={{ color: '#888', fontSize: '14px' }}>{item.text}</span>
           </div>
@@ -67,7 +70,7 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
         </ul>
       )}
 
-      <p style={{ color: '#ffb478', fontWeight: 'bold', marginBottom: '20px' }}>
+      <p style={{ color: '#ffffff', fontWeight: 'bold', marginBottom: '20px' }}>
         {type === 'LEADER' ? data.assessmentGoal : data.assessmentCall}
       </p>
       
@@ -82,15 +85,20 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
         whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
         onClick={onProceed}
         style={{ 
-          padding: '25px 50px', background: '#ffb478', color: '#000', 
-          border: 'none', fontWeight: '900', cursor: 'pointer', fontSize: '16px',
-          boxShadow: '0 10px 30px rgba(255,180,120,0.2)'
+          padding: '25px 50px', 
+          background: '#fff', 
+          color: '#000', 
+          border: 'none', 
+          fontWeight: '900', 
+          cursor: 'pointer', 
+          fontSize: '16px',
+          letterSpacing: '2px'
         }}
       >
         {t.common.startBtn}
       </motion.button>
 
-      <p style={{ marginTop: '40px', color: '#444', fontSize: '12px', lineHeight: '1.6' }}>
+      <p style={{ marginTop: '40px', color: '#333', fontSize: '12px', lineHeight: '1.6' }}>
         {data.footer}
       </p>
     </div>
@@ -101,7 +109,7 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
   const [view, setView] = useState('MAIN');
   const t = translations[language];
 
-  // Birač jezika u gornjem desnom uglu
+  // Birač jezika
   const LanguagePicker = () => (
     <div style={{ 
       position: 'absolute', top: '20px', right: '40px', zIndex: 100,
@@ -115,7 +123,7 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
           onClick={() => setLanguage(l)}
           style={{ 
             cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: language === l ? '#ffb478' : '#666',
+            color: language === l ? '#ffffff' : '#666',
             transition: '0.3s'
           }}
         >
@@ -134,16 +142,10 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
 
       <AnimatePresence mode="wait">
         {view === 'MAIN' ? (
-          <motion.div 
-            key="main" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }}
-          >
-            {/* SEKCIJA: HB KOMPAS */}
+          <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <section style={{ marginBottom: '80px', marginTop: '40px', maxWidth: '1000px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-                <Compass size={32} color="#ffb478" />
+                <Compass size={32} color="#ffb478" /> {/* Sačuvana boja */}
                 <h2 style={{ fontSize: '32px', fontWeight: '900' }}>{t.compass.title}</h2>
               </div>
               
@@ -151,25 +153,24 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
                 {t.compass.description}
               </p>
               
-              <p style={{ color: '#aaa', lineHeight: '1.6', marginBottom: '40px' }}>
+              <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '40px' }}>
                 {t.compass.subquote}
               </p>
 
-              {/* Dimenzije kompasa */}
+              {/* Dimenzije */}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
                 {Object.values(t.compass.dimensions).map((dim, i) => (
                   <div key={i} style={{ padding: '15px', background: 'rgba(255,255,255,0.03)', borderRadius: '4px' }}>
-                    <div style={{ color: '#ffb478', fontWeight: 'bold', marginBottom: '8px', fontSize: '14px' }}>{dim.title}</div>
+                    <div style={{ color: '#ffffff', fontWeight: 'bold', marginBottom: '8px', fontSize: '14px' }}>{dim.title}</div>
                     <div style={{ color: '#666', fontSize: '13px' }}>{dim.text}</div>
                   </div>
                 ))}
               </div>
 
-              <p style={{ color: '#888', fontSize: '14px', fontStyle: 'italic', marginBottom: '60px' }}>
+              <p style={{ color: '#444', fontSize: '14px', fontStyle: 'italic', marginBottom: '60px' }}>
                 {t.compass.extraInfo}
               </p>
 
-              {/* IZBOR PUTANJE (Role Cards) */}
               <h3 style={{ marginBottom: '30px', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', color: '#444' }}>
                 {t.common.selectPath}
               </h3>
@@ -179,32 +180,22 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
                   title={t.leader.title} 
                   desc={t.leader.subtitle} 
                   onClick={() => setView('LEADER')} 
-                  icon={<Target color="#ffb478" size={32} />}
+                  icon={<Target color="#ffb478" size={32} />}  /* Sačuvana boja */
                   t={t}
                 />
                 <RoleCard 
                   title={t.employee.title} 
                   desc={t.employee.subtitle} 
                   onClick={() => setView('EMPLOYEE')} 
-                  icon={<Users color="#ffb478" size={32} />}
+                  icon={<Users color="#ffb478" size={32} />} /* Sačuvana boja */
                   t={t}
                 />
               </div>
             </section>
           </motion.div>
         ) : (
-          <motion.div 
-            key="details" 
-            initial={{ opacity: 0, x: 20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            exit={{ opacity: 0, x: -20 }}
-          >
-            <DetailView 
-              type={view} 
-              t={t} 
-              onBack={() => setView('MAIN')} 
-              onProceed={() => onStart(view)} 
-            />
+          <motion.div key="details" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+            <DetailView type={view} t={t} onBack={() => setView('MAIN')} onProceed={() => onStart(view)} />
           </motion.div>
         )}
       </AnimatePresence>

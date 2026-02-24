@@ -150,7 +150,7 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
           onClick={() => setLanguage(l)}
           style={{ 
             cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: language === l ? '#ffb478' : '#666',
+            color: language === l ? '#ffff' : '#666',
             transition: '0.3s',
             letterSpacing: '1px'
           }}

@@ -44,7 +44,7 @@ const SidebarCompass = () => {
     <div style={{ position: 'relative', width: '100px', height: '100px', margin: '30px 0', opacity: 0.8 }}>
       <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
         <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
-        <text x="50" y="8" fontSize="7" fill="#ffb478" textAnchor="middle" fontWeight="900">N</text>
+        <text x="50" y="8" fontSize="7" fill="#fcfcfc" textAnchor="middle" fontWeight="900">N</text>
         {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
           <line key={deg} x1="50" y1="15" x2="50" y2="20" transform={`rotate(${deg} 50 50)`} stroke="rgba(255,180,120,0.2)" strokeWidth="0.5" />
         ))}
@@ -184,10 +184,10 @@ function App() {
           style={{
             position: 'fixed', top: '30px', left: '30px', zIndex: 9999,
             cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px',
-            color: 'rgba(255, 180, 120, 0.8)', backgroundColor: 'rgba(0,0,0,0.5)',
+            color: '#fff', backgroundColor: 'rgba(0,0,0,0.5)',
             padding: '10px 15px', borderRadius: '50px', backdropFilter: 'blur(10px)',
             fontSize: '12px', fontWeight: 'bold', letterSpacing: '1px',
-            border: '1px solid rgba(255, 180, 120, 0.2)'
+            border: '1px solid #676767af'
           }}
         >
           <span>←</span> BACK
@@ -236,13 +236,13 @@ function App() {
                     <div className="sidebar-header" style={{ position: 'relative', zIndex: 2 }}>
                       <img src="/logo.png" alt="Logo" style={{ marginTop: '20px', width: '160px', opacity: 0.9, marginBottom: '40px' }} />
                       <SidebarCompass />
-                      <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px', fontWeight: 'bold' }}>The Expedition</div>
+                      <div style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px', fontWeight: 'bold' }}>The Expedition</div>
                       <h1 style={{ fontSize: '28px', fontWeight: '900', lineHeight: '1.1', color: '#fff' }}>Ideal Profile <br /> Assessment</h1>
-                      <div style={{ width: '40px', height: '2px', backgroundColor: '#ffb478', marginTop: '20px' }} />
+                      <div style={{ width: '40px', height: '2px', backgroundColor: '#85858598', marginTop: '20px' }} />
                     </div>
 
                     <div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px' }}>
-                      <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'rgba(255,180,120,0.4)', display: 'flex', justifyContent: 'space-between' }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', display: 'flex', justifyContent: 'space-between' }}>
                         <span>LOC: 90°00′S 0°00′E</span>
                         <span>VER: 2.0.4</span>
                       </div>

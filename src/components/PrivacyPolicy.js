@@ -26,7 +26,7 @@ const PrivacyPolicy = ({ language: initialLanguage = 'sr' }) => {
           onClick={() => setLang(l)}
           style={{ 
             cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: lang === l ? '#ffb478' : '#666',
+            color: lang === l ? '#ffffff' : '#666',
             transition: '0.3s'
           }}
         >
@@ -58,7 +58,7 @@ const PrivacyPolicy = ({ language: initialLanguage = 'sr' }) => {
         <h1 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>
           {t.title}
         </h1>
-        <p style={{ color: '#ffb478', letterSpacing: '2px', fontSize: '12px', marginBottom: '60px', textTransform: 'uppercase' }}>
+        <p style={{ color: '#9a9a9a', letterSpacing: '2px', fontSize: '12px', marginBottom: '60px', textTransform: 'uppercase' }}>
           {t.updated}
         </p>
 

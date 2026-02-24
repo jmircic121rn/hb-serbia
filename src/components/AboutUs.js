@@ -108,7 +108,7 @@ const AboutUs = ({ onBack }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
-              style={{ padding: '30px', borderLeft: '1px solid rgba(255,180,120,0.3)', background: 'rgba(255,255,255,0.02)' }}
+              style={{ padding: '30px', borderLeft: '1px solid rgba(252, 252, 252, 0.3)', background: 'rgba(255,255,255,0.02)' }}
             >
               <h4 style={{ fontSize: '12px', letterSpacing: '2px', color: '#666', marginBottom: '15px' }}>{item.title}</h4>
               <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#ccc' }}>{item.text}</p>
@@ -121,13 +121,13 @@ const AboutUs = ({ onBack }) => {
           <h3 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '60px' }}>Ko smo mi i kako se ponašamo - Naše vrednosti</h3>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
             <div>
-              <p style={{ color: 'rgba(255, 180, 120, 0.8)', fontWeight: 'bold' }}>Mi smo...</p>
+              <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontWeight: 'bold' }}>Mi smo...</p>
               <ValueItem title="Autentični" desc="Iskreni smo, empatični i aktivno gradimo poverenje. Otvoreni smo i delimo svoje ranjivosti." />
               <ValueItem title="Pokretači (Driven)" desc="Završavamo stvari. Lično doprinosimo i aktivno angažujemo druge. Upravljamo i isporučujemo rezultate." />
               <ValueItem title="Volimo ono što radimo" desc="Volimo svoj posao i to pokazujemo!" />
             </div>
             <div>
-              <p style={{ color: 'rgba(255, 180, 120, 0.8)', fontWeight: 'bold' }}>Verujemo u...</p>
+              <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontWeight: 'bold' }}>Verujemo u...</p>
               <ValueItem title="Istraživanje" desc="Dosledno smo radoznali, sa mentalitetom rasta. Napredujemo u promenama i imamo hrabrosti da zakoračimo u nepoznato." />
               <ValueItem title="Buđenje heroja" desc="Mi smo skromni izazivači. Otkrivamo i prepoznajemo potencijal u drugima. Omogućavamo ljudima da napreduju." />
               <ValueItem title="Vrednovanje različitosti" desc="Inkluzivni smo. Uživamo i obogaćeni smo različitošću. Pokazujemo poštovanje prema svima." />
@@ -136,8 +136,8 @@ const AboutUs = ({ onBack }) => {
         </section>
 
         {/* TIM EKSPERATA */}
-        <motion.section style={{ marginBottom: '120px', background: 'rgba(255,180,120,0.05)', padding: '60px', borderRadius: '2px' }}>
-          <h3 style={{ fontSize: '28px', marginBottom: '30px' , color: 'rgba(255, 180, 120, 0.8)'}}>Naš tim eksperata u Srbiji</h3>
+        <motion.section style={{ marginBottom: '120px', background: 'rgba(198, 198, 198, 0.06)', padding: '60px', borderRadius: '2px' }}>
+          <h3 style={{ fontSize: '28px', marginBottom: '30px' , color: 'rgba(255, 255, 255, 0.8)'}}>Naš tim eksperata u Srbiji</h3>
           <p style={{ lineHeight: '1.8', color: '#ccc', fontSize: '17px' }}>
             Mi smo Hansen Beck. Osnovani od strane strastvenih poslovnih eksperata u 25 zemalja na 5 kontinenata sa preko 400 godina kolektivnog poslovnog iskustva.
             <br /><br />
@@ -186,7 +186,7 @@ const AboutUs = ({ onBack }) => {
                             left: index % 2 === 0 ? '-15px' : '15px', 
                             width: '100%', 
                             height: '100%', 
-                            border: '1px solid rgba(255, 180, 120, 0.4)', 
+                            border: '1px solid rgba(198, 198, 198, 0.39)', 
                             zIndex: 0 
                           }} />
                           
@@ -212,7 +212,7 @@ const AboutUs = ({ onBack }) => {
                         <div style={{ flex: 1, minWidth: '300px' }}>
                           <h3 style={{ fontSize: '36px', fontWeight: '900', margin: '0' }}>{trainer.name}</h3>
                           <h4 style={{ 
-                            color: 'rgba(255, 180, 120, 0.9)', 
+                            color: 'rgba(255, 255, 255, 0.9)', 
                             fontSize: '13px', 
                             letterSpacing: '2px', 
                             textTransform: 'uppercase', 
@@ -232,7 +232,7 @@ const AboutUs = ({ onBack }) => {
                              <div>
                                 <p style={{ fontSize: '11px', color: '#555', textTransform: 'uppercase', marginBottom: '10px' }}>Kontakt</p>
                                 <p style={{ fontSize: '14px', color: '#ccc', margin: '5px 0' }}>{trainer.phone}</p>
-                                <a href={trainer.linkedin} target="_blank" rel="noreferrer" style={{ fontSize: '14px', color: 'rgba(255, 180, 120, 0.8)', textDecoration: 'none' }}>LinkedIn Profil →</a>
+                                <a href={trainer.linkedin} target="_blank" rel="noreferrer" style={{ fontSize: '14px', color: 'rgba(255, 255, 255, 0.8)', textDecoration: 'none' }}>LinkedIn Profil →</a>
                              </div>
                              <div>
                                 <p style={{ fontSize: '11px', color: '#555', textTransform: 'uppercase', marginBottom: '10px' }}>Specijalnosti</p>

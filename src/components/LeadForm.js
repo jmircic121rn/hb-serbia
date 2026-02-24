@@ -40,7 +40,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
           onClick={() => setLanguage(l)}
           style={{
             cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: language === l ? '#ffb478' : '#666',
+            color: language === l ? '#ffffff' : '#666',
             transition: '0.3s'
           }}
         >
@@ -107,7 +107,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
             id="gdpr-consent"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            style={{ marginTop: '4px', cursor: 'pointer', accentColor: '#ffb478' }}
+            style={{ marginTop: '4px', cursor: 'pointer', accentColor: '#f8f8f8' }}
           />
           {/* Koristimo div umesto label-a za ceo tekst da izbegnemo automatsko okidanje checkboxa na klik linka */}
           <div style={{ fontSize: '12px', color: '#888', lineHeight: '1.6' }}>

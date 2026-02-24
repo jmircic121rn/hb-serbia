@@ -8,11 +8,11 @@ const SuccessLine = () => {
     };
 
     useEffect(() => {
-            window.scrollTo(0, 0);
-        }, []);
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
-<motion.div
+        <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             style={{ 
@@ -37,7 +37,6 @@ const SuccessLine = () => {
                 position: 'relative'
             }}>
                 
-                {/* KOMPLEKSNA EKLIPSA (Preneta iz tvog EclipseIntro koda) */}
                 <motion.div 
                     style={{
                         position: 'relative',
@@ -46,21 +45,16 @@ const SuccessLine = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        scale: 1, // Malo smanjeno da bi stalo u koncept
+                        scale: 1,
                         marginBottom: '-40px',
                         zIndex: 5
                     }}
                 >
-                    {/* Sjaj u pozadini */}
                     <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-                    {/* Horizontalni zrak */}
                     <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 200, 150, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-                    {/* Prstenovi */}
                     <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
                     <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                    {/* Glavna bela tačka (Sunce) */}
                     <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
-                    {/* Crni krug (Zemlja/Senka) */}
                     <div style={{ position: 'relative', width: '280px', height: '280px', backgroundColor: '#050505', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 15px rgba(0,0,0,1)' }} />
                 </motion.div>
 
@@ -68,12 +62,12 @@ const SuccessLine = () => {
                     <motion.h2
                         initial={{ opacity: 0, letterSpacing: '10px' }}
                         animate={{ opacity: 1, letterSpacing: '4px' }}
-                        style={{ fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,180,120,0.8)', marginBottom: '10px' }}
+                        style={{ fontSize: '12px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}
                     >
                         Masterclass Serijal
                     </motion.h2>
                     <motion.h1 style={{ fontSize: 'clamp(40px, 8vw, 70px)', fontWeight: '900', lineHeight: '0.9', margin: '0 0 20px 0' }}>
-                        TANKA LINIJA <br /> <span style={{ color: '#333' }}>USPEHA</span>
+                        TANKA LINIJA <br /> <span style={{ color: '#222' }}>USPEHA</span>
                     </motion.h1>
                     <p style={{ maxWidth: '600px', color: '#888', fontSize: '18px', lineHeight: '1.6', fontWeight: '300' }}>
                         Od dobrog do nezaboravnog javnog nastupa. Moć uticaja.
@@ -81,12 +75,12 @@ const SuccessLine = () => {
                 </div>
             </section>
 
-                {/* STORYTELLING SEKCIJA (Jazz Story) */}
+                {/* STORYTELLING SEKCIJA */}
                 <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '100px 20px' }}>
                     <motion.div variants={sectionVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                         <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '60px', alignItems: 'start' }}>
                             <div>
-                                <h3 style={{ color: 'rgba(255,180,120,1)', fontSize: '14px', letterSpacing: '2px', marginBottom: '30px', textTransform: 'uppercase' }}>Koncept</h3>
+                                <h3 style={{ color: '#fff', fontSize: '14px', letterSpacing: '2px', marginBottom: '30px', textTransform: 'uppercase' }}>Koncept</h3>
                                 <p style={{ color: '#ccc', lineHeight: '1.8', fontSize: '16px', marginBottom: '20px' }}>
                                     Zamislite raskošnu koncertnu dvoranu. Simfonijski orkestar se naštimava, a zatim besprekorno izvodi delo. Svaka nota je precizna, svaki segment savršeno sinhronizovan. To je izvedba koja zaslužuje gromoglasan aplauz. Ovo je slično <strong>„dobrom“</strong> govoru.
                                 </p>
@@ -95,7 +89,7 @@ const SuccessLine = () => {
                                 </p>
                             </div>
                             <div style={{ paddingTop: window.innerWidth > 768 ? '100px' : '0' }}>
-                                <p style={{ color: '#fff', lineHeight: '1.8', fontSize: '16px', marginBottom: '20px', fontStyle: 'italic', borderLeft: '2px solid rgba(255,180,120,0.5)', paddingLeft: '20px' }}>
+                                <p style={{ color: '#fff', lineHeight: '1.8', fontSize: '16px', marginBottom: '20px', fontStyle: 'italic', borderLeft: '2px solid rgba(255,255,255,0.2)', paddingLeft: '20px' }}>
                                     A sada, zamislite slabo osvetljen džez klub. Saksofonista se sprema za nastup, atmosfera je gusta od iščekivanja. Zna melodiju, ali nešto više je u igri. Zatvara oči, a prsti plešu, improvizujući solo koji je istovremeno tehnički blistav i duboko emotivan.
                                 </p>
                                 <p style={{ color: '#ccc', lineHeight: '1.8', fontSize: '16px' }}>
@@ -125,13 +119,13 @@ const SuccessLine = () => {
                     </div>
                 </section>
 
-                {/* POZIVNICA ZA SEKCIJA */}
+                {/* POZIVNICA SEKCIJA */}
                 <section style={{ maxWidth: '900px', margin: '0 auto', padding: '120px 20px' }}>
-                    <h3 style={{ color: 'rgba(255,180,120,1)', letterSpacing: '3px', textTransform: 'uppercase', fontSize: '13px', marginBottom: '40px', textAlign: 'center' }}>Ovo je pozivnica za:</h3>
+                    <h3 style={{ color: '#fff', letterSpacing: '3px', textTransform: 'uppercase', fontSize: '13px', marginBottom: '40px', textAlign: 'center' }}>Ovo je pozivnica za:</h3>
                     <ul style={{ listStyle: 'none', padding: 0, fontSize: '18px', color: '#ccc', lineHeight: '2' }}>
-                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,180,120,1)' }}>—</span> Brušenje vaših jedinstvenih snaga u javnom nastupu.</li>
-                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,180,120,1)' }}>—</span> Čitanje i razumevanje publike (neverbalni signali i trenutna adaptacija).</li>
-                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,180,120,1)' }}>—</span> Ovladavanje tehnikama koje omogućavaju da budete svoji, a maksimalno uticajni.</li>
+                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,255,255,0.3)' }}>—</span> Brušenje vaših jedinstvenih snaga u javnom nastupu.</li>
+                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,255,255,0.3)' }}>—</span> Čitanje i razumevanje publike (neverbalni signali i trenutna adaptacija).</li>
+                        <li style={{ marginBottom: '20px', display: 'flex', gap: '15px' }}> <span style={{ color: 'rgba(255,255,255,0.3)' }}>—</span> Ovladavanje tehnikama koje omogućavaju da budete svoji, a maksimalno uticajni.</li>
                     </ul>
                 </section>
 
@@ -143,14 +137,14 @@ const SuccessLine = () => {
                             name="Vesna Damjanić"
                             image="/vesnadamjanic.png"
                             title="Novinarka i glavna urednica Bloomberg Adria"
-                            desc="Vesna Damjanić je istaknuta novinarka i glavna i odgovorna urednica Bloomberg Adria televizije, sa više od dve decenije iskustva u medijima i komunikacijama. Specijalizovana za ekonomske, finansijske i biznis teme, Vesna je izgradila karijeru u informativnom programu Radio-televizije Srbije, gde je 14 godina uređivala i vodila brojne emisije, žive programe i intervjue sa ključnim domaćim i svetskim akterima ekonomskih i političkih tokova. Izveštavala je sa najvažnijih domaćih, regionalnih, ali i međunarodnih događaja, uključujući Davos Biznis Forum, i kreirala brojne emisije i reportaže o ekonomskim trendovima u Evropi i SAD-u. Vesna je diplomirala novinarstvo na Fakultetu političkih nauka u Beogradu. Specijalizovala je elektronsko novinarstvo i ekonomsko izveštavanje na programima edukacije BBC-ja i Rojtersa u Londonu i Berlinu. Trenutno pohađa master studije Executive MBA na Rome Business School, usmerene na razvoju strateškog liderstva i menadžmenta."
+                            desc="Vesna Damjanić je istaknuta novinarka i glavna i odgovorna urednica Bloomberg Adria televizije, sa više od dve decenije iskustva u medijima i komunikacijama. Specijalizovana za ekonomske, finansijske i biznis teme, Vesna je izgradila karijeru u informativnom programu Radio-televizije Srbije, gde je 14 godina uređivala i vodila brojne emisije, žive programe i intervjue sa ključnim domaćim i svetskim akterima ekonomskih i političkih tokova."
                         />
                         <MentorCard
                             name="Goran Bogdan"
                             image="/goranbogdan.jpeg"
                             side="right"
                             title="Glumac"
-                            desc="Goran Bogdan je istaknuti hrvatski glumac, prepoznat i u regionu i na međunarodnoj sceni. Diplomirao je ekonomiju, a 2012. godine završio studije glume na Akademiji dramske umjetnosti u Zagrebu. Od tada je ostvario više od 40 filmskih uloga, među kojima se izdvajaju Otac (2020), Agape (2017), Sonja i bik (2012), kao i međunarodne TV serije Fargo i The Last Panthers. Uloga u filmu Otac (2020) donela mu je istorijsko priznanje – postao je prvi hrvatski glumac nominovan za nagradu Evropske filmske akademije za najboljeg glumca. Film je ujedno osvojio i nagradu publike na Berlinalu, čime je Goranovo ime dodatno potvrđeno na evropskoj filmskoj sceni."
+                            desc="Goran Bogdan je istaknuti hrvatski glumac, prepoznat i u regionu i na međunarodnoj sceni. Diplomirao je ekonomiju, a 2012. godine završio studije glume na Akademiji dramske umjetnosti u Zagrebu. Od tada je ostvario više od 40 filmskih uloga, među kojima se izdvajaju Otac (2020), Agape (2017) i međunarodne TV serije Fargo i The Last Panthers."
                         />
                         <MentorCard
                             name="Nikola Mirčić"
@@ -159,18 +153,8 @@ const SuccessLine = () => {
                             desc={
                                 <>
                                     Master of Science in Global Human Resource Management (University of Liverpool).
-                                    Suosnivač globalne kompanije Hansen Beck sa decenijskim iskustvom u transformaciji pojedinaca i timova.
-                                    <br /><br />
-                                    Svu svoju karijeru gradio je od 1993. godine u IT industriji, a ključne godine proveo je u <strong>Microsoftu</strong>,
-                                    gde je bio jedan od prvih zaposlenih u Srbiji, vodio prodaju za mala i srednja preduzeća i upravljao timovima od 15 ljudi.
-                                    <br /><br />
-                                    Od 2010. godine Nikola je licencirani trener komunikacionih veština, specijalizovan za:
-                                    <ul style={{ paddingLeft: '20px', marginTop: '10px', listStyleType: 'square' }}>
-                                        <li>Uticaj kao alat za natprosečne uspehe</li>
-                                        <li>Razvoj i vođenje timova visokih performansi</li>
-                                        <li>Veštine pregovaranja i prodaju rešenja</li>
-                                        <li>Insights Discovery analizu ličnih preferenci</li>
-                                    </ul>
+                                    Suosnivač globalne kompanije Hansen Beck sa decenijskim iskustvom u transformaciji pojedinaca i timova. 
+                                    Nikola je licencirani trener komunikacionih veština specijalizovan za uticaj i razvoj timova visokih performansi.
                                 </>
                             } />
                     </div>
@@ -178,7 +162,7 @@ const SuccessLine = () => {
 
                 {/* LOGISTIKA */}
                 <section style={{ textAlign: 'center', padding: '100px 20px', background: 'linear-gradient(to bottom, #050505, #000)' }}>
-                    <div style={{ border: '1px solid rgba(255,180,120,0.2)', padding: '80px 40px', display: 'inline-block', width: '100%', maxWidth: '800px' }}>
+                    <div style={{ border: '1px solid rgba(255,255,255,0.1)', padding: '80px 40px', display: 'inline-block', width: '100%', maxWidth: '800px' }}>
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', marginBottom: '50px', flexWrap: 'wrap' }}>
                             <div>
                                 <p style={{ color: '#666', letterSpacing: '2px', fontSize: '12px', marginBottom: '10px' }}>DATUM</p>
@@ -202,14 +186,13 @@ const SuccessLine = () => {
                         <input placeholder="Telefon" style={inputStyle} />
                         <input placeholder="Naziv Kompanije" style={inputStyle} />
                         <textarea placeholder="Vaša poruka" style={{ ...inputStyle, gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', height: '120px' }} />
-                        <button style={{ gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', padding: '20px', background: 'rgba(255,180,120,1)', color: '#000', fontWeight: '900', border: 'none', cursor: 'pointer', marginTop: '20px' }}>POŠALJI PRIJAVU</button>
+                        <button style={{ gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', padding: '20px', background: '#fff', color: '#000', fontWeight: '900', border: 'none', cursor: 'pointer', marginTop: '20px', letterSpacing: '2px' }}>POŠALJI PRIJAVU</button>
                     </div>
                 </section>
         </motion.div>
     );
 };
 
-// Pomoćne komponente (ostale nepromenjene)
 const FeatureBlock = ({ title, desc }) => (
     <div style={{ borderLeft: '1px solid #222', paddingLeft: '25px' }}>
         <h4 style={{ fontSize: '18px', marginBottom: '15px', color: '#fff' }}>{title}</h4>
@@ -233,12 +216,13 @@ const MentorCard = ({ name, title, desc, image, side = 'left' }) => (
         }}
     >
         <div style={{ position: 'relative', width: '320px', height: '420px', flexShrink: 0 }}>
-            <div style={{ position: 'absolute', top: '15px', left: side === 'left' ? '-15px' : '15px', width: '100%', height: '100%', border: '1px solid rgba(255, 180, 120, 0.3)', zIndex: 0 }} />
-            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative', zIndex: 1 }} />
+            {/* Bela bordura umesto narandžaste */}
+            <div style={{ position: 'absolute', top: '15px', left: side === 'left' ? '-15px' : '15px', width: '100%', height: '100%', border: '1px solid rgba(255, 255, 255, 0.15)', zIndex: 0 }} />
+            <img src={image} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'relative', zIndex: 1, filter: 'grayscale(20%)' }} />
         </div>
         <div style={{ flex: 1, minWidth: '300px', textAlign: side === 'left' ? 'left' : 'right' }}>
             <h3 style={{ fontSize: '32px', margin: '0', fontWeight: '900' }}>{name}</h3>
-            <h4 style={{ color: 'rgba(255,180,120,0.8)', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', margin: '10px 0 25px 0', lineHeight: '1.4' }}>{title}</h4>
+            <h4 style={{ color: 'rgba(255,255,255,0.4)', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', margin: '10px 0 25px 0', lineHeight: '1.4' }}>{title}</h4>
             <p style={{ color: '#888', lineHeight: '1.8', fontSize: '15px', fontWeight: '300' }}>{desc}</p>
         </div>
     </motion.div>
@@ -247,7 +231,7 @@ const MentorCard = ({ name, title, desc, image, side = 'left' }) => (
 const inputStyle = {
     background: 'transparent',
     border: 'none',
-    borderBottom: '1px solid #333',
+    borderBottom: '1px solid #222',
     padding: '15px 0',
     color: '#fff',
     outline: 'none',

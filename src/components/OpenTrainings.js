@@ -200,7 +200,7 @@ Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obr
 
             {/* Marija Čeleketić - Pinoles */}
             <motion.div
-              whileHover={{ borderColor: 'rgba(255, 180, 120, 0.4)' }}
+              whileHover={{ borderColor: 'rgba(171, 171, 171, 0.4)' }}
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
@@ -217,7 +217,7 @@ Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obr
 
             {/* Stojan Jovanović - SBB */}
             <motion.div
-              whileHover={{ borderColor: 'rgba(255, 180, 120, 0.4)' }}
+              whileHover={{ borderColor: 'rgba(171, 171, 171, 0.4)' }}
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
@@ -234,7 +234,7 @@ Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obr
 
             {/* Marija Simić Savić - Ekomar */}
             <motion.div
-              whileHover={{ borderColor: 'rgba(255, 180, 120, 0.4)' }}
+              whileHover={{ borderColor: 'rgba(171, 171, 171, 0.4)' }}
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
@@ -285,7 +285,7 @@ const authorNameStyle = {
 
 const authorCompanyStyle = {
   fontSize: '11px',
-  color: 'rgba(255, 180, 120, 0.7)',
+  color: 'rgba(130, 130, 130, 0.7)',
   textTransform: 'uppercase',
   letterSpacing: '2px'
 };
