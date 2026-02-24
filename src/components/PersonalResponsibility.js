@@ -7,6 +7,11 @@ const PersonalResponsibility = () => {
     }, []);
 
     const API_BASE_URL = process.env.REACT_APP_API_URL;
+    const formRef = React.useRef(null); // ili samo useRef(null) ako si importovao
+    
+        const scrollToForm = () => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     const [formData, setFormData] = useState({
         ime: '',
@@ -124,6 +129,18 @@ const PersonalResponsibility = () => {
                     <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#fff', marginBottom: '30px' }}>
                         Ova intenzivna poludnevna radionica menja igru. Namenjena je svakom profesionalcu koji se prepoznaje u ovim scenarijima traženja izgovora i „prebacivanja“ odgovornost ili borbe sa strahom od neuspeha. Donosimo potpuno drugačiju perspektivu i konkretne alate za transformaciju vašeg pristupa ličnoj odgovornosti. Umesto izgovora, straha ili stagnacije, fokusiramo se na prepoznavanje unutrašnjih sabotera i njihovo pretvaranje u izvor snage.
                     </p>
+                    <p 
+    onClick={scrollToForm} 
+    style={{ 
+        marginTop: '50px', 
+        fontSize: '22px', 
+        fontWeight: '800', 
+        color: 'rgba(255,180,120,1)', 
+        cursor: 'pointer' // Dodao sam pointer da korisnik zna da je klikabilno
+    }}
+>
+    Prijavite se odmah!
+</p>
                     <h3 style={{ marginTop: '50px', fontSize: '22px', fontWeight: '800', color: 'rgba(255,180,120,1)' }}>
                         Jer, u svetu Vrednosti lične odgovornosti, kreiranje željene budućnosti ne zavisi od toga koliko savršen sistem ili okruženje imamo, već od unutrašnje moći i izbora koje svakodnevno pravimo.
                     </h3>
@@ -152,6 +169,21 @@ const PersonalResponsibility = () => {
                         </div>
                     ))}
                 </div>
+                <p 
+    onClick={scrollToForm} 
+    style={{ 
+        marginTop: '50px', 
+        fontSize: '22px', 
+        fontWeight: '800', 
+        color: 'rgba(255,180,120,1)', 
+        cursor: 'pointer',
+        textAlign: 'center',        // Centriranje teksta unutar elementa
+        gridColumn: '1 / -1',      // Govori elementu da se protegne preko svih kolona grida
+        width: '100%'              // Osigurava da zauzima punu širinu
+    }}
+>
+    Prijavite se odmah!
+</p>
             </section>
 
             {/* TRENER SEKCIJA */}
@@ -219,7 +251,7 @@ const PersonalResponsibility = () => {
             </section>
 
             {/* FORMA */}
-            <section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
+            <section ref={formRef} style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
                 <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h2 style={{ fontSize: '36px', fontWeight: '900', marginBottom: '20px' }}>Hajde da pričamo o postizanju Vaših ciljeva!</h2>
                     <p style={{ color: '#666' }}>Popunite formular i kliknite na Pošalji da biste stupili u kontakt sa našim timom Hansen Beck u Srbiji. Odgovorićemo na Vaš upit u roku od 24 sata.</p>

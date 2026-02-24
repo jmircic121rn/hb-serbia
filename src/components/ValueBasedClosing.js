@@ -8,6 +8,11 @@ const ValueBasedClosing = () => {
     }, []);
 
     const API_BASE_URL = process.env.REACT_APP_API_URL;
+    const formRef = React.useRef(null); // ili samo useRef(null) ako si importovao
+
+    const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth' });
+};
 
     const [formData, setFormData] = useState({
     ime: '',
@@ -143,6 +148,18 @@ const handleFormSubmit = async (e) => {
                     <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#aaa', marginBottom: '40px' }}>
                         Prestanite da pregovarate protiv sebe i gubite poslove na „Razmisliću“ ili Skupo je“. Hrabro i jasno naplatite pravu vrednost svog rada i samouvereno vodite klijenta do zaključenja posla. Budite prodavac od koga klijenti žele da kupe – ne zato što spuštate cenu ili ih agresivno “jurite”, već zato što jedini razumete koliko njihov uspeh zaista vredi i što ste proces zaključenja učinili prirodnim i neizbežnim izborom.
                     </p>
+                    <p 
+    onClick={scrollToForm} 
+    style={{ 
+        marginTop: '50px', 
+        fontSize: '22px', 
+        fontWeight: '800', 
+        color: 'rgba(255,180,120,1)', 
+        cursor: 'pointer' // Dodao sam pointer da korisnik zna da je klikabilno
+    }}
+>
+    Prijavite se odmah!
+</p>
                     <h3 style={{ marginTop: '50px', fontSize: '22px', fontWeight: '800', color: 'rgba(255,180,120,1)' }}>
                         Jer, u svetu Prodaje zasnovane na vrednosti, zatvaranje prodaje ne tiče se iznosa koji klijent plaća, već prepoznavanja vrednosti koju dobija.
                     </h3>
@@ -166,7 +183,23 @@ const handleFormSubmit = async (e) => {
                             <p style={{ color: '#888', fontSize: '14px', lineHeight: '1.6' }}>{item.d}</p>
                         </div>
                     ))}
+                    <p 
+    onClick={scrollToForm} 
+    style={{ 
+        marginTop: '50px', 
+        fontSize: '22px', 
+        fontWeight: '800', 
+        color: 'rgba(255,180,120,1)', 
+        cursor: 'pointer',
+        textAlign: 'center',        // Centriranje teksta unutar elementa
+        gridColumn: '1 / -1',      // Govori elementu da se protegne preko svih kolona grida
+        width: '100%'              // Osigurava da zauzima punu širinu
+    }}
+>
+    Prijavite se odmah!
+</p>
                 </div>
+                
             </section>
 
             {/* TRENER SEKCIJA */}
@@ -234,7 +267,7 @@ const handleFormSubmit = async (e) => {
             </section>
 
             {/* KONTAKT FORMA */}
-<section style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
+<section ref={formRef} style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '20px' }}>Rezervišite Vaše mesto.</h2>
         <p style={{ color: '#666' }}>Hajde da pričamo o postizanju Vaših ciljeva! Odgovorićemo na Vaš upit u roku od 24 sata.</p>
