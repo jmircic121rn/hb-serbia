@@ -14,11 +14,11 @@ export const translations = {
             selectDest: "Izaberite vašu destinaciju",
             selectSys: "Odaberite vaš sistem",
             planets: {
-                whoWeAre: { title: "Hansen Beck", subtitle: "Ko smo mi" },
-                explore: { title: "Personalizacija", subtitle: "Želim da istražim neotkriveni potencijal" },
-                b2b: { title: "B2B Rešenja", subtitle: "Interni treninzi za kompanije" },
+                whoWeAre: { title: "Hansen Beck", subtitle: "Vaši vodiči na putovanju" },
+                explore: { title: "Destinacija: Izvrsnost", subtitle: "Vaše putovanje" },
+                b2b: { title: "TIMSKI RAZVOJ", subtitle: "Interni treninzi za kompanije" },
                 individual: { title: "Individualni razvoj", subtitle: "Treninzi otvorenog tipa" },
-                analysis: { title: "Analiza kompetencija", subtitle: "Profilisanje potencijala" }
+                analysis: { title: "Uradi samoprocenu sposobnosti", subtitle: "Tvoj profesionalni profil" }
             }
         },
         form: {
@@ -167,11 +167,11 @@ export const translations = {
             selectDest: "Choose your destination",
             selectSys: "Select your system",
             planets: {
-                whoWeAre: { title: "Hansen Beck", subtitle: "Who we are" },
-                explore: { title: "Personalization", subtitle: "I want to explore hidden potential" },
-                b2b: { title: "B2B Solutions", subtitle: "Internal corporate trainings" },
+                whoWeAre: { title: "Hansen Beck", subtitle: "Your guide on the journey" },
+                explore: { title: "Destination: Excellence", subtitle: "Your journey" },
+                b2b: { title: "Team Development", subtitle: "Internal corporate trainings" },
                 individual: { title: "Individual Development", subtitle: "Open enrollment trainings" },
-                analysis: { title: "Competence Analysis", subtitle: "Potential profiling" }
+                analysis: { title: "Take the Self-Assessment", subtitle: "Your Professional Profile" }
             }
         },
         form: {
