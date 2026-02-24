@@ -15,22 +15,20 @@ import SuccessLine from './components/SuccessLine';
 import ValueBasedClosing from './components/ValueBasedClosing';
 import PerceptionBasedConversation from './components/PerceptionBasedConversation';
 import PersonalResponsibility from './components/PersonalResponsibility';
-import AboutUs from './components/AboutUs'; // <--- DODATO
+import AboutUs from './components/AboutUs';
 import Trainers from './components/Trainers';
 import PrivacyPolicy from './components/PrivacyPolicy';
 
+// Kompas komponenta sa suptilnim pokretom
 const SidebarCompass = () => {
-  // Koristimo fiksnu rotaciju sa blagim nasumičnim odstupanjem (float efekat)
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
-    // Efekat laganog ljuljanja igle (kao da je u tečnosti)
     const driftInterval = setInterval(() => {
       setRotation(prev => prev + (Math.random() - 0.5) * 2);
     }, 2000);
 
     const handleMouseMove = (e) => {
-      // Igla se samo blago "nagne" ka kursoru (max 15 stepeni), ne prati ga skroz
       const x = (e.clientX / window.innerWidth - 0.5) * 15;
       setRotation(x);
     };
@@ -45,35 +43,13 @@ const SidebarCompass = () => {
   return (
     <div style={{ position: 'relative', width: '100px', height: '100px', margin: '30px 0', opacity: 0.8 }}>
       <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
-        {/* Spoljni prsten sa stepenima */}
         <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
-        
-        {/* Marker za Sever (N) - Fiksiran */}
-        <text x="50" y="8" fontSize="7" fill="#ffb478" textAnchor="middle" fontWeight="900" style={{ letterSpacing: '1px' }}>N</text>
-        
-        {/* Diskretne linije kompasa */}
+        <text x="50" y="8" fontSize="7" fill="#ffb478" textAnchor="middle" fontWeight="900">N</text>
         {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
-          <line 
-            key={deg}
-            x1="50" y1="15" x2="50" y2="20" 
-            transform={`rotate(${deg} 50 50)`} 
-            stroke="rgba(255,180,120,0.2)" 
-            strokeWidth="0.5" 
-          />
+          <line key={deg} x1="50" y1="15" x2="50" y2="20" transform={`rotate(${deg} 50 50)`} stroke="rgba(255,180,120,0.2)" strokeWidth="0.5" />
         ))}
-
-        {/* IGRA IGLE */}
-        <motion.g 
-          animate={{ rotate: rotation }} 
-          transition={{ type: 'spring', stiffness: 15, damping: 20 }} 
-          style={{ originX: '50px', originY: '50px' }}
-        >
-          {/* Severni deo igle (Crveni/Narandžasti) */}
-          <path d="M50 15 L55 50 L45 50 Z" fill="#ffb478" />
-          {/* Južni deo igle (Tamni) */}
-          <path d="M50 85 L55 50 L45 50 Z" fill="rgba(255,255,255,0.1)" />
-          
-          {/* Centar igle */}
+        <motion.g animate={{ rotate: rotation }} transition={{ type: 'spring', stiffness: 15, damping: 20 }} style={{ originX: '50px', originY: '50px' }}>
+          <path d="M50 15 L54 50 L50 85 L46 50 Z" fill="#ffb478" />
           <circle cx="50" cy="50" r="2.5" fill="#0a0a0a" stroke="#ffb478" strokeWidth="1" />
         </motion.g>
       </svg>
@@ -85,8 +61,12 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // GLOBALNA STANJA
   const [step, setStep] = useState('PREINTRO');
-  const [eclipseMenu, setEclipseMenu] = useState('main'); // DODATO: Kontrola nivoa planeta
+  const [eclipseMenu, setEclipseMenu] = useState('main');
+  const [language, setLanguage] = useState('sr'); // Globalni jezik
+  const [assessmentType, setAssessmentType] = useState(null); // 'LEADER' ili 'EMPLOYEE'
+
   const [userData, setUserData] = useState(null);
   const [report, setReport] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -105,65 +85,60 @@ function App() {
     }
   };
 
+  // Funkcija koja se poziva kada korisnik klikne "Započni samoprocenu" na Landing stranici
+  const handleStartJourney = (type) => {
+    setAssessmentType(type); // Pamti da li je lider ili zaposleni
+    setStep('START'); // Šalje na formu (LeadForm)
+  };
+
   const goBack = () => {
-    // 1. Ako smo na ruti koja nije "/" (npr. /success-line)
     if (location.pathname !== '/') {
       navigate('/');
       setStep('OPEN_TRAININGS');
-      setEclipseMenu('assessment'); // Vraća na druge tri planete
+      setEclipseMenu('assessment');
       return;
     }
 
-    // 2. Logika za povratak unutar same eklipse (nivoi planeta)
     if (step === 'PREINTRO' && eclipseMenu === 'assessment') {
       setEclipseMenu('main');
       return;
     }
 
-    // 3. Logika za povratak sa stranica na eklipsu
     switch (step) {
       case 'ABOUT':
       case 'TRAINERS':
         setStep('PREINTRO');
-        setEclipseMenu('main'); // "Ko smo mi" i "Treneri" su na prvom nivou
+        setEclipseMenu('main');
         break;
-      
       case 'OPEN_TRAININGS':
       case 'INTRO':
         setStep('PREINTRO');
-        setEclipseMenu('assessment'); // OVO JE KLJUČ: Vraća na "zelim da znam o sebi" nivo
+        setEclipseMenu('assessment');
         break;
-
       case 'START':
-        setStep('INTRO'); // Sa forme na LandingPage (koji je vezan za assessment nivo)
+        setStep('INTRO');
         break;
-
       case 'PRIVACY':
-        setStep('START'); // Sa privatnosti na formu
+        setStep('START');
         break;
-
       case 'TEST':
         setStep('START');
         break;
-
       case 'RESULT':
         setStep('PREINTRO');
         setEclipseMenu('assessment');
         break;
-
       default:
         setStep('PREINTRO');
         setEclipseMenu('main');
     }
   };
 
-  // PRILAGOĐENA FUNKCIJA ZA PORTAL (ECLIPSEINTRO)
   const handlePortalChoice = (choice) => {
-    if (choice === 'ABOUT') setStep('ABOUT'); // <--- DODATO ZA ABOUT US
-    else if (choice === 'TRAINERS') setStep('TRAINERS'); // <--- DODATO ZA TRENERA
-    else if (choice === 'INTERNAL') setStep('INTRO');
+    if (choice === 'ABOUT') setStep('ABOUT');
+    else if (choice === 'TRAINERS') setStep('TRAINERS');
+    else if (choice === 'INTERNAL' || choice === 'INTRO') setStep('INTRO');
     else if (choice === 'OPEN_TRAININGS') setStep('OPEN_TRAININGS');
-else if (choice === 'INTRO') setStep('INTRO');
     else setStep('INTRO');
   };
 
@@ -173,7 +148,12 @@ else if (choice === 'INTRO') setStep('INTRO');
       const response = await fetch(`${API_BASE_URL}/api/public-assessment/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...userData, responses: finalAnswers })
+        body: JSON.stringify({
+          ...userData,
+          responses: finalAnswers,
+          type: assessmentType, // Šaljemo tip na backend
+          lang: language
+        })
       });
       const data = await response.json();
       if (response.ok) {
@@ -191,13 +171,12 @@ else if (choice === 'INTRO') setStep('INTRO');
     setStep('TEST');
   };
 
-  const showSidebar = ['INTRO', 'START', 'TEST', 'LOADING', 'RESULT'].includes(step) && location.pathname === '/';
+  const showSidebar = ['INTRO', 'START', 'PRIVACY', 'TEST', 'LOADING', 'RESULT'].includes(step) && location.pathname === '/';
 
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
-      {/* GLAVNO NAZAD DUGME */}
-      {/* Prikazuje se ako nismo na eklipsi ILI ako smo na drugom nivou planeta */}
+      {/* BACK DUGME */}
       {((step !== 'PREINTRO' || eclipseMenu !== 'main') || location.pathname !== '/') && step !== 'LOADING' && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -216,81 +195,98 @@ else if (choice === 'INTRO') setStep('INTRO');
       )}
 
       <Routes>
-        {/* OVE RUTE SU NEZAVISNE - Kada si na njima, "/" ruta se ignoriše */}
         <Route path="/success-line" element={<SuccessLine />} />
         <Route path="/value-based-closing" element={<ValueBasedClosing />} />
         <Route path="/perception-based" element={<PerceptionBasedConversation />} />
         <Route path="/personal-responsibility" element={<PersonalResponsibility />} />
         <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
 
-        {/* GLAVNA RUTA - Sada sa dodatnom zaštitom unutra */}
         <Route path="/" element={
           location.pathname === '/' ? (
             <div style={{ width: '100%', minHeight: '100vh' }}>
-              {/* 1. PORTAL LOGIKA */}
-              {step === 'PREINTRO' && location.pathname === '/' && <EclipseIntro 
-                  onProceed={handlePortalChoice} 
-                  menuLevel={eclipseMenu}      // PROSLEĐENO
-                  setMenuLevel={setEclipseMenu} // PROSLEĐENO
-                />}
-              {step === 'ABOUT' && location.pathname === '/' && <AboutUs onBack={() => setStep('PREINTRO')} />}
-              {step === 'TRAINERS' && location.pathname === '/' && <Trainers onBack={() => setStep('PREINTRO')} />}
-              {step === 'OPEN_TRAININGS' && location.pathname === '/' && <OpenTrainings onNavigate={handleNavigate} />}
-              {step === 'PRIVACY' && <PrivacyPolicy />}
 
-              {/* 2. ASSESSMENT LOGIKA */}
+              {step === 'PREINTRO' && (
+                <EclipseIntro
+                  onProceed={handlePortalChoice}
+                  menuLevel={eclipseMenu}
+                  setMenuLevel={setEclipseMenu}
+                  language={language}
+                  setLanguage={setLanguage} // <--- DODAJ OVU LINIJU
+                />
+              )}
+              {step === 'ABOUT' && <AboutUs onBack={() => setStep('PREINTRO')} />}
+              {step === 'TRAINERS' && <Trainers onBack={() => setStep('PREINTRO')} />}
+              {step === 'OPEN_TRAININGS' && <OpenTrainings onNavigate={handleNavigate} />}
+
               {showSidebar && (
-                <div className="pd-split-container" style={{ display: 'flex', width: '100%', minHeight: '100vh', flexDirection: window.innerWidth < 1024 ? 'column' : 'row' }}>
+                <div className="pd-split-container" style={{
+                  display: 'flex', width: '100%', minHeight: '100vh',
+                  flexDirection: window.innerWidth < 1024 ? 'column' : 'row'
+                }}>
+                  {/* SIDEBAR SA KOMPASOM */}
                   <div className="pd-sidebar" style={{
-  width: window.innerWidth < 1024 ? '100%' : '380px', flexShrink: 0,
-  backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
-  color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-  padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
-  top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100,
-  overflow: 'hidden' // Da efekti ne vire napolje
-}}>
-  {/* BACKGROUND ŠUM/TEKSTURA */}
-  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.03, pointerEvents: 'none', backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
+                    width: window.innerWidth < 1024 ? '100%' : '380px',
+                    backgroundColor: '#050505', borderRight: '1px solid rgba(255, 180, 120, 0.1)',
+                    color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                    padding: '60px 40px', position: window.innerWidth < 1024 ? 'relative' : 'sticky',
+                    top: 0, height: window.innerWidth < 1024 ? 'auto' : '100vh', zIndex: 100, overflow: 'hidden'
+                  }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.03, pointerEvents: 'none', backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
 
-  <div className="sidebar-header" style={{ position: 'relative', zIndex: 2 }}>
-    <img src="/logo.png" alt="Hansen Beck" style={{ marginTop: '20px', width: '160px', opacity: 0.9, marginBottom: '40px' }} />
-    
-    {/* DODATI KOMPAS */}
-    <SidebarCompass />
+                    <div className="sidebar-header" style={{ position: 'relative', zIndex: 2 }}>
+                      <img src="/logo.png" alt="Logo" style={{ marginTop: '20px', width: '160px', opacity: 0.9, marginBottom: '40px' }} />
+                      <SidebarCompass />
+                      <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px', fontWeight: 'bold' }}>The Expedition</div>
+                      <h1 style={{ fontSize: '28px', fontWeight: '900', lineHeight: '1.1', color: '#fff' }}>Ideal Profile <br /> Assessment</h1>
+                      <div style={{ width: '40px', height: '2px', backgroundColor: '#ffb478', marginTop: '20px' }} />
+                    </div>
 
-    <div style={{ color: 'rgba(255, 180, 120, 0.6)', fontSize: '10px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '15px', fontWeight: 'bold' }}>
-      The Expedition
-    </div>
-    <h1 style={{ fontSize: '28px', fontWeight: '900', lineHeight: '1.1', letterSpacing: '-1px', color: '#fff', marginBottom: '20px' }}>
-      Ideal Profile <br /> Assessment
-    </h1>
-    <div style={{ width: '40px', height: '2px', backgroundColor: '#ffb478', marginBottom: '30px' }} />
-  </div>
+                    <div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px' }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'rgba(255,180,120,0.4)', display: 'flex', justifyContent: 'space-between' }}>
+                        <span>LOC: 90°00′S 0°00′E</span>
+                        <span>VER: 2.0.4</span>
+                      </div>
+                    </div>
+                  </div>
 
-  {/* DONJI DEO SIDEBARA - KOORDINATE I VERZIJA */}
-  <div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px' }}>
-    <div style={{ fontFamily: 'monospace', fontSize: '10px', color: 'rgba(255,180,120,0.4)', display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
-      <span>LOC: 90°00′S 0°00′E</span>
-      <span>VER: 2.0.4</span>
-    </div>
-    <p style={{ fontSize: '11px', color: '#444', margin: 0, lineHeight: '1.5' }}>
-      Based on Amundsen-Scott South Pole Station Expedition Records.
-    </p>
-  </div>
-</div>
-
+                  {/* GLAVNI SADRŽAJ SA PROSLEĐENIM JEZIKOM */}
                   <div className="pd-content" style={{ flex: 1, backgroundColor: '#0a0a0a' }}>
-                    {step === 'INTRO' && <LandingPage onStart={() => setStep('START')} />}
-                    {step === 'START' && (
-                      <LeadForm
-                        errorMsg={errorMsg}
-                        onNext={handleLeadSubmit}
-                        onPrivacyClick={() => setStep('PRIVACY')} // <--- DODAJ OVU LINIJU
+                    {step === 'INTRO' && (
+                      <LandingPage
+                        onStart={handleStartJourney}
+                        language={language}
+                        setLanguage={setLanguage}
                       />
                     )}
-                    {step === 'TEST' && <Assessment onFinish={handleFinish} />}
-                    {step === 'LOADING' && <LoadingScreen />}
-                    {step === 'RESULT' && <ResultView report={report} userData={userData} />}
+                    {step === 'START' && (
+                      <LeadForm
+                        language={language}
+                        errorMsg={errorMsg}
+                        setLanguage={setLanguage}
+                        onNext={handleLeadSubmit}
+                        onPrivacyClick={() => setStep('PRIVACY')}
+                      />
+                    )}
+                    {step === 'PRIVACY' && (
+                      <div style={{ padding: '40px' }}>
+                        <PrivacyPolicy language={language} onBack={() => setStep('START')} />
+                      </div>
+                    )}
+                    {step === 'TEST' && (
+                      <Assessment
+                        language={language}
+                        type={assessmentType}
+                        onFinish={handleFinish}
+                      />
+                    )}
+                    {step === 'LOADING' && <LoadingScreen language={language} />}
+                    {step === 'RESULT' && (
+                      <ResultView
+                        report={report}
+                        userData={userData}
+                        language={language}
+                      />
+                    )}
                   </div>
                 </div>
               )}
@@ -301,4 +297,5 @@ else if (choice === 'INTRO') setStep('INTRO');
     </div>
   );
 }
+
 export default App;

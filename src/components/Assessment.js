@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Koristimo shortTermGoals iz tvog fajla
-import { mockQuestions } from '../data/mockQuestions'; 
+import { leaderQuestions } from '../data/leaderQuestions'; 
 
 const Assessment = ({ onFinish, onQuestionChange }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,7 +10,7 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
   // 1. TRANSFORMACIJA: Pretvaramo tvojih 40 faza (sa Core i Reflection) 
   // u ravan niz od 80 pitanja radi lakše navigacije
   const flatQuestions = useMemo(() => {
-    return mockQuestions.flatMap(q => [
+    return leaderQuestions.flatMap(q => [
       { 
         id: `${q.id}-core`, 
         facet: q.facetName, 
@@ -58,7 +58,7 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
             {currentQ.facet}
           </span>
           <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '9px', marginTop: '4px' }}>
-            PHASE {Math.floor(currentIndex / 2) + 1} / {mockQuestions.length}
+            PHASE {Math.floor(currentIndex / 2) + 1} / {leaderQuestions.length}
           </div>
         </div>
         <div style={{ textAlign: 'right' }}>

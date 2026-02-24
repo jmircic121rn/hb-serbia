@@ -1,121 +1,213 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Compass, Target, Zap, Shield, Users, Rocket, 
-  Lightbulb, TrendingUp, MessageSquare, ArrowRight,
-  Layers, Brain, BarChart3, Star
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Compass, Target, Users } from 'lucide-react';
+import { translations } from '../data/translations';
 
-const LandingPage = ({ onStart }) => {
+// POMOĆNA KOMPONENTA ZA KARTICE NA POČETNOJ
+const RoleCard = ({ title, desc, onClick, icon, t }) => (
+  <div onClick={onClick} style={{ 
+    padding: '30px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,180,120,0.1)',
+    cursor: 'pointer', transition: '0.3s'
+  }} className="role-card-hover">
+    {icon}
+    <h3 style={{ marginTop: '20px', marginBottom: '10px' }}>{title}</h3>
+    <p style={{ color: '#666', fontSize: '14px' }}>{desc}</p>
+    <div style={{ marginTop: '20px', color: '#ffb478', fontSize: '12px', fontWeight: 'bold' }}>
+      {t.common.learnMore}
+    </div>
+  </div>
+);
+
+// DETALJAN PRIKAZ LIDERA ILI ZAPOSLENOG
+const DetailView = ({ type, t, onBack, onProceed }) => {
+  const data = type === 'LEADER' ? t.leader : t.employee;
+  
+  return (
+    <div style={{ maxWidth: '900px', padding: '40px 0' }}>
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#ffb478', cursor: 'pointer', marginBottom: '30px', fontWeight: 'bold' }}>
+        ← {t.common.back}
+      </button>
+      
+      <h1 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{data.title}</h1>
+      <h3 style={{ color: '#ffb478', marginBottom: '30px' }}>{data.subtitle}</h3>
+      
+      <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#ccc', marginBottom: '30px' }}>
+        {data.mainDescription}
+      </p>
+
+      {/* Specifično za lidera: HB framework info */}
+      {type === 'LEADER' && data.frameworkInfo && (
+        <p style={{ color: '#888', fontStyle: 'italic', marginBottom: '40px' }}>{data.frameworkInfo}</p>
+      )}
+
+      <h4 style={{ marginBottom: '20px', color: '#fff' }}>
+        {type === 'LEADER' ? data.capabilitiesTitle : data.vbcFeaturesTitle}
+      </h4>
+
+      {/* Lista karakteristika / stubova */}
+      <div style={{ display: 'grid', gap: '20px', marginBottom: '40px' }}>
+        {(type === 'LEADER' ? data.capabilities : data.vbcFeatures).map((item, i) => (
+          <div key={i} style={{ padding: '20px', background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid #ffb478' }}>
+            <strong style={{ color: '#fff', display: 'block', marginBottom: '5px' }}>{item.title}</strong>
+            <span style={{ color: '#888', fontSize: '14px' }}>{item.text}</span>
+          </div>
+        ))}
+      </div>
+
+      <p style={{ fontSize: '18px', color: '#fff', marginBottom: '20px' }}>
+        {type === 'LEADER' ? data.transformTitle : data.summary}
+      </p>
+      
+      {/* Lista za transformaciju (samo za lidera) */}
+      {type === 'LEADER' && (
+        <ul style={{ color: '#888', marginBottom: '40px', paddingLeft: '20px' }}>
+          {data.transformItems.map((item, i) => (
+            <li key={i} style={{ marginBottom: '10px' }}>{item}</li>
+          ))}
+        </ul>
+      )}
+
+      <p style={{ color: '#ffb478', fontWeight: 'bold', marginBottom: '20px' }}>
+        {type === 'LEADER' ? data.assessmentGoal : data.assessmentCall}
+      </p>
+      
+      {/* Ishodi procene (bullets) */}
+      <div style={{ marginBottom: '50px' }}>
+        {data.assessmentOutcomes?.map((outcome, i) => (
+          <div key={i} style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>• {outcome}</div>
+        ))}
+      </div>
+
+      <motion.button 
+        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+        onClick={onProceed}
+        style={{ 
+          padding: '25px 50px', background: '#ffb478', color: '#000', 
+          border: 'none', fontWeight: '900', cursor: 'pointer', fontSize: '16px',
+          boxShadow: '0 10px 30px rgba(255,180,120,0.2)'
+        }}
+      >
+        {t.common.startBtn}
+      </motion.button>
+
+      <p style={{ marginTop: '40px', color: '#444', fontSize: '12px', lineHeight: '1.6' }}>
+        {data.footer}
+      </p>
+    </div>
+  );
+};
+
+const LandingPage = ({ onStart, language, setLanguage }) => {
+  const [view, setView] = useState('MAIN');
+  const t = translations[language];
+
+  // Birač jezika u gornjem desnom uglu
+  const LanguagePicker = () => (
+    <div style={{ 
+      position: 'absolute', top: '20px', right: '40px', zIndex: 100,
+      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
+      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
+      border: '1px solid rgba(255,255,255,0.1)'
+    }}>
+      {['sr', 'en'].map((l) => (
+        <span 
+          key={l}
+          onClick={() => setLanguage(l)}
+          style={{ 
+            cursor: 'pointer', fontSize: '12px', fontWeight: '900',
+            color: language === l ? '#ffb478' : '#666',
+            transition: '0.3s'
+          }}
+        >
+          {l.toUpperCase()}
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <div className="landing-scroll-container" style={{ 
       textAlign: 'left', color: '#fff', backgroundColor: '#0a0a0a', minHeight: '100vh',
-      padding: '60px 40px', position: 'relative', width: '100%', boxSizing: 'border-box', overflowX: 'hidden'
+      padding: '60px 40px', position: 'relative', width: '100%', boxSizing: 'border-box'
     }}>
-      
-      {/* BACKGROUND DEKORACIJA */}
-      <div style={{ position: 'absolute', top: 0, right: 0, width: '100%', height: '100%',
-        background: 'radial-gradient(circle at 80% 20%, rgba(255, 180, 120, 0.05) 0%, transparent 50%)',
-        filter: 'blur(60px)', zIndex: 0, pointerEvents: 'none'
-      }} />
+      <LanguagePicker />
 
-      
-
-      {/* 2. SEKCIJA: HB KOMPAS (Tvoj Vodič) */}
-      <section style={{ marginBottom: '120px', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-          <Compass size={32} color="#ffb478" />
-          <h2 style={{ fontSize: '32px', fontWeight: '900' }}>HB Kompas – Vaš Vodič kroz Profesionalni Razvoj</h2>
-        </div>
-        <p style={{ color: '#aaa', lineHeight: '1.8', maxWidth: '900px', marginBottom: '40px' }}>
-          U današnjem dinamičnom poslovnom svetu, uspeh ne zavisi samo od onoga što znate, već i od načina na koji razmišljate. HB Kompas je sveobuhvatan okvir, razvijen od strane HubX tima, za procenu i razvoj profesionalne izvrsnosti.
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
-          {[
-            { Icon: Brain, title: "Način razmišljanja (Mindset)", text: "Istražuje vaš unutrašnji svet – samopercepciju, uverenja i stavove." },
-            { Icon: Layers, title: "Veštine (Skills)", text: "Fokusira se na praktične sposobnosti i znanja potrebna za rad." },
-            { Icon: BarChart3, title: "Rezultati (Results)", text: "Meri vaš doprinos ishodima, od ciljeva do dugoročnih promena." },
-            { Icon: Star, title: "Uticaj (Influence)", text: "Proučava kako interaktujete sa drugima i kako ih inspirišete." }
-          ].map((item, i) => (
-            <div key={i} style={{ padding: '25px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <item.Icon size={24} color="#ffb478" style={{ marginBottom: '15px' }} />
-              <h4 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '10px' }}>{item.title}</h4>
-              <p style={{ fontSize: '13px', color: '#777', lineHeight: '1.5' }}>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. SEKCIJA: INSPIRATIVNO LIDERSTVO 2.0 */}
-      <section style={{ marginBottom: '120px', position: 'relative', zIndex: 1 }}>
-        <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '30px' }}>Inspirativno Liderstvo 2.0</h2>
-        <p style={{ color: '#aaa', lineHeight: '1.8', maxWidth: '900px', marginBottom: '40px' }}>
-          Inspirativno Liderstvo 2.0 je detaljan profil lidera budućnosti, razvijen na osnovu okvira HB Kompasa i temeljen na principima VBC komunikacije. Fokusiramo se na lidere koji:
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-          {[
-            { Icon: Target, title: "Jasna vizija i strategija", text: "Razumeju širi kontekst i usklađuju timske napore sa dugoročnom vizijom." },
-            { Icon: Zap, title: "Majstori upravljanja promenama", text: "Uspešno sprovode inicijative dok upravljaju otporom i angažovanjem." },
-            { Icon: Shield, title: "Kultura rasta i otpornosti", text: "Neguju duboku samosvest i efikasno se oporavljaju od neuspeha." },
-            { Icon: Users, title: "Poverenje i inkluzivnost", text: "Praktikuju radikalnu empatiju i stvaraju okruženje gde se svi osećaju vrednovanim." },
-            { Icon: Rocket, title: "Podsticanje akcije i osnaživanje", text: "Inspirišu vizijom, efikasno delegiraju i promovišu vlasništvo." }
-          ].map((item, i) => (
-            <div key={i} style={{ display: 'flex', gap: '20px', padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <item.Icon size={24} color="#ffb478" style={{ flexShrink: 0 }} />
-              <div>
-                <h4 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '5px' }}>{item.title}</h4>
-                <p style={{ fontSize: '14px', color: '#777' }}>{item.text}</p>
+      <AnimatePresence mode="wait">
+        {view === 'MAIN' ? (
+          <motion.div 
+            key="main" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+          >
+            {/* SEKCIJA: HB KOMPAS */}
+            <section style={{ marginBottom: '80px', marginTop: '40px', maxWidth: '1000px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
+                <Compass size={32} color="#ffb478" />
+                <h2 style={{ fontSize: '32px', fontWeight: '900' }}>{t.compass.title}</h2>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+              
+              <p style={{ color: '#fff', fontSize: '18px', lineHeight: '1.8', marginBottom: '20px' }}>
+                {t.compass.description}
+              </p>
+              
+              <p style={{ color: '#aaa', lineHeight: '1.6', marginBottom: '40px' }}>
+                {t.compass.subquote}
+              </p>
 
-      {/* 4. SEKCIJA: VIŠE OD TRANSAKCIJA (Moderni Zaposleni) */}
-      <section style={{ marginBottom: '120px', padding: '60px 40px', background: 'rgba(255,180,120,0.02)', border: '1px solid rgba(255,180,120,0.1)', position: 'relative', zIndex: 1 }}>
-        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '20px' }}>Idealni Profil Modernog Zaposlenog</h2>
-        <p style={{ color: '#ffb478', fontWeight: '700', marginBottom: '40px' }}>Više od Transakcija – Komunikacija Zasnovana na Vrednostima (VBC)</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
-          {[
-            { Icon: MessageSquare, title: "Ovladavanje VBC-om", text: "Privlači pažnju i nagoni druge na razmišljanje o istinskoj vrednosti." },
-            { Icon: Users, title: "Radikalna empatija", text: "Duboko razume potrebe i strahove drugih, 'čuje neizrečeno'." },
-            { Icon: Lightbulb, title: "Artikulacija vrednosti", text: "Prevodite složene ideje u jasne poruke koje rezoniraju." },
-            { Icon: TrendingUp, title: "Proaktivnost i agilnost", text: "Dosledno transformiše odbijanje u podatke za kontinuirano učenje." }
-          ].map((item, i) => (
-            <div key={i}>
-              <item.Icon size={20} color="#ffb478" style={{ marginBottom: '15px' }} />
-              <h4 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '10px' }}>{item.title}</h4>
-              <p style={{ fontSize: '13px', color: '#aaa', lineHeight: '1.5' }}>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+              {/* Dimenzije kompasa */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                {Object.values(t.compass.dimensions).map((dim, i) => (
+                  <div key={i} style={{ padding: '15px', background: 'rgba(255,255,255,0.03)', borderRadius: '4px' }}>
+                    <div style={{ color: '#ffb478', fontWeight: 'bold', marginBottom: '8px', fontSize: '14px' }}>{dim.title}</div>
+                    <div style={{ color: '#666', fontSize: '13px' }}>{dim.text}</div>
+                  </div>
+                ))}
+              </div>
 
-      {/* 5. SEKCIJA: SAMOPROCENA & CTA */}
-      <section style={{ textAlign: 'center', paddingBottom: '100px', position: 'relative', zIndex: 1 }}>
-        <h3 style={{ fontSize: '26px', fontWeight: '900', marginBottom: '40px' }}>Spremni da otkrijete gde se nalazite?</h3>
-        <div style={{ display: 'inline-grid', textAlign: 'left', gap: '20px', marginBottom: '60px' }}>
-          {[
-            "Precizna analiza vaših trenutnih veština i načina razmišljanja.",
-            "Identifikacija jakih strana gde već pokazujete izvanrednost.",
-            "Konkretne oblasti za dalji razvoj sa jasnim smernicama."
-          ].map((text, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <ArrowRight size={18} color="#ffb478" />
-              <p style={{ fontSize: '16px', color: '#ccc', margin: 0 }}>{text}</p>
-            </div>
-          ))}
-        </div>
-        <br />
-        <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} onClick={onStart} 
-          style={{ padding: '20px 60px', background: '#ffb478', color: '#000', border: 'none', fontWeight: '900', letterSpacing: '2px', cursor: 'pointer' }}
-        >
-          START MY JOURNEY
-        </motion.button>
-      </section>
+              <p style={{ color: '#888', fontSize: '14px', fontStyle: 'italic', marginBottom: '60px' }}>
+                {t.compass.extraInfo}
+              </p>
 
-      {/* NOISE TEKSTURA */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0.02, pointerEvents: 'none', backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`, zIndex: 5 }} />
+              {/* IZBOR PUTANJE (Role Cards) */}
+              <h3 style={{ marginBottom: '30px', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', color: '#444' }}>
+                {t.common.selectPath}
+              </h3>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+                <RoleCard 
+                  title={t.leader.title} 
+                  desc={t.leader.subtitle} 
+                  onClick={() => setView('LEADER')} 
+                  icon={<Target color="#ffb478" size={32} />}
+                  t={t}
+                />
+                <RoleCard 
+                  title={t.employee.title} 
+                  desc={t.employee.subtitle} 
+                  onClick={() => setView('EMPLOYEE')} 
+                  icon={<Users color="#ffb478" size={32} />}
+                  t={t}
+                />
+              </div>
+            </section>
+          </motion.div>
+        ) : (
+          <motion.div 
+            key="details" 
+            initial={{ opacity: 0, x: 20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            exit={{ opacity: 0, x: -20 }}
+          >
+            <DetailView 
+              type={view} 
+              t={t} 
+              onBack={() => setView('MAIN')} 
+              onProceed={() => onStart(view)} 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

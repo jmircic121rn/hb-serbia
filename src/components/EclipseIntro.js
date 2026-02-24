@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { translations } from '../data/translations'; // Proveri putanju do fajla
 
 const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   return (
@@ -8,17 +9,14 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
       animate={{
         opacity: 1,
         scale: 1,
-        // LEBDENJE: Pomera se gore-dole za 10px i blago se naginje
         y: [0, -10, 0],
         rotate: [0, 1, -1, 0]
       }}
       transition={{
-        // Ulazna animacija (fade i scale)
         opacity: { duration: 1, delay: delay },
         scale: { duration: 1, delay: delay },
-        // Beskonačno lebdenje (kreće nakon što se pojavi)
         y: {
-          duration: 4 + Math.random() * 2, // Različita brzina za svaku planetu
+          duration: 4 + Math.random() * 2,
           repeat: Infinity,
           ease: "easeInOut",
           delay: delay
@@ -41,7 +39,6 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
         position: 'relative',
       }}
     >
-      {/* PULSIRAJUĆI SJAJ - Ostaje isti */}
       <motion.div
         variants={{
           hover: {
@@ -63,7 +60,6 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
         }}
       />
 
-      {/* SATURN VIZUAL - Ostaje isti */}
       <div style={{
         position: 'relative',
         width: '140px',
@@ -110,7 +106,6 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
         }} />
       </div>
 
-      {/* TEKST SEKCIJA */}
       <div style={{ textAlign: 'center', zIndex: 10 }}>
         <h3 style={{ fontSize: '7px', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px', textTransform: 'uppercase' }}>
           {title}
@@ -132,13 +127,40 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   );
 };
 
-const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
+const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage }) => {
   const [showOptions, setShowOptions] = useState(menuLevel !== 'main');
+  const t = translations[language].eclipse;
+
   useEffect(() => {
     if (menuLevel !== 'main') {
       setShowOptions(true);
     }
   }, [menuLevel]);
+
+  const LanguagePicker = () => (
+    <div style={{ 
+      position: 'absolute', top: '30px', right: '40px', zIndex: 100,
+      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
+      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
+      border: '1px solid rgba(255,255,255,0.1)'
+    }}>
+      {['sr', 'en'].map((l) => (
+        <span 
+          key={l}
+          onClick={() => setLanguage(l)}
+          style={{ 
+            cursor: 'pointer', fontSize: '12px', fontWeight: '900',
+            color: language === l ? '#ffb478' : '#666',
+            transition: '0.3s',
+            letterSpacing: '1px'
+          }}
+        >
+          {l.toUpperCase()}
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <div style={{
       height: '100vh',
@@ -152,6 +174,7 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
       position: 'relative',
       overflow: 'hidden',
     }}>
+      <LanguagePicker />
 
       <motion.div
         animate={{ y: showOptions ? -60 : 0 }}
@@ -173,7 +196,6 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
         <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
         <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
         <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
-        {/* Crni krug (Zemlja/Senka) */}
         <div style={{
           position: 'relative',
           width: '280px',
@@ -182,44 +204,43 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
           borderRadius: '50%',
           zIndex: 5,
           boxShadow: '0 0 15px rgba(0,0,0,1)',
-          display: 'flex',            // Dodato za centriranje logoa
-          alignItems: 'center',       // Dodato
-          justifyContent: 'center',    // Dodato
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           overflow: 'hidden'
         }}>
-          {/* LOGO KOJI JE UNUTAR KRUGA */}
           <motion.img
             src="/logo.png"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }} // Suptilna vidljivost
+            animate={{ opacity: 0.2 }}
             transition={{ delay: 1, duration: 2 }}
             style={{
-              width: '220px', // Veličina da lepo stane unutar 280px
+              width: '220px',
               height: 'auto',
               objectFit: 'contain',
               filter: 'grayscale(100%) brightness(1.5)'
             }}
           />
-        </div>            </motion.div>
+        </div>
+      </motion.div>
 
       <div style={{ textAlign: 'center', zIndex: 20 }}>
         <motion.h1
-  animate={{ 
-    y: showOptions ? -40 : 0,
-    opacity: showOptions ? 0.45 : 1, // Smanjuje vidljivost na 15% kada se pojave planete
-    scale: showOptions ? 0.95 : 1    // Blago se smanji da bi delovalo kao da odlazi u pozadinu
-  }}
-  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-  style={{
-    fontSize: '64px',
-    fontWeight: '900',
-    lineHeight: '0.9',
-    letterSpacing: '-2px',
-    margin: 0
-  }}
->
-          Great Conquests <br />
-          Are Won in the <span style={{ color: '#444' }}>Backseat.</span>
+          animate={{ 
+            y: showOptions ? -40 : 0,
+            opacity: showOptions ? 0.45 : 1,
+            scale: showOptions ? 0.95 : 1
+          }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontSize: '64px',
+            fontWeight: '900',
+            lineHeight: '0.9',
+            letterSpacing: '-2px',
+            margin: 0
+          }}
+        >
+          {t.mainTitle}
         </motion.h1>
 
         <motion.p
@@ -239,33 +260,31 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
             transition: 'all 0.3s ease'
           }}
         >
-          {menuLevel === 'main' ? "Izaberite vašu destinaciju" : "Odaberite vaš sistem"}                </motion.p>
+          {menuLevel === 'main' ? t.selectDest : t.selectSys}
+        </motion.p>
 
         <AnimatePresence mode="wait">
           {showOptions && menuLevel === 'main' && (
             <motion.div
+              key="main-menu"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              style={{
-                display: 'flex',
-                gap: '30px',
-                justifyContent: 'center'
-              }}
+              style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
             >
               <SaturnPlanet
-                title="Hansen Beck"
-                subtitle="Ko smo mi"
+                title={t.planets.whoWeAre.title}
+                subtitle={t.planets.whoWeAre.subtitle}
                 glowColor="rgba(255, 180, 120, 0.6)"
                 delay={0.1}
                 onClick={() => onProceed('ABOUT')}
               />
               <SaturnPlanet
-                title="Personalizacija"
-                subtitle="Želim da istražim neotkriveni potencijal"
+                title={t.planets.explore.title}
+                subtitle={t.planets.explore.subtitle}
                 glowColor="rgba(255, 180, 120, 0.6)"
                 delay={0.3}
-                onClick={() => setMenuLevel('assessment')} // Menja set planeta
+                onClick={() => setMenuLevel('assessment')}
               />
             </motion.div>
           )}
@@ -278,32 +297,34 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel }) => {
               style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
             >
               <SaturnPlanet
-                title="B2B Rešenja"
-                subtitle="Interni treninzi za kompanije"
+                title={t.planets.b2b.title}
+                subtitle={t.planets.b2b.subtitle}
                 glowColor="rgba(255, 180, 120, 0.6)"
                 delay={0.1}
                 onClick={() => onProceed('INTERNAL')}
               />
               <SaturnPlanet
-                title="Individualni razvoj"
-                subtitle="Treninzi otvorenog tipa"
+                title={t.planets.individual.title}
+                subtitle={t.planets.individual.subtitle}
                 glowColor="rgba(255, 180, 120, 0.6)"
                 delay={0.2}
                 onClick={() => onProceed('OPEN_TRAININGS')}
               />
               <SaturnPlanet
-                title="Analiza kompetencija"
-                subtitle="Profilisanje potencijala"
+                title={t.planets.analysis.title}
+                subtitle={t.planets.analysis.subtitle}
                 glowColor="rgba(255, 180, 120, 0.6)"
                 delay={0.3}
                 onClick={() => onProceed('INTRO')}
               />
-              {/* Dugme za povratak (opciono) */}
               <div
                 onClick={() => setMenuLevel('main')}
-                style={{ position: 'absolute', bottom: '-40px', cursor: 'pointer', fontSize: '10px', opacity: 0.5 }}
+                style={{ 
+                  position: 'absolute', bottom: '-40px', cursor: 'pointer', 
+                  fontSize: '10px', opacity: 0.5, letterSpacing: '2px' 
+                }}
               >
-                ← NAZAD
+                ← {translations[language].common.back.toUpperCase()}
               </div>
             </motion.div>
           )}
