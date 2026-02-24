@@ -104,7 +104,7 @@ Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obr
             title="Zatvaranje prodaje zasnovano na vrednosti"
             duration={
               <div>
-                <div>30. april 09:00 - 17:00 </div>
+                <div>14. maj 09:00 - 17:00 </div>
                 <div >23. jun 09:00 - 17:00</div>
               </div>
             }
@@ -122,7 +122,7 @@ Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obr
             title="Razgovor zasnovan na percepciji"
             duration={
               <div>
-                <div>28. april 09:00 - 17:00</div>
+                <div>12. maj 09:00 - 17:00</div>
                 <div>21. maj 09:00 - 17:00</div>
               </div>
             }

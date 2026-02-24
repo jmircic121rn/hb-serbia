@@ -126,13 +126,10 @@ const PerceptionBasedConversation = () => {
                     <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#fff', marginBottom: '30px' }}>
                         Ova intenzivna jednodnevna radionica menja igru. Namenjena je svakom prodajnom profesionalcu koji se prepoznaje u ovim scenarijima. Donosimo potpuno drugačiju perspektivu i konkretne alate za transformaciju vašeg pristupa fazi otkrivanja potreba. Umesto čekanja na eksplicitne izjave o potrebama (što bi bilo idealno), fokusiramo se na vođenje razgovora koje stvara uvid u preoznavanje vrednosti i pre nego što se rešenje uopšte spomene.
                     </p>
-                    <p style={{ fontSize: '20px', fontWeight: '800', color: 'rgba(255,180,120,1)', marginBottom: '30px' }}>
-                        Prijavite se odmah!
-                    </p>
-                    <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#aaa', marginBottom: '40px' }}>
+                    <h3 style={{ marginTop: '50px', fontSize: '22px', fontWeight: '800', color: 'rgba(255,180,120,1)' }}>
                         Jer, u svetu Razgovora zasnovanog na percepciji, prodaja ne počinje kada klijent izrazi potrebu, već kada mu pomognete da uvidi skriveni problem koji ne sme da ignoriše.
                         Prestanite da čekate da vam klijenti kažu da im nešto treba i gubite prilike zbog „Nemamo potrebe“. Pretvorite „Ne treba nam ništa!“ u „Ovo ne smemo da ignorišemo!”
-                    </p>
+                    </h3>
                     <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#fff' }}>
                         Vodite razgovore koji stvaraju uvid u vrednost pre nego što se rešenje uopšte spomene. Otkrijte klijentu skrivene neefikasnosti i rizike, pomozite mu da vidi svoju situaciju danas i sutra na potpuno nov način – bez pritiska ili konfrontacije. Budite prodavac koji ne „gura“ rešenja, već čini „nevidljivi“ problem nemogućim za ignorisanje, vodeći samouvereno prodajne razgovore baš tada kada drugi čuju „Ne“.
                     </p>
@@ -155,9 +152,6 @@ const PerceptionBasedConversation = () => {
                             <p style={{ color: '#888', fontSize: '14px', lineHeight: '1.6' }}>{item.d}</p>
                         </div>
                     ))}
-                </div>
-                <div style={{ textAlign: 'center', marginTop: '60px' }}>
-                     <p style={{ fontSize: '20px', fontWeight: '800', color: 'rgba(255,180,120,1)' }}>Prijavite se odmah!</p>
                 </div>
             </section>
 
@@ -241,7 +235,7 @@ const PerceptionBasedConversation = () => {
                     <input name="trening" value={formData.trening} style={{...inputStyle, opacity: 0.7}} readOnly />
                     <select name="datum" value={formData.datum} onChange={handleInputChange} style={inputStyle} required>
                         <option value="" disabled>Izaberite datum</option>
-                        <option value="28. April">28. April</option>
+                        <option value="12. Maj">12. Maj</option>
                         <option value="21. Maj">21. Maj</option>
                     </select>
                     <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={inputStyle} required>

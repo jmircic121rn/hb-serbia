@@ -300,7 +300,7 @@ const handleFormSubmit = async (e) => {
             required
         >
             <option value="" disabled>Izaberite datum</option>
-            <option value="30. april">30. april</option>
+            <option value="14. maj">14. maj</option>
             <option value="23. jun">23. jun</option>
         </select>
 
