@@ -40,16 +40,58 @@ const SidebarCompass = () => {
     };
   }, []);
 
+  // Definicija strana sveta i njihovih pozicija
+  const directions = [
+    { label: 'N', x: 50, y: 8 },
+    { label: 'S', x: 50, y: 95 },
+    { label: 'E', x: 92, y: 52.5 },
+    { label: 'W', x: 8, y: 52.5 },
+  ];
+
   return (
     <div style={{ position: 'relative', width: '100px', height: '100px', margin: '30px 0', opacity: 0.8 }}>
       <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+        {/* Spoljni krug */}
         <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
-        <text x="50" y="8" fontSize="7" fill="#fcfcfc" textAnchor="middle" fontWeight="900">N</text>
-        {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
-          <line key={deg} x1="50" y1="15" x2="50" y2="20" transform={`rotate(${deg} 50 50)`} stroke="rgba(255,180,120,0.2)" strokeWidth="0.5" />
+        
+        {/* Prikaz slova strana sveta */}
+        {directions.map(dir => (
+          <text 
+            key={dir.label}
+            x={dir.x} 
+            y={dir.y} 
+            fontSize="7" 
+            fill={dir.label === 'N' ? "#ffb478" : "#fcfcfc"} // Sever je naglašen narandžastom
+            textAnchor="middle" 
+            fontWeight="900"
+            style={{ pointerEvents: 'none', userSelect: 'none' }}
+          >
+            {dir.label}
+          </text>
         ))}
-        <motion.g animate={{ rotate: rotation }} transition={{ type: 'spring', stiffness: 15, damping: 20 }} style={{ originX: '50px', originY: '50px' }}>
-          <path d="M50 15 L54 50 L50 85 L46 50 Z" fill="#ffb478" />
+
+        {/* Graduacija (crtice) */}
+        {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
+          <line 
+            key={deg} 
+            x1="50" y1="12" x2="50" y2="18" // Malo pomerene crtice da ne udaraju u slova
+            transform={`rotate(${deg} 50 50)`} 
+            stroke="rgba(255,180,120,0.2)" 
+            strokeWidth="0.5" 
+          />
+        ))}
+
+        {/* Igla kompasa */}
+        <motion.g 
+          animate={{ rotate: rotation }} 
+          transition={{ type: 'spring', stiffness: 15, damping: 20 }} 
+          style={{ originX: '50px', originY: '50px' }}
+        >
+          {/* Igla - Gornji deo (Sever) */}
+          <path d="M50 15 L54 50 L50 50 L46 50 Z" fill="#ffb478" />
+          {/* Igla - Donji deo (Jug) za realističniji izgled */}
+          <path d="M50 85 L54 50 L50 50 L46 50 Z" fill="rgba(255,255,255,0.2)" />
+          
           <circle cx="50" cy="50" r="2.5" fill="#0a0a0a" stroke="#ffb478" strokeWidth="1" />
         </motion.g>
       </svg>
