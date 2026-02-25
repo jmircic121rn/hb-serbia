@@ -63,7 +63,7 @@ function App() {
   const [report, setReport] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const API_BASE_URL = 'http://localhost:5001';
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
   const checkIntervalRef = useRef(null);
 
   // App.js
