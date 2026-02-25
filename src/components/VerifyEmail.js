@@ -10,7 +10,7 @@ const VerifyEmail = () => {
   useEffect(() => {
     const token = searchParams.get('token');
     // Koristimo direktan URL da izbegnemo bilo kakav problem sa ENV varijablama
-    const API_BASE_URL = 'http://localhost:5001';
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
 
     console.log("🔍 PROVERA: Pokrećem verifikaciju za token:", token);
 
