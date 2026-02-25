@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Target, Users } from 'lucide-react';
 import { translations } from '../data/translations';
@@ -108,6 +108,13 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
 const LandingPage = ({ onStart, language, setLanguage }) => {
   const [view, setView] = useState('MAIN');
   const t = translations[language];
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Opcija za glatko skrolovanje
+    });
+  }, [view]);
 
   // Birač jezika
   const LanguagePicker = () => (

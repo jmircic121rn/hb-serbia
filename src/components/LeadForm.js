@@ -9,18 +9,32 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
 
   const [agreed, setAgreed] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // Preuzimanje prevoda na osnovu jezika
   const t = translations[language].form;
 
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreed) {
       alert(t.gdprAlert);
       return;
     }
-    onNext(formData);
-  };
 
+    setIsLoading(true);
+    localStorage.setItem('appLanguage', language); 
+    
+    try {
+      // Sada await radi jer je funkcija async
+      await onNext(formData);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
@@ -133,9 +147,14 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
           </div>
         </div>
 
-        <button type="submit" className="hb-primary-btn" style={{ marginTop: '20px' }}>
-          {t.btn}
-        </button>
+        <button 
+  type="submit" 
+  className="hb-primary-btn" 
+  style={{ marginTop: '20px' }}
+  disabled={isLoading} // Dodaj isLoading state u LeadForm kao što smo pričali u prethodnoj poruci
+>
+  {isLoading ? '...' : t.btn}
+</button>
 
         <p style={{ textAlign: 'center', fontSize: '11px', color: '#999', marginTop: '15px' }}>
           {t.footerNote}

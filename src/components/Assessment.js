@@ -3,26 +3,33 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { leaderQuestions40 } from '../data/leaderQuestions40';
 
 const Assessment = ({ onFinish, onQuestionChange }) => {
-  const [language, setLanguage] = useState('sr');
-  const [questionSet, setQuestionSet] = useState('40');
+  // Jezik inicijalizujemo na osnovu onoga što je sačuvano u LeadFormi
+  const [language] = useState(() => {
+    const savedLang = localStorage.getItem('appLanguage');
+    return savedLang === 'en' ? 'eng' : 'sr';
+  });
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
 
-  const dataSource = useMemo(() => {
-    if (questionSet === '80') return leaderQuestions40; 
-    return leaderQuestions40;
-  }, [questionSet]);
-
+  // flatQuestions sada direktno mapira podatke iz fiksne 40Qs baze
   const flatQuestions = useMemo(() => {
-    const langData = dataSource[language];
+    const langData = leaderQuestions40[language];
+    if (!langData) return [];
+    // Spajamo sve stubove (pillars) u jedan niz
     return Object.values(langData).flat();
-  }, [language, dataSource]);
+  }, [language]);
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Resetuje skrol na vrh pri svakoj promeni pitanja
-    setCurrentIndex(0);
-    setAnswers([]);
-  }, [questionSet]);
+    const verifiedEmail = localStorage.getItem('userEmail');
+    if (!verifiedEmail) {
+      window.location.href = '/'; 
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentIndex]);
 
   if (!flatQuestions.length) return null;
 
@@ -30,33 +37,43 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
   const progress = ((currentIndex + 1) / flatQuestions.length) * 100;
 
   const handleAnswer = (score) => {
-    const newAnswers = [...answers, { id: currentQ.id, score }];
-    
-    // Smooth scroll na vrh za sledeće pitanje
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Pronalazimo tekst opcije na osnovu score-a (opciono, ali dobro za AI)
+  const selectedOptionText = currentQ.options.find(o => o.score === score)?.text || "";
 
-    if (currentIndex < flatQuestions.length - 1) {
-      setAnswers(newAnswers);
-      const nextIndex = currentIndex + 1;
-      setCurrentIndex(nextIndex);
-      if (onQuestionChange) onQuestionChange(nextIndex);
-    } else {
-      onFinish(newAnswers);
-    }
-  };
+  const newAnswers = [...answers, { 
+    id: currentQ.id, 
+    score: score,
+    facet: currentQ.facet,      // Ključno za AI mapping
+    pillar: currentQ.pillar,    // Ključno za AI mapping
+    type: currentQ.type,
+    questionText: currentQ.text,
+    selectedText: selectedOptionText
+  }];
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (currentIndex < flatQuestions.length - 1) {
+    setAnswers(newAnswers);
+    const nextIndex = currentIndex + 1;
+    setCurrentIndex(nextIndex);
+    if (onQuestionChange) onQuestionChange(nextIndex);
+  } else {
+    onFinish(newAnswers);
+  }
+};
 
   return (
     <div className="assessment-wrapper" style={{
       display: 'flex', 
       flexDirection: 'column', 
-      minHeight: '100vh', // Menjamo height u minHeight
+      minHeight: '100vh', 
       backgroundColor: '#0a0a0a', 
       color: '#fff', 
       padding: '0 8%',
-      overflowX: 'hidden' // Sprečava horizontalni skrol zbog animacija
+      overflowX: 'hidden'
     }}>
       
-      {/* HEADER */}
+      {/* HEADER: Uklonjeni selektori za Qs i Lang */}
       <div style={{ padding: '40px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
         <div>
           <span style={{ color: '#ffffff', fontSize: '10px', letterSpacing: '2px', fontWeight: '700', textTransform: 'uppercase' }}>
@@ -66,38 +83,16 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
              {currentQ.facet}
           </div>
         </div>
-
-        <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.05)', padding: '4px', borderRadius: '12px' }}>
-            {['40', '80'].map(size => (
-              <button key={size} onClick={() => setQuestionSet(size)} style={{
-                  background: questionSet === size ? '#ffffff' : 'transparent',
-                  color: questionSet === size ? '#000' : '#888',
-                  border: 'none', fontSize: '10px', cursor: 'pointer', padding: '6px 14px', borderRadius: '8px', fontWeight: '700', transition: '0.3s ease'
-              }}>
-                {size} Qs
-              </button>
-            ))}
-          </div>
-
-          <div style={{ display: 'flex', gap: '4px', background: 'rgba(255,255,255,0.05)', padding: '4px', borderRadius: '12px' }}>
-            {['sr', 'eng'].map(lang => (
-              <button key={lang} onClick={() => setLanguage(lang)} style={{
-                  background: language === lang ? '#ffffff' : 'transparent',
-                  color: language === lang ? '#000' : '#888',
-                  border: 'none', fontSize: '10px', cursor: 'pointer', padding: '6px 14px', borderRadius: '8px', fontWeight: '700', textTransform: 'uppercase', transition: '0.3s ease'
-              }}>
-                {lang}
-              </button>
-            ))}
-          </div>
+        
+        {/* Status indicator umesto dugmića */}
+        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: '700' }}>
+          {language === 'eng' ? 'LEADERSHIP ASSESSMENT' : 'PROCENA LEADERSHIP-A'}
         </div>
       </div>
 
-      {/* MAIN: Smanjen margin i uklonjen paddingBottom */}
       <div style={{ 
         maxWidth: '850px', 
-        margin: '40px auto 20px auto', // Smanjen gornji i donji razmak
+        margin: '40px auto 20px auto', 
         width: '100%',
       }}>
         <AnimatePresence mode="wait">
@@ -110,8 +105,8 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
           >
             <h2 style={{ fontSize: 'clamp(20px, 3.5vw, 28px)', fontWeight: '400', lineHeight: '1.4', marginBottom: '45px', color: '#f0f0f0' }}>
               {currentQ.text.includes(':') 
-    ? currentQ.text.split(':').slice(1).join(':').trim() 
-    : currentQ.text}
+                ? currentQ.text.split(':').slice(1).join(':').trim() 
+                : currentQ.text}
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -136,9 +131,8 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
         </AnimatePresence>
       </div>
 
-      {/* FOOTER: Sada stoji odmah ispod pitanja */}
       <div style={{ 
-        padding: '20px 0 60px 0', // Smanjen gornji padding
+        padding: '20px 0 60px 0',
         width: '100%',
         maxWidth: '850px',
         margin: '0 auto',
@@ -152,7 +146,7 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
           color: 'rgba(255,255,255,0.2)', 
           letterSpacing: '1px' 
         }}>
-           <span>PROGRESS: {currentIndex + 1} / {flatQuestions.length}</span>
+           <span>{language === 'eng' ? 'PROGRESS' : 'NAPREDAK'}: {currentIndex + 1} / {flatQuestions.length}</span>
            <span>{Math.round(progress)}%</span>
         </div>
         <div style={{ 

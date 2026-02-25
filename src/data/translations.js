@@ -22,6 +22,8 @@ export const translations = {
             }
         },
         form: {
+            alreadyDone: "Iskoristili ste jedan free report. Javi nam se mejlom za dalje korake.",
+      serverError: "Serverska greška. Pokušajte kasnije.",
             tag: "Strateški unos",
             title: "Personalizujte svoju analizu.",
             firstName: "Ime",
@@ -175,6 +177,8 @@ export const translations = {
             }
         },
         form: {
+            alreadyDone: "You have already used your free report. Please contact us via email for further steps.",
+      serverError: "Server error. Please try again later.",
             tag: "Strategic Intake",
             title: "Personalize your analysis.",
             firstName: "First Name",

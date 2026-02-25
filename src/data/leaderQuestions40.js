@@ -95,198 +95,282 @@ export const leaderQuestions40 = {
             }
         ],
         MINDSET: [
-            // STUB: PREMA SEBI
-            {
-                id: "M40_1",
-                pillar: "PREMA SEBI",
-                facet: "Način razmišljanja o rastu i otpornost",
-                text: "SA - Osnovni Scenario 2.3: Dobijate značajne konstruktivne povratne informacije od kolege o vašem liderskom stilu na novom, složenom projektu gde ste se takođe suočili sa nekoliko prepreka. Kako vi obično obrađujete ove povratne informacije i reagujete na izazove?",
-                options: [
-                    { score: 3, text: "B. Ja slušam povratne informacije i razmišljam o svom pristupu, prepoznajući oblasti za poboljšanje, a zatim prilagođavam svoju strategiju kako bih se suočio sa izazovima, generalno održavajući fokus." },
-                    { score: 1, text: "A. Ja se borim da integrišem povratne informacije, često se osećam defanzivno ili obeshrabreno zbog prepreka, i teško mi je da zadržim pozitivan stav, ponekad se opirući daljim promenama." },
-                    { score: 5, text: "C. Ja proaktivno tražim raznovrsne povratne informacije, otvoreno prihvatam prepreke kao dragocene prilike za učenje, i brzo prilagođavam svoju strategiju, demonstrirajući izuzetnu otpornost." }
-                ]
-            },
-            {
-                id: "M40_2",
-                pillar: "PREMA SEBI",
-                facet: "Spremnost za promene i lična prilagodljivost",
-                text: "SA - Osnovni Scenario 2.4: Kompanija najavljuje značajnu organizacionu promenu koja menja strukturu vašeg tima i zahteva učenje potpuno novih sistema van vaše zone komfora. Kako upravljate svojim načinom razmišljanja?",
-                options: [
-                    { score: 1, text: "A. Ja izražavam frustraciju ili cinizam kolegama od poverenja, i fokusiram se na to kako da zaštitim svoje trenutne metode rada, osećajući se preopterećeno i otporno na učenje novih sistema." },
-                    { score: 3, text: "B. Ja prihvatam promenu kao neophodnu, marljivo učim nove sisteme i prilagođavam svoj radni tok, generalno održavajući svoju efikasnost i pribranost." },
-                    { score: 5, text: "C. Ja aktivno prihvatam promenu kao priliku za preispitivanje starih procesa, proaktivno tražeći informacije i savladavajući nove sisteme, inspirišući kolege da modeluju entuzijazam." }
-                ]
-            },
+    // --- STUB: PREMA SEBI ---
+    {
+        id: "M2_3_S",
+        pillar: "PREMA SEBI",
+        facet: "Samosvest i otpornost",
+        text: "SA - Osnovni Scenario 2.3: Dobijate značajne konstruktivne povratne informacije od kolege o vašem liderskom stilu na novom, složenom projektu gde ste se suočili sa preprekama. Kako vi obično obrađujete ove informacije?",
+        options: [
+            { score: 1, text: "A. Borim se da integrišem povratne informacije, često se osećam defanzivno ili obeshrabreno, i teško mi je da zadržim pozitivan stav." },
+            { score: 3, text: "B. Slušam povratne informacije i razmišljam o svom pristupu, prepoznajem oblasti za poboljšanje i prilagođavam svoju strategiju." },
+            { score: 5, text: "C. Proaktivno tražim raznovrsne povratne informacije, prihvatam prepreke kao prilike za učenje i demonstriram izuzetnu otpornost koja inspiriše druge." }
+        ]
+    },
+    {
+        id: "M2_3_R",
+        pillar: "PREMA SEBI",
+        facet: "Uticaj na rast",
+        text: "SA - Refleksija o uticaju 2.3: Koliko često smatrate da vaš lični odgovor na izazove i prepreke vidljivo inspiriše vaše kolege da usvoje prilagodljiviji pristup rastu?",
+        options: [
+            { score: 1, text: "A. Retko; obično držim borbe privatnim, i moji odgovori ne utiču vidljivo na pristup mojih kolega." },
+            { score: 3, text: "B. Povremeno; moj smiren pristup izazovima primećuju kolege i ponekad traže moj savet." },
+            { score: 5, text: "C. Dosledno; moja vidljiva otpornost motiviše kolege da uče iz sopstvenih prepreka i često me konsultuju." }
+        ]
+    },
+    {
+        id: "M2_4_S",
+        pillar: "PREMA SEBI",
+        facet: "Spremnost na promene",
+        text: "SA - Osnovni Scenario 2.4: Kompanija najavljuje značajnu promenu koja menja strukturu vašeg tima i zahteva učenje novih sistema van zone komfora. Kako upravljate svojim načinom razmišljanja?",
+        options: [
+            { score: 1, text: "A. Izražavam frustraciju ili cinizam kolegama, fokusiram se na zaštitu trenutnih metoda rada i osećam se otporno na učenje." },
+            { score: 3, text: "B. Prihvatam promenu kao neophodnu, marljivo učim nove sisteme i prilagođavam svoj radni tok uz pribranost." },
+            { score: 5, text: "C. Aktivno prihvatam promenu kao priliku za preispitivanje procesa, inspirišući kolege da modeluju entuzijazam i prilagodljivost." }
+        ]
+    },
+    {
+        id: "M2_4_R",
+        pillar: "PREMA SEBI",
+        facet: "Doprinos tranziciji",
+        text: "SA - Refleksija o uticaju 2.4: Kada se suočavate sa velikom promenom, koliko često smatrate da vaš lični stav i prilagodljivost doprinose lakšoj tranziciji za vaš tim?",
+        options: [
+            { score: 1, text: "A. Retko; moja početna nevoljnost često stvara trenje ili povećava anksioznost među kolegama." },
+            { score: 3, text: "B. Povremeno; moj profesionalni pristup pomaže timu da prođe kroz promenu bez stvaranja dodatnih problema." },
+            { score: 5, text: "C. Dosledno; moj pozitivan stav čini me ključnom osobom za savete i doprinosi bržem usvajanju promena u timu." }
+        ]
+    },
 
-            // STUB: PREMA DRUGIMA
-            {
-                id: "M40_3",
-                pillar: "PREMA DRUGIMA",
-                facet: "Konstruktivan konflikt i inkluzivnost",
-                text: "SA - Osnovni Scenario 2.5: Dvoje kolega je u žučnoj raspravi, što stvara tenziju u timu. Primećujete i da se novi član tima bori da izrazi svoje mišljenje. Kako vi obično intervenišete?",
-                options: [
-                    { score: 5, text: "C. Ja proaktivno ulazim u sukob, vodeći kolege da duboko razumeju međusobne motive kroz empatiju, i stvaram inkluzivan prostor za novog člana tima da doprinese, pretvarajući tenziju u saradnju." },
-                    { score: 1, text: "A. Ja obižno izbegavam direktno uplitanje u sukob, ili stajem na stranu jedne strane, fokusirajući se na svoje zadatke, i ne stvaram aktivno prostor za tišeg člana tima." },
-                    { score: 3, text: "B. Ja pokušavam da posredujem u neslaganju olakšavanjem diskusije između kolega i trudim se da uključim novog člana tima, obezbeđujući da se različita mišljenja poštuju." }
-                ]
-            },
-            {
-                id: "M40_4",
-                pillar: "PREMA DRUGIMA",
-                facet: "Timska posvećenost i saradnja",
-                text: "SA - Osnovni Scenario 2.6: Tim se suočava sa projektom visokog uloga koji zahteva duboku saradnju, ali neki članovi se bore da podele znanje zbog različitih prioriteta. Kako podstičete saradnju?",
-                options: [
-                    { score: 3, text: "B. Ja aktivno učestvujem u timskim aktivnostima, delim svoje znanje i resurse kada se to zatraži, i doprinosim generalno podržavajućem okruženju, usklađujući napore sa ciljevima." },
-                    { score: 5, text: "C. Ja dosledno dajem prioritet timskom uspehu, proaktivno nudim podršku kolegama, delim znanje bez podsticaja i aktivno radim na izgradnji kohezivnog okruženja koje podstiče posvećenost." },
-                    { score: 1, text: "A. Ja se fokusiram na izvršavanje svojih zadataka i ispunjavanje svojih rokova, pretpostavljajući da će drugi uraditi isto, i čekam eksplicitne zahteve pre nego što podelim znanje." }
-                ]
-            },
+    // --- STUB: PREMA DRUGIMA ---
+    {
+        id: "M2_5_S",
+        pillar: "PREMA DRUGIMA",
+        facet: "Konflikt i inkluzivnost",
+        text: "SA - Osnovni Scenario 2.5: Dvoje kolega je u žučnoj raspravi, a novi član tima se bori da izrazi svoje mišljenje. Kako intervenišete?",
+        options: [
+            { score: 1, text: "A. Izbegavam direktno uplitanje, fokusiram se na svoje zadatke i ne stvaram aktivno prostor za tišeg člana tima." },
+            { score: 3, text: "B. Pokušavam da posredujem olakšavanjem diskusije i trudim se da uključim novog člana, obezbeđujući da se različita mišljenja čuju." },
+            { score: 5, text: "C. Proaktivno ulazim u sukob kroz empatiju i stvaram inkluzivan prostor koji jača odnose i timsku dinamiku." }
+        ]
+    },
+    {
+        id: "M2_5_R",
+        pillar: "PREMA DRUGIMA",
+        facet: "Psihološka sigurnost",
+        text: "SA - Refleksija o uticaju 2.5: Koliko često smatrate da vaše interakcije dovode do toga da se kolege osećaju shvaćenije i bezbednije da izraze različita mišljenja?",
+        options: [
+            { score: 1, text: "A. Retko; moje interakcije ponekad dovode do nesporazuma ili ostavljaju ljude da se osećaju neprimećeno." },
+            { score: 3, text: "B. Povremeno; moje interakcije generalno dovode do razumevanja, ali neki i dalje mogu oklevati da iskažu različito mišljenje." },
+            { score: 5, text: "C. Dosledno; transformišem napete situacije u konstruktivne dijaloge, gde se svi osećaju bezbedno da doprinesu." }
+        ]
+    },
+    {
+        id: "M2_6_S",
+        pillar: "PREMA DRUGIMA",
+        facet: "Timsko zalaganje",
+        text: "SA - Osnovni Scenario 2.6: Tim se bori sa deljenjem znanja na složenom projektu zbog različitih prioriteta. Kako podstičete saradnju?",
+        options: [
+            { score: 1, text: "A. Fokusiram se na svoje zadatke, pretpostavljajući da će drugi uraditi isto, i čekam zahteve pre deljenja znanja." },
+            { score: 3, text: "B. Aktivno učestvujem, delim resurse kada se to zatraži i doprinosim okruženju koje promoviše saradnju." },
+            { score: 5, text: "C. Dosledno dajem prioritet timskom uspehu, proaktivno nudim podršku bez podsticaja i gradim kohezivno okruženje." }
+        ]
+    },
+    {
+        id: "M2_6_R",
+        pillar: "PREMA DRUGIMA",
+        facet: "Osećaj jedinstva",
+        text: "SA - Refleksija o uticaju 2.6: Koliko često vaši proaktivni napori značajno povećavaju saradnju i jačaju osećaj timskog jedinstva?",
+        options: [
+            { score: 1, text: "A. Retko; saradnja obično zahteva spoljnu intervenciju, što sugeriše borbu za podsticanje timske posvećenosti." },
+            { score: 3, text: "B. Povremeno; moji doprinosi pomažu u olakšavanju saradnje i doprinose dobroj timskoj dinamici." },
+            { score: 5, text: "C. Dosledno; prepoznat sam po rušenju barijera i vidljivo doprinosim zajedničkom vlasništvu unutar tima." }
+        ]
+    },
 
-            // STUB: PREMA KOMPANIJI I POZICIJI
-            {
-                id: "M40_5",
-                pillar: "PREMA KOMPANIJI",
-                facet: "Odgovornost i liderstvo vođeno vrednostima",
-                text: "SA - Osnovni Scenario 2.7: Projekat koji vodite doživljava veliki neuspeh, i morate doneti tešku odluku pod pritiskom koja je u skladu sa vrednostima kompanije, ali je nepopularna. Kako reagujete?",
-                options: [
-                    { score: 1, text: "A. Ja obično ističem spoljne faktore ili ukazujem na okolnosti izvan moje kontrole, ponekad odlažući odluke ili izbegavajući potpunu odgovornost za ishod." },
-                    { score: 3, text: "B. Ja preuzimam odgovornost za neuspeh, jasno artikulišem naučene lekcije i donosim blagovremenu odluku pod pritiskom koja je u skladu sa vrednostima kompanije." },
-                    { score: 5, text: "C. Ja prihvatam punu odgovornost, proaktivno identifikujem sistemske probleme i donosim hrabru odluku vođenu vrednostima, inspirišući tim da se uskladi sa strateškom namerom." }
-                ]
-            },
-            {
-                id: "M40_6",
-                pillar: "PREMA KOMPANIJI",
-                facet: "Strateško vlasništvo i uticaj",
-                text: "SA - Osnovni Scenario 2.8: Identifikujete priliku koja zahteva novi strateški pravac, ali osporava postojeće norme i naići će na otpor. Kako zagovarate ovu inicijativu?",
-                options: [
-                    { score: 3, text: "B. Ja gradim snažnu poslovnu analizu i efikasno sarađujem sa ključnim akterima da bih dobio podršku, predstavljajući jedinstven front višeg rukovodstva." },
-                    { score: 5, text: "C. Ja pedantno mapiram politički pejzaž i donosioce odluka, prilagođavam argumente svakome, i angažujem ih u dijalogu pretvarajući ih u šampione inicijative." },
-                    { score: 1, text: "A. Ja predstavljam detaljnu poslovnu analizu (ROI i rizike), pretpostavljajući da će podaci govoriti sami za sebe, ali se često borim da prevaziđem otpor ili dobijem podršku." }
-                ]
-            },
-
-            // REFLEKSIJE ZA CELU DIMENZIJU (Primer za integraciju u 40 pitanja)
-            {
-                id: "M40_7",
-                pillar: "PREMA SEBI",
-                facet: "Refleksija o uticaju na kolege",
-                text: "SA - Refleksija o uticaju 2.3 & 2.4: Koliko često smatrate da vaš lični odgovor na izazove i promene vidljivo inspiriše vaše kolege da usvoje prilagodljiviji pristup?",
-                options: [
-                    { score: 1, text: "A. Retko; ja obično držim svoje borbe privatnim, ili moja frustracija sa promenama često stvara trenje među kolegama." },
-                    { score: 3, text: "B. Povremeno; moj smiren i profesionalan pristup primećuju kolege, i ja se generalno prilagođavam bez stvaranja dodatnih problema." },
-                    { score: 5, text: "C. Dosledno; moja vidljiva otpornost i pozitivan stav čine me ključnom osobom za kolege, podstičući kulturu stalne prilagodljivosti." }
-                ]
-            },
-            {
-                id: "M40_8",
-                pillar: "PREMA KOMPANIJI",
-                facet: "Refleksija o strateškom uticaju",
-                text: "SA - Refleksija o uticaju 2.7 & 2.8: Koliko često vaši postupci i predlozi dovode do vidljive promene u organizacionoj strategiji ili jačanja etičke kulture?",
-                options: [
-                    { score: 5, text: "C. Dosledno; moje odluke služe kao merilo za druge, a moji uvidi često transformišu organizacioni pravac i utiču na kulturu kompanije." },
-                    { score: 1, text: "A. Retko; moji predlozi se priznaju, ali retko dovode do strateških promena, a moje odluke se ponekad percipiraju kao nedosledne." },
-                    { score: 3, text: "B. Povremeno; moje odluke se poštuju, a doprinos utiče na taktička prilagođavanja, demonstrirajući dobar nivo strateškog vlasništva." }
-                ]
-            }
-        ],
+    // --- STUB: PREMA KOMPANIJI ---
+    {
+        id: "M2_7_S",
+        pillar: "PREMA KOMPANIJI",
+        facet: "Odgovornost i vrednosti",
+        text: "SA - Osnovni Scenario 2.7: Projekat doživljava neuspeh, i morate doneti tešku, nepopularnu odluku koja je u skladu sa vrednostima kompanije. Kako reagujete?",
+        options: [
+            { score: 1, text: "A. Ističem spoljne faktore ili okolnosti izvan kontrole, izbegavajući potpunu odgovornost za ishod." },
+            { score: 3, text: "B. Preuzimam odgovornost, artikulišem lekcije i donosim blagovremenu odluku usklađenu sa vrednostima." },
+            { score: 5, text: "C. Prihvatam punu odgovornost, donosim hrabru odluku koja utiče na šira poboljšanja i inspirišem tim." }
+        ]
+    },
+    {
+        id: "M2_7_R",
+        pillar: "PREMA KOMPANIJI",
+        facet: "Etički autoritet",
+        text: "SA - Refleksija o uticaju 2.7: Koliko često vaše odluke služe kao primer snažnog liderstva i usklađenosti sa vrednostima, čak i kada su nepopularne?",
+        options: [
+            { score: 1, text: "A. Retko; moje odluke se ponekad dovode u pitanje ili percipiraju kao nedosledne sa ciljevima kompanije." },
+            { score: 3, text: "B. Povremeno; moje odluke se generalno poštuju i pozitivno doprinose moralu, ali ne inspirišu uvek širu podršku." },
+            { score: 5, text: "C. Dosledno; moje odluke su hvaljene zbog integriteta i služe kao merilo za druge, jačajući etičku kulturu." }
+        ]
+    },
+    {
+        id: "M2_8_S",
+        pillar: "PREMA KOMPANIJI",
+        facet: "Strateško vlasništvo",
+        text: "SA - Osnovni Scenario 2.8: Identifikujete priliku koja osporava norme i naići će na otpor rukovodstva. Kako zagovarate ovu inicijativu?",
+        options: [
+            { score: 1, text: "A. Predstavljam detaljnu analizu (ROI), pretpostavljajući da podaci govore za sebe, ali se borim sa otporom." },
+            { score: 3, text: "B. Gradim snažnu poslovnu analizu i efikasno sarađujem sa ključnim akterima da bih dobio neophodnu podršku." },
+            { score: 5, text: "C. Mapiram politički pejzaž, prilagođavam ubedljive argumente svakome i pretvaram ih u šampione inicijative." }
+        ]
+    },
+    {
+        id: "M2_8_R",
+        pillar: "PREMA KOMPANIJI",
+        facet: "Organizacioni uticaj",
+        text: "SA - Refleksija o uticaju 2.8: Koliko često vaši strateški predlozi dovode do vidljive promene u strategiji kompanije izvan vašeg tima?",
+        options: [
+            { score: 1, text: "A. Retko; predlozi se priznaju, ali retko dovode do značajnih strateških promena ili alokacije resursa." },
+            { score: 3, text: "B. Povremeno; doprinosi utiču na taktička prilagođavanja, demonstrirajući dobar nivo strateškog vlasništva." },
+            { score: 5, text: "C. Dosledno; moji uvidi često dovode do usvajanja novih inicijativa i transformišu organizacioni pravac." }
+        ]
+    }
+],
         VEŠTINE: [
             // STUB: LIČNA EFIKASNOST
             {
-                id: "S40_1",
-                pillar: "LIČNA EFIKASNOST",
-                facet: "Upravljanje prioritetima i prilagodljivost",
-                text: "SA - Osnovni Scenario 3.1: Upravljate velikim radnim opterećenjem tima, a uvodi se novi, nepoznat softver koji menja radni tok. Kako upravljate prioritetima i prilagođavate tim novoj tehnologiji?",
-                options: [
-                    { score: 3, text: "B. Koristim utvrđene tehnike upravljanja prioritetima da efikasno upravljam radnim opterećenjem, i marljivo učim novi softver, postepeno prilagođavajući naš radni tok." },
-                    { score: 1, text: "A. Obično pokušavam da usklađujem zadatke na osnovu hitnosti, i izražavam frustraciju ili otpor prema novom softveru, preferirajući stare metode." },
-                    { score: 5, text: "C. Proaktivno primenjujem sofisticirane okvire za prioritete, predviđajući uticaj tehnologije. Brzo savladavam softver i optimizujem procese da bih premašio prethodnu efikasnost." }
-                ]
-            },
-            {
-                id: "S40_2",
-                pillar: "LIČNA EFIKASNOST",
-                facet: "Rešavanje problema i sistemska promena",
-                text: "SA - Osnovni Scenario 3.2: Tim se susreće sa ponavljajućim, složenim problemom, a najavljena je i organizaciona promena koja zahteva prilagođavanje procesa. Kako pristupate ovome?",
-                options: [
-                    { score: 5, text: "C. Proaktivno identifikujem sistemski osnovni uzrok problema, razvijam inovativno rešenje i aktivno podržavam organizacionu promenu, vodeći i kolege kroz njihova prilagođavanja." },
-                    { score: 1, text: "A. Obično pokušavam da zaobiđem ponavljajući problem ili se oslanjam na druge za rešenja, i borim se da se prilagodim novoj organizacionoj promeni." },
-                    { score: 3, text: "B. Primenjujem strukturirane tehnike rešavanja problema da bih rešio problem u radnom toku, i marljivo vodim svoj tim da prilagodi svoje radne procese." }
-                ]
-            },
+        id: "S3_1_S",
+        pillar: "LIČNA EFIKASNOST",
+        facet: "Upravljanje prioritetima i prilagodljivost",
+        text: "SA - Osnovni Scenario 3.1: Upravljate velikim radnim opterećenjem tima, a uvodi se novi, nepoznat softver koji menja radni tok. Kako upravljate prioritetima i prilagođavate tim novoj tehnologiji?",
+        options: [
+            { score: 1, text: "A. Pokušavam da usklađujem zadatke na osnovu hitnosti i izražavam otpor prema novom softveru, što smanjuje ukupnu efikasnost tima." },
+            { score: 3, text: "B. Koristim utvrđene tehnike upravljanja prioritetima i marljivo učim novi softver, postepeno prilagođavajući naš radni tok." },
+            { score: 5, text: "C. Proaktivno primenjujem sofisticirane okvire za prioritete, brzo savladavam softver i optimizujem procese da bih premašio prethodnu efikasnost." }
+        ]
+    },
+    {
+        id: "S3_1_R",
+        pillar: "LIČNA EFIKASNOST",
+        facet: "Primer i podrška kolegama",
+        text: "SA - Refleksija o uticaju 3.1: Koliko često smatrate da vaša lična efikasnost služi kao pozitivan primer i pruža efikasnu podršku vašim kolegama i drugim timovima?",
+        options: [
+            { score: 1, text: "A. Retko; moje borbe sa novim alatima ili prioritetima ponekad uzrokuju trenje ili kašnjenja za druge." },
+            { score: 3, text: "B. Povremeno; obično dobro upravljam zadacima i ponekad naša efikasnost pomaže drugima, ali ne preuzimam aktivno vodeću ulogu." },
+            { score: 5, text: "C. Dosledno; izuzetna prilagodljivost mog tima čini nas resursom za kolege, a naše metode su često usvojene za širu produktivnost." }
+        ]
+    },
+    {
+        id: "S3_2_S",
+        pillar: "LIČNA EFIKASNOST",
+        facet: "Rešavanje problema i vođenje kroz promenu",
+        text: "SA - Osnovni Scenario 3.2: Tim se susreće sa ponavljajućim problemom, a najavljena je i organizaciona promena koja zahteva prilagođavanje procesa. Kako pristupate ovome?",
+        options: [
+            { score: 1, text: "A. Pokušavam da zaobiđem problem ili se oslanjam na druge, i borim se da se prilagodim novoj promeni preferirajući stare metode." },
+            { score: 3, text: "B. Primenjujem strukturirane tehnike rešavanja problema i marljivo vodim tim da prilagodi radne procese kako bi prevazišao promenu." },
+            { score: 5, text: "C. Identifikujem sistemski uzrok problema, razvijam inovativno rešenje i optimizujem prilagođavanje tima tako da premašim očekivanja." }
+        ]
+    },
+    {
+        id: "S3_2_R",
+        pillar: "LIČNA EFIKASNOST",
+        facet: "Širenje najboljih praksi",
+        text: "SA - Refleksija o uticaju 3.2: Koliko često rešenja vašeg tima za probleme ili njegove metode prilagođavanja promenama postaju modeli koje usvajaju drugi timovi?",
+        options: [
+            { score: 1, text: "A. Retko; rešenja su obično za našu sopstvenu upotrebu i naše metode prilagođavanja nisu široko usvojene od strane drugih." },
+            { score: 3, text: "B. Povremeno; efikasna rešenja ili metode mog tima ponekad se dele i doprinose manjim poboljšanjima za druge timove." },
+            { score: 5, text: "C. Dosledno; naše strategije su prepoznate kao najbolje prakse i aktivno ih usvajaju drugi, poboljšavajući organizacionu efikasnost." }
+        ]
+    },
 
-            // STUB: KOMUNIKACIJA
-            {
-                id: "S40_3",
-                pillar: "KOMUNIKACIJA",
-                facet: "Strateško slušanje i artikulacija vrednosti",
-                text: "SA - Osnovni Scenario 3.3: Potrebno je da objasnite složenu stratešku inicijativu akterima koji su zauzeti i daju nejasan 'ne'. Kako pristupate komunikaciji?",
-                options: [
-                    { score: 1, text: "A. Predstavljam detalje inicijative, pretpostavljajući da su prednosti očigledne, ali se borim da im pokažem ličnu vrednost i shvatam 'ne' lično." },
-                    { score: 3, text: "B. Jasno objašnjavam strateške prednosti, prilagođavam poruku potrebama aktera i tražim specifične povratne informacije o njihovom 'ne' kako bih razumeo brige." },
-                    { score: 5, text: "C. Pedantno kreiram poruku sa 'mamcem' za pažnju, strateški slušam neizgovorene motive iza 'ne' i preoblikujem poruku da artikulišem obostranu vrednost." }
-                ]
-            },
-            {
-                id: "S40_4",
-                pillar: "KOMUNIKACIJA",
-                facet: "Navigacija akterima i saradnja bez autoriteta",
-                text: "SA - Osnovni Scenario 3.4: Morate obezbediti resurs od drugog odeljenja gde nemate formalni autoritet, a oni imaju konkurentne prioritete. Kako utičete na njih?",
-                options: [
-                    { score: 5, text: "C. Strateški uokvirujem zahtev u smislu obostrane vrednosti i zajedničkih ciljeva, proaktivno rešavajući njihove brige i gradeći snažno unakrsno funkcionalno partnerstvo." },
-                    { score: 3, text: "B. Proaktivno komuniciram, objašnjavajući potrebu projekta i nastojeći da razumem njihove prioritete, predlažući rešenje usklađeno sa zajedničkim ciljevima." },
-                    { score: 1, text: "A. Podnosim zahtev pretpostavljajući da je važnost očigledna, ali često nailazim na kašnjenja, što zahteva eskalaciju preko menadžera." }
-                ]
-            },
+    // --- STUB: KOMUNIKACIJA ---
+    {
+        id: "S3_3_S",
+        pillar: "KOMUNIKACIJA",
+        facet: "Artikulacija vrednosti",
+        text: "SA - Osnovni Scenario 3.3: Objašnjavate složenu inicijativu akterima koji daju nejasan 'ne'. Kako pristupate ovom komunikacionom izazovu?",
+        options: [
+            { score: 1, text: "A. Predstavljam detalje, pretpostavljajući da su prednosti očigledne, i shvatam 'ne' lično, što dovodi do trenja." },
+            { score: 3, text: "B. Jasno objašnjavam prednosti, prilagođavam poruku potrebama aktera i tražim povratne informacije o njihovom 'ne'." },
+            { score: 5, text: "C. Strateški slušam neizgovorene motive iza njihovog 'ne' i preoblikujem poruku da artikulišem obostranu vrednost i gradim koalicije." }
+        ]
+    },
+    {
+        id: "S3_3_R",
+        pillar: "KOMUNIKACIJA",
+        facet: "Proaktivna akcija aktera",
+        text: "SA - Refleksija o uticaju 3.3: Koliko često vaše komunikacije rezultiraju time da akteri preduzimaju proaktivne akcije bez potrebe za obimnim praćenjem?",
+        options: [
+            { score: 1, text: "A. Retko; inicijative često zahtevaju višestruko praćenje, a početni otpor dovodi do značajnog odlaganja." },
+            { score: 3, text: "B. Povremeno; komunikacije generalno dovode do akcije, ali je ponekad potrebna druga diskusija da se osigura pun angažman." },
+            { score: 5, text: "C. Dosledno; moje poruke generišu neposredan angažman jer akteri jasno vide vrednost i put do akcije bez napora." }
+        ]
+    },
+    {
+        id: "S3_4_S",
+        pillar: "KOMUNIKACIJA",
+        facet: "Unakrsna saradnja",
+        text: "SA - Osnovni Scenario 3.4: Morate obezbediti resurs od drugog odeljenja gde nemate formalni autoritet. Kako komunicirate da biste na njih uticali?",
+        options: [
+            { score: 1, text: "A. Podnosim zahtev pretpostavljajući da je važnost očigledna, ali nailazim na otpor koji zahteva eskalaciju preko menadžera." },
+            { score: 3, text: "B. Proaktivno komuniciram, nastojim da razumem njihove prioritete i predlažem rešenje usklađeno sa zajedničkim ciljevima." },
+            { score: 5, text: "C. Strateški uokvirujem zahtev u smislu obostrane vrednosti, rešavajući njihove brige i rušeći silose kroz trajne odnose." }
+        ]
+    },
+    {
+        id: "S3_4_R",
+        pillar: "KOMUNIKACIJA",
+        facet: "Entuzijazam partnera",
+        text: "SA - Refleksija o uticaju 3.4: Koliko često vaši zahtevi za unakrsnu podršku rezultiraju entuzijastičnom saradnjom umesto otpora ili kašnjenja?",
+        options: [
+            { score: 1, text: "A. Retko; saradnje često nailaze na trenje ili kašnjenja, što sugeriše probleme sa artikulacijom obostrane vrednosti." },
+            { score: 3, text: "B. Povremeno; saradnje generalno postižu ciljeve, ali je ponekad potreban dodatni napor da se prevaziđu neusklađeni prioriteti." },
+            { score: 5, text: "C. Dosledno; moje veze su ključni pokretači uspeha, proaktivno uklanjajući prepreke i omogućavajući organizaciono usklađivanje." }
+        ]
+    },
 
-            // STUB: RAZVOJ TIMA I LJUDI
-            {
-                id: "S40_5",
-                pillar: "RAZVOJ TIMA I LJUDI",
-                facet: "Delegiranje kao alat za razvoj",
-                text: "SA - Osnovni Scenario 3.5: Imate člana tima sa potencijalom za složen zadatak i drugog koji ispunjava očekivanja ali nema inicijativu za rast. Kako upravljate njihovim učinkom?",
-                options: [
-                    { score: 1, text: "A. Obično pokušavam da mikro-upravljam zahtevnim zadatkom, i pružam pozitivne povratne informacije doslednom izvođaču, ali ne podstičem aktivno njihov rast." },
-                    { score: 3, text: "B. Strateški biram zahtevan zadatak zbog razvojnog uticaja, pružajući jasna uputstva, i uključujem se u razvojne razgovore sa doslednim izvođačem." },
-                    { score: 5, text: "C. Koristim delegiranje kao primarni alat za razvoj uz coaching, i olakšavam duboke diskusije identifikujući latentne snage i kreirajući personalizovane planove rasta." }
-                ]
-            },
-            {
-                id: "S40_6",
-                pillar: "RAZVOJ TIMA I LJUDI",
-                facet: "Teški razgovori i prepoznavanje uspeha",
-                text: "SA - Osnovni Scenario 3.6: Morate se suočiti sa negativnim ponašanjem podređenog, dok istovremeno tim slavi veliki uspeh. Kako upravljate ovim interakcijama?",
-                options: [
-                    { score: 3, text: "B. Pripremam specifične primere i vodim jasan razgovor pun poštovanja o negativnom ponašanju, uz personalizovano prepoznavanje timskog uspeha." },
-                    { score: 5, text: "C. Pedantno planiram težak razgovor uokvirujući ga oko vrednosti, i osmišljavam inovativno prepoznavanje uspeha koje povezuje rezultate sa strateškim vrednostima." },
-                    { score: 1, text: "A. Odlažem rešavanje negativnog ponašanja nadajući se da će se samo rešiti, i nudim generičke pohvale za timski uspeh." }
-                ]
-            },
-
-            // REFLEKSIJE O UTICAJU VEŠTINA
-            {
-                id: "S40_7",
-                pillar: "LIČNA EFIKASNOST",
-                facet: "Refleksija o uticaju na organizaciju",
-                text: "SA - Refleksija o uticaju 3.1 & 3.2: Koliko često vaša lična efikasnost i rešenja za ponavljajuće probleme postaju modeli koje usvajaju drugi timovi?",
-                options: [
-                    { score: 1, text: "A. Retko; borbe sa alatima ponekad uzrokuju kašnjenja za druge, a rešenja su obično samo za unutrašnju upotrebu tima." },
-                    { score: 3, text: "B. Povremeno; obično dobro upravljam zadacima i naša efikasnost ili rešenja ponekad doprinose poboljšanjima za druge timove." },
-                    { score: 5, text: "C. Dosledno; inovativne strategije mog tima su prepoznate kao najbolje prakse i aktivno ih usvajaju drugi, poboljšavajući organizacionu produktivnost." }
-                ]
-            },
-            {
-                id: "S40_8",
-                pillar: "RAZVOJ TIMA I LJUDI",
-                facet: "Refleksija o rastu tima i poverenju",
-                text: "SA - Refleksija o uticaju 3.5 & 3.6: Koliko često članovi tima pripisuju svoj izuzetan rast vašoj podršci i opisuju vaše povratne informacije kao fer i razvojne?",
-                options: [
-                    { score: 5, text: "C. Dosledno; članovi tima postaju mentori drugima pripisujući rast mom liderstvu, a povratne informacije vide kao razvojne, što vodi velikom poverenju." },
-                    { score: 1, text: "A. Retko; rast je često samoinicijativan, a povratne informacije se ponekad doživljavaju kao grube ili nejasne." },
-                    { score: 3, text: "B. Povremeno; neki članovi pokazuju rast i cene povratne informacije, osećajući se cenjenim za svoj doprinos." }
-                ]
-            }
+    // --- STUB: RAZVOJ TIMA I LJUDI ---
+    {
+        id: "S3_5_S",
+        pillar: "RAZVOJ TIMA I LJUDI",
+        facet: "Delegiranje i rast",
+        text: "SA - Osnovni Scenario 3.5: Imate člana tima sa potencijalom i drugog koji ispunjava očekivanja ali nema inicijativu. Kako upravljate njihovim razvojem?",
+        options: [
+            { score: 1, text: "A. Pokušavam da mikro-upravljam zahtevnim zadatkom i ne podstičem aktivno rast doslednog izvođača." },
+            { score: 3, text: "B. Strateški biram zahtevan zadatak zbog razvojnog uticaja i postavljam ambiciozne ciljeve doslednom izvođaču." },
+            { score: 5, text: "C. Koristim delegiranje kao primarni alat uz coaching, i kreiram personalizovane planove koji vidljivo ubrzavaju razvoj tima." }
+        ]
+    },
+    {
+        id: "S3_5_R",
+        pillar: "RAZVOJ TIMA I LJUDI",
+        facet: "Inicijativa tima",
+        text: "SA - Refleksija o uticaju 3.5: Koliko često članovi vašeg tima pokazuju povećanu inicijativu, navodeći vašu podršku kao ključni faktor?",
+        options: [
+            { score: 1, text: "A. Retko; članovi tima se drže dodeljenih zadataka, a rast je često samoinicijativan ili zahteva spoljnu intervenciju." },
+            { score: 3, text: "B. Povremeno; neki članovi tima pokazuju rast i cene moje povratne informacije, doprinoseći dobroj dinamici." },
+            { score: 5, text: "C. Dosledno; moji ljudi su prepoznati po izuzetnom rastu i često sami postaju mentori, pripisujući to mom liderstvu." }
+        ]
+    },
+    {
+        id: "S3_6_S",
+        pillar: "RAZVOJ TIMA I LJUDI",
+        facet: "Teški razgovori i prepoznavanje",
+        text: "SA - Osnovni Scenario 3.6: Morate se suočiti sa negativnim ponašanjem podređenog dok tim postiže uspeh. Kako upravljate ovim interakcijama?",
+        options: [
+            { score: 1, text: "A. Odlažem rešavanje negativnog ponašanja i nudim generičke pohvale za timski uspeh." },
+            { score: 3, text: "B. Vodim jasan razgovor o negativnom ponašanju uz poštovanje i pružam personalizovano prepoznavanje uspeha." },
+            { score: 5, text: "C. Planiram težak razgovor uokvirujući ga oko vrednosti i osmišljavam inovativno prepoznavanje koje povezuje uspeh sa strategijom." }
+        ]
+    },
+    {
+        id: "S3_6_R",
+        pillar: "RAZVOJ TIMA I LJUDI",
+        facet: "Poverenje i vrednovanje",
+        text: "SA - Refleksija o uticaju 3.6: Koliko često članovi vašeg tima opisuju vaše povratne informacije kao konstruktivne i osećaju se istinski cenjenim?",
+        options: [
+            { score: 1, text: "A. Retko; povratne informacije se ponekad doživljavaju kao grube, a članovi tima se osećaju nedovoljno cenjenim." },
+            { score: 3, text: "B. Povremeno; povratne informacije su generalno dobro prihvaćene i članovi tima se osećaju cenjenim nakon velikih dostignuća." },
+            { score: 5, text: "C. Dosledno; članovi tima izražavaju da su moje povratne informacije fer i razvojne, što dovodi do velikog poverenja." }
+        ]
+    }
         ],
         UTICAJ: [
             // STUB: KAKO ČINIM DA SE MOJ TIM OSEĆA?
@@ -479,199 +563,283 @@ export const leaderQuestions40 = {
             }
         ],
         MINDSET: [
-            // PILLAR: TOWARDS ONESELF
-            {
-                id: "M40_1",
-                pillar: "TOWARDS ONESELF",
-                facet: "Growth Mindset & Resilience",
-                text: "SA - Core Scenario 2.3: You receive significant constructive feedback from a colleague about your leadership style on a complex project where you've also encountered setbacks. How do you typically process this feedback and respond?",
-                options: [
-                    { score: 3, text: "B. I listen to the feedback and reflect on my approach, acknowledging areas for improvement, and then adapt my strategy, generally maintaining my focus and composure." },
-                    { score: 1, text: "A. I struggle to integrate the feedback, often feeling defensive or discouraged by the setbacks, and find it difficult to maintain a positive outlook." },
-                    { score: 5, text: "C. I proactively seek diverse feedback, embrace setbacks as learning opportunities, and quickly pivot my strategy, demonstrating exceptional resilience and belief in growth." }
-                ]
-            },
-            {
-                id: "M40_2",
-                pillar: "TOWARDS ONESELF",
-                facet: "Change Readiness & Adaptability",
-                text: "SA - Core Scenario 2.4: The company announces a significant organizational change that alters your team's structure and requires you to learn new systems outside your comfort zone. How do you manage your mindset?",
-                options: [
-                    { score: 1, text: "A. I express frustration or cynicism to trusted colleagues, and focus on how to protect my current work methods, feeling overwhelmed and resistant to learning." },
-                    { score: 3, text: "B. I accept the change as necessary, diligently learn the new systems, and adapt my workflow, generally maintaining my effectiveness and composure." },
-                    { score: 5, text: "C. I actively embrace the change as an opportunity to rethink old processes, proactively seeking information and fostering a change-ready culture through enthusiasm." }
-                ]
-            },
+    // --- PILLAR: TOWARDS ONESELF ---
+    {
+        id: "M2_3_S",
+        pillar: "TOWARDS ONESELF",
+        facet: "Growth Mindset & Resilience",
+        text: "SA - Core Scenario 2.3: You receive significant constructive feedback from a colleague about your leadership style on a complex project where you've also encountered setbacks. How do you typically process this feedback?",
+        options: [
+            { score: 1, text: "A. I struggle to integrate the feedback, often feeling defensive or discouraged by setbacks, and find it difficult to maintain a positive outlook." },
+            { score: 3, text: "B. I listen to the feedback and reflect on my approach, acknowledging areas for improvement, and then adapt my strategy to address challenges." },
+            { score: 5, text: "C. I proactively seek diverse feedback, openly embrace setbacks as learning opportunities, and quickly pivot my strategy to incorporate new insights." }
+        ]
+    },
+    {
+        id: "M2_3_R",
+        pillar: "TOWARDS ONESELF",
+        facet: "Inspiring Growth",
+        text: "SA - Reflection on Impact 2.3: How often do you find that your personal response to challenges and setbacks visibly inspires your peers to adopt a more adaptable and growth-oriented mindset?",
+        options: [
+            { score: 1, text: "A. Rarely; I tend to keep my struggles private, and my responses don't visibly influence my peers' approach to challenges." },
+            { score: 3, text: "B. Occasionally; my composed approach to challenges is noticed by peers, and they sometimes seek my advice on similar situations." },
+            { score: 5, text: "C. Consistently; my visible resilience and growth-oriented approach frequently motivates peers to embrace change and learn from their own setbacks." }
+        ]
+    },
+    {
+        id: "M2_4_S",
+        pillar: "TOWARDS ONESELF",
+        facet: "Change Readiness",
+        text: "SA - Core Scenario 2.4: The company announces a significant change that alters your team's structure and requires learning new systems outside your comfort zone. How do you manage your mindset?",
+        options: [
+            { score: 1, text: "A. I express frustration or cynicism to colleagues and focus on protecting my current methods, feeling resistant to learning new systems." },
+            { score: 3, text: "B. I accept the change as necessary, diligently learn the new systems, and adapt my workflow while maintaining effectiveness." },
+            { score: 5, text: "C. I actively embrace the change as an opportunity to rethink old processes, mastering new systems and modeling enthusiasm for others." }
+        ]
+    },
+    {
+        id: "M2_4_R",
+        pillar: "TOWARDS ONESELF",
+        facet: "Transition Support",
+        text: "SA - Reflection on Impact 2.4: When faced with major organizational change, how often do you find that your personal attitude contributes to a smoother, more positive transition for your team?",
+        options: [
+            { score: 1, text: "A. Rarely; my initial reluctance or frustration often creates friction or increases anxiety among my peers." },
+            { score: 3, text: "B. Occasionally; my professional approach helps the team navigate the change, and I generally adapt without creating further issues." },
+            { score: 5, text: "C. Consistently; my positive attitude and proactive adaptation make me a go-to person for peers seeking guidance during transitions." }
+        ]
+    },
 
-            // PILLAR: TOWARDS OTHERS
-            {
-                id: "M40_3",
-                pillar: "TOWARDS OTHERS",
-                facet: "Conflict Resolution & Inclusion",
-                text: "SA - Core Scenario 2.5: Two colleagues are in a heated disagreement, and a new team member is struggling to voice their opinion. How do you typically intervene?",
-                options: [
-                    { score: 5, text: "C. I proactively step into the conflict, guiding colleagues to understand motivations through empathy, and create an inclusive space for the new member to contribute." },
-                    { score: 1, text: "A. I tend to avoid direct involvement in the conflict, focusing on my own tasks, and I don't actively make space for the quieter team member." },
-                    { score: 3, text: "B. I try to mediate the disagreement by facilitating discussion and make an effort to include the new team member, ensuring different viewpoints are heard." }
-                ]
-            },
-            {
-                id: "M40_4",
-                pillar: "TOWARDS OTHERS",
-                facet: "Collaboration & Team Commitment",
-                text: "SA - Core Scenario 2.6: Your team faces a complex project requiring deep collaboration, but some members struggle to share knowledge due to differing priorities. How do you foster commitment?",
-                options: [
-                    { score: 3, text: "B. I actively participate in team activities, share my knowledge when asked, and contribute to a generally supportive environment, ensuring efforts align with team goals." },
-                    { score: 5, text: "C. I consistently prioritize team success, proactively offer support, share resources without prompting, and build a cohesive environment that fosters deep commitment." },
-                    { score: 1, text: "A. I focus on completing my assigned tasks and meeting individual deadlines, assuming others will do the same, and wait for explicit requests before sharing knowledge." }
-                ]
-            },
+    // --- PILLAR: TOWARDS OTHERS ---
+    {
+        id: "M2_5_S",
+        pillar: "TOWARDS OTHERS",
+        facet: "Conflict Resolution & Inclusion",
+        text: "SA - Core Scenario 2.5: Two colleagues are in a heated disagreement, and a new team member is struggling to voice their opinion. How do you typically intervene?",
+        options: [
+            { score: 1, text: "A. I tend to avoid direct involvement or side with one party, and I don't actively make space for the quieter team member." },
+            { score: 3, text: "B. I try to mediate by facilitating discussion and make an effort to include the new member, ensuring viewpoints are respected." },
+            { score: 5, text: "C. I proactively step into the conflict, guiding colleagues to understand motivations through empathy, transforming tension into collaboration." }
+        ]
+    },
+    {
+        id: "M2_5_R",
+        pillar: "TOWARDS OTHERS",
+        facet: "Psychological Safety",
+        text: "SA - Reflection on Impact 2.5: How often do your interactions consistently lead to colleagues feeling more understood, valued, and safe to express diverse opinions?",
+        options: [
+            { score: 1, text: "A. Rarely; my interactions sometimes lead to misunderstandings or leave people feeling unheard, limiting psychological safety." },
+            { score: 3, text: "B. Occasionally; my interactions generally lead to respect, but some might still hesitate to express strong emotions or differing views." },
+            { score: 5, text: "C. Consistently; I am recognized for transforming tense situations into constructive dialogues where everyone feels safe to contribute." }
+        ]
+    },
+    {
+        id: "M2_6_S",
+        pillar: "TOWARDS OTHERS",
+        facet: "Team Commitment",
+        text: "SA - Core Scenario 2.6: Your team faces a high-stakes project, but some members struggle to share knowledge due to differing priorities. How do you foster collaboration?",
+        options: [
+            { score: 1, text: "A. I focus on my individual tasks and deadlines, assuming others will do the same, and wait for requests before sharing knowledge." },
+            { score: 3, text: "B. I actively participate in team activities, share my knowledge when asked, and contribute to a generally supportive environment." },
+            { score: 5, text: "C. I consistently prioritize team success, proactively offer support without prompting, and build a cohesive environment that fosters commitment." }
+        ]
+    },
+    {
+        id: "M2_6_R",
+        pillar: "TOWARDS OTHERS",
+        facet: "Team Unity",
+        text: "SA - Reflection on Impact 2.6: How often do your proactive efforts significantly and visibly increase collaboration, leading to a stronger sense of team unity?",
+        options: [
+            { score: 1, text: "A. Rarely; team members often work in silos, and collaboration requires explicit directives or outside intervention to move forward." },
+            { score: 3, text: "B. Occasionally; my contributions help facilitate collaboration and contribute to good team dynamics." },
+            { score: 5, text: "C. Consistently; I am recognized for breaking down barriers and visibly contributing to shared ownership and mutual success." }
+        ]
+    },
 
-            // PILLAR: TOWARDS COMPANY & POSITION
-            {
-                id: "M40_5",
-                pillar: "TOWARDS COMPANY",
-                facet: "Accountability & Value-Driven Leadership",
-                text: "SA - Core Scenario 2.7: A project you lead encounters a major setback, and you need to make a tough decision under pressure that aligns with company values but might be unpopular. How do you respond?",
-                options: [
-                    { score: 1, text: "A. I tend to highlight external factors or circumstances beyond my control, sometimes delaying decisions or avoiding full ownership of the outcome." },
-                    { score: 3, text: "B. I take ownership for the setback, clearly articulate lessons learned, and make a timely decision that aligns with company values, communicating the rationale clearly." },
-                    { score: 5, text: "C. I embrace full accountability, identify systemic issues, and make a courageous, value-driven decision that influences broader organizational improvements." }
-                ]
-            },
-            {
-                id: "M40_6",
-                pillar: "TOWARDS COMPANY",
-                facet: "Strategic Ownership & Advocacy",
-                text: "SA - Core Scenario 2.8: You identify a significant opportunity that requires a new strategic direction but challenges existing norms. How do you advocate for this initiative?",
-                options: [
-                    { score: 3, text: "B. I build a strong business case and effectively collaborate with key stakeholders to gain necessary buy-in, presenting a unified front to senior leadership." },
-                    { score: 5, text: "C. I meticulously map the political landscape, identify key influencers, and tailor persuasive arguments to each, transforming initial resistance into advocacy." },
-                    { score: 1, text: "A. I present the detailed business case assuming the data will speak for itself, but I often struggle to overcome resistance or gain full endorsement." }
-                ]
-            },
-
-            // REFLECTIONS ON IMPACT
-            {
-                id: "M40_7",
-                pillar: "TOWARDS ONESELF",
-                facet: "Reflection on Inspiring Others",
-                text: "SA - Reflection on Impact 2.3 & 2.4: How often does your personal response to challenges and changes visibly inspire your peers to adopt a more growth-oriented mindset?",
-                options: [
-                    { score: 1, text: "A. Rarely; I tend to keep struggles private, or my initial reluctance with changes creates friction that increases anxiety among my peers." },
-                    { score: 3, text: "B. Occasionally; my composed approach is noticed by peers, and they sometimes seek my advice on how to handle similar situations or transitions." },
-                    { score: 5, text: "C. Consistently; my visible resilience and positive attitude make me a go-to person, motivating others to embrace change and learn from setbacks." }
-                ]
-            },
-            {
-                id: "M40_8",
-                pillar: "TOWARDS COMPANY",
-                facet: "Reflection on Strategic Impact",
-                text: "SA - Reflection on Impact 2.7 & 2.8: How often do your decisions and strategic proposals lead to a visible shift in organizational strategy or value alignment?",
-                options: [
-                    { score: 5, text: "C. Consistently; my strategic insights lead to the adoption of new initiatives and my decisions often serve as a benchmark for a strong ethical culture." },
-                    { score: 1, text: "A. Rarely; my proposals seldom lead to significant strategic shifts, and my decisions are sometimes perceived as inconsistent with broader goals." },
-                    { score: 3, text: "B. Occasionally; my input contributes to strategic discussions and my decisions are generally respected, contributing positively to team morale." }
-                ]
-            }
-        ],
+    // --- PILLAR: TOWARDS COMPANY & POSITION ---
+    {
+        id: "M2_7_S",
+        pillar: "TOWARDS COMPANY",
+        facet: "Accountability",
+        text: "SA - Core Scenario 2.7: A project you lead encounters a major setback, and you must make a tough, unpopular decision that aligns with company values. How do you respond?",
+        options: [
+            { score: 1, text: "A. I tend to highlight external factors beyond my control, sometimes delaying decisions or avoiding full ownership." },
+            { score: 3, text: "B. I take ownership for the setback, articulate lessons learned, and make a timely decision that aligns with company values." },
+            { score: 5, text: "C. I embrace full accountability, identify systemic issues, and champion a courageous decision that influences broader organizational improvements." }
+        ]
+    },
+    {
+        id: "M2_7_R",
+        pillar: "TOWARDS COMPANY",
+        facet: "Value-Driven Leadership",
+        text: "SA - Reflection on Impact 2.7: How often are your decisions recognized as examples of strong leadership and alignment with company values, even when unpopular?",
+        options: [
+            { score: 1, text: "A. Rarely; my decisions sometimes face internal questioning or are perceived as inconsistent with broader company goals." },
+            { score: 3, text: "B. Occasionally; my decisions are generally respected and align with values, though they may not inspire broader organizational buy-in." },
+            { score: 5, text: "C. Consistently; my decisions are lauded for strategic integrity and serve as a benchmark for others, reinforcing an ethical culture." }
+        ]
+    },
+    {
+        id: "M2_8_S",
+        pillar: "TOWARDS COMPANY",
+        facet: "Strategic Ownership",
+        text: "SA - Core Scenario 2.8: You identify a strategic opportunity that challenges norms and might meet resistance from leadership. How do you advocate for it?",
+        options: [
+            { score: 1, text: "A. I present the business case assuming the data will speak for itself, but often struggle to overcome resistance or gain endorsement." },
+            { score: 3, text: "B. I build a strong business case and collaborate with stakeholders to gain buy-in, presenting a unified front to leadership." },
+            { score: 5, text: "C. I meticulously map the political landscape, tailor persuasive arguments to key influencers, and transform resistance into advocacy." }
+        ]
+    },
+    {
+        id: "M2_8_R",
+        pillar: "TOWARDS COMPANY",
+        facet: "Organizational Influence",
+        text: "SA - Reflection on Impact 2.8: How often do your proactive initiatives or strategic proposals lead to a visible shift in organizational strategy or resource allocation?",
+        options: [
+            { score: 1, text: "A. Rarely; my proposals are usually acknowledged but seldom lead to significant strategic shifts or major resource re-allocations." },
+            { score: 3, text: "B. Occasionally; my input contributes to strategic discussions and sometimes influences specific tactical adjustments." },
+            { score: 5, text: "C. Consistently; my strategic insights consistently lead to new initiatives, visibly transforming organizational direction." }
+        ]
+    }
+],
         SKILLS: [
-            // PILLAR: PERSONAL EFFICIENCY
-            {
-                id: "S40_1",
-                pillar: "PERSONAL EFFICIENCY",
-                facet: "Priority Management & Adaptability",
-                text: "SA - Core Scenario 3.1: You are managing a heavy workload while a new software is introduced that changes the workflow. How do you manage priorities and adapt your team to this new technology?",
-                options: [
-                    { score: 3, text: "B. I use established priority management techniques and diligently learn the new software, adapting our workflow gradually to maintain team effectiveness." },
-                    { score: 1, text: "A. I juggle tasks based on urgency and express resistance towards the new software, preferring old methods, which leads to missed deadlines." },
-                    { score: 5, text: "C. I proactively implement sophisticated frameworks, master the new technology quickly, and optimize processes to exceed previous efficiency." }
-                ]
-            },
-            {
-                id: "S40_2",
-                pillar: "PERSONAL EFFICIENCY",
-                facet: "Problem Solving & Change Tactics",
-                text: "SA - Core Scenario 3.2: Your team faces a recurring workflow problem and a significant organizational change is announced. How do you approach the problem and the change?",
-                options: [
-                    { score: 5, text: "C. I identify the systemic root cause, develop an innovative solution, and actively champion the organizational change, guiding peers through their adjustments." },
-                    { score: 1, text: "A. I tend to work around the recurring problem or rely on others for solutions, and I struggle to adapt to the new organizational change." },
-                    { score: 3, text: "B. I apply structured problem-solving techniques to resolve the issue and diligently guide my team to navigate the organizational change." }
-                ]
-            },
+    // --- PILLAR: PERSONAL EFFICIENCY ---
+    {
+        id: "S3_1_S",
+        pillar: "PERSONAL EFFICIENCY",
+        facet: "Priority Management & Adaptability",
+        text: "SA - Core Scenario 3.1: You are managing a heavy workload while a new software is introduced that changes the workflow. How do you manage priorities and adapt your team to this new technology?",
+        options: [
+            { score: 1, text: "A. I juggle tasks based on urgency and express resistance towards the new software, which leads to missed deadlines and hinders efficiency." },
+            { score: 3, text: "B. I use established priority management techniques and diligently learn the new software, adapting our workflow gradually to maintain effectiveness." },
+            { score: 5, text: "C. I proactively implement sophisticated frameworks, master the technology quickly, and optimize processes to exceed previous efficiency levels." }
+        ]
+    },
+    {
+        id: "S3_1_R",
+        pillar: "PERSONAL EFFICIENCY",
+        facet: "Positive Modeling",
+        text: "SA - Reflection on Impact 3.1: How often do you find that your personal efficiency not only keeps your team on track but also sets a positive example and provides support for your peers?",
+        options: [
+            { score: 1, text: "A. Rarely; I am often focused on my own team, and our struggles with tools or priorities sometimes cause friction or delays for others." },
+            { score: 3, text: "B. Occasionally; I manage my team's tasks well, and sometimes our efficiency helps other teams, though I don't actively take a lead role here." },
+            { score: 5, text: "C. Consistently; our exceptional efficiency and adaptability make us a go-to resource, and our methods are often adopted to improve broader productivity." }
+        ]
+    },
+    {
+        id: "S3_2_S",
+        pillar: "PERSONAL EFFICIENCY",
+        facet: "Problem Solving & Change Leadership",
+        text: "SA - Core Scenario 3.2: Your team faces a recurring workflow problem and a significant organizational change is announced. How do you approach the problem and the change?",
+        options: [
+            { score: 1, text: "A. I tend to work around the recurring problem and struggle to adapt to the new organizational change, often preferring old methods." },
+            { score: 3, text: "B. I apply structured problem-solving techniques to resolve the issue and diligently guide my team to navigate the organizational change successfully." },
+            { score: 5, text: "C. I identify the systemic root cause, develop an innovative solution, and actively champion the change, optimizing my team's adaptation." }
+        ]
+    },
+    {
+        id: "S3_2_R",
+        pillar: "PERSONAL EFFICIENCY",
+        facet: "Best Practice Adoption",
+        text: "SA - Reflection on Impact 3.2: How often do your team's solutions to recurring problems or its methods for adapting to change become models adopted by other departments?",
+        options: [
+            { score: 1, text: "A. Rarely; our solutions are typically for our own use, and our adaptation methods are not widely adopted by others." },
+            { score: 3, text: "B. Occasionally; our effective solutions or adaptation methods are sometimes shared and contribute to minor improvements for other teams." },
+            { score: 5, text: "C. Consistently; our innovative strategies are frequently recognized as best practices and are actively adopted by other departments." }
+        ]
+    },
 
-            // PILLAR: COMMUNICATION
-            {
-                id: "S40_3",
-                pillar: "COMMUNICATION",
-                facet: "Strategic Listening & Influencing",
-                text: "SA - Core Scenario 3.3: You need to explain a complex initiative to a sceptical stakeholder who initially says 'no.' How do you approach this challenge?",
-                options: [
-                    { score: 1, text: "A. I present the details assuming its merits are clear, but struggle to capture attention or show personal value, taking the 'no' personally." },
-                    { score: 3, text: "B. I clearly explain strategic benefits, tailor the message to their needs, and ask for specific feedback on their 'no' to understand concerns." },
-                    { score: 5, text: "C. I craft a 'hook' to capture attention, strategically listen for unspoken motivations, and reframe the message to articulate mutual value." }
-                ]
-            },
-            {
-                id: "S40_4",
-                pillar: "COMMUNICATION",
-                facet: "Stakeholder Navigation & Collaboration",
-                text: "SA - Core Scenario 3.4: You need approval for a project from another department where you have no formal authority. How do you communicate to influence them?",
-                options: [
-                    { score: 5, text: "C. I strategically frame my request in terms of mutual value and shared goals, proactively addressing concerns and building a strong partnership." },
-                    { score: 3, text: "B. I proactively communicate, seeking to understand their priorities, and propose a solution that aligns with shared goals." },
-                    { score: 1, text: "A. I make my request assuming its importance is evident, but encounter delays requiring escalation through my manager." }
-                ]
-            },
+    // --- PILLAR: COMMUNICATION ---
+    {
+        id: "S3_3_S",
+        pillar: "COMMUNICATION",
+        facet: "Strategic Influencing",
+        text: "SA - Core Scenario 3.3: You need to explain a complex initiative to a sceptical stakeholder who initially gives a vague 'no.' How do you approach this challenge?",
+        options: [
+            { score: 1, text: "A. I present the details assuming merits are clear, but struggle to capture attention or show personal value, taking the 'no' personally." },
+            { score: 3, text: "B. I clearly explain strategic benefits, tailor the message to their needs, and ask for feedback on their 'no' to understand concerns." },
+            { score: 5, text: "C. I craft a 'hook' to capture attention, strategically listen for unspoken motivations, and reframe the message to articulate mutual value." }
+        ]
+    },
+    {
+        id: "S3_3_R",
+        pillar: "COMMUNICATION",
+        facet: "Action-Inducing Influence",
+        text: "SA - Reflection on Impact 3.3: How often do your communications result in stakeholders taking proactive, willing action without extensive follow-up or resistance?",
+        options: [
+            { score: 1, text: "A. Rarely; my initiatives often require multiple follow-ups, and initial resistance frequently leads to significant delays." },
+            { score: 3, text: "B. Occasionally; my communications generally lead to action, but sometimes require a second discussion to secure full engagement." },
+            { score: 5, text: "C. Consistently; my communications prompt immediate, positive engagement because stakeholders clearly see the value and the path to action is effortless." }
+        ]
+    },
+    {
+        id: "S3_4_S",
+        pillar: "COMMUNICATION",
+        facet: "Cross-Functional Collaboration",
+        text: "SA - Core Scenario 3.4: You need approval for a project from another department where you have no formal authority. How do you communicate to influence them?",
+        options: [
+            { score: 1, text: "A. I make my request assuming its importance is evident, but encounter delays requiring escalation through my manager." },
+            { score: 3, text: "B. I proactively communicate, seeking to understand their priorities, and propose a solution that aligns with shared goals." },
+            { score: 5, text: "C. I frame the request in terms of mutual value, proactively addressing their concerns and shattering silos to build a lasting partnership." }
+        ]
+    },
+    {
+        id: "S3_4_R",
+        pillar: "COMMUNICATION",
+        facet: "Seamless Cooperation",
+        text: "SA - Reflection on Impact 3.4: How often do your requests for cross-functional support result in proactive support rather than resistance or delays?",
+        options: [
+            { score: 1, text: "A. Rarely; my cross-functional collaborations often encounter friction or delays, suggesting a struggle to articulate mutual value." },
+            { score: 3, text: "B. Occasionally; my collaborations generally achieve their goals, but sometimes require extra effort to overcome misaligned priorities." },
+            { score: 5, text: "C. Consistently; my strong relationships and strategic influence are key drivers of success, proactively removing roadblocks." }
+        ]
+    },
 
-            // PILLAR: TEAM & PEOPLE DEVELOPMENT
-            {
-                id: "S40_5",
-                pillar: "TEAM DEVELOPMENT",
-                facet: "Empowering Delegation & Growth",
-                text: "SA - Core Scenario 3.5: You have a high-potential member ready for a stretch assignment and a consistent performer with little growth initiative. How do you approach them?",
-                options: [
-                    { score: 1, text: "A. I tend to micromanage the stretch assignment and provide positive feedback to the consistent performer without pushing for growth." },
-                    { score: 3, text: "B. I strategically select the stretch assignment for impact and engage in developmental conversations with the consistent performer, setting stretch goals." },
-                    { score: 5, text: "C. I use delegation as a primary development tool with coaching and co-create personalized growth plans that visibly accelerate development." }
-                ]
-            },
-            {
-                id: "S40_6",
-                pillar: "TEAM DEVELOPMENT",
-                facet: "Difficult Conversations & Recognition",
-                text: "SA - Core Scenario 3.6: You need to address a report's negative behaviour while the team celebrates a major milestone. How do you manage these interactions?",
-                options: [
-                    { score: 3, text: "B. I prepare specific examples for a respectful conversation about the behaviour and provide personalized recognition for the team's milestone." },
-                    { score: 5, text: "C. I meticulously plan the difficult conversation around shared values and design innovative recognition that links success to strategic values." },
-                    { score: 1, text: "A. I delay addressing the negative behaviour and offer generic praise for the team's milestone, missing opportunities for impact." }
-                ]
-            },
-
-            // REFLECTIONS ON IMPACT
-            {
-                id: "S40_7",
-                pillar: "PERSONAL EFFICIENCY",
-                facet: "Reflection on Best Practices",
-                text: "SA - Reflection on Impact 3.1 & 3.2: How often do your team's solutions or adaptation methods become models adopted by other departments?",
-                options: [
-                    { score: 1, text: "A. Rarely; our struggles with tools cause friction for others, and our solutions are typically for our own internal use." },
-                    { score: 3, text: "B. Occasionally; I manage tasks well and our effective solutions are sometimes shared to contribute to minor improvements for others." },
-                    { score: 5, text: "C. Consistently; our innovative strategies are recognized as best practices and are actively adopted to enhance organizational efficiency." }
-                ]
-            },
-            {
-                id: "S40_8",
-                pillar: "TEAM DEVELOPMENT",
-                facet: "Reflection on Feedback & Culture",
-                text: "SA - Reflection on Impact 3.5 & 3.6: How often do team members describe your feedback as fair and developmental, leading to high trust and loyalty?",
-                options: [
-                    { score: 5, text: "C. Consistently; members feel deeply valued and their growth is recognized, often becoming mentors themselves due to my leadership." },
-                    { score: 1, text: "A. Rarely; feedback can be perceived as harsh or unclear, and members feel unappreciated, suggesting a struggle with communication." },
-                    { score: 3, text: "B. Occasionally; feedback is generally well-received and members feel valued for their contributions, especially after major achievements." }
-                ]
-            }
-        ],
+    // --- PILLAR: TEAM & PEOPLE DEVELOPMENT ---
+    {
+        id: "S3_5_S",
+        pillar: "TEAM DEVELOPMENT",
+        facet: "Empowering Delegation",
+        text: "SA - Core Scenario 3.5: You have a high-potential member ready for a stretch assignment and a consistent performer with little growth initiative. How do you manage them?",
+        options: [
+            { score: 1, text: "A. I tend to micromanage the stretch assignment to ensure success and provide positive feedback to the consistent performer without pushing for growth." },
+            { score: 3, text: "B. I strategically select the stretch assignment for impact and engage in developmental conversations with the consistent performer, setting stretch goals." },
+            { score: 5, text: "C. I use delegation as a primary development tool with coaching and co-create personalized growth plans that visibly accelerate development." }
+        ]
+    },
+    {
+        id: "S3_5_R",
+        pillar: "TEAM DEVELOPMENT",
+        facet: "Increased Capability",
+        text: "SA - Reflection on Impact 3.5: How often do your team members visibly demonstrate increased capability and initiative, citing your support as a key factor?",
+        options: [
+            { score: 1, text: "A. Rarely; my team members generally stick to assigned duties, and growth is often self-driven rather than led by my management." },
+            { score: 3, text: "B. Occasionally; some team members show growth and initiative and appreciate my feedback, contributing to good team dynamics." },
+            { score: 5, text: "C. Consistently; my team members are recognized for exceptional growth and often become mentors themselves due to my empowering leadership." }
+        ]
+    },
+    {
+        id: "S3_6_S",
+        pillar: "TEAM DEVELOPMENT",
+        facet: "Managing Difficult Interactions",
+        text: "SA - Core Scenario 3.6: You need to address a report's negative behaviour while the team celebrates a major milestone. How do you manage these interactions?",
+        options: [
+            { score: 1, text: "A. I delay addressing the negative behaviour and offer generic praise for the team's milestone, missing opportunities for impact." },
+            { score: 3, text: "B. I conduct a clear, respectful conversation about the negative behaviour and provide personalized recognition for the team's milestone." },
+            { score: 5, text: "C. I plan the difficult conversation around shared values and design innovative recognition that links success to strategic values." }
+        ]
+    },
+    {
+        id: "S3_6_R",
+        pillar: "TEAM DEVELOPMENT",
+        facet: "Feedback Culture & Trust",
+        text: "SA - Reflection on Impact 3.6: How often do team members describe your feedback as clear and developmental, and feel genuinely valued for their contributions?",
+        options: [
+            { score: 1, text: "A. Rarely; my feedback can be perceived as harsh or unclear, and team members occasionally feel unappreciated for their efforts." },
+            { score: 3, text: "B. Occasionally; my feedback is generally well-received, and team members feel valued for their contributions, especially after major achievements." },
+            { score: 5, text: "C. Consistently; team members express that my feedback is fair and developmental, leading to high levels of trust and loyalty." }
+        ]
+    }
+],
         INFLUENCE: [
             // PILLAR: HOW DO I MAKE MY TEAM FEEL?
             {
