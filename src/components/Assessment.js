@@ -20,12 +20,25 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
     return Object.values(langData).flat();
   }, [language]);
 
+  if (data.isVerified) {
+  // OVO DODAJ:
+  localStorage.setItem('userEmail', userData.email);
+  localStorage.setItem('isVerified', 'true');
+  
+  clearInterval(checkIntervalRef.current);
+  setStep('TEST');
+}
+
   useEffect(() => {
     const verifiedEmail = localStorage.getItem('userEmail');
-    if (!verifiedEmail) {
-      window.location.href = '/'; 
+    // Ako nema emaila u storage-u, proveri da li je bar u memoriji aplikacije
+    // Ako baš ničega nema, tek onda vrati na početak
+    if (!verifiedEmail && !localStorage.getItem('isVerified')) {
+      console.log("No verification found, redirecting...");
+      // Privremeno zakomentariši donju liniju da testiraš ako sumnjaš da je bag
+      // window.location.href = '/'; 
     }
-  }, []);
+}, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
