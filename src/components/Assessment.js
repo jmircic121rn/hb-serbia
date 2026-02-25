@@ -20,14 +20,7 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
     return Object.values(langData).flat();
   }, [language]);
 
-  if (data.isVerified) {
-  // OVO DODAJ:
-  localStorage.setItem('userEmail', userData.email);
-  localStorage.setItem('isVerified', 'true');
   
-  clearInterval(checkIntervalRef.current);
-  setStep('TEST');
-}
 
   useEffect(() => {
     const verifiedEmail = localStorage.getItem('userEmail');

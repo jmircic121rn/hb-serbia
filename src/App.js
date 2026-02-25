@@ -91,6 +91,10 @@ function App() {
           console.log("Provera statusa za", userData.email, "IsVerified:", data.isVerified);
 
           if (data.isVerified) {
+            // OVO DODAJ:
+            localStorage.setItem('userEmail', userData.email);
+            localStorage.setItem('isVerified', 'true');
+            
             clearInterval(checkIntervalRef.current);
             setStep('TEST');
           }
