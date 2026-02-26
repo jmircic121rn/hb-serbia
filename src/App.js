@@ -264,8 +264,14 @@ const handleLeadSubmit = async (data) => {
               <div className="main-layout-wrapper">
                 {step === 'ABOUT' && <AboutUs onBack={() => setStep('PREINTRO')} />}
                 {step === 'TRAINERS' && <Trainers onBack={() => setStep('PREINTRO')} />}
-                {step === 'OPEN_TRAININGS' && <OpenTrainings onNavigate={(t) => { setStep(t); navigate('/'); }} />}
-
+{step === 'OPEN_TRAININGS' && (
+  <OpenTrainings 
+    onNavigate={(path) => { 
+      // Umesto menjanja step-a koji ne postoji, idemo direktno na rutu
+      navigate(path); 
+    }} 
+  />
+)}
                {showSidebar && (
   <div className="pd-split-container" style={{ 
     display: 'flex', 
