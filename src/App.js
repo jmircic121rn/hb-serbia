@@ -62,6 +62,7 @@ function App() {
   const [userData, setUserData] = useState(null);
   const [report, setReport] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
   const checkIntervalRef = useRef(null);
@@ -74,6 +75,12 @@ function App() {
       // Ali za sada, polling na "živom" tabu je najsigurnija opcija.
     }
   }, [step]);
+
+  useEffect(() => {
+  const handleResize = () => setIsMobile(window.innerWidth < 768);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   // POLLING ZA VERIFIKACIJU
   useEffect(() => {
@@ -170,15 +177,61 @@ const handleLeadSubmit = async (data) => {
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
-      {/* Dugme za nazad (BACK) */}
-      {((step !== 'PREINTRO' || eclipseMenu !== 'main') || location.pathname !== '/') && step !== 'LOADING' && (
-        <div onClick={() => {
-          if (location.pathname !== '/') navigate('/');
-          else setStep('PREINTRO');
-        }} className="back-btn-custom" style={{ cursor: 'pointer', zIndex: 1000 }}>
-          <span>←</span> BACK
-        </div>
-      )}
+      {/* --- POVRATAK DUGMETA NA SVE STRANICE --- */}
+{(step !== 'PREINTRO' || eclipseMenu !== 'main' || location.pathname !== '/') && step !== 'LOADING' && (
+  <div 
+    onClick={() => {
+      // 1. Ako smo na bilo kojoj posebnoj ruti (/success-line, /verify, itd.)
+      if (location.pathname !== '/' && location.pathname !== '') {
+        navigate('/');
+      } 
+      // 2. Ako smo unutar planeta u EclipseIntro
+      else if (step === 'PREINTRO' && eclipseMenu !== 'main') {
+        setEclipseMenu('main');
+      }
+      // 3. Logika za sve ostale stranice
+      else if (step === 'ABOUT' || step === 'TRAINERS' || step === 'OPEN_TRAININGS') {
+        setStep('PREINTRO');
+      } else if (step === 'INTRO') {
+        setStep('PREINTRO');
+      } else if (step === 'START') {
+        setStep('INTRO');
+      } else if (step === 'PRIVACY') {
+        setStep('START');
+      } else if (step === 'WAIT_VERIFICATION') {
+        setStep('START');
+      } else if (step === 'TEST') {
+        setStep('START');
+      } else {
+        // Sigurnosna mreža - uvek vrati na početak ako ništa drugo ne upali
+        setStep('PREINTRO');
+        setEclipseMenu('main');
+        navigate('/');
+      }
+    }} 
+    className="back-btn-custom" 
+    style={{ 
+      position: 'fixed', // Mora biti fixed da bi ga videle sve stranice
+      top: '30px', 
+      left: '40px', 
+      cursor: 'pointer', 
+      zIndex: 99999, // Najviši mogući sloj
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      color: '#fff',
+      fontSize: '12px',
+      letterSpacing: '2px',
+      fontWeight: 'bold',
+      background: 'rgba(0,0,0,0.5)', // Malo pozadine da se vidi preko planeta
+      padding: '10px 15px',
+      borderRadius: '30px',
+      border: '1px solid rgba(255,255,255,0.2)'
+    }}
+  >
+    <span>←</span> BACK
+  </div>
+)}
 
       <Routes>
         {/* NEZAVISNE RUTE */}
@@ -213,10 +266,25 @@ const handleLeadSubmit = async (data) => {
                 {step === 'TRAINERS' && <Trainers onBack={() => setStep('PREINTRO')} />}
                 {step === 'OPEN_TRAININGS' && <OpenTrainings onNavigate={(t) => { setStep(t); navigate('/'); }} />}
 
-                {showSidebar && (
-                  <div className="pd-split-container" style={{ display: 'flex' }}>
-                    <div className="pd-sidebar" style={{ width: '350px', padding: '40px' }}>
-                      <img src="/logo.png" alt="Logo" style={{ width: '160px' }} />
+               {showSidebar && (
+  <div className="pd-split-container" style={{ 
+    display: 'flex', 
+    flexDirection: isMobile ? 'column' : 'row', // Na mobilnom ide jedno ispod drugog
+    minHeight: '100vh'
+  }}>
+    <div className="pd-sidebar" style={{ 
+      width: isMobile ? '100%' : '350px', 
+      padding: isMobile ? '60px 20px 20px 20px' : '40px', // Više prostora gore na mob da ne udari u BACK dugme
+      marginTop: isMobile ? '40px' : '70px',
+      height: isMobile ? 'auto' : 'calc(100vh - 140px)', // Na mob visina auto, na desktop skoro puna visina minus padding
+      display: 'flex',
+      flexDirection: isMobile ? 'row' : 'column', // Elementi unutar sidebara idu vodoravno na mob
+      alignItems: 'center',
+      justifyContent: isMobile ? 'space-around' : 'flex-start',
+      borderBottom: isMobile ? '1px solid rgba(255,180,120,0.1)' : 'none',
+      borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)'
+    }}>
+        <img src="/logo.png" alt="Logo" style={{ width: '160px' }} />
                       <SidebarCompass />
                       <h1 className="sidebar-title">Ideal Profile Assessment</h1>
                     </div>
