@@ -19,6 +19,7 @@ import Trainers from './components/Trainers';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import VerifyEmail from './components/VerifyEmail';
 import { translations } from './data/translations';
+import InternalTrainings from './components/InternalTrainings';
 
 
 function App() {
@@ -98,25 +99,66 @@ function App() {
   };
 
   const AssessmentLayout = ({ children }) => (
-    <div className="main-layout-wrapper">
-      <div className="pd-split-container" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', minHeight: '100vh' }}>
-        <div className="pd-sidebar" style={{ 
-          width: isMobile ? '100%' : '350px', padding: isMobile ? '60px 20px 20px 20px' : '40px',
-          marginTop: isMobile ? '40px' : '70px', height: isMobile ? 'auto' : 'calc(100vh - 140px)',
-          display: 'flex', flexDirection: isMobile ? 'row' : 'column',
-          alignItems: 'center', justifyContent: isMobile ? 'space-around' : 'flex-start',
-          borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)',
-          borderBottom: isMobile ? '1px solid rgba(255,180,120,0.1)' : 'none'
+  <div className="main-layout-wrapper">
+    <div className="pd-split-container" style={{ 
+      display: 'flex', 
+      flexDirection: isMobile ? 'column' : 'row', 
+      minHeight: '100vh',
+      overflow: 'visible' 
+    }}>
+      <aside className="pd-sidebar" style={{ 
+        width: isMobile ? '100%' : '380px', 
+        padding: isMobile ? '20px' : '0px', // Smanjujemo padding sidebara da kontrolišemo poziciju unutra
+        height: isMobile ? 'auto' : '100vh',
+        position: isMobile ? 'relative' : 'sticky',
+        top: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: isMobile ? 'center' : 'flex-start', // Desktop: levo poravnanje
+        borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)',
+        zIndex: 10,
+        flexShrink: 0,
+        backgroundColor: '#050505'
+      }}>
+        {/* UNUTRAŠNJI KONTEJNER - Ovde kontrolišeš tačnu poziciju */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'flex-start', // Pomera sadržaj ulevo
+          position: isMobile ? 'relative' : 'sticky',
+          top: 0,
+          paddingTop: isMobile ? '40px' : '150px', // POMERA DOLE (podesi vrednost po želji)
+          paddingLeft: isMobile ? '0' : '50px'     // ODMAK OD LEVE IVICE
         }}>
-          <img src="/logo.png" alt="Logo" style={{ width: '200px' }} />
-           <img src="/compass.png" alt="Logo" style={{ width: '180px', marginTop: '20px' }} />
+          <img 
+            src="/logo.png" 
+            alt="Logo" 
+            style={{ 
+              width: isMobile ? '150px' : '220px', 
+              marginBottom: '30px' 
+            }} 
+          />
+          <img 
+            src="/compass.png" 
+            alt="Compass" 
+            style={{ 
+              width: isMobile ? '130px' : '200px',
+              opacity: 0.9 // Suptilno smanjen intenzitet da ne odskače previše
+            }} 
+          />
         </div>
-        <div className="pd-content" style={{ flex: 1 }}>
-          {children}
-        </div>
-      </div>
+      </aside>
+
+      <main className="pd-content" style={{ 
+        flex: 1, 
+        overflow: 'visible',
+        paddingTop: isMobile ? '20px' : '100px'
+      }}>
+        {children}
+      </main>
     </div>
-  );
+  </div>
+);
 
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
@@ -159,6 +201,7 @@ function App() {
               if (choice === 'ABOUT') navigate('/about');
               else if (choice === 'TRAINERS') navigate('/trainers');
               else if (choice === 'OPEN_TRAININGS') navigate('/open-trainings');
+              else if (choice === 'INTERNAL_TRAININGS') navigate('/internal-trainings'); // 2. DODATA PUTANJA
               else navigate('/assessment'); // OVO SADA VODI NA URL /assessment
             }}
             menuLevel={eclipseMenu}
@@ -167,6 +210,7 @@ function App() {
             setLanguage={setLanguage}
           />
         } />
+        <Route path="/internal-trainings" element={<InternalTrainings language={language} />} />
 
         {/* 2. LANDING PAGE (Sada ima svoj URL /assessment) */}
         <Route path="/assessment" element={

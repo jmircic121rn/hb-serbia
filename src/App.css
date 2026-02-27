@@ -21,10 +21,10 @@ html {
 .pd-split-container {
   display: flex;
   min-height: 100vh;
-  background-color: #000; /* Osnova celog ekrana */
-  overflow: hidden;
+  background-color: #000;
+  /* overflow: hidden;  <-- OVO OBAVEZNO IZBRIŠI ILI STAVI NA visible */
+  overflow: visible; 
   width: 100%;
-  gap: 0; /* Eliminiše bilo kakav razmak */
 }
 
 /* SIDEBAR - CRNI DEO */
@@ -77,16 +77,15 @@ html {
 
 /* CONTENT - BELI DEO */
 .pd-content {
-  flex: 1; /* Ovo će popuniti sav preostali prostor do sidebara */
-  padding: 0; /* Uklanjamo padding ovde jer LandingPage ima svoj */
+  flex: 1;
   background-color: #0a0a0a;
   min-height: 100vh;
+  /* overflow-y: auto; <-- OVO IZBRIŠI, skrol treba da bude na celom ekranu */
+  overflow: visible;
   position: relative;
-  min-width: 0;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-  overflow-y: auto;
   padding-top: 100px;
 }
 
