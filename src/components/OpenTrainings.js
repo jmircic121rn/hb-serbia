@@ -10,40 +10,37 @@ const TrainingGallerySidebar = () => {
   return (
     <div style={{ 
       display: 'grid', 
-      gridTemplateColumns: 'repeat(2, 1fr)', 
-      gridAutoRows: 'minmax(220px, auto)', 
-      gap: '12px',
+      gridTemplateColumns: '1fr', // Jedna kolona za maksimalnu širinu slika
+      gridAutoRows: '280px', // Mnogo veće slike
+      gap: '20px',
       position: 'sticky',
-      top: '120px', // Galerija prati skrol
+      top: '120px',
       height: 'fit-content'
     }}>
       {images.map((src, index) => (
         <motion.div
           key={index}
-          whileHover={{ scale: 1.02, filter: 'grayscale(0%)' }}
+          whileHover={{ scale: 0.99, filter: 'grayscale(0%)' }}
           style={{
-            gridColumn: index === 0 || index === 5 ? 'span 2' : 'span 1',
-            gridRow: index === 0 ? 'span 2' : 'span 1',
             backgroundImage: `url(${src})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             borderRadius: '2px',
             border: '1px solid rgba(255,255,255,0.05)',
-            filter: 'grayscale(50%)',
-            transition: '0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-            minHeight: '120px'
+            filter: 'grayscale(60%)',
+            transition: '0.8s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         />
       ))}
       <div style={{ 
-        gridColumn: 'span 2', 
         padding: '20px 0', 
         fontSize: '10px', 
-        letterSpacing: '3px', 
-        color: '#333', 
-        textTransform: 'uppercase' 
+        letterSpacing: '5px', 
+        color: '#222', 
+        textTransform: 'uppercase',
+        textAlign: 'center'
       }}>
-        Hansen Beck Atmosphere // 2024
+        Hansen Beck Experience
       </div>
     </div>
   );
@@ -52,53 +49,47 @@ const TrainingGallerySidebar = () => {
 // MODIFIKOVANA KARTICA - Popravljen DOM nesting (p -> div)
 const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
   <motion.div
-    whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
+    whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.02)' }}
     style={{
-      background: 'linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%)',
-      border: '1px solid rgba(255,255,255,0.1)',
-      padding: '35px',
+      background: 'linear-gradient(145deg, rgba(15,15,15,0.8) 0%, rgba(5,5,5,0.9) 100%)',
+      border: '1px solid rgba(255,255,255,0.08)',
+      padding: '30px', // Smanjen padding
       borderRadius: '2px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      minHeight: '400px',
+      minHeight: '320px', // Smanjena minimalna visina
       position: 'relative',
-      overflow: 'hidden',
       marginBottom: '20px'
     }}
   >
-    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent, #fff, transparent)', opacity: 0.2 }} />
-
     <div>
-      <h4 style={{ color: '#b3b3b3', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>{duration}</h4>
-      <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '15px', letterSpacing: '-0.5px' }}>{title}</h3>
-
-      <div style={{ color: '#999', fontSize: '14px', lineHeight: '1.6', fontWeight: '300' }}>
+      <h4 style={{ color: '#555', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px' }}>{duration}</h4>
+      <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '15px', lineHeight: '1.2' }}>{title}</h3>
+      <div style={{ color: '#888', fontSize: '14px', lineHeight: '1.5', fontWeight: '300' }}>
         {description}
       </div>
-
-      {mentors && <p style={{ color: '#fff', fontSize: '11px', marginTop: '15px', fontStyle: 'italic' }}>Mentori: {mentors}</p>}
+      {mentors && <p style={{ color: '#fff', fontSize: '11px', marginTop: '15px', fontStyle: 'italic', opacity: 0.6 }}>{mentors}</p>}
     </div>
 
-    <motion.button
+    <button
       onClick={onClick}
-      whileHover={{ scale: 1.05, backgroundColor: '#fff', color: '#000' }}
       style={{
-        marginTop: '30px',
-        padding: '12px 25px',
+        marginTop: '25px',
+        padding: '10px 0',
         background: 'transparent',
-        border: '1px solid #fff',
+        border: 'none',
+        borderBottom: '1px solid #fff',
         color: '#fff',
         fontSize: '10px',
         letterSpacing: '2px',
         textTransform: 'uppercase',
         cursor: 'pointer',
-        transition: 'all 0.3s',
         width: 'fit-content'
       }}
     >
-      Više informacija
-    </motion.button>
+      Istraži program →
+    </button>
   </motion.div>
 );
 
@@ -148,7 +139,7 @@ const OpenTrainings = ({ onNavigate }) => {
         <div style={{ 
           display: 'flex', 
           flexDirection: isMobile ? 'column' : 'row', 
-          gap: '50px',
+          gap: '80px', // Veći razmak između slika i teksta
           alignItems: 'flex-start'
         }}>
           
