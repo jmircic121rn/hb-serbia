@@ -122,28 +122,34 @@ function App() {
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
       {/* --- UNIVERZALNO BACK DUGME --- */}
-      {(location.pathname !== '/' || eclipseMenu !== 'main') && !location.pathname.includes('loading') && (
-        <div 
-          onClick={() => {
-            if (location.pathname === '/' && eclipseMenu !== 'main') {
-              setEclipseMenu('main');
-            } else if (location.pathname.startsWith('/assessment')) {
-               location.pathname === '/assessment' ? navigate('/') : navigate(-1);
-            } else {
-              navigate('/');
-            }
-          }} 
-          className="back-btn-custom" 
-          style={{ 
-            position: 'fixed', top: '30px', left: '40px', cursor: 'pointer', zIndex: 99999,
-            display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '12px',
-            letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)',
-            padding: '10px 15px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)'
-          }}
-        >
-          <span>←</span> BACK
-        </div>
-      )}
+{(location.pathname !== '/' || eclipseMenu !== 'main') && !location.pathname.includes('loading') && (
+  <div 
+    onClick={() => {
+      // USLOV 1: Ako smo na početnoj, ali su prikazane 3 planete (assessment nivo)
+      if (location.pathname === '/' && eclipseMenu !== 'main') {
+        setEclipseMenu('main');
+      } 
+      // USLOV 2: Ako smo na prvoj strani assessment-a (/assessment), vrati nas na planete
+      else if (location.pathname === '/assessment') {
+        navigate('/');
+        setEclipseMenu('assessment'); // Opciono: postavi da odmah budu 3 planete kad se vratiš
+      }
+      // USLOV 3: Za sve ostalo, koristi istoriju pretraživača (pamti prethodnu stranu)
+      else {
+        navigate(-1);
+      }
+    }} 
+    className="back-btn-custom" 
+    style={{ 
+      position: 'fixed', top: '30px', left: '40px', cursor: 'pointer', zIndex: 99999,
+      display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '12px',
+      letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)',
+      padding: '10px 15px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)'
+    }}
+  >
+    <span>←</span> BACK
+  </div>
+)}
 
       <Routes>
         {/* 1. PLANETE (Pre-intro) */}

@@ -77,7 +77,6 @@ const AboutUs = ({ onBack }) => {
           zIndex: 100
         }}
       >
-        ← NAZAD
       </motion.button>
 
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>

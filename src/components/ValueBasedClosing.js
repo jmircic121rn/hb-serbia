@@ -59,12 +59,27 @@ const ValueBasedClosing = () => {
         fontSize: '14px',
         outline: 'none',
         transition: 'border-color 0.3s',
-        appearance: 'none',
-        cursor: 'pointer'
+        width: '100%',
+        boxSizing: 'border-box'
     };
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+
+            <style>
+                {`
+                    select option {
+                        background-color: #111 !important;
+                        color: #fff !important;
+                    }
+                    select option:disabled {
+                        color: #666 !important;
+                    }
+                    input::placeholder, textarea::placeholder {
+                        color: #555;
+                    }
+                `}
+            </style>
             
             {/* HERO SEKCIJA SA NOVOM EKLIPSOM */}
             <section style={{ 
@@ -297,13 +312,13 @@ const ValueBasedClosing = () => {
                     <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
                     <input name="trening" value={formData.trening} placeholder="Naziv Treninga" style={{...inputStyle, opacity: 0.7}} readOnly />
 
-                    <select name="datum" value={formData.datum} onChange={handleInputChange} style={inputStyle} required>
+                    <select name="datum" value={formData.datum} onChange={handleInputChange} style={{...inputStyle, cursor: 'pointer'}} required>
                         <option value="" disabled>Izaberite datum</option>
                         <option value="14. maj">14. maj</option>
                         <option value="23. jun">23. jun</option>
                     </select>
 
-                    <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={inputStyle} required>
+                    <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={{...inputStyle, cursor: 'pointer'}} required>
                         <option value="" disabled>Izaberite vreme</option>
                         <option value="09:00 - 17:00">09:00 - 17:00</option>
                     </select>

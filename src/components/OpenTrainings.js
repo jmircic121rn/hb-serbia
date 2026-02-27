@@ -52,7 +52,7 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
     whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.02)' }}
     style={{
       background: 'linear-gradient(145deg, rgba(15,15,15,0.8) 0%, rgba(5,5,5,0.9) 100%)',
-      border: '1px solid rgba(255,255,255,0.08)',
+      border: '1px solid rgba(255, 255, 255, 0.25)',
       padding: '30px', // Smanjen padding
       borderRadius: '2px',
       display: 'flex',
@@ -64,8 +64,8 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
     }}
   >
     <div>
-      <h4 style={{ color: '#555', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px' }}>{duration}</h4>
-      <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '15px', lineHeight: '1.2' }}>{title}</h3>
+      <h4 style={{ color: '#ffffff', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px' }}>{duration}</h4>
+      <h3 style={{ fontSize: '25px', fontWeight: '800', marginBottom: '15px', lineHeight: '1.2' }}>{title}</h3>
       <div style={{ color: '#888', fontSize: '14px', lineHeight: '1.5', fontWeight: '300' }}>
         {description}
       </div>
@@ -152,21 +152,21 @@ const OpenTrainings = ({ onNavigate }) => {
           <div style={{ flex: '1', width: '100%' }}>
             <TrainingCard
               title="Zatvaranje prodaje zasnovano na vrednosti"
-              duration={<div><div>14. maj 09:00 - 17:00 </div><br/><div>23. jun 09:00 - 17:00</div></div>}
+              duration={<div><div>14. maj / 09:00 - 17:00 </div><br/><div>23. jun / 09:00 - 17:00</div></div>}
               description={<>Pretvorite „Skupo je!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
               onClick={() => onNavigate('/value-based-closing')}
             />
 
             <TrainingCard
               title="Razgovor zasnovan na percepciji"
-              duration={<div><div>12. maj 09:00 - 17:00</div><br/><div>21. maj 09:00 - 17:00</div></div>}
+              duration={<div><div>12. maj / 09:00 - 17:00</div><br/><div>21. maj / 09:00 - 17:00</div></div>}
               description={<>Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
               onClick={() => onNavigate('/perception-based')}
             />
 
             <TrainingCard
               title="Vrednost lične odgovornosti"
-              duration={<div><div>19. maj 09:00 - 13:00 / 14:00 - 18:00</div><br/><div>25. jun 09:00 - 13:00 / 14:00 - 18:00</div></div>}
+              duration={<div><div>19. maj / 09:00 - 13:00 / 14:00 - 18:00</div><br/><div>25. jun / 09:00 - 13:00 / 14:00 - 18:00</div></div>}
               description={<>Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
               onClick={() => onNavigate('/personal-responsibility')}
             />

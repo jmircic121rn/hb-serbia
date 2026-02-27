@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from '../data/translations'; // Proveri putanju do fajla
 
+const isMobile = window.innerWidth < 768;
+
+
 const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   return (
     <motion.div
@@ -32,11 +35,14 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
       onClick={onClick}
       style={{
         cursor: 'pointer',
-        width: '200px',
+        // KLJUČNO: Smanjena širina sa 200px na 110px na mobilnom
+        width: isMobile ? '110px' : '200px', 
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
+        // Dodatno smanjujemo celu planetu da prstenovi ne vire previše
+        transform: isMobile ? 'scale(0.85)' : 'scale(1)',
       }}
     >
       <motion.div
@@ -107,16 +113,22 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
       </div>
 
       <div style={{ textAlign: 'center', zIndex: 10 }}>
-        <h3 style={{ fontSize: '7px', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px', textTransform: 'uppercase' }}>
+        <h3 style={{ 
+          fontSize: isMobile ? '6px' : '7px', 
+          letterSpacing: '1px', 
+          color: 'rgba(255,255,255,0.4)', 
+          marginBottom: '4px', 
+          textTransform: 'uppercase' 
+        }}>
           {title}
         </h3>
-        <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 8px' }} />
+        <div style={{ height: '1px', width: '15px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 6px' }} />
         <span style={{
-          fontSize: '10px',
+          fontSize: isMobile ? '8px' : '10px',
           fontWeight: '700',
-          letterSpacing: '1px',
+          letterSpacing: '0.5px',
           color: '#fff',
-          lineHeight: '1.4',
+          lineHeight: '1.2',
           display: 'block',
           textTransform: 'uppercase'
         }}>
@@ -294,8 +306,15 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
-            >
+style={{ 
+      display: 'flex', 
+      // Razmak od samo 5px na mobilnom, 30px na desktopu
+      gap: isMobile ? '5px' : '30px', 
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      width: '100%',
+      maxWidth: '100vw'
+    }}            >
               <SaturnPlanet
                 title={t.planets.b2b.title}
                 subtitle={t.planets.b2b.subtitle}
