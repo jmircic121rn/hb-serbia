@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { motion } from 'framer-motion';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 
-// Importi svih tvojih komponenti
+// Importi komponenti
 import LandingPage from './components/LandingPage';
 import LeadForm from './components/LeadForm';
 import LoadingScreen from './components/LoadingScreen';
@@ -43,7 +43,7 @@ const SidebarCompass = () => {
       <svg viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
         <motion.g animate={{ rotate: rotation }} style={{ originX: '50px', originY: '50px' }}>
-          <path d="M50 15 L54 50 L50 50 L46 50 Z" fill="#ffb478" />
+          <path d="M50 15 L54 50 L50 50 L46 50 Z" fill="#ffffff" />
           <path d="M50 85 L54 50 L50 50 L46 50 Z" fill="rgba(255,255,255,0.2)" />
         </motion.g>
       </svg>
@@ -55,7 +55,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [step, setStep] = useState('PREINTRO');
   const [eclipseMenu, setEclipseMenu] = useState('main');
   const [language, setLanguage] = useState('sr');
   const [assessmentType, setAssessmentType] = useState(null);
@@ -67,256 +66,188 @@ function App() {
   const API_BASE_URL = process.env.REACT_APP_API_URL;
   const checkIntervalRef = useRef(null);
 
-  // App.js
   useEffect(() => {
-    const savedEmail = localStorage.getItem('userEmail');
-    if (savedEmail && step === 'PREINTRO') {
-      // Opciono: Možeš ga vratiti na test ako prepoznaš da je verifikovan
-      // Ali za sada, polling na "živom" tabu je najsigurnija opcija.
-    }
-  }, [step]);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
+  // POLLING ZA VERIFIKACIJU (Prati rutu /assessment/verify)
   useEffect(() => {
-  const handleResize = () => setIsMobile(window.innerWidth < 768);
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
-
-  // POLLING ZA VERIFIKACIJU
-  useEffect(() => {
-    // Dodajemo logove da vidimo da li polling uopšte radi
-    if (step === 'WAIT_VERIFICATION' && userData?.email) {
-      console.log("Checking status for:", userData.email);
-
-      // App.js - unutar useEffect-a za polling
+    if (location.pathname === '/assessment/verify' && userData?.email) {
       checkIntervalRef.current = setInterval(async () => {
         try {
           const res = await fetch(`${API_BASE_URL}/api/public-assessment/check-status?email=${userData.email}`);
           const data = await res.json();
-
-          // Dodaj ovaj log da vidiš u konzoli "živog" taba da li proverava
-          console.log("Provera statusa za", userData.email, "IsVerified:", data.isVerified);
-
           if (data.isVerified) {
-            // OVO DODAJ:
             localStorage.setItem('userEmail', userData.email);
             localStorage.setItem('isVerified', 'true');
-            
             clearInterval(checkIntervalRef.current);
-            setStep('TEST');
+            navigate('/assessment/test');
           }
         } catch (err) { console.error("Polling error:", err); }
       }, 3000);
     }
+    return () => { if (checkIntervalRef.current) clearInterval(checkIntervalRef.current); };
+  }, [location.pathname, userData, API_BASE_URL, navigate]);
 
-    return () => {
-      if (checkIntervalRef.current) clearInterval(checkIntervalRef.current);
-    };
-  }, [step, userData, API_BASE_URL]);
+  const handleLeadSubmit = async (data) => {
+    setErrorMsg(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/public-assessment/check-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (response.ok) {
+        setUserData(data);
+        navigate('/assessment/verify');
+      } else {
+        setErrorMsg(result.code === 'ALREADY_DONE' ? translations[language].form.alreadyDone : translations[language].form.serverError);
+      }
+    } catch (error) { setErrorMsg(translations[language].form.serverError); }
+  };
 
-  // 2. FUNKCIJA ZA SUBMIT TESTA (Vraćena stara logika)
   const handleFinish = async (finalAnswers) => {
-    setStep('LOADING');
+    navigate('/assessment/loading');
     try {
       const response = await fetch(`${API_BASE_URL}/api/public-assessment/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...userData,
-          responses: finalAnswers,
-          type: assessmentType,
-          lang: language
-        })
+        body: JSON.stringify({ ...userData, responses: finalAnswers, type: assessmentType, lang: language })
       });
       const data = await response.json();
       if (response.ok) {
         setReport(data.report);
-        setStep('RESULT');
+        navigate('/assessment/results');
       } else {
-        setErrorMsg(data.message || "Greška pri slanju.");
-        setStep('START');
+        navigate('/assessment/form');
       }
-    } catch (error) {
-      console.error("Submit error:", error);
-      setStep('START');
-    }
+    } catch (error) { navigate('/assessment'); }
   };
 
-  // App.js
-const handleLeadSubmit = async (data) => {
-  setErrorMsg(null);
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/public-assessment/check-email`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    
-    const result = await response.json();
-
-    if (response.ok) {
-      setUserData(data);
-      setStep('WAIT_VERIFICATION');
-    } else {
-      // PROVERA ŠIFRE GREŠKE
-      if (result.code === 'ALREADY_DONE') {
-        // Uzimamo prevod na osnovu trenutnog jezika u App.js
-        const msg = translations[language].form.alreadyDone;
-        setErrorMsg(msg);
-      } else {
-        setErrorMsg(translations[language].form.serverError);
-      }
-    }
-  } catch (error) { 
-    setErrorMsg(translations[language].form.serverError); 
-  }
-};
-
-  const showSidebar = ['INTRO', 'START', 'PRIVACY', 'TEST', 'LOADING', 'RESULT', 'WAIT_VERIFICATION'].includes(step);
+  const AssessmentLayout = ({ children }) => (
+    <div className="main-layout-wrapper">
+      <div className="pd-split-container" style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', minHeight: '100vh' }}>
+        <div className="pd-sidebar" style={{ 
+          width: isMobile ? '100%' : '350px', padding: isMobile ? '60px 20px 20px 20px' : '40px',
+          marginTop: isMobile ? '40px' : '70px', height: isMobile ? 'auto' : 'calc(100vh - 140px)',
+          display: 'flex', flexDirection: isMobile ? 'row' : 'column',
+          alignItems: 'center', justifyContent: isMobile ? 'space-around' : 'flex-start',
+          borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)',
+          borderBottom: isMobile ? '1px solid rgba(255,180,120,0.1)' : 'none'
+        }}>
+          <img src="/logo.png" alt="Logo" style={{ width: '200px' }} />
+           <img src="/compass.png" alt="Logo" style={{ width: '180px', marginTop: '20px' }} />
+        </div>
+        <div className="pd-content" style={{ flex: 1 }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
-      {/* --- POVRATAK DUGMETA NA SVE STRANICE --- */}
-{(step !== 'PREINTRO' || eclipseMenu !== 'main' || location.pathname !== '/') && step !== 'LOADING' && (
-  <div 
-    onClick={() => {
-      // 1. Ako smo na bilo kojoj posebnoj ruti (/success-line, /verify, itd.)
-      if (location.pathname !== '/' && location.pathname !== '') {
-        navigate('/');
-      } 
-      // 2. Ako smo unutar planeta u EclipseIntro
-      else if (step === 'PREINTRO' && eclipseMenu !== 'main') {
-        setEclipseMenu('main');
-      }
-      // 3. Logika za sve ostale stranice
-      else if (step === 'ABOUT' || step === 'TRAINERS' || step === 'OPEN_TRAININGS') {
-        setStep('PREINTRO');
-      } else if (step === 'INTRO') {
-        setStep('PREINTRO');
-      } else if (step === 'START') {
-        setStep('INTRO');
-      } else if (step === 'PRIVACY') {
-        setStep('START');
-      } else if (step === 'WAIT_VERIFICATION') {
-        setStep('START');
-      } else if (step === 'TEST') {
-        setStep('START');
-      } else {
-        // Sigurnosna mreža - uvek vrati na početak ako ništa drugo ne upali
-        setStep('PREINTRO');
-        setEclipseMenu('main');
-        navigate('/');
-      }
-    }} 
-    className="back-btn-custom" 
-    style={{ 
-      position: 'fixed', // Mora biti fixed da bi ga videle sve stranice
-      top: '30px', 
-      left: '40px', 
-      cursor: 'pointer', 
-      zIndex: 99999, // Najviši mogući sloj
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      color: '#fff',
-      fontSize: '12px',
-      letterSpacing: '2px',
-      fontWeight: 'bold',
-      background: 'rgba(0,0,0,0.5)', // Malo pozadine da se vidi preko planeta
-      padding: '10px 15px',
-      borderRadius: '30px',
-      border: '1px solid rgba(255,255,255,0.2)'
-    }}
-  >
-    <span>←</span> BACK
-  </div>
-)}
+      {/* --- UNIVERZALNO BACK DUGME --- */}
+      {(location.pathname !== '/' || eclipseMenu !== 'main') && !location.pathname.includes('loading') && (
+        <div 
+          onClick={() => {
+            if (location.pathname === '/' && eclipseMenu !== 'main') {
+              setEclipseMenu('main');
+            } else if (location.pathname.startsWith('/assessment')) {
+               location.pathname === '/assessment' ? navigate('/') : navigate(-1);
+            } else {
+              navigate('/');
+            }
+          }} 
+          className="back-btn-custom" 
+          style={{ 
+            position: 'fixed', top: '30px', left: '40px', cursor: 'pointer', zIndex: 99999,
+            display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '12px',
+            letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)',
+            padding: '10px 15px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)'
+          }}
+        >
+          <span>←</span> BACK
+        </div>
+      )}
 
       <Routes>
-        {/* NEZAVISNE RUTE */}
-        <Route path="/verify" element={<VerifyEmail />} />
+        {/* 1. PLANETE (Pre-intro) */}
+        <Route path="/" element={
+          <EclipseIntro
+            onProceed={(choice) => {
+              if (choice === 'ABOUT') navigate('/about');
+              else if (choice === 'TRAINERS') navigate('/trainers');
+              else if (choice === 'OPEN_TRAININGS') navigate('/open-trainings');
+              else navigate('/assessment'); // OVO SADA VODI NA URL /assessment
+            }}
+            menuLevel={eclipseMenu}
+            setMenuLevel={setEclipseMenu}
+            language={language}
+            setLanguage={setLanguage}
+          />
+        } />
 
-        {/* Ostale stranice iz Eclipse menija */}
+        {/* 2. LANDING PAGE (Sada ima svoj URL /assessment) */}
+        <Route path="/assessment" element={
+          <AssessmentLayout>
+            <LandingPage 
+              onStart={(type) => { setAssessmentType(type); navigate('/assessment/form'); }} 
+              language={language} 
+              setLanguage={setLanguage} 
+            />
+          </AssessmentLayout>
+        } />
+
+        {/* 3. FORMA */}
+        <Route path="/assessment/form" element={
+          <AssessmentLayout>
+            <LeadForm 
+              language={language} 
+              errorMsg={errorMsg} 
+              onNext={handleLeadSubmit} 
+              onPrivacyClick={() => navigate('/politika-privatnosti')} 
+              setLanguage={setLanguage} 
+            />
+          </AssessmentLayout>
+        } />
+
+        {/* 4. VERIFIKACIJA */}
+        <Route path="/assessment/verify" element={
+          <AssessmentLayout>
+            <div style={{ padding: '60px', color: '#fff' }}>
+              <h2>{language === 'sr' ? 'Skoro smo stigli.' : 'Almost there.'}</h2>
+              <p>{language === 'sr' ? 'Kliknite na link u mejlu koji smo vam poslali.' : 'Click the link in the email we sent you.'}</p>
+            </div>
+          </AssessmentLayout>
+        } />
+
+        {/* 5. TEST */}
+        <Route path="/assessment/test" element={
+          <AssessmentLayout>
+            <Assessment language={language} type={assessmentType} onFinish={handleFinish} />
+          </AssessmentLayout>
+        } />
+
+        {/* 6. LOADING & REZULTAT */}
+        <Route path="/assessment/loading" element={<LoadingScreen language={language} />} />
+        <Route path="/assessment/results" element={<AssessmentLayout><ResultView report={report} userData={userData} language={language} /></AssessmentLayout>} />
+
+        {/* --- OSTALE RUTE --- */}
+        <Route path="/about" element={<AboutUs onBack={() => navigate('/')} />} />
+        <Route path="/trainers" element={<Trainers onBack={() => navigate('/')} />} />
+        <Route path="/open-trainings" element={<OpenTrainings onNavigate={(path) => navigate(path)} />} />
         <Route path="/success-line" element={<SuccessLine />} />
         <Route path="/value-based-closing" element={<ValueBasedClosing />} />
         <Route path="/perception-based" element={<PerceptionBasedConversation />} />
         <Route path="/personal-responsibility" element={<PersonalResponsibility />} />
-        <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
-
-        {/* GLAVNA RUTA (Logika step-ova) */}
-        <Route path="/" element={
-          <div style={{ width: '100%', minHeight: '100vh' }}>
-            {step === 'PREINTRO' ? (
-              <EclipseIntro
-                onProceed={(choice) => {
-                  if (choice === 'ABOUT') setStep('ABOUT');
-                  else if (choice === 'TRAINERS') setStep('TRAINERS');
-                  else if (choice === 'OPEN_TRAININGS') setStep('OPEN_TRAININGS');
-                  else setStep('INTRO');
-                }}
-                menuLevel={eclipseMenu}
-                setMenuLevel={setEclipseMenu}
-                language={language}
-                setLanguage={setLanguage}
-              />
-            ) : (
-              <div className="main-layout-wrapper">
-                {step === 'ABOUT' && <AboutUs onBack={() => setStep('PREINTRO')} />}
-                {step === 'TRAINERS' && <Trainers onBack={() => setStep('PREINTRO')} />}
-{step === 'OPEN_TRAININGS' && (
-  <OpenTrainings 
-    onNavigate={(path) => { 
-      // Umesto menjanja step-a koji ne postoji, idemo direktno na rutu
-      navigate(path); 
-    }} 
-  />
-)}
-               {showSidebar && (
-  <div className="pd-split-container" style={{ 
-    display: 'flex', 
-    flexDirection: isMobile ? 'column' : 'row', // Na mobilnom ide jedno ispod drugog
-    minHeight: '100vh'
-  }}>
-    <div className="pd-sidebar" style={{ 
-      width: isMobile ? '100%' : '350px', 
-      padding: isMobile ? '60px 20px 20px 20px' : '40px', // Više prostora gore na mob da ne udari u BACK dugme
-      marginTop: isMobile ? '40px' : '70px',
-      height: isMobile ? 'auto' : 'calc(100vh - 140px)', // Na mob visina auto, na desktop skoro puna visina minus padding
-      display: 'flex',
-      flexDirection: isMobile ? 'row' : 'column', // Elementi unutar sidebara idu vodoravno na mob
-      alignItems: 'center',
-      justifyContent: isMobile ? 'space-around' : 'flex-start',
-      borderBottom: isMobile ? '1px solid rgba(255,180,120,0.1)' : 'none',
-      borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)'
-    }}>
-        <img src="/logo.png" alt="Logo" style={{ width: '160px' }} />
-                      <SidebarCompass />
-                      <h1 className="sidebar-title">Ideal Profile Assessment</h1>
-                    </div>
-
-                    <div className="pd-content" style={{ flex: 1 }}>
-                      {step === 'INTRO' && <LandingPage onStart={(type) => { setAssessmentType(type); setStep('START'); }} language={language} setLanguage={setLanguage} />}
-                      {step === 'START' && <LeadForm language={language} errorMsg={errorMsg} onNext={handleLeadSubmit} onPrivacyClick={() => setStep('PRIVACY')} setLanguage={setLanguage} />}
-                      {step === 'PRIVACY' && <PrivacyPolicy language={language} onBack={() => setStep('START')} />}
-
-                      {step === 'WAIT_VERIFICATION' && (
-                        <div style={{ padding: '60px', color: '#fff' }}>
-                          <h2>{language === 'sr' ? 'Skoro smo stigli.' : 'Almost there.'}</h2>
-                          <p>{language === 'sr' ? 'Kliknite na link u mejlu koji smo vam poslali da nastavite sa testom.' : 'Click the link in the email we sent you to continue.'}</p>
-                        </div>
-                      )}
-
-                      {step === 'TEST' && <Assessment language={language} type={assessmentType} onFinish={handleFinish} />}
-                      {step === 'LOADING' && <LoadingScreen language={language} />}
-                      {step === 'RESULT' && <ResultView report={report} userData={userData} language={language} />}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        } />
+        <Route path="/politika-privatnosti" element={<PrivacyPolicy language={language} onBack={() => navigate(-1)} />} />
+        <Route path="/verify" element={<VerifyEmail />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

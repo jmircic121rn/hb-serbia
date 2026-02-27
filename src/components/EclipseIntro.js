@@ -192,10 +192,10 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
         }}
       >
         <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 200, 150, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255,200,150,0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 200, 150, 0.9)' }} />
+        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
         <div style={{
           position: 'relative',
           width: '280px',
@@ -275,14 +275,14 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
               <SaturnPlanet
                 title={t.planets.whoWeAre.title}
                 subtitle={t.planets.whoWeAre.subtitle}
-                glowColor="rgba(255, 180, 120, 0.6)"
+                glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.1}
                 onClick={() => onProceed('ABOUT')}
               />
               <SaturnPlanet
                 title={t.planets.explore.title}
                 subtitle={t.planets.explore.subtitle}
-                glowColor="rgba(255, 180, 120, 0.6)"
+                glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.3}
                 onClick={() => setMenuLevel('assessment')}
               />
@@ -299,21 +299,21 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
               <SaturnPlanet
                 title={t.planets.b2b.title}
                 subtitle={t.planets.b2b.subtitle}
-                glowColor="rgba(255, 180, 120, 0.6)"
+                glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.1}
                 onClick={() => onProceed('INTERNAL')}
               />
               <SaturnPlanet
                 title={t.planets.individual.title}
                 subtitle={t.planets.individual.subtitle}
-                glowColor="rgba(255, 180, 120, 0.6)"
+                glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.2}
                 onClick={() => onProceed('OPEN_TRAININGS')}
               />
               <SaturnPlanet
                 title={t.planets.analysis.title}
                 subtitle={t.planets.analysis.subtitle}
-                glowColor="rgba(255, 180, 120, 0.6)"
+                glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.3}
                 onClick={() => onProceed('INTRO')}
               />

@@ -1,31 +1,79 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+
+const TrainingGallerySidebar = () => {
+  const images = [
+    "/images/t1.jpg", "/images/t2.jpg", "/images/t3.jpg", 
+    "/images/t4.jpg", "/images/t5.jpg", "/images/t6.jpg", "/images/t7.jpg"
+  ];
+
+  return (
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(2, 1fr)', 
+      gridAutoRows: 'minmax(220px, auto)', 
+      gap: '12px',
+      position: 'sticky',
+      top: '120px', // Galerija prati skrol
+      height: 'fit-content'
+    }}>
+      {images.map((src, index) => (
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.02, filter: 'grayscale(0%)' }}
+          style={{
+            gridColumn: index === 0 || index === 5 ? 'span 2' : 'span 1',
+            gridRow: index === 0 ? 'span 2' : 'span 1',
+            backgroundImage: `url(${src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            borderRadius: '2px',
+            border: '1px solid rgba(255,255,255,0.05)',
+            filter: 'grayscale(50%)',
+            transition: '0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+            minHeight: '120px'
+          }}
+        />
+      ))}
+      <div style={{ 
+        gridColumn: 'span 2', 
+        padding: '20px 0', 
+        fontSize: '10px', 
+        letterSpacing: '3px', 
+        color: '#333', 
+        textTransform: 'uppercase' 
+      }}>
+        Hansen Beck Atmosphere // 2024
+      </div>
+    </div>
+  );
+};
 
 // MODIFIKOVANA KARTICA - Popravljen DOM nesting (p -> div)
 const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
   <motion.div
-    whileHover={{ y: -10, boxShadow: '0 0 30px rgba(255,255,255,0.05)' }}
+    whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
     style={{
       background: 'linear-gradient(145deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%)',
       border: '1px solid rgba(255,255,255,0.1)',
-      padding: '30px',
+      padding: '35px',
       borderRadius: '2px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      minHeight: '420px',
+      minHeight: '400px',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      marginBottom: '20px'
     }}
   >
     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent, #fff, transparent)', opacity: 0.2 }} />
 
     <div>
       <h4 style={{ color: '#b3b3b3', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '15px' }}>{duration}</h4>
-      <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '15px', letterSpacing: '-0.5px' }}>{title}</h3>
+      <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '15px', letterSpacing: '-0.5px' }}>{title}</h3>
 
-      {/* OVDE JE PROMENA: p je zamenjen sa div-om */}
-      <div style={{ color: '#999', fontSize: '13px', lineHeight: '1.6', fontWeight: '300' }}>
+      <div style={{ color: '#999', fontSize: '14px', lineHeight: '1.6', fontWeight: '300' }}>
         {description}
       </div>
 
@@ -37,7 +85,7 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
       whileHover={{ scale: 1.05, backgroundColor: '#fff', color: '#000' }}
       style={{
         marginTop: '30px',
-        padding: '12px 20px',
+        padding: '12px 25px',
         background: 'transparent',
         border: '1px solid #fff',
         color: '#fff',
@@ -45,7 +93,8 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
         letterSpacing: '2px',
         textTransform: 'uppercase',
         cursor: 'pointer',
-        transition: 'all 0.3s'
+        transition: 'all 0.3s',
+        width: 'fit-content'
       }}
     >
       Više informacija
@@ -55,8 +104,12 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
 
 const OpenTrainings = ({ onNavigate }) => {
   const commonLocation = "Radisson Collection Hotel, Old Mill Belgrade, Bulevar vojvode Mišića 15";
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
   useEffect(() => {
     window.scrollTo(0, 0);
+    const handleResize = () => setIsMobile(window.innerWidth < 1000);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
   return (
     <motion.div
@@ -64,7 +117,7 @@ const OpenTrainings = ({ onNavigate }) => {
       animate={{ opacity: 1 }}
       style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'sans-serif', paddingBottom: '100px' }}
     >
-      {/* MINI EKLIPSA U UGLU (Kao potpis stila) */}
+      {/* MINI EKLIPSA U UGLU */}
       <div style={{ position: 'fixed', top: '-100px', right: '-100px', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.05) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '100px 20px', position: 'relative', zIndex: 1 }}>
@@ -82,108 +135,66 @@ const OpenTrainings = ({ onNavigate }) => {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            style={{ fontSize: '56px', fontWeight: '900', maxWidth: '800px', lineHeight: '1.1', marginBottom: '40px' }}
+            style={{ fontSize: isMobile ? '38px' : '56px', fontWeight: '900', maxWidth: '800px', lineHeight: '1.1', marginBottom: '40px' }}
           >
-            Izazivamo vas da probate
-i <span style={{ color: '#444' }}>ostanete ravnodušni.</span>
+            Izazivamo vas da probate i <span style={{ color: '#444' }}>ostanete ravnodušni.</span>
           </motion.h1>
           <p style={{ color: '#888', maxWidth: '700px', lineHeight: '1.8', fontSize: '16px' }}>
-Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obrasce, već i transformišemo vaše liderske, prodajne i komunikacione veštine i način razmišljanja, stvarajući nezaobilaznu prednost za današnji uspeh. Od kratkih, intenzivnih formi do celovitih razvojnih programa, ovo je investicija koja se višestruko isplati – donosi dugoročne, merljive rezultate koji oblikuju vašu profesionalnu budućnost.
+            Kroz dinamične sesije i primenljive alate, ne samo da preslažemo ustaljene obrasce, već i transformišemo vaše liderske, prodajne i komunikacione veštine.
           </p>
         </header>
 
-        {/* GRID SA PROGRAMIMA */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '30px',
-          marginBottom: '150px'
+        {/* --- NOVI SPLIT LAYOUT (Slike levo, Kartice desno) --- */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: isMobile ? 'column' : 'row', 
+          gap: '50px',
+          alignItems: 'flex-start'
         }}>
-          {/* NOVI TRENING 1 */}
-          <TrainingCard
-            title="Zatvaranje prodaje zasnovano na vrednosti"
-            duration={
-              <div>
-                <div>14. maj 09:00 - 17:00 </div>
-                <div >23. jun 09:00 - 17:00</div>
-              </div>
-            }
-            description={
-              <>
-                Pretvorite „Skupo je!“ i „Razmisliću!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude i transformišete otpor klijenta.
-                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
-                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
-              </>
-            } onClick={() => onNavigate('/value-based-closing')}
-          />
+          
+          {/* LEVA STRANA: Galerija (40%) */}
+          <div style={{ flex: isMobile ? '1' : '0 0 40%', width: '100%' }}>
+            <TrainingGallerySidebar />
+          </div>
 
-          {/* NOVI TRENING 2 */}
-          <TrainingCard
-            title="Razgovor zasnovan na percepciji"
-            duration={
-              <div>
-                <div>12. maj 09:00 - 17:00</div>
-                <div>21. maj 09:00 - 17:00</div>
-              </div>
-            }
-            description={
-              <>
-                Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta pre nego što se rešenje uopšte pomene.
-                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
-                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 200€ + PDV</div>
-              </>
-            } onClick={() => onNavigate('/perception-based')}
-          />
+          {/* DESNA STRANA: Kartice (60%) */}
+          <div style={{ flex: '1', width: '100%' }}>
+            <TrainingCard
+              title="Zatvaranje prodaje zasnovano na vrednosti"
+              duration={<div><div>14. maj 09:00 - 17:00 </div><br/><div>23. jun 09:00 - 17:00</div></div>}
+              description={<>Pretvorite „Skupo je!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              onClick={() => onNavigate('/value-based-closing')}
+            />
 
-          {/* NOVI TRENING 3 */}
-          <TrainingCard
-            title="Vrednost lične odgovornosti"
-            duration={
-              <div>
-                <div>19. maj 09:00 - 13:00 / 14:00 - 18:00</div>
-                <div>25. jun 09:00 - 13:00 / 14:00 - 18:00</div>
-              </div>
-            }
-            description={
-              <>
-                Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke i restruktuirajte način na koji posmatrate sopstveni uticaj.
-                <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
-                <div style={{ marginTop: '5px', color: '#fff', fontWeight: '600' }}>Investicija: 100€ + PDV</div>
-              </>
-            } onClick={() => onNavigate('/personal-responsibility')}
-          />
+            <TrainingCard
+              title="Razgovor zasnovan na percepciji"
+              duration={<div><div>12. maj 09:00 - 17:00</div><br/><div>21. maj 09:00 - 17:00</div></div>}
+              description={<>Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              onClick={() => onNavigate('/perception-based')}
+            />
 
-          <TrainingCard
-            title="Moć uticaja: Tanka linija uspeha"
-            duration="Specijalni Masterclass"
-            description="Od dobrog do nezaboravnog javnog nastupa. Zamislite da vaš glas pokreće promene."
-            mentors="Vesna Damjanić, Goran Bogdan, Nikola Mirčić"
-            onClick={() => onNavigate('/success-line')}
-          />
-          <TrainingCard
-            title="Inspirativno Liderstvo 1.0"
-            duration="4 meseca / 6 dana"
-            description="Program dizajniran za menadžere koji žele da unaprede liderske veštine i osiguraju trajne rezultate."
-            onClick={() => alert("Stranica u pripremi")}
-          />
-          <TrainingCard
-            title="Izvrsnost u prodaji 1.0"
-            duration="4 meseca"
-            description="Usavršite prodajnu komunikaciju i steknite samopouzdanje kojim ćete obezbediti bolje rezultate."
-            onClick={() => alert("Stranica u pripremi")}
-          />
-          <TrainingCard
-            title="Uverljiva prezentacija 1.0"
-            duration="2 meseca"
-            description="Vaš uticaj, vaša moć. Naučite kako da ostvarite snažan utisak i inspirišete na akciju."
-            onClick={() => alert("Stranica u pripremi")}
-          />
-          <TrainingCard
-            title="Umetnost pregovaranja 1.0"
-            duration="2 meseca"
-            description="Strategije efektivne kolaboracije sa ciljem postizanja vrednosnog dogovora."
-            onClick={() => alert("Stranica u pripremi")}
-          />
+            <TrainingCard
+              title="Vrednost lične odgovornosti"
+              duration={<div><div>19. maj 09:00 - 13:00 / 14:00 - 18:00</div><br/><div>25. jun 09:00 - 13:00 / 14:00 - 18:00</div></div>}
+              description={<>Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              onClick={() => onNavigate('/personal-responsibility')}
+            />
+
+            <TrainingCard
+              title="Moć uticaja: Tanka linija uspeha"
+              duration="Specijalni Masterclass"
+              description="Od dobrog do nezaboravnog javnog nastupa. Zamislite da vaš glas pokreće promene."
+              mentors="Vesna Damjanić, Goran Bogdan, Nikola Mirčić"
+              onClick={() => onNavigate('/success-line')}
+            />
+
+            <TrainingCard
+              title="Inspirativno Liderstvo 1.0"
+              duration="4 meseca / 6 dana"
+              description="Program dizajniran za menadžere koji žele da unaprede liderske veštine i osiguraju trajne rezultate."
+              onClick={() => alert("Stranica u pripremi")}
+            />
+          </div>
         </div>
 
         {/* TESTIMONIALS SEKCIJA */}

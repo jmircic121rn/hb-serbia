@@ -152,7 +152,6 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
           <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <section style={{ marginBottom: '80px', marginTop: '40px', maxWidth: '1000px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '30px' }}>
-                <Compass size={32} color="#ffb478" /> {/* Sačuvana boja */}
                 <h2 style={{ fontSize: '32px', fontWeight: '900' }}>{t.compass.title}</h2>
               </div>
               
@@ -187,14 +186,16 @@ const LandingPage = ({ onStart, language, setLanguage }) => {
                   title={t.leader.title} 
                   desc={t.leader.subtitle} 
                   onClick={() => setView('LEADER')} 
-                  icon={<Target color="#ffb478" size={32} />}  /* Sačuvana boja */
+                  icon={<img src="/leader.png" alt="Logo" style={{ width: '120px' }} />
+}  /* Sačuvana boja */
                   t={t}
                 />
                 <RoleCard 
                   title={t.employee.title} 
                   desc={t.employee.subtitle} 
                   onClick={() => setView('EMPLOYEE')} 
-                  icon={<Users color="#ffb478" size={32} />} /* Sačuvana boja */
+                  icon={ <img src="/zaposleni.png" alt="Logo" style={{ width: '120px' }} />
+} /* Sačuvana boja */
                   t={t}
                 />
               </div>

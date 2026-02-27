@@ -18,7 +18,7 @@ export const translations = {
                 explore: { title: "Destinacija: Izvrsnost", subtitle: "Vaše putovanje" },
                 b2b: { title: "TIMSKI RAZVOJ", subtitle: "Interni treninzi za kompanije" },
                 individual: { title: "Individualni razvoj", subtitle: "Treninzi otvorenog tipa" },
-                analysis: { title: "Uradi samoprocenu sposobnosti", subtitle: "Tvoj profesionalni profil" }
+                analysis: { title: "Uradi samoprocenu sposobnosti", subtitle: "Moj profesionalni profil" }
             }
         },
         form: {
@@ -173,7 +173,7 @@ export const translations = {
                 explore: { title: "Destination: Excellence", subtitle: "Your journey" },
                 b2b: { title: "Team Development", subtitle: "Internal corporate trainings" },
                 individual: { title: "Individual Development", subtitle: "Open enrollment trainings" },
-                analysis: { title: "Take the Self-Assessment", subtitle: "Your Professional Profile" }
+                analysis: { title: "Take the Self-Assessment", subtitle: "My Professional Profile" }
             }
         },
         form: {
