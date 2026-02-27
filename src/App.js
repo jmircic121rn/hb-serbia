@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
-import { motion } from 'framer-motion';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 
 // Importi komponenti
@@ -21,35 +20,6 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import VerifyEmail from './components/VerifyEmail';
 import { translations } from './data/translations';
 
-const SidebarCompass = () => {
-  const [rotation, setRotation] = useState(0);
-  useEffect(() => {
-    const driftInterval = setInterval(() => {
-      setRotation(prev => prev + (Math.random() - 0.5) * 2);
-    }, 2000);
-    const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 15;
-      setRotation(x);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(driftInterval);
-    };
-  }, []);
-
-  return (
-    <div style={{ position: 'relative', width: '100px', height: '100px', margin: '30px 0', opacity: 0.8 }}>
-      <svg viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,180,120,0.15)" strokeWidth="0.5" />
-        <motion.g animate={{ rotate: rotation }} style={{ originX: '50px', originY: '50px' }}>
-          <path d="M50 15 L54 50 L50 50 L46 50 Z" fill="#ffffff" />
-          <path d="M50 85 L54 50 L50 50 L46 50 Z" fill="rgba(255,255,255,0.2)" />
-        </motion.g>
-      </svg>
-    </div>
-  );
-};
 
 function App() {
   const navigate = useNavigate();

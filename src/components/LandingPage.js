@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Compass, Target, Users } from 'lucide-react';
 import { translations } from '../data/translations';
 
 // POMOĆNA KOMPONENTA ZA KARTICE NA POČETNOJ
