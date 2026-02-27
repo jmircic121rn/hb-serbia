@@ -57,12 +57,27 @@ const PersonalResponsibility = () => {
         fontSize: '14px',
         outline: 'none',
         transition: 'border-color 0.3s',
-        appearance: 'none',
-        cursor: 'pointer'
+        width: '100%',
+        boxSizing: 'border-box'
     };
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+            
+            <style>
+                {`
+                    select option {
+                        background-color: #111 !important;
+                        color: #fff !important;
+                    }
+                    select option:disabled {
+                        color: #666 !important;
+                    }
+                    input::placeholder, textarea::placeholder {
+                        color: #555;
+                    }
+                `}
+            </style>
             
             {/* HERO SEKCIJA - EKLIPSA SAČUVANA */}
             <section style={{ 
