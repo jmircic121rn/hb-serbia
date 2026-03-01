@@ -20,7 +20,6 @@ const SuccessLine = () => {
                 color: '#fff', 
                 minHeight: '100vh', 
                 paddingBottom: '100px', 
-                fontFamily: 'Inter, sans-serif', 
                 overflow: 'hidden',
                 position: 'relative'
             }}

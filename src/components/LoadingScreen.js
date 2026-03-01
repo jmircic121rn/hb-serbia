@@ -30,7 +30,6 @@ const LoadingScreen = () => {
       justifyContent: 'center',
       backgroundColor: '#050505',
       color: '#fff',
-      fontFamily: 'Inter, sans-serif',
       position: 'fixed', // Koristimo fixed da prekrije sve komponente tokom obrade
       top: 0,
       left: 0,

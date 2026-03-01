@@ -1,3 +1,61 @@
+/* REGISTRACIJA PT SERIF FONTOVA (Za naslove i akcente) */
+@font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PT_Serif-Web-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PT_Serif-Web-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PT_Serif-Web-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('./assets/fonts/PT_Serif-Web-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* REGISTRACIJA PT SANS FONTOVA (Za body tekst) */
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./assets/fonts/PT_Sans-Web-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./assets/fonts/PT_Sans-Web-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./assets/fonts/PT_Sans-Web-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./assets/fonts/PT_Sans-Web-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --hb-black: #000000;
   --hb-white: #ffffff;

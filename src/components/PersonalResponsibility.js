@@ -62,7 +62,7 @@ const PersonalResponsibility = () => {
     };
 
     return (
-        <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
             
             <style>
                 {`

@@ -152,7 +152,7 @@ const InternalTrainings = () => {
 );
 
     return (
-        <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
 
             {/* LANGUAGE SWITCHER */}
             <div style={{ position: 'fixed', top: '30px', right: '40px', zIndex: 99999, display: 'flex', alignItems: 'center', gap: '15px', color: '#fff', fontSize: '12px', letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)' }}>

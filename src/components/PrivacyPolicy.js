@@ -42,7 +42,6 @@ const PrivacyPolicy = ({ language: initialLanguage = 'sr' }) => {
       color: '#fff', 
       minHeight: '100vh', 
       padding: '120px 10% 60px 10%',
-      fontFamily: 'Inter, sans-serif',
       lineHeight: '1.6',
       position: 'relative'
     }}>

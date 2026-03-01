@@ -106,7 +106,7 @@ const OpenTrainings = ({ onNavigate }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'sans-serif', paddingBottom: '100px' }}
+      style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', paddingBottom: '100px' }}
     >
       {/* MINI EKLIPSA U UGLU */}
       <div style={{ position: 'fixed', top: '-100px', right: '-100px', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.05) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
