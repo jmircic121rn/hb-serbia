@@ -70,9 +70,9 @@ const InternalTrainings = () => {
             p1: "Sledeća velika pobeda vaše kompanije nije negde tamo. Ona je unutra. Ona živi u neiskorišćenom potencijalu vaših ljudi — u načinu na koji komuniciraju, sarađuju i vode jedni druge kroz kompleksnost. U svetu koji zahteva neprestanu evoluciju, trajan uspeh retko je pitanje same strategije. To je pitanje ljudi: kako se ponašaju, kako se povezuju i kako rastu.",
             p2: "Čuli ste to već ranije — beskrajna obećanja o 'razvoju ljudi'. Programi koji zvuče transformaciono, ali donose malo više od dana provedenog van kancelarije. Jaz između retorike i stvarne promene je mesto gde većina organizacija tiho gubi tlo pod nogama.",
             p3: "Verujemo da ne mora biti tako. Verujemo da kada probudite heroja u svakom pojedincu, organizacija ide napred — merljivo, održivo i pod sopstvenim uslovima.",
-            section2Title: "Mi smo Ledeni Piloti.",
+            section2Title: "Mi smo Ice Pilots.",
             p4: "Poput Hansena i Becka — dvojice Ledenih Pilota koji su vodili Amundsenove brodove kroz antarktički led kako bi drugi mogli da osvoje Južni pol — naša uloga nije da budemo u centru pažnje. Naša uloga je da osiguramo da vi dostignete svoju.",
-            p5: "Nazivamo sebe Ledenim Pilotima jer je to upravo ono što radimo: navigiramo zajedno sa vašim ljudima — ne kao spoljni posmatrači, već kao integrisani deo vašeg tima — kombinujući strateško predviđanje sa pragmatizmom na terenu. Mi vam ne uručujemo mapu uz lepe želje. Ostajemo dok vaši ljudi ne postanu heroji sopstvene priče.",
+            p5: "Nazivamo sebe Ice Pilots jer je to upravo ono što radimo: navigiramo zajedno sa vašim ljudima — ne kao spoljni posmatrači, već kao integrisani deo vašeg tima — kombinujući strateško predviđanje sa pragmatizmom na terenu. Mi vam ne uručujemo mapu uz lepe želje. Ostajemo dok vaši ljudi ne postanu heroji sopstvene priče.",
             p6: "A da biste navigirali kroz led, potreban vam je pravi instrument. Zato vam u ruke stavljamo HB Compass. Naš vlasnički model mapira liderske i komunikacione kompetencije koje definišu velike organizacije u 21. veku — i to nije nešto što samo primenjujemo na vama. To je alat koji delimo sa vama, onaj koji ostaje u vašoj organizaciji dugo nakon što se naše zajedničko putovanje završi.",
             section3Title: "Četiri načina saradnje sa nama.",
             p7: "Led svake organizacije je drugačiji. Zato nudimo četiri različita nivoa angažovanja — svaki dizajniran da vas sretne tačno tamo gde se nalazite i odvede vas precizno tamo gde treba da stignete.",
@@ -122,31 +122,34 @@ const InternalTrainings = () => {
     const t = content[language];
 
     // Mala komponenta za prefinjenu sliku (akcenat)
-    const ImageAccent = ({ src, float = 'none', width = '300px', margin = '40px auto' }) => (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 0.7, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
+    const ImageAccent = ({ src, float = 'none', width = '300px', margin = '0' }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }} // Povećao sam opacity na 1 za bolju vidljivost
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        style={{ 
+            width: width, 
+            float: float, 
+            margin: margin,
+            clear: float === 'none' ? 'both' : 'none' 
+        }}
+    >
+        <img 
+            src={src} 
+            alt="" 
             style={{ 
-                width: width, 
-                float: float, 
-                margin: margin,
-                clear: 'both' 
-            }}
-        >
-            <img 
-                src={src} 
-                alt="" 
-                style={{ 
-                    width: '100%', 
-                    height: 'auto', 
-                    filter: 'grayscale(100%) contrast(1.1)',
-                    borderRadius: '2px'
-                }} 
-            />
-        </motion.div>
-    );
+                width: '100%', 
+                height: 'auto', 
+                // FILTERI ZA BOLJI KVALITET:
+                filter: 'grayscale(90%) brightness(1.1) contrast(1.05)',
+                imageRendering: 'crisp-edges', // Pomaže kod oštrine na nekim browserima
+                borderRadius: '2px',
+                display: 'block'
+            }} 
+        />
+    </motion.div>
+);
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
@@ -186,7 +189,6 @@ const InternalTrainings = () => {
                         <ImageAccent src="/images/1.png" float="right" width="220px" margin="0 0 30px 40px" />
                         <p style={{ fontSize: '20px', lineHeight: '1.8', marginBottom: '40px' }}>{t.p1}</p>
                         <p style={{ fontSize: '18px', color: '#888', lineHeight: '1.8', marginBottom: '40px' }}>{t.p2}</p>
-                        <ImageAccent src="/images/2.png" float="left" width="250px" margin="0 40px 30px 0" />
                         <p style={{ fontSize: '22px', fontWeight: '600', borderLeft: '3px solid rgba(255, 255, 255, 0.4)', paddingLeft: '30px' }}>{t.p3}</p>
                     </div>
 
@@ -194,8 +196,9 @@ const InternalTrainings = () => {
                     <div style={{ marginBottom: '100px', clear: 'both' }}>
                         <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '40px' }}>{t.section2Title}</h2>
                         <p style={{ fontSize: '18px', color: '#aaa', lineHeight: '1.8', marginBottom: '30px' }}>{t.p4}</p>
-                        <ImageAccent src="/images/3.png" width="400px" margin="60px auto" />
                         <p style={{ fontSize: '18px', color: '#aaa', lineHeight: '1.8', marginBottom: '30px' }}>{t.p5}</p>
+                        <ImageAccent src="/images/3.png" width="400px" margin="60px auto" />
+
                         <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)', padding: '40px', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px' }}>
                             <ImageAccent src="/images/4.png" float="right" width="180px" margin="0 0 10px 20px" />
                             <p style={{ fontSize: '18px', lineHeight: '1.8' }}>{t.p6}</p>
@@ -224,10 +227,10 @@ const InternalTrainings = () => {
                                 }}
                             >
                                 {/* Slike 5, 6, 7, 8 kao mali "peek" akcenti unutar ili pored kartica */}
-                                {idx === 0 && <ImageAccent src="/images/5.png" float="right" width="150px" margin="0 0 20px 20px" />}
-                                {idx === 1 && <ImageAccent src="/images/6.png" float="right" width="150px" margin="0 0 20px 20px" />}
-                                {idx === 2 && <ImageAccent src="/images/7.png" float="right" width="150px" margin="0 0 20px 20px" />}
-                                {idx === 3 && <ImageAccent src="/images/8.png" float="right" width="150px" margin="0 0 20px 20px" />}
+                                {idx === 0 && <ImageAccent src="/images/5.png" float="right" width="200px" margin="0 0 20px 20px" />}
+                                {idx === 1 && <ImageAccent src="/images/6.png" float="right" width="200px" margin="0 0 20px 20px" />}
+                                {idx === 2 && <ImageAccent src="/images/7.png" float="right" width="200px" margin="0 0 20px 20px" />}
+                                {idx === 3 && <ImageAccent src="/images/8.png" float="right" width="200px" margin="0 0 20px 20px" />}
 
                                 <div style={{ fontSize: '12px', color: 'rgb(255, 255, 255)', fontWeight: 'bold', marginBottom: '15px', letterSpacing: '2px' }}>
                                     LEVEL 0{level.id} — {level.dur}
