@@ -173,7 +173,7 @@ export const translations = {
                 explore: { title: "Destination: Excellence", subtitle: "Your journey" },
                 b2b: { title: "Team Development", subtitle: "Internal corporate trainings" },
                 individual: { title: "Individual Development", subtitle: "Open enrollment trainings" },
-                analysis: { title: "Take the Self-Assessment", subtitle: "My Professional Profile" }
+                analysis: { title: "UNLOCK YOUR COMPASS", subtitle: "START THE EXPEDITION" }
             }
         },
         form: {
