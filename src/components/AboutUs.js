@@ -215,6 +215,46 @@ const AboutUs = ({ onBack }) => {
                         </div>
                     </div>
                 </section>
+
+                {/* VIDEO SEKCIJA NA KRAJU */}
+        <section style={{ padding: '100px 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            style={{ width: '100%', position: 'relative', borderRadius: '4px', overflow: 'hidden', backgroundColor: '#050505' }}
+          >
+            <video 
+              controls 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              style={{ 
+                width: '100%', 
+                display: 'block',
+                filter: 'grayscale(30%) contrast(1.1)', // Blagi filter da se uklopi u estetiku sajta
+                boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+              }}
+            >
+              <source src="/Hansen-Beck-Brand-Story.mp4" type="video/mp4" />
+              Vaš pregledač ne podržava video tag.
+            </video>
+            
+            {/* Opcioni overlay tekst preko videa ako želiš */}
+            <div style={{ marginTop: '20px', textAlign: 'right' }}>
+              <p style={{ 
+                fontFamily: "'PT Serif', serif", 
+                fontSize: '12px', 
+                letterSpacing: '3px', 
+                color: '#666', 
+                textTransform: 'uppercase' 
+              }}>
+                {language === 'sr' ? 'Pogledajte našu priču' : 'Watch our story'}
+              </p>
+            </div>
+          </motion.div>
+        </section>
             </div>
         </div>
     );
