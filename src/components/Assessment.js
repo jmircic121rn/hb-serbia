@@ -2,9 +2,10 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { leaderQuestions40 } from '../data/leaderQuestions40';
 
-const Assessment = ({ onFinish, onQuestionChange }) => {
-  // Jezik inicijalizujemo na osnovu onoga što je sačuvano u LeadFormi
+const Assessment = ({ onFinish, onQuestionChange, language: propsLanguage }) => {
+  // 1. Logika za jezik: prioritet ima prop, pa localStorage, pa default 'sr'
   const [language] = useState(() => {
+    if (propsLanguage) return propsLanguage === 'en' ? 'eng' : 'sr';
     const savedLang = localStorage.getItem('appLanguage');
     return savedLang === 'en' ? 'eng' : 'sr';
   });
@@ -12,61 +13,67 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
 
-  // flatQuestions sada direktno mapira podatke iz fiksne 40Qs baze
+  // 2. Mapiranje pitanja iz leaderQuestions40
   const flatQuestions = useMemo(() => {
     const langData = leaderQuestions40[language];
     if (!langData) return [];
-    // Spajamo sve stubove (pillars) u jedan niz
+    // Spajamo sve stubove (pillars) u jedan niz za linearni progres
     return Object.values(langData).flat();
   }, [language]);
 
-  
-
+  // 3. Provera verifikacije pri mount-u
   useEffect(() => {
     const verifiedEmail = localStorage.getItem('userEmail');
-    // Ako nema emaila u storage-u, proveri da li je bar u memoriji aplikacije
-    // Ako baš ničega nema, tek onda vrati na početak
-    if (!verifiedEmail && !localStorage.getItem('isVerified')) {
-      console.log("No verification found, redirecting...");
-      // Privremeno zakomentariši donju liniju da testiraš ako sumnjaš da je bag
-      // window.location.href = '/'; 
+    const isVerified = localStorage.getItem('isVerified');
+    
+    if (!verifiedEmail && !isVerified) {
+      console.warn("User not verified, redirecting to landing...");
+      // window.location.href = '/assessment'; 
     }
-}, []);
+  }, []);
 
+  // 4. Scroll na vrh pri svakoj promeni pitanja
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentIndex]);
 
-  if (!flatQuestions.length) return null;
+  if (!flatQuestions || flatQuestions.length === 0) {
+    return (
+      <div style={{ color: '#fff', padding: '100px', textAlign: 'center' }}>
+        Loading assessment questions...
+      </div>
+    );
+  }
 
   const currentQ = flatQuestions[currentIndex];
   const progress = ((currentIndex + 1) / flatQuestions.length) * 100;
 
   const handleAnswer = (score) => {
-  // Pronalazimo tekst opcije na osnovu score-a (opciono, ali dobro za AI)
-  const selectedOptionText = currentQ.options.find(o => o.score === score)?.text || "";
+    // Pronalazimo tekst opcije za čuvanje u bazi (korisno za AI analizu kasnije)
+    const selectedOptionText = currentQ.options.find(o => o.score === score)?.text || "";
 
-  const newAnswers = [...answers, { 
-    id: currentQ.id, 
-    score: score,
-    facet: currentQ.facet,      // Ključno za AI mapping
-    pillar: currentQ.pillar,    // Ključno za AI mapping
-    type: currentQ.type,
-    questionText: currentQ.text,
-    selectedText: selectedOptionText
-  }];
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+    const newAnswer = { 
+      id: currentQ.id, 
+      score: score,
+      facet: currentQ.facet,
+      pillar: currentQ.pillar,
+      type: currentQ.type,
+      questionText: currentQ.text,
+      selectedText: selectedOptionText
+    };
 
-  if (currentIndex < flatQuestions.length - 1) {
-    setAnswers(newAnswers);
-    const nextIndex = currentIndex + 1;
-    setCurrentIndex(nextIndex);
-    if (onQuestionChange) onQuestionChange(nextIndex);
-  } else {
-    onFinish(newAnswers);
-  }
-};
+    const updatedAnswers = [...answers, newAnswer];
+
+    if (currentIndex < flatQuestions.length - 1) {
+      setAnswers(updatedAnswers);
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      if (onQuestionChange) onQuestionChange(nextIndex);
+    } else {
+      // Slanje svih odgovora na finalnu obradu
+      onFinish(updatedAnswers);
+    }
+  };
 
   return (
     <div className="assessment-wrapper" style={{
@@ -79,54 +86,58 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
       overflowX: 'hidden'
     }}>
       
-      {/* HEADER: Uklonjeni selektori za Qs i Lang */}
-      <div style={{ padding: '40px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexShrink: 0 }}>
-        <div>
-          <span style={{ color: '#ffffff', fontSize: '10px', letterSpacing: '2px', fontWeight: '700', textTransform: 'uppercase' }}>
-            {currentQ.pillar}
-          </span>
-          <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '11px', marginTop: '6px' }}>
-             {currentQ.facet}
-          </div>
+      
+        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: '700', letterSpacing: '1px' }}>
+          {language === 'eng' ? 'HB COMPASS ASSESSMENT' : 'HB COMPASS PROCENA'}
         </div>
-        
-        {/* Status indicator umesto dugmića */}
-        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: '700' }}>
-          {language === 'eng' ? 'LEADERSHIP ASSESSMENT' : 'PROCENA LEADERSHIP-A'}
-        </div>
-      </div>
 
+      {/* QUESTION BODY */}
       <div style={{ 
         maxWidth: '850px', 
         margin: '40px auto 20px auto', 
         width: '100%',
+        flex: 1
       }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={`${currentIndex}-${language}`}
-            initial={{ opacity: 0, x: 15 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -15 }}
+            exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <h2 style={{ fontSize: 'clamp(20px, 3.5vw, 28px)', fontWeight: '400', lineHeight: '1.4', marginBottom: '45px', color: '#f0f0f0' }}>
-              {currentQ.text.includes(':') 
+            {/* Tekst pitanja - uklanja prefikse ako postoje (npr "Scenario 1:") */}
+            <h2 style={{ 
+              fontSize: 'clamp(20px, 3.5vw, 26px)', 
+              fontWeight: '400', 
+              lineHeight: '1.5', 
+              marginBottom: '50px', 
+              color: '#f0f0f0' 
+            }}>
+              {currentQ.text.includes(':') && currentQ.text.length > 50
                 ? currentQ.text.split(':').slice(1).join(':').trim() 
                 : currentQ.text}
             </h2>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {/* OPTIONS */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {currentQ.options.map((option, idx) => (
                 <motion.button
                   key={idx}
-                  whileHover={{ x: 8, backgroundColor: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255, 255, 255, 0.4)' }}
+                  whileHover={{ x: 8, backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255, 255, 255, 0.3)' }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => handleAnswer(option.score)}
                   style={{
-                    padding: '22px 28px', textAlign: 'left', background: 'rgba(255,255,255,0.015)',
-                    border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px',
-                    color: '#d1d1d1', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                    fontSize: '15.5px', lineHeight: '1.5'
+                    padding: '24px 30px', 
+                    textAlign: 'left', 
+                    background: 'rgba(255,255,255,0.01)',
+                    border: '1px solid rgba(255,255,255,0.08)', 
+                    borderRadius: '12px',
+                    color: '#d1d1d1', 
+                    cursor: 'pointer', 
+                    transition: 'all 0.2s ease',
+                    fontSize: '15.5px', 
+                    lineHeight: '1.6'
                   }}
                 >
                   {option.text}
@@ -137,39 +148,39 @@ const Assessment = ({ onFinish, onQuestionChange }) => {
         </AnimatePresence>
       </div>
 
+      {/* PROGRESS BAR FOOTER */}
       <div style={{ 
-        padding: '20px 0 60px 0',
+        padding: '40px 0 60px 0',
         width: '100%',
         maxWidth: '850px',
-        margin: '0 auto',
-        boxSizing: 'border-box'
+        margin: '0 auto'
       }}>
         <div style={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
           marginBottom: '12px', 
-          fontSize: '10px', 
+          fontSize: '11px', 
           color: 'rgba(255,255,255,0.2)', 
-          letterSpacing: '1px' 
+          fontWeight: 'bold'
         }}>
            <span>{language === 'eng' ? 'PROGRESS' : 'NAPREDAK'}: {currentIndex + 1} / {flatQuestions.length}</span>
            <span>{Math.round(progress)}%</span>
         </div>
         <div style={{ 
           width: '100%', 
-          height: '2px', 
+          height: '3px', 
           background: 'rgba(255,255,255,0.05)', 
-          borderRadius: '2px', 
+          borderRadius: '4px', 
           overflow: 'hidden' 
         }}>
           <motion.div
             initial={false}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5 }}
             style={{ 
               height: '100%', 
               background: '#ffb478',
-              boxShadow: '0 0 10px rgba(255,180,120,0.3)' 
+              boxShadow: '0 0 15px rgba(255,180,120,0.4)' 
             }}
           />
         </div>

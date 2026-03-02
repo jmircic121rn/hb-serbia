@@ -20,6 +20,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import VerifyEmail from './components/VerifyEmail';
 import { translations } from './data/translations';
 import InternalTrainings from './components/InternalTrainings';
+import AssessmentIntro from './components/AssessmentIntro';
 
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
             localStorage.setItem('userEmail', userData.email);
             localStorage.setItem('isVerified', 'true');
             clearInterval(checkIntervalRef.current);
-            navigate('/assessment/test');
+            navigate('/assessment/intro');
           }
         } catch (err) { console.error("Polling error:", err); }
       }, 3000);
@@ -245,6 +246,15 @@ function App() {
             </div>
           </AssessmentLayout>
         } />
+
+        <Route path="/assessment/intro" element={
+    <AssessmentLayout>
+      <AssessmentIntro
+        language={language} 
+        onStart={() => navigate('/assessment/test')} 
+      />
+    </AssessmentLayout>
+  } />
 
         {/* 5. TEST */}
         <Route path="/assessment/test" element={

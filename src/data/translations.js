@@ -21,6 +21,31 @@ export const translations = {
                 analysis: { title: "Uradi samoprocenu sposobnosti", subtitle: "Moj profesionalni profil" }
             }
         },
+        intro: {
+      title: "HB Compass — Vodič za pripremu",
+      subtitle: "Za čitanje ove stranice biće vam potrebno oko 3 minuta. Molimo pročitajte pre početka.",
+      whatTitle: "Šta ćete raditi",
+      whatText: "Čitaćete seriju realističnih scenarija sa radnog mesta — situacija sa kojima se ljudi u određenoj ulozi redovno suočavaju. Za svaki od njih, izabraćete opis koji najbolje odgovara načinu na koji ZAISTA reagujete. Ne postoje tačni ili netačni odgovori. Tri opcije u svakom pitanju predstavljaju različite pristupe istoj situaciji — ne različite nivoe moralne ili profesionalne vrednosti.",
+      importantTitle: "Najvažnija stvar",
+      importantText: "Odgovarajte na osnovu toga kako ZAISTA radite — ne kako mislite da bi trebalo. Primamljivo je izabrati najimpresivniju opciju na svakom pitanju. Molimo vas da to ne radite — iz praktičnog razloga. Svaki scenario je uparen sa dodatnim pitanjem koje pita šta se zapravo dogodilo kao rezultat vašeg pristupa. Ako vaš prvi odgovor opisuje ponašanje koje tipično ne pokazujete, drugo pitanje će otkriti taj jaz. Osvojićete manje poena nego da ste bili iskreni od početka. Iskrena 3 je korisnija od naduvane 5-ice.",
+      optionsTitle: "Šta znače tri opcije",
+      optionA: "Opcija A — Profesionalac u ranijoj fazi razvoja u ovoj oblasti. Nije „loš“ odgovor. Legitiman pristup koji koriste mnogi sposobni ljudi, posebno u oblastima koje još uvek grade.",
+      optionB: "Opcija B — Stabilan, kompetentan profesionalac koji radi dosledno i samostalno. Za većinu ljudi u većini oblasti, ovo je realističan i tačan opis.",
+      optionC: "Opcija C — Visoko kvalifikovan profesionalac koji nastupa izvrsno i počinje da podiže druge oko sebe. Izaberite ovo samo ako to zaista odražava vaš tipičan pristup — ne vaš najbolji dan.",
+      howTitle: "Kako čitati svako pitanje",
+      howText: "Zapitajte se: „Tokom tipične nedelje, u ovakvim situacijama — koji opis najtačnije opisuje šta ja zapravo radim?“ Razmišljajte o obrascima, ne o izuzecima. Vaša najimpresivnija interakcija nije vaša tipična interakcija.",
+      rememberTitle: "5 stvari koje treba zapamtiti",
+      rememberItems: [
+        "Razmišljajte o obrascima, ne o izuzecima — birajte šta je tipično, ne izvanredno",
+        "Opcije A i B su respektabilne — opisuju prave profesionalce, ne neuspehe",
+        "Varijacije su zdrave — profil sa A, B i C je iskreniji i korisniji od svih C-ova",
+        "Ako se dvoumite — izaberite nižu opciju; naknadno pitanje vam daje prostor da pokažete nijanse",
+        "Možete pauzirati i vratiti se — vaš napredak se čuva automatski; koristite isti link da nastavite"
+      ],
+      readyTitle: "Kada budete spremni",
+      readyText: "Pronađite mirno mesto. Odvojite oko 20 minuta bez prekida. Vaša iskrena refleksija je najvrednija stvar koju donosite u ovu procenu — vrednija od bilo kog pojedinačnog rezultata.",
+      startBtn: "ZAPOČNI ASSESSMENT"
+    },
         form: {
             alreadyDone: "Iskoristili ste jedan free report. Javi nam se mejlom za dalje korake.",
       serverError: "Serverska greška. Pokušajte kasnije.",
@@ -176,6 +201,31 @@ export const translations = {
                 analysis: { title: "UNLOCK YOUR COMPASS", subtitle: "START THE EXPEDITION" }
             }
         },
+        intro: {
+      title: "HB Compass Self-Assessment — Preparation Guide",
+      subtitle: "This page will take you about 3 minutes to read. Please read it before you begin.",
+      whatTitle: "What you are about to do",
+      whatText: "You are going to read a series of realistic workplace scenarios — situations that people in the particular role regularly face. For each one, you will choose the description that best fits how you actually respond. There are no right or wrong answers. The three options in each question represent different approaches to the same situation — not different levels of moral worth or professional value.",
+      importantTitle: "The single most important thing",
+      importantText: "Answer based on how you actually work — not how you think you should work. It is tempting to choose the most impressive-sounding option on every question. We'd ask you not to — for a practical reason. Each scenario is paired with a follow-up question that asks what actually happened as a result of your approach. If your first answer describes behaviour you don't typically exhibit, the follow-up will reveal the gap. You'll score lower than if you'd been honest from the start. An honest 3 is more useful than an inflated 5.",
+      optionsTitle: "What the three options mean",
+      optionA: "Option A — A professional at an earlier stage of development in this area. Not the \"bad\" answer. A legitimate approach that many capable people use, especially in areas they're still building.",
+      optionB: "Option B — A solid, competent professional performing consistently and independently. For most people in most areas, this is a realistic and accurate description.",
+      optionC: "Option C — A highly skilled professional who performs excellently and begins to elevate others around them. Select this only if it genuinely reflects your typical approach — not your best day.",
+      howTitle: "How to read each question",
+      howText: "Ask yourself: \"Across a typical week, in situations like this — which description most accurately captures what I actually do?\" Think about patterns, not highlights. Your most impressive interaction is not your typical one.",
+      rememberTitle: "Five things to remember while answering",
+      rememberItems: [
+        "Think patterns, not highlights — choose what's typical, not exceptional",
+        "Both options A and B are respectable — they describe real professionals, not failures",
+        "Variation is healthy — a profile with some A's, B's and C's is more honest and more useful than wall-to-wall C's",
+        "If you're between two options — choose the lower one; the follow-up question gives you room to show nuance",
+        "You can pause and return — your progress saves automatically; use the same link to continue"
+      ],
+      readyTitle: "When you're ready",
+      readyText: "Find a quiet place. Set aside 20 minutes without interruptions. Your honest reflection is the most valuable thing you can bring to this assessment — more valuable than any particular score.",
+      startBtn: "BEGIN ASSESSMENT"
+    },
         form: {
             alreadyDone: "You have already used your free report. Please contact us via email for further steps.",
       serverError: "Server error. Please try again later.",
