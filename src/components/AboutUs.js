@@ -52,7 +52,13 @@ const AboutUs = ({ onBack }) => {
           ],
           specialties: ["Prodajna komunikacija.", "Prezentacione veštine.", "Vođenje ljudi.", "Customer journey setup.", "Upravljanje procesima.", "Transformacija kompanijske kulture u cilju unapređenja korisničkog iskustva.", "Korporativna edukacija i alati za razvoj treninga."]
         }
-      ]
+      ],
+      legalTitle: "Pravni podaci i kontakt",
+legalPartner: "Hansen Beck partner za teritoriju Republike Srbije:",
+companyName: "Training & Development d.o.o.",
+address: "Tošin Bunar 188/1, 11070 Novi Beograd",
+taxId: "PIB: 106602940",
+contactPerson: "Kontakt osoba: Nikola Mirčić",
     },
     en: {
       heroTag: "Global Experts",
@@ -101,7 +107,13 @@ const AboutUs = ({ onBack }) => {
           ],
           specialties: ["Sales communication.", "Presentation skills.", "Leading people.", "Customer journey setup.", "Process management.", "Transformation of company culture to improve customer experience.", "Corporate education and training development tools."]
         }
-      ]
+      ],
+      legalTitle: "Legal Information & Contact",
+legalPartner: "Hansen Beck partner for the territory of the Republic of Serbia:",
+companyName: "Training & Development d.o.o.",
+address: "Tosin Bunar 188/1, 11070 New Belgrade",
+taxId: "VAT: 106602940",
+contactPerson: "Contact person: Nikola Mircic",
     }
   };
 
@@ -305,6 +317,40 @@ const AboutUs = ({ onBack }) => {
           </div>
         </section>
 
+        {/* NOVA SEKCIJA NA SAMOM KRAJU */}
+<section style={{ 
+  marginTop: '0px', 
+  paddingTop: '60px', 
+  borderTop: '1px solid rgba(255,255,255,0.05)', 
+  paddingBottom: '40px' 
+}}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+    
+    {/* Kolona 1: Kompanija */}
+    <div>
+      <h4 style={{ fontSize: '11px', letterSpacing: '3px', color: '#666', marginBottom: '20px', textTransform: 'uppercase' }}>
+        {t.legalTitle}
+      </h4>
+      <p style={{ color: '#888', fontSize: '14px', marginBottom: '10px' }}>{t.legalPartner}</p>
+      <p style={{ color: '#fff', fontSize: '18px', fontWeight: 'bold', marginBottom: '5px' }}>{t.companyName}</p>
+      <p style={{ color: '#888', fontSize: '14px' }}>{t.address}</p>
+      <p style={{ color: '#444', fontSize: '13px', marginTop: '10px' }}>{t.taxId}</p>
+    </div>
+
+    {/* Kolona 2: Direktni kontakt */}
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+      <p style={{ color: '#ccc', fontSize: '15px', marginBottom: '0px' }}>{t.contactPerson}</p>
+      <a 
+        href="mailto:nikola.mircic@traininganddevelopment.rs" 
+        style={{ color: '#fff', fontSize: '16px', textDecoration: 'none', marginBottom: '5px', borderBottom: '1px solid rgba(255,255,255,0.1)', width: 'fit-content' }}
+      >
+        nikola.mircic@traininganddevelopment.rs
+      </a>
+      <p style={{ color: '#fff', fontSize: '16px', marginTop: '5px' }}>063 221910</p>
+    </div>
+
+  </div>
+</section>
         
       </div>
     </div>

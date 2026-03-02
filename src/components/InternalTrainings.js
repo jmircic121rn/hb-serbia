@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 const InternalTrainings = () => {
     const [language, setLanguage] = useState('sr');
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -61,7 +62,27 @@ const InternalTrainings = () => {
                     detail: "Through our Interim Management offering, a Hansen Beck Ice Pilot joins your operations for one or more days per month — embedded in your team's daily work, thinking alongside your leaders, and applying real expertise to real challenges as they emerge. It is not consulting from a distance. It is experienced, hands-on navigation, available to your organization exactly when and where the ice gets thick."
                 }
             ],
-            finalMessage: "The question is not whether your people have what it takes. The question is whether you are ready to help them find it. Let's navigate together."
+            finalMessage: "The question is not whether your people have what it takes. The question is whether you are ready to help them find it. Let's navigate together.",
+            copyright: "© 2026 HANSEN BECK SERBIA. ALL RIGHTS RESERVED.",
+            formTitle: "Begin Your Expedition",
+            formSubtitle: "Choose how you want us to navigate together",
+            labels: {
+                firstName: "First Name",
+                lastName: "Last Name",
+                email: "Email",
+                phone: "Phone",
+                company: "Company",
+                interest: "4 Ways to Work with Us",
+                message: "Message",
+                submit: "Send Application",
+                placeholderInterest: "Select an option...",
+                options: [
+                    "Ice Pilot Training Programmes",
+                    "Level-Up Simulator",
+                    "Partners in Development",
+                    "Interim Ice Pilot"
+                ]
+            },
         },
         sr: {
             category: "INTERNI TRENINZI",
@@ -115,41 +136,111 @@ const InternalTrainings = () => {
                     detail: "Kroz našu ponudu Interim Management-a, Hansen Beck Ledeni Pilot se pridružuje vašim operacijama na jedan ili više dana mesečno — ugrađen u svakodnevni rad vašeg tima, razmišljajući zajedno sa vašim liderima i primenjujući stručnost na stvarne izazove onako kako se oni pojavljuju. To nije konsalting sa distance. To je iskusna, praktična navigacija, dostupna vašoj organizaciji tačno tamo i tada gde led postane gust."
                 }
             ],
-            finalMessage: "Pitanje nije da li vaši ljudi imaju ono što je potrebno. Pitanje je da li ste spremni da im pomognete da to pronađu. Navigirajmo zajedno."
+            finalMessage: "Pitanje nije da li vaši ljudi imaju ono što je potrebno. Pitanje je da li ste spremni da im pomognete da to pronađu. Navigirajmo zajedno.",
+            copyright: "© 2026 HANSEN BECK SRBIJA. SVA PRAVA ZADRŽANA.",
+            formTitle: "Započnite svoju ekspediciju",
+            formSubtitle: "Izaberite način na koji želite da sarađujemo",
+            labels: {
+                firstName: "Ime",
+                lastName: "Prezime",
+                email: "Email",
+                phone: "Telefon",
+                company: "Kompanija",
+                interest: "Način saradnje (4 Ways to Work)",
+                message: "Poruka",
+                submit: "Pošalji prijavu",
+                placeholderInterest: "Izaberite opciju...",
+                options: [
+                    "Ice Pilot Programi Treninga",
+                    "Level-Up Simulator",
+                    "Partneri u Razvoju (Interna Akademija)",
+                    "Interim Ice Pilot"
+                ]
+            },
+        }
+    };
+
+    const [formData, setFormData] = useState({
+        FirstName: '',
+        LastName: '',
+        Email: '',
+        PhoneNumber: '',
+        CompanyName: '',
+        TrainingName: 'Internal Trainings Page',
+        TrainingDate: '', // Prazno prema zahtevu (null u bazi)
+        TrainingTime: '', // Prazno prema zahtevu (null u bazi)
+        FourWaysToWorkWithUs: '', // NOVA KOLONA
+        Message: ''
+    });
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/training/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert(language === 'sr' ? "Prijava uspešno poslata!" : "Application sent successfully!");
+                setFormData({ ...formData, FirstName: '', LastName: '', Email: '', PhoneNumber: '', CompanyName: '', Message: '', FourWaysToWorkWithUs: '' });
+            } else {
+                alert("Error sending application.");
+            }
+        } catch (error) {
+            console.error("Greška:", error);
         }
     };
 
     const t = content[language];
 
+    const inputStyle = {
+        background: 'transparent',
+        border: 'none',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        padding: '15px 0',
+        color: '#fff',
+        fontSize: '16px',
+        outline: 'none',
+        width: '100%',
+        marginBottom: '30px',
+        fontFamily: 'inherit'
+    };
+
     // Mala komponenta za prefinjenu sliku (akcenat)
     const ImageAccent = ({ src, float = 'none', width = '300px', margin = '0' }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }} // Povećao sam opacity na 1 za bolju vidljivost
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        style={{ 
-            width: width, 
-            float: float, 
-            margin: margin,
-            clear: float === 'none' ? 'both' : 'none' 
-        }}
-    >
-        <img 
-            src={src} 
-            alt="" 
-            style={{ 
-                width: '100%', 
-                height: 'auto', 
-                // FILTERI ZA BOLJI KVALITET:
-                filter: 'grayscale(90%) brightness(1.1) contrast(1.05)',
-                imageRendering: 'crisp-edges', // Pomaže kod oštrine na nekim browserima
-                borderRadius: '2px',
-                display: 'block'
-            }} 
-        />
-    </motion.div>
-);
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }} // Povećao sam opacity na 1 za bolju vidljivost
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={{
+                width: width,
+                float: float,
+                margin: margin,
+                clear: float === 'none' ? 'both' : 'none'
+            }}
+        >
+            <img
+                src={src}
+                alt=""
+                style={{
+                    width: '100%',
+                    height: 'auto',
+                    // FILTERI ZA BOLJI KVALITET:
+                    filter: 'grayscale(90%) brightness(1.1) contrast(1.05)',
+                    imageRendering: 'crisp-edges', // Pomaže kod oštrine na nekim browserima
+                    borderRadius: '2px',
+                    display: 'block'
+                }}
+            />
+        </motion.div>
+    );
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
@@ -261,8 +352,78 @@ const InternalTrainings = () => {
                 </div>
             </section>
 
-            <footer style={{ padding: '50px 10%', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', fontSize: '12px', color: '#444' }}>
-                © 2026 HANSEN BECK SRBIJA. SVA PRAVA ZADRŽANA.
+            {/* FORMA SEKCIJA */}
+            <section style={{ padding: '100px 10%', backgroundColor: '#080808' }}>
+                <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                        <h2 style={{ fontSize: '36px', fontWeight: '900', marginBottom: '10px' }}>{t.formTitle}</h2>
+                        <p style={{ color: '#888' }}>{t.formSubtitle}</p>
+                    </div>
+
+                    <form onSubmit={handleFormSubmit}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+                            <input type="text" name="FirstName" placeholder={t.labels.firstName} value={formData.FirstName} onChange={handleInputChange} style={inputStyle} required />
+                            <input type="text" name="LastName" placeholder={t.labels.lastName} value={formData.LastName} onChange={handleInputChange} style={inputStyle} required />
+                        </div>
+                        
+                        <input type="email" name="Email" placeholder={t.labels.email} value={formData.Email} onChange={handleInputChange} style={inputStyle} required />
+                        <input type="text" name="PhoneNumber" placeholder={t.labels.phone} value={formData.PhoneNumber} onChange={handleInputChange} style={inputStyle} />
+                        <input type="text" name="CompanyName" placeholder={t.labels.company} value={formData.CompanyName} onChange={handleInputChange} style={inputStyle} />
+
+                        {/* SELECT ZA 4 WAYS TO WORK */}
+                        <div style={{ marginBottom: '30px' }}>
+                            <label style={{ fontSize: '12px', color: '#555', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.labels.interest}</label>
+                            <select 
+                                name="FourWaysToWorkWithUs" 
+                                value={formData.FourWaysToWorkWithUs} 
+                                onChange={handleInputChange} 
+                                style={{ ...inputStyle, cursor: 'pointer', appearance: 'none' }}
+                                required
+                            >
+                                <option value="" disabled>{t.labels.placeholderInterest}</option>
+                                {t.labels.options.map((opt, i) => (
+                                    <option key={i} value={opt}>{opt}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <textarea name="Message" placeholder={t.labels.message} value={formData.Message} onChange={handleInputChange} style={{ ...inputStyle, minHeight: '100px', resize: 'vertical' }} />
+
+                        <motion.button
+                            whileHover={{ scale: 1.02, backgroundColor: '#fff', color: '#000' }}
+                            whileTap={{ scale: 0.98 }}
+                            type="submit"
+                            style={{
+                                width: '100%',
+                                padding: '20px',
+                                background: 'transparent',
+                                border: '1px solid #fff',
+                                color: '#fff',
+                                fontSize: '14px',
+                                fontWeight: 'bold',
+                                textTransform: 'uppercase',
+                                letterSpacing: '2px',
+                                cursor: 'pointer',
+                                marginTop: '20px',
+                                transition: '0.3s'
+                            }}
+                        >
+                            {t.labels.submit}
+                        </motion.button>
+                    </form>
+                </div>
+            </section>
+
+            <footer style={{
+                padding: '50px 10%',
+                borderTop: '1px solid rgba(255,255,255,0.05)',
+                textAlign: 'center',
+                fontSize: '12px',
+                color: '#444',
+                textTransform: 'uppercase', // Opciono, da uvek bude velikim slovima
+                letterSpacing: '1px'
+            }}>
+                {t.copyright}
             </footer>
         </div>
     );
