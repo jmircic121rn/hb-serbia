@@ -520,8 +520,8 @@ export const leaderQuestions40 = {
                 type: "core",
                 text: "SA - Core Scenario 1.1: It is the start of a busy quarter, and you need to ensure your team hits ambitious targets while maintaining quality, effectively managing performance, and handling unexpected issues. How do you typically set the stage for execution and manage performance through the quarter?",
                 options: [
-                    { score: 3, text: "B. Set clear, measurable goals for the quarter, establish regular check-ins to track progress, and provide consistent feedback to keep execution aligned. Most targets are delivered on time with acceptable quality, though some refinement may be needed as the quarter evolves." },
-                    { score: 1, text: "A. Assign tasks based on immediate priorities and monitor progress as issues emerge. Address performance problems when they threaten deadlines, though this often requires my direct involvement to keep momentum moving. Results can be uneven depending on how well I anticipate shifting priorities." },
+                    { score: 3, text: "A. Set clear, measurable goals for the quarter, establish regular check-ins to track progress, and provide consistent feedback to keep execution aligned. Most targets are delivered on time with acceptable quality, though some refinement may be needed as the quarter evolves." },
+                    { score: 1, text: "B. Assign tasks based on immediate priorities and monitor progress as issues emerge. Address performance problems when they threaten deadlines, though this often requires my direct involvement to keep momentum moving. Results can be uneven depending on how well I anticipate shifting priorities." },
                     { score: 5, text: "C. Connect team goals to broader organizational strategy, plan resource allocation upfront to remove obstacles, and coach team members to own their outcomes. This approach typically reduces last-minute scrambling and creates more predictable delivery with fewer surprises mid-quarter." }
                 ]
             },
@@ -532,9 +532,9 @@ export const leaderQuestions40 = {
                 type: "reflection",
                 text: "SA - Reflection on Impact 1.1: When performance gaps emerge during a quarter, what is typically the root cause?",
                 options: [
-                    { score: 5, text: "C. Team members typically understand what success looks like and take ownership of adjusting their approach when obstacles appear, requiring minimal intervention from me." },
+                    { score: 5, text: "A. Team members typically understand what success looks like and take ownership of adjusting their approach when obstacles appear, requiring minimal intervention from me." },
                     { score: 3, text: "B. Initially clear goals sometimes need adjustment due to new information or external factors, but the team generally adapts and stays on track with some guidance." },
-                    { score: 1, text: "A. Goals weren't clearly defined upfront, or priorities shifted significantly, requiring frequent mid-quarter course corrections and my involvement to realign effort." }
+                    { score: 1, text: "C. Goals weren't clearly defined upfront, or priorities shifted significantly, requiring frequent mid-quarter course corrections and my involvement to realign effort." }
                 ]
             },
             {
@@ -545,8 +545,8 @@ export const leaderQuestions40 = {
                 text: "SA - Core Scenario 1.2: A critical operational error occurs unexpectedly, threatening a key deadline and causing immediate panic within the team. How do you lead through this disruption, ensuring the problem is solved effectively and the team remains stable?",
                 options: [
                     { score: 1, text: "A. I immediately take control, either fixing the problem myself or pushing the team to work faster to stop the bleeding. While this addresses the urgent deadline, similar problems often resurface later, suggesting I'm solving the immediate symptom rather than the underlying cause." },
-                    { score: 5, text: "C. I stabilize the immediate situation calmly, then shift focus to understanding the root cause. Where feasible within time and resource constraints, I work with the team to implement changes that prevent similar problems from recurring." },
-                    { score: 3, text: "B. I remain calm, organize the team to diagnose the problem, and make a structured decision to resolve it. The team stabilizes quickly, and the immediate issue is addressed effectively while maintaining focus on quality and deadline." }
+                    { score: 5, text: "B. I stabilize the immediate situation calmly, then shift focus to understanding the root cause. Where feasible within time and resource constraints, I work with the team to implement changes that prevent similar problems from recurring." },
+                    { score: 3, text: "C. I remain calm, organize the team to diagnose the problem, and make a structured decision to resolve it. The team stabilizes quickly, and the immediate issue is addressed effectively while maintaining focus on quality and deadline." }
                 ]
             },
             {
@@ -556,8 +556,8 @@ export const leaderQuestions40 = {
                 type: "reflection",
                 text: "SA - Reflection on Impact 1.2: When you resolve an operational crisis, what typically happens in the weeks or months that follow?",
                 options: [
-                    { score: 3, text: "B. We occasionally encounter related challenges, but the team generally handles them better than before, having learned from the previous disruption." },
-                    { score: 1, text: "A. Similar types of problems resurface fairly quickly, suggesting my solutions often address the urgent problem but not the deeper causes. This creates a cycle of repeated fires." },
+                    { score: 3, text: "A. We occasionally encounter related challenges, but the team generally handles them better than before, having learned from the previous disruption." },
+                    { score: 1, text: "B. Similar types of problems resurface fairly quickly, suggesting my solutions often address the urgent problem but not the deeper causes. This creates a cycle of repeated fires." },
                     { score: 5, text: "C. Similar problems rarely recur. The systemic fixes we implement tend to hold, and the team becomes more resilient and confident in preventing or quickly resolving new issues." }
                 ]
             },
@@ -571,8 +571,8 @@ export const leaderQuestions40 = {
                 text: "SA - Core Scenario 1.3: Your industry is experiencing rapid shifts due to emerging technologies, and your organization announces a major strategic change that requires your team to develop entirely new capabilities. How do you typically lead your team through these changes, from strategic vision to capability development?",
                 options: [
                     { score: 1, text: "A. Announce the new strategic direction and expect the team to develop necessary skills on their own timeline. I maintain focus on near-term operational delivery and assume the team will figure out capability gaps as they emerge." },
-                    { score: 5, text: "C. Translate market dynamics into a clear vision for where the team needs to go, design a capability-building strategy for the next 2-3 years, and actively coach team members to see how they fit into this future. I encourage experimentation and learning from setbacks as we adapt the vision based on what we discover." },
-                    { score: 3, text: "B. Explain the strategic rationale for the change and outline what new capabilities the team will need. I develop a training plan and allocate resources to build these capabilities, working toward alignment between current operations and future direction." }
+                    { score: 5, text: "B. Translate market dynamics into a clear vision for where the team needs to go, design a capability-building strategy for the next 2-3 years, and actively coach team members to see how they fit into this future. I encourage experimentation and learning from setbacks as we adapt the vision based on what we discover." },
+                    { score: 3, text: "C. Explain the strategic rationale for the change and outline what new capabilities the team will need. I develop a training plan and allocate resources to build these capabilities, working toward alignment between current operations and future direction." }
                 ]
             },
             {
@@ -582,8 +582,8 @@ export const leaderQuestions40 = {
                 type: "reflection",
                 text: "SA - Reflection on Impact 1.3: When your team pursues long-term capability development, what obstacles typically emerge?",
                 options: [
-                    { score: 3, text: "B. Some team members embrace capability development while others lag behind. Progress is generally steady, though unevenly distributed across the team, and some planned capabilities take longer than expected." },
-                    { score: 1, text: "A. Team members struggle to prioritize learning alongside daily work, and external pressures often delay or derail capability-building efforts. New capabilities take longer to develop than initially planned." },
+                    { score: 3, text: "A. Some team members embrace capability development while others lag behind. Progress is generally steady, though unevenly distributed across the team, and some planned capabilities take longer than expected." },
+                    { score: 1, text: "B. Team members struggle to prioritize learning alongside daily work, and external pressures often delay or derail capability-building efforts. New capabilities take longer to develop than initially planned." },
                     { score: 5, text: "C. Most team members see the value of developing new capabilities and make progress, though we sometimes discover that the initial vision needs adjustment as market conditions or team strengths reveal new priorities." }
                 ]
             },
@@ -594,9 +594,9 @@ export const leaderQuestions40 = {
                 type: "core",
                 text: "SA - Core Scenario 1.4: A significant, complex process in your team needs optimization, but your organization is also implementing a major transformation that you need to lead. How do you typically balance driving innovation in team processes with leading the broader organizational change?",
                 options: [
-                    { score: 5, text: "C. I champion the organizational transformation while actively involving the team in shaping how it gets implemented. I encourage the team to identify process improvements that align with the new direction, and I work to build buy-in across the organization by demonstrating how our innovations strengthen the transformation." },
-                    { score: 1, text: "A. I prioritize getting my team aligned with the organizational transformation. I focus on smooth implementation of the required changes, rather than pursuing additional local innovations, as I believe compliance and stability are the primary need during transformation." },
-                    { score: 3, text: "B. I develop a clear plan for implementing the organizational transformation and ensure the team understands and commits to required changes. I also create space for the team to identify and pilot process improvements that fit within the new direction, balancing stability with incremental innovation." }
+                    { score: 5, text: "A. I champion the organizational transformation while actively involving the team in shaping how it gets implemented. I encourage the team to identify process improvements that align with the new direction, and I work to build buy-in across the organization by demonstrating how our innovations strengthen the transformation." },
+                    { score: 1, text: "B. I prioritize getting my team aligned with the organizational transformation. I focus on smooth implementation of the required changes, rather than pursuing additional local innovations, as I believe compliance and stability are the primary need during transformation." },
+                    { score: 3, text: "C. I develop a clear plan for implementing the organizational transformation and ensure the team understands and commits to required changes. I also create space for the team to identify and pilot process improvements that fit within the new direction, balancing stability with incremental innovation." }
                 ]
             },
             {
@@ -621,8 +621,8 @@ export const leaderQuestions40 = {
                 type: "core",
                 text: "SA - Core Scenario 2.1: You receive significant constructive feedback from a colleague about your leadership style on a new, complex project where you've also encountered several setbacks. How do you typically process this feedback and respond to the challenges, reflecting your personal mindset?",
                 options: [
-                    { score: 3, text: "B. I listen to the feedback, take time to reflect on what might be valid, and identify specific adjustments to try. I work through the project setbacks methodically, adapting my approach based on what's working and what isn't." },
-                    { score: 1, text: "A. I listen to the feedback but find myself initially defending my approach. The project setbacks frustrate me, and I tend to stick with my existing methods rather than making significant changes quickly." },
+                    { score: 3, text: "A. I listen to the feedback, take time to reflect on what might be valid, and identify specific adjustments to try. I work through the project setbacks methodically, adapting my approach based on what's working and what isn't." },
+                    { score: 1, text: "B. I listen to the feedback but find myself initially defending my approach. The project setbacks frustrate me, and I tend to stick with my existing methods rather than making significant changes quickly." },
                     { score: 5, text: "C. I actively seek feedback from multiple sources and view project setbacks as data about what to improve. I adjust my approach based on what I learn, and I openly discuss what I'm working on with others, modelling that struggles are part of growth." }
                 ]
             },
@@ -633,9 +633,9 @@ export const leaderQuestions40 = {
                 type: "reflection",
                 text: "SA - Reflection on Impact 2.1: When you receive feedback that challenges your approach, how do you typically process it?",
                 options: [
-                    { score: 5, text: "C. I'm genuinely curious about feedback, even when it's difficult to hear. I look for patterns across multiple sources and actively experiment with new approaches based on what I learn." },
-                    { score: 1, text: "A. I initially resist or defend the feedback, even though intellectually I know some of it might be valid. I need time before I can genuinely consider changing my approach." },
-                    { score: 3, text: "B. I listen for what might be useful, though I'm selective about which feedback I act on. I change my approach when the feedback resonates with my own observations." }
+                    { score: 5, text: "A. I'm genuinely curious about feedback, even when it's difficult to hear. I look for patterns across multiple sources and actively experiment with new approaches based on what I learn." },
+                    { score: 1, text: "B. I initially resist or defend the feedback, even though intellectually I know some of it might be valid. I need time before I can genuinely consider changing my approach." },
+                    { score: 3, text: "C. I listen for what might be useful, though I'm selective about which feedback I act on. I change my approach when the feedback resonates with my own observations." }
                 ]
             },
             {
@@ -657,9 +657,9 @@ export const leaderQuestions40 = {
                 type: "reflection",
                 text: "SA - Reflection on Impact 2.2: When you face a significant change you didn't choose, how do you typically manage your own mindset?",
                 options: [
-                    { score: 3, text: "B. I adapt to the change as required and move forward, though I sometimes reflect on what I miss about the old way of working. Overall, I manage the transition without significant stress." },
-                    { score: 5, text: "C. I view change as normal and inevitable, and I use the disruption as a chance to reconsider how I work. I find the process of learning new systems and approaches energizing, even when challenging." },
-                    { score: 1, text: "A. I experience anxiety or frustration about the change. I manage it by focusing on what I need to do, but I acknowledge internally that adaptation is uncomfortable for me." }
+                    { score: 3, text: "A. I adapt to the change as required and move forward, though I sometimes reflect on what I miss about the old way of working. Overall, I manage the transition without significant stress." },
+                    { score: 5, text: "B. I view change as normal and inevitable, and I use the disruption as a chance to reconsider how I work. I find the process of learning new systems and approaches energizing, even when challenging." },
+                    { score: 1, text: "C. I experience anxiety or frustration about the change. I manage it by focusing on what I need to do, but I acknowledge internally that adaptation is uncomfortable for me." }
                 ]
             },
             {
