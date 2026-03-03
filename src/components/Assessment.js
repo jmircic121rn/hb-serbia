@@ -109,66 +109,87 @@ const Assessment = ({ onFinish, onQuestionChange, language: propsLanguage }) => 
   const currentQ = flatQuestions[currentIndex];
   const progress = ((currentIndex + 1) / flatQuestions.length) * 100;
 
-  return (
-    <div className="assessment-wrapper" style={{
-      display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#0a0a0a', 
-      color: '#fff', padding: '0 8%', overflowX: 'hidden'
-    }}>
-      <div style={{ padding: '40px 0 20px 0', textAlign: 'center' }}>
-        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: '700', letterSpacing: '1px' }}>
-          {language === 'eng' ? 'HB COMPASS ASSESSMENT' : 'HB COMPASS PROCENA'}
-        </div>
-      </div>
-
-      <div style={{ maxWidth: '850px', margin: '40px auto 20px auto', width: '100%', flex: 1 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4 }}
-          >
-            <h2 style={{ fontSize: 'clamp(20px, 3.5vw, 26px)', fontWeight: '400', lineHeight: '1.5', marginBottom: '50px', color: '#f0f0f0' }}>
-              {currentQ.text.includes(':') && currentQ.text.length > 50
-                ? currentQ.text.split(':').slice(1).join(':').trim() 
-                : currentQ.text}
-            </h2>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              {currentQ.options.map((option, idx) => (
-                <motion.button
-                  key={idx}
-                  whileHover={{ x: 8, backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255, 255, 255, 0.3)' }}
-                  whileTap={{ scale: 0.99 }}
-                  onClick={() => handleAnswer(option.score)}
-                  style={{
-                    padding: '24px 30px', textAlign: 'left', background: 'rgba(255,255,255,0.01)',
-                    border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px',
-                    color: '#d1d1d1', cursor: 'pointer', transition: 'all 0.2s ease',
-                    fontSize: '15.5px', lineHeight: '1.6'
-                  }}
-                >
-                  {option.text}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* PROGRESS BAR */}
-      <div style={{ padding: '40px 0 60px 0', width: '100%', maxWidth: '850px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '11px', color: 'rgba(255,255,255,0.2)', fontWeight: 'bold' }}>
-           <span>{language === 'eng' ? 'PROGRESS' : 'NAPREDAK'}: {currentIndex + 1} / {flatQuestions.length}</span>
-           <span>{Math.round(progress)}%</span>
-        </div>
-        <div style={{ width: '100%', height: '3px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden' }}>
-          <motion.div animate={{ width: `${progress}%` }} style={{ height: '100%', background: '#ffb478' }} />
-        </div>
+return (
+  <div className="assessment-wrapper" style={{
+    display: 'flex', 
+    flexDirection: 'column', 
+    backgroundColor: '#0a0a0a', // Osiguraj da je ista kao pozadina roditelja ako je moguće
+    color: '#fff',  
+    width: '100%',
+    paddingTop: '0px' // Resetovan padding
+  }}>
+    
+    {/* Labela na samom vrhu - smanjen padding */}
+    <div style={{ padding: '20px 0', textAlign: 'center' }}>
+      <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', fontWeight: '700', letterSpacing: '2px' }}>
+        {language === 'eng' ? 'HB COMPASS ASSESSMENT' : 'HB COMPASS PROCENA'}
       </div>
     </div>
-  );
+
+    {/* Glavni kontejner sa pitanjem - smanjena gornja margina na 0 */}
+    <div style={{ maxWidth: '850px', margin: '0 auto', width: '100%', padding: '0 20px' }}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Pitanje - smanjen font-size i margin bottom za kompaktnost */}
+          <h2 style={{ 
+            fontSize: 'clamp(18px, 3vw, 24px)', 
+            fontWeight: '400', 
+            lineHeight: '1.4', 
+            marginBottom: '30px', 
+            color: '#f0f0f0',
+            textAlign: 'center' // Centrirano pitanje lepše izgleda kad nema boxa
+          }}>
+            {currentQ.text.includes(':') && currentQ.text.length > 50
+              ? currentQ.text.split(':').slice(1).join(':').trim() 
+              : currentQ.text}
+          </h2>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {currentQ.options.map((option, idx) => (
+              <motion.button
+                key={idx}
+                whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+                whileTap={{ scale: 0.99 }}
+                onClick={() => handleAnswer(option.score)}
+                style={{
+                  padding: '20px 25px', // Malo kompaktnije opcije
+                  textAlign: 'left', 
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(255,255,255,0.1)', 
+                  borderRadius: '10px',
+                  color: '#d1d1d1', 
+                  cursor: 'pointer', 
+                  transition: '0.2s ease',
+                  fontSize: '15px', 
+                  lineHeight: '1.5'
+                }}
+              >
+                {option.text}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+
+    {/* PROGRESS BAR - prati sadržaj */}
+    <div style={{ padding: '40px 20px', width: '100%', maxWidth: '850px', margin: '0 auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '10px', color: 'rgba(255,255,255,0.2)', fontWeight: 'bold' }}>
+         <span>{language === 'eng' ? 'PROGRESS' : 'NAPREDAK'}: {currentIndex + 1}/{flatQuestions.length}</span>
+         <span>{Math.round(progress)}%</span>
+      </div>
+      <div style={{ width: '100%', height: '2px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
+        <motion.div animate={{ width: `${progress}%` }} style={{ height: '100%', background: '#ffffff' }} />
+      </div>
+    </div>
+  </div>
+);
 };
 
 export default Assessment;
