@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; // Vraćen useState i useEffect
 import { motion, AnimatePresence } from 'framer-motion';
-import { translations } from '../data/translations'; // Proveri putanju do fajla
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { translations } from '../data/translations';
 
 const isMobile = window.innerWidth < 768;
-
 
 const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   return (
@@ -31,106 +31,73 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
           delay: delay
         }
       }}
-      whileHover="hover"
+      whileHover={{ scale: 1.05 }}
       onClick={onClick}
       style={{
         cursor: 'pointer',
-        // KLJUČNO: Smanjena širina sa 200px na 110px na mobilnom
-        width: isMobile ? '110px' : '200px', 
+        width: isMobile ? '110px' : '180px', 
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
-        // Dodatno smanjujemo celu planetu da prstenovi ne vire previše
         transform: isMobile ? 'scale(0.85)' : 'scale(1)',
       }}
     >
-      <motion.div
-        variants={{
-          hover: {
-            opacity: [0.2, 0.5, 0.2],
-            scale: [1, 1.3, 1],
-            transition: { repeat: Infinity, duration: 2 }
-          }
-        }}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          width: '80px',
-          height: '80px',
-          background: glowColor,
-          filter: 'blur(30px)',
-          borderRadius: '50%',
-          opacity: 0,
-          zIndex: 0
-        }}
-      />
+      <div style={{
+        position: 'absolute',
+        top: '10%',
+        width: '80%',
+        height: '60%',
+        background: glowColor,
+        filter: 'blur(35px)',
+        borderRadius: '50%',
+        opacity: 0.25,
+        zIndex: 0
+      }} />
 
       <div style={{
         position: 'relative',
-        width: '140px',
-        height: '100px',
+        width: '100%',
+        height: isMobile ? '90px' : '140px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: '20px',
+        marginBottom: '15px',
         zIndex: 2
       }}>
-        <div style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          border: `2px solid ${glowColor}`,
-          borderRadius: '50%',
-          transform: 'rotateX(75deg)',
-          zIndex: 1,
-          clipPath: 'inset(0% 0% 50% 0%)',
-          opacity: 0.5,
-        }} />
-
-        <div style={{
-          width: '55px',
-          height: '55px',
-          borderRadius: '50%',
-          background: `radial-gradient(circle at 30% 30%, #444 0%, #000 100%)`,
-          border: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: `inset -8px -8px 20px #000`,
-          zIndex: 2,
-          position: 'relative'
-        }} />
-
-        <div style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          border: `2px solid ${glowColor}`,
-          borderRadius: '50%',
-          transform: 'rotateX(75deg)',
-          zIndex: 3,
-          clipPath: 'inset(50% 0% 0% 0%)',
-          boxShadow: `0 8px 15px ${glowColor}33`,
-        }} />
+        <img 
+          src="/planet.png" 
+          alt={subtitle}
+          style={{
+            width: '90%',
+            height: '90%',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.1))'
+          }}
+        />
       </div>
 
       <div style={{ textAlign: 'center', zIndex: 10 }}>
         <h3 style={{ 
-          fontSize: isMobile ? '6px' : '7px', 
-          letterSpacing: '1px', 
+          fontSize: isMobile ? '7px' : '9px', 
+          letterSpacing: '2px', 
           color: 'rgba(255,255,255,0.4)', 
           marginBottom: '4px', 
-          textTransform: 'uppercase' 
+          textTransform: 'uppercase',
+          fontFamily: "'PT Sans', sans-serif" 
         }}>
           {title}
         </h3>
-        <div style={{ height: '1px', width: '15px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 6px' }} />
+        <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 8px' }} />
         <span style={{
-          fontSize: isMobile ? '8px' : '10px',
+          fontSize: isMobile ? '10px' : '12px',
           fontWeight: '700',
-          letterSpacing: '0.5px',
+          letterSpacing: '1px',
           color: '#fff',
           lineHeight: '1.2',
           display: 'block',
-          textTransform: 'uppercase'
+          textTransform: 'uppercase',
+          fontFamily: "'PT Sans', sans-serif"
         }}>
           {subtitle}
         </span>
@@ -139,7 +106,13 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   );
 };
 
-const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage }) => {
+const EclipseIntro = ({ onProceed, language, setLanguage }) => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  
+  const menuLevel = searchParams.get('menu') || 'main';
+  
+  // Vraćamo showOptions i useEffect za početni sloj
   const [showOptions, setShowOptions] = useState(menuLevel !== 'main');
   const t = translations[language].eclipse;
 
@@ -149,18 +122,35 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
     }
   }, [menuLevel]);
 
+  const BrandLogo = () => (
+    <motion.img
+      src="/logo.png"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      style={{
+        position: 'absolute',
+        top: '40px',
+        left: '40px',
+        width: isMobile ? '100px' : '180px',
+        height: 'auto',
+        zIndex: 100,
+        filter: 'brightness(1.5)'
+      }}
+    />
+  );
+
   const LanguagePicker = () => (
-    <div style={{ 
-      position: 'absolute', top: '30px', right: '40px', zIndex: 100,
+    <div style={{
+      position: 'absolute', top: '40px', right: '40px', zIndex: 100,
       display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
       padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
       border: '1px solid rgba(255,255,255,0.1)'
     }}>
       {['sr', 'en'].map((l) => (
-        <span 
+        <span
           key={l}
           onClick={() => setLanguage(l)}
-          style={{ 
+          style={{
             cursor: 'pointer', fontSize: '12px', fontWeight: '900',
             color: language === l ? '#ffff' : '#666',
             transition: '0.3s',
@@ -185,78 +175,57 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
       color: '#fff',
       position: 'relative',
       overflow: 'hidden',
+      fontFamily: "'PT Sans', sans-serif"
     }}>
+      <BrandLogo />
       <LanguagePicker />
 
       <motion.div
-        animate={{ y: showOptions ? -60 : 0 }}
+        animate={{ 
+            y: showOptions ? -60 : 0,
+            scale: showOptions ? (menuLevel !== 'main' ? 1.1 : 1.1) : 1.6 
+        }}
         style={{
-          position: 'relative',
-          width: '350px',
-          height: '350px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          scale: 1.2,
-          marginBottom: '-60px',
-          zIndex: 5,
+          position: 'relative', width: '350px', height: '350px', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', marginBottom: '-60px', zIndex: 5,
           transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
         }}
       >
         <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-                            <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-                            <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                            <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                            <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
-         <div style={{
-          position: 'relative',
-          width: '280px',
-          height: '280px',
-          backgroundColor: '#000',
-          borderRadius: '50%',
-          zIndex: 5,
-          boxShadow: '0 0 15px rgba(0,0,0,1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
+        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
+        <div style={{
+          position: 'relative', width: '280px', height: '280px', backgroundColor: '#000',
+          borderRadius: '50%', zIndex: 5, boxShadow: '0 0 15px rgba(0,0,0,1)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
         }}>
-          <motion.img
-            src="/logo.png"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            transition={{ delay: 1, duration: 2 }}
-            style={{
-              width: '220px',
-              height: 'auto',
-              objectFit: 'contain',
-              filter: 'grayscale(100%) brightness(1.5)'
-            }}
-          />
         </div>
       </motion.div>
 
       <div style={{ textAlign: 'center', zIndex: 20 }}>
         <motion.h1
-          animate={{ 
-            y: showOptions ? -40 : 0,
-            opacity: showOptions ? 0.45 : 1,
-            scale: showOptions ? 0.95 : 1
+          animate={{
+            y: showOptions ? -50 : 0,
+            opacity: showOptions ? 0.4 : 1,
+            scale: showOptions ? 0.9 : 1
           }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: '64px',
+            fontSize: isMobile ? '48px' : '82px',
             fontWeight: '900',
             lineHeight: '0.9',
-            letterSpacing: '-2px',
-            margin: 0
+            letterSpacing: '-3px',
+            margin: 0,
+            fontFamily: "'PT Serif', serif"
           }}
         >
           {t.mainTitle}
         </motion.h1>
 
         <motion.p
-          onClick={() => !showOptions && setShowOptions(true)}
+          onClick={() => !showOptions && setShowOptions(true)} // AKTIVIRA PRVI NIVO
           animate={{
             opacity: showOptions ? 0.3 : 1,
             marginBottom: showOptions ? '40px' : '50px'
@@ -296,7 +265,7 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
                 subtitle={t.planets.explore.subtitle}
                 glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.3}
-                onClick={() => setMenuLevel('assessment')}
+                onClick={() => navigate('/?menu=assessment')} 
               />
             </motion.div>
           )}
@@ -306,15 +275,14 @@ const EclipseIntro = ({ onProceed, menuLevel, setMenuLevel, language,setLanguage
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-style={{ 
-      display: 'flex', 
-      // Razmak od samo 5px na mobilnom, 30px na desktopu
-      gap: isMobile ? '5px' : '30px', 
-      justifyContent: 'center',
-      alignItems: 'flex-start',
-      width: '100%',
-      maxWidth: '100vw'
-    }}            >
+              style={{
+                display: 'flex',
+                gap: isMobile ? '5px' : '30px',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                width: '100%',
+                maxWidth: '100vw'
+              }}            >
               <SaturnPlanet
                 title={t.planets.b2b.title}
                 subtitle={t.planets.b2b.subtitle}
@@ -337,10 +305,10 @@ style={{
                 onClick={() => onProceed('INTRO')}
               />
               <div
-                onClick={() => setMenuLevel('main')}
-                style={{ 
-                  position: 'absolute', bottom: '-40px', cursor: 'pointer', 
-                  fontSize: '10px', opacity: 0.5, letterSpacing: '2px' 
+                onClick={() => navigate('/')} 
+                style={{
+                  position: 'absolute', bottom: '-40px', cursor: 'pointer',
+                  fontSize: '10px', opacity: 0.5, letterSpacing: '2px'
                 }}
               >
                 ← {translations[language].common.back.toUpperCase()}

@@ -1,261 +1,295 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from '../data/translations';
+import { HBButton } from './UIComponents';
 
-// POMOĆNA KOMPONENTA ZA SLIKE SA TVOJIM SPECIFIČNIM EFEKTOM
-const AestheticImage = ({ src, alt, width = "100%", height = "300px", margin = "0" }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    style={{ 
-      width: width, 
-      height: height, 
-      overflow: 'hidden', 
-      border: '1px solid rgba(255,255,255,0.08)', 
-      margin: margin,
-      borderRadius: '2px',
-      backgroundColor: '#000'
-    }}
-  >
+// --- POMOĆNA KOMPONENTA ZA SLIKE (Centrirana) ---
+const ImageAccent = ({ src, width = '300px', margin = '0 auto 40px auto' }) => {
+  const isPhoto = src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg');
+  return (
     <motion.div
-      whileHover={{ filter: 'grayscale(0%)', scale: 1.02 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
       style={{
-        width: '100%',
-        height: '100%',
-        backgroundImage: `url(${src})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: 'grayscale(60%)',
-        transition: '0.8s cubic-bezier(0.22, 1, 0.36, 1)',
+        width: width,
+        margin: margin,
+        zIndex: 2,
+        maxWidth: '100%'
       }}
-    />
-  </motion.div>
-);
+    >
+      <img src={src} alt="" style={{
+        width: '100%',
+        height: 'auto',
+        filter: isPhoto ? 'brightness(1.1) contrast(1.05) saturate(1.1)' : 'grayscale(100%) brightness(1.1)',
+        borderRadius: '2px',
+        display: 'block',
+        boxShadow: isPhoto ? '0 20px 40px rgba(0,0,0,0.4)' : 'none'
+      }} />
+    </motion.div>
+  );
+};
 
-// POMOĆNA KOMPONENTA ZA KARTICE NA POČETNOJ
-const RoleCard = ({ title, desc, onClick, icon, t }) => (
-  <div onClick={onClick} style={{ 
-    padding: '30px', 
-    background: 'rgba(255,255,255,0.02)', 
-    border: '1px solid rgba(255,255,255,0.1)',
-    cursor: 'pointer', 
-    transition: '0.3s'
-  }} className="role-card-hover">
-    {icon}
-    <h3 style={{ marginTop: '20px', marginBottom: '10px' }}>{title}</h3>
-    <p style={{ color: '#666', fontSize: '14px' }}>{desc}</p>
-    <div style={{ marginTop: '20px', color: '#ffffff', fontSize: '12px', fontWeight: 'bold' }}>
-      {t.common.learnMore}
-    </div>
-  </div>
-);
-
-// DETALJAN PRIKAZ LIDERA ILI ZAPOSLENOG
+// --- DETALJAN PRIKAZ ---
 const DetailView = ({ type, t, onBack, onProceed }) => {
   const data = type === 'LEADER' ? t.leader : t.employee;
-  
+
   return (
-    <div style={{ maxWidth: '900px', padding: '40px 0' }}>
-      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', marginBottom: '30px', fontWeight: 'bold' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+      <button onClick={onBack} style={{
+        background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
+        cursor: 'pointer', marginBottom: '40px', fontWeight: 'bold',
+        fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase'
+      }}>
         ← {t.common.back}
       </button>
-      
-      <h1 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{data.title}</h1>
-      <h3 style={{ color: '#ffffff', marginBottom: '30px' }}>{data.subtitle}</h3>
-      
-      <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#ccc', marginBottom: '30px' }}>
+
+      <h4 style={{ color: '#888', letterSpacing: '4px', textTransform: 'uppercase', fontSize: '11px', marginBottom: '15px' }}>
+        {type} PATHWAY
+      </h4>
+      <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: '900', marginBottom: '20px', lineHeight: '1.1' }}>{data.title}</h1>
+      <h3 style={{ color: 'rgba(255,255,255,0.6)', fontSize: '20px', fontWeight: '400', marginBottom: '40px' }}>{data.subtitle}</h3>
+
+      <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#ccc', marginBottom: '50px' }}>
         {data.mainDescription}
       </p>
 
-      {type === 'LEADER' && data.frameworkInfo && (
-        <p style={{ color: '#888', fontStyle: 'italic', marginBottom: '40px' }}>{data.frameworkInfo}</p>
-      )}
-
-      <h4 style={{ marginBottom: '20px', color: '#fff' }}>
-        {type === 'LEADER' ? data.capabilitiesTitle : data.vbcFeaturesTitle}
-      </h4>
-
-      <div style={{ display: 'grid', gap: '20px', marginBottom: '40px' }}>
+      <div style={{ display: 'grid', gap: '20px', marginBottom: '60px', textAlign: 'left' }}>
         {(type === 'LEADER' ? data.capabilities : data.vbcFeatures).map((item, i) => (
-          <div key={i} style={{ padding: '20px', background: 'rgba(255,255,255,0.02)', borderLeft: '3px solid #ffffff' }}>
-            <strong style={{ color: '#fff', display: 'block', marginBottom: '5px' }}>{item.title}</strong>
-            <span style={{ color: '#888', fontSize: '14px' }}>{item.text}</span>
+          <div key={i} style={{
+            padding: '30px',
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.05)',
+            borderLeft: '2px solid #fff'
+          }}>
+            <strong style={{ color: '#fff', display: 'block', marginBottom: '8px', fontSize: '18px' }}>{item.title}</strong>
+            <span style={{ color: '#888', fontSize: '15px', lineHeight: '1.6' }}>{item.text}</span>
           </div>
         ))}
       </div>
 
-      <p style={{ fontSize: '18px', color: '#fff', marginBottom: '20px' }}>
-        {type === 'LEADER' ? data.transformTitle : data.summary}
-      </p>
-      
-      {type === 'LEADER' && (
-        <ul style={{ color: '#888', marginBottom: '40px', paddingLeft: '20px' }}>
-          {data.transformItems.map((item, i) => (
-            <li key={i} style={{ marginBottom: '10px' }}>{item}</li>
-          ))}
-        </ul>
-      )}
-
-      <p style={{ color: '#ffffff', fontWeight: 'bold', marginBottom: '20px' }}>
-        {type === 'LEADER' ? data.assessmentGoal : data.assessmentCall}
-      </p>
-      
-      <div style={{ marginBottom: '50px' }}>
-        {data.assessmentOutcomes?.map((outcome, i) => (
-          <div key={i} style={{ fontSize: '14px', color: '#666', marginBottom: '8px' }}>• {outcome}</div>
-        ))}
+      <div style={{ paddingBottom: '100px' }}>
+        <HBButton onClick={onProceed}>
+          {t.common.startBtn}
+        </HBButton>
       </div>
-
-      <motion.button 
-        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-        onClick={onProceed}
-        style={{ 
-          padding: '25px 50px', 
-          background: '#fff', 
-          color: '#000', 
-          border: 'none', 
-          fontWeight: '900', 
-          cursor: 'pointer', 
-          fontSize: '16px',
-          letterSpacing: '2px'
-        }}
-      >
-        {t.common.startBtn}
-      </motion.button>
-
-      <p style={{ marginTop: '40px', color: '#333', fontSize: '12px', lineHeight: '1.6' }}>
-        {data.footer}
-      </p>
     </div>
   );
 };
 
-const LandingPage = ({ onStart, language, setLanguage }) => {
+// --- GLAVNA LANDING PAGE KOMPONENTA ---
+const LandingPage = ({ onStart, language }) => {
   const [view, setView] = useState('MAIN');
   const t = translations[language];
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [view]);
 
-  const LanguagePicker = () => (
-    <div style={{ 
-      position: 'absolute', top: '20px', right: '40px', zIndex: 100,
-      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
-      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255,255,255,0.1)'
-    }}>
-      {['sr', 'en'].map((l) => (
-        <span 
-          key={l}
-          onClick={() => setLanguage(l)}
-          style={{ 
-            cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: language === l ? '#ffffff' : '#666',
-            transition: '0.3s'
-          }}
-        >
-          {l.toUpperCase()}
-        </span>
-      ))}
-    </div>
-  );
-
   return (
-    <div className="landing-scroll-container" style={{ 
-      textAlign: 'left', color: '#fff', backgroundColor: '#0a0a0a', minHeight: '100vh',
-      padding: '60px 40px', position: 'relative', width: '100%', boxSizing: 'border-box'
+    <div style={{
+      backgroundColor: '#050505',
+      color: '#fff',
+      minHeight: '100vh',
+      width: '100vw',           // Uzima punu širinu viewporta
+      marginLeft: 'calc(-50vw + 50%)', // Neutrališe potencijalne očeve kontejnere
+      marginRight: 'calc(-50vw + 50%)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxSizing: 'border-box',
+      fontFamily: "'PT Sans', sans-serif",
+      position: 'relative',
+      overflowX: 'hidden'
     }}>
-      <LanguagePicker />
-
       <AnimatePresence mode="wait">
         {view === 'MAIN' ? (
-          <motion.div key="main" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <section style={{ marginBottom: '80px', marginTop: '40px', maxWidth: '1550px', margin: '0 auto' }}>
-              
-              {/* SEKCIJA 1: Naslov i prva slika desno */}
-              <div style={{ display: 'flex', gap: '60px', flexWrap: 'wrap', alignItems: 'flex-start', marginBottom: '60px' }}>
-                <div style={{ flex: '1 1 500px' }}>
-                  <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '30px' }}>{t.compass.title}</h2>
-                  <p style={{ color: '#fff', fontSize: '18px', lineHeight: '1.8', marginBottom: '20px' }}>
-                    {t.compass.description}
-                  </p>
-                </div>
-                <div style={{ flex: '1 1 350px' }}>
-                  <AestheticImage src="/images/t8.jpg" height="400px" />
-                </div>
-              </div>
-              
-              {/* SEKCIJA 2: Citat i T9 slika - FIKSIRANO JEDNO PORED DRUGOG */}
-              <div style={{ display: 'flex', gap: '60px', alignItems: 'center', marginBottom: '80px', flexWrap: 'nowrap' }}>
-                <div style={{ flex: '1' }}>
-                  <p style={{ color: '#666', lineHeight: '1.6', fontSize: '20px', fontStyle: 'italic', borderLeft: '2px solid #222', paddingLeft: '25px' }}>
-                    {t.compass.subquote}
-                  </p>
-                </div>
-                <div style={{ width: '370px', flexShrink: 0 }}>
-                  <AestheticImage src="/images/t9.jpg" height="350px" />
-                </div>
-              </div>
+          <motion.div
+            key="main"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            style={{ maxWidth: '900px', width: '100%', textAlign: 'center' }}
+          >
+            {/* HERO SEKCIJA SA EKLIPSOM I HB KOMPAS TEKSTOM */}
+            <section style={{
+              height: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+              padding: '0 10%',
+              position: 'relative',
+              overflow: 'hidden',
+              backgroundColor: '#050505',
+              marginBottom: '60px'
+            }}>
+              {/* EKLIPSA KONTEJNER */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.5 }}
+                style={{
+                  position: 'relative',
+                  width: '500px',
+                  height: '500px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '-20px',
+                  zIndex: 5
+                }}
+              >
+                {/* Glow efekti */}
+                <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
 
-              {/* Dimenzije - DVE PO DVE */}
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: '1fr 1fr', 
-                gap: '20px', 
-                marginBottom: '40px' 
-              }}>
+                {/* Horizontalna linija */}
+                <div style={{ position: 'absolute', width: '300px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-100px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+
+                {/* Svetlosni prstenovi */}
+                <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+                <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+
+                {/* Diamond/Sparkle tačka */}
+                <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '45px', top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
+
+                {/* CENTRALNI CRNI DISK */}
+                <div style={{
+                  position: 'relative',
+                  width: '400px',
+                  height: '400px',
+                  backgroundColor: '#000',
+                  borderRadius: '50%',
+                  zIndex: 5,
+                  boxShadow: '0 0 20px rgba(0,0,0,1)'
+                }} />
+              </motion.div>
+
+              {/* TEKST HERO SEKCIJE KOJI PREKLAPA EKLIPSU */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                style={{
+                  zIndex: 10,
+                  marginTop: '-160px',
+                  position: 'relative'
+                }}
+              >
+                <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
+                  {t.form.tag}
+                </h4>
+                <h1 style={{
+                  fontSize: 'clamp(40px, 6vw, 72px)',
+                  fontWeight: '900',
+                  lineHeight: '1.1',
+                  maxWidth: '900px',
+                  marginBottom: '30px',
+                  textShadow: '0 0 30px rgba(0,0,0,0.8)'
+                }}>
+                  HB Kompas – <br /> Vaš Vodič kroz Profesionalni Razvoj
+                </h1>
+                <p style={{
+                  fontSize: '20px',
+                  lineHeight: '1.8',
+                  color: '#ccc',
+                  maxWidth: '750px',
+                  margin: '0 auto',
+                  textShadow: '0 0 10px rgba(0,0,0,0.5)'
+                }}>
+                  U današnjem dinamičnom poslovnom svetu, uspeh ne zavisi samo od onoga što znate ili umete, već i od načina na koji razmišljate i utičete na druge. Brze promene i složeni izazovi zahtevaju od nas da budemo celoviti profesionalci koji razumeju svoj doprinos i inspirišu druge.
+                </p>
+              </motion.div>
+            </section>
+
+            {/* CITAT */}
+            <div style={{
+              marginBottom: '120px',
+              padding: '80px 40px',
+              borderTop: '1px solid rgba(255,255,255,0.1)',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+            }}>
+              <p style={{ fontSize: 'clamp(20px, 4vw, 28px)', fontStyle: 'italic', color: '#fff', lineHeight: '1.5', opacity: 0.9, maxWidth: '750px', margin: '0 auto' }}>
+                "{t.compass.subquote}"
+              </p>
+            </div>
+
+            {/* DIMENZIJE */}
+            <div style={{ marginBottom: '120px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
                 {Object.values(t.compass.dimensions).map((dim, i) => (
-                  <div key={i} style={{ padding: '25px', background: 'rgba(255,255,255,0.03)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div style={{ color: '#ffffff', fontWeight: 'bold', marginBottom: '10px', fontSize: '15px', letterSpacing: '1px' }}>{dim.title}</div>
-                    <div style={{ color: '#666', fontSize: '14px', lineHeight: '1.6' }}>{dim.text}</div>
+                  <div key={i} style={{
+                    padding: '40px',
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid rgba(255,255,255,0.05)',
+                    textAlign: 'left'
+                  }}>
+                    <h5 style={{ fontWeight: '900', letterSpacing: '2px', marginBottom: '15px', color: '#fff', textTransform: 'uppercase', fontSize: '13px' }}>
+                      {dim.title}
+                    </h5>
+                    <p style={{ color: '#777', fontSize: '15px', lineHeight: '1.7' }}>
+                      {dim.text}
+                    </p>
                   </div>
                 ))}
               </div>
+            </div>
 
-              <p style={{ color: '#444', fontSize: '14px', fontStyle: 'italic', marginBottom: '80px' }}>
-                {t.compass.extraInfo}
-              </p>
+            {/* PATH SELECTION */}
+<div style={{ textAlign: 'center', paddingBottom: '100px' }}>
+  <ImageAccent src="/images/t10.jpg" width="80%" />
+  <h3 style={{ fontSize: '12px', letterSpacing: '4px', color: 'rgba(255,255,255,0.4)', marginBottom: '50px', textTransform: 'uppercase' }}>
+    {t.common.selectPath}
+  </h3>
 
-              <div style={{ flex: '1 1 350px' }}>
-                  <AestheticImage src="/images/t10.jpg" height="250px" />
-                </div>
+  <motion.div
+    whileHover={{ scale: 1.02, backgroundColor: '#111' }}
+    whileTap={{ scale: 0.98 }}
+    onClick={() => setView('LEADER')}
+    style={{
+      padding: '40px 30px',           // Smanjen padding (bilo je 80x40)
+      background: '#0e0e0e',             // Crna pozadina
+      color: '#fff',                  // Beli tekst
+      cursor: 'pointer',
+      transition: '0.3s',
+      width: '100%',
+      maxWidth: '400px',              // Smanjena maksimalna širina
+      margin: '0 auto',
+      border: '1px solid rgba(255,255,255,0.1)', // Suptilna ivica da se dugme uoči
+      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+      borderRadius: '4px'             // Blago zaobljene ivice za moderniji izgled
+    }}
+  >
+    {/* Ikona (filter invert je tu ako je originalna ikona crna, da postane bela) */}
+    <img src="/leader.png" alt="" style={{ width: '120px', marginBottom: '20px', filter: 'invert(1)' }} />
+    
+    <h3 style={{ fontSize: '24px', fontWeight: '900', marginBottom: '10px' }}>
+        {t.leader.title}
+    </h3>
+    
+    <p style={{ color: '#888', fontSize: '15px', fontWeight: '400', marginBottom: '0' }}>
+        {t.leader.subtitle}
+    </p>
 
-              {/* SEKCIJA 3: Select path naslov i treća slika desno */}
-              <div style={{ display: 'flex', gap: '60px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '40px' }}>
-                <div style={{ flex: '1 1 500px' }}>
-                  
-                  <h3 style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px', color: '#444' }}>
-                    {t.common.selectPath}
-                  </h3>
-                </div>
-                
-              </div>
-              
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
-                <RoleCard 
-                  title={t.leader.title} 
-                  desc={t.leader.subtitle} 
-                  onClick={() => setView('LEADER')} 
-                  icon={<img src="/leader.png" alt="Logo" style={{ width: '120px' }} />}
-                  t={t}
-                />
-                <RoleCard 
-                  title={t.employee.title} 
-                  desc={t.employee.subtitle} 
-                  onClick={() => setView('EMPLOYEE')} 
-                  icon={<img src="/zaposleni.png" alt="Logo" style={{ width: '120px' }} />}
-                  t={t}
-                />
-              </div>
-            </section>
+    <div style={{ 
+        marginTop: '30px', 
+        fontSize: '11px', 
+        fontWeight: '900', 
+        letterSpacing: '3px', 
+        textTransform: 'uppercase', 
+        borderTop: '1px solid rgb(255, 255, 255)', 
+        paddingTop: '20px',
+        color: '#fff'
+    }}>
+      {t.common.learnMore} →
+    </div>
+  </motion.div>
+</div>
           </motion.div>
         ) : (
-          <motion.div key="details" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+          <motion.div key="details" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
             <DetailView type={view} t={t} onBack={() => setView('MAIN')} onProceed={() => onStart(view)} />
           </motion.div>
         )}

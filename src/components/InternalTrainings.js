@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { HBInput, HBTextArea, HBSelect, HBButton } from '../components/UIComponents';
+
 
 const InternalTrainings = () => {
     const [language, setLanguage] = useState('sr');
@@ -199,31 +201,22 @@ const InternalTrainings = () => {
 
     const t = content[language];
 
-    const inputStyle = {
-        background: 'transparent',
-        border: 'none',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
-        padding: '15px 0',
-        color: '#fff',
-        fontSize: '16px',
-        outline: 'none',
-        width: '100%',
-        marginBottom: '30px',
-        fontFamily: 'inherit'
-    };
-
     // Mala komponenta za prefinjenu sliku (akcenat)
-    const ImageAccent = ({ src, float = 'none', width = '300px', margin = '0' }) => (
+    const ImageAccent = ({ src, float = 'none', width = '300px', margin = '0' }) => {
+    const isPhoto = src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg');
+    
+    return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }} // Povećao sam opacity na 1 za bolju vidljivost
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             style={{
                 width: width,
                 float: float,
                 margin: margin,
-                clear: float === 'none' ? 'both' : 'none'
+                clear: float === 'none' ? 'both' : 'none',
+                zIndex: 2
             }}
         >
             <img
@@ -232,15 +225,19 @@ const InternalTrainings = () => {
                 style={{
                     width: '100%',
                     height: 'auto',
-                    // FILTERI ZA BOLJI KVALITET:
-                    filter: 'grayscale(90%) brightness(1.1) contrast(1.05)',
-                    imageRendering: 'crisp-edges', // Pomaže kod oštrine na nekim browserima
-                    borderRadius: '2px',
-                    display: 'block'
+                    // Ako je JPG (slika čoveka), skidamo grayscale i pojačavamo toplinu i oštrinu
+                    filter: isPhoto 
+                        ? 'brightness(1.05) contrast(1.1) saturate(1.1)' 
+                        : 'grayscale(90%) brightness(1.1) contrast(1.05)',
+                    imageRendering: 'auto',
+                    borderRadius: '4px',
+                    display: 'block',
+                    boxShadow: isPhoto ? '0 15px 35px rgba(0,0,0,0.5)' : 'none'
                 }}
             />
         </motion.div>
     );
+};
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
@@ -253,23 +250,35 @@ const InternalTrainings = () => {
             </div>
 
             {/* HERO SEKCIJA */}
-            <section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
-                <motion.div style={{ position: 'relative', width: '350px', height: '350px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '-20px', zIndex: 5 }}>
-                    <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-                    <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-                    <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                    <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                    <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
-                    <div style={{ position: 'relative', width: '280px', height: '280px', backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 15px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                        <motion.img src="/logo.png" initial={{ opacity: 0 }} animate={{ opacity: 0.2 }} transition={{ delay: 1, duration: 2 }} style={{ width: '220px', height: 'auto', objectFit: 'contain', filter: 'grayscale(100%) brightness(1.5)' }} />
-                    </div>
-                </motion.div>
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10 }}>
-                    <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>{t.category}</h4>
-                    <h1 style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
-                    <h2 style={{ fontSize: '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
-                </motion.div>
-            </section>
+<section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
+    {/* 1. POVEĆAN KONTEJNER: sa 350px na 500px */}
+    <motion.div style={{ position: 'relative', width: '500px', height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>
+        
+        {/* Glow efekat u pozadini (uvećan) */}
+        <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
+        
+        {/* Horizontalna linija (prilagođena širina) */}
+        <div style={{ position: 'absolute', width: '300px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-100px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        
+        {/* 2. SVETLOSNI PRSTENOVI: sa 284px na 404px */}
+        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        
+        {/* Mala bela tačka (Diamond/Sparkle) - Pomerena na novu ivicu (right: 45px) */}
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '45px', top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
+        
+        {/* 3. CENTRALNI CRNI KRUG: sa 280px na 400px */}
+        <div style={{ position: 'relative', width: '400px', height: '400px', backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 20px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        </div>
+    </motion.div>
+
+    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10, marginTop: '-180px',  // Negativna margina koja vuče tekst "gore" preko kruga
+            position: 'relative' }}>
+        <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>{t.category}</h4>
+        <h1 style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
+        <h2 style={{ fontSize: '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
+    </motion.div>
+</section>
 
             {/* MAIN CONTENT */}
             <section style={{ padding: '100px 10%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
@@ -318,10 +327,10 @@ const InternalTrainings = () => {
                                 }}
                             >
                                 {/* Slike 5, 6, 7, 8 kao mali "peek" akcenti unutar ili pored kartica */}
-                                {idx === 0 && <ImageAccent src="/images/5.png" float="right" width="200px" margin="0 0 20px 20px" />}
-                                {idx === 1 && <ImageAccent src="/images/6.png" float="right" width="200px" margin="0 0 20px 20px" />}
-                                {idx === 2 && <ImageAccent src="/images/7.png" float="right" width="200px" margin="0 0 20px 20px" />}
-                                {idx === 3 && <ImageAccent src="/images/8.png" float="right" width="200px" margin="0 0 20px 20px" />}
+                                {idx === 0 && <ImageAccent src="/images/t5.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
+                                {idx === 1 && <ImageAccent src="/images/t6.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
+                                {idx === 2 && <ImageAccent src="/images/t7.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
+                                {idx === 3 && <ImageAccent src="/images/t8.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
 
                                 <div style={{ fontSize: '12px', color: 'rgb(255, 255, 255)', fontWeight: 'bold', marginBottom: '15px', letterSpacing: '2px' }}>
                                     LEVEL 0{level.id} — {level.dur}
@@ -351,68 +360,83 @@ const InternalTrainings = () => {
                     </motion.div>
                 </div>
             </section>
+{/* FORMA SEKCIJA - USKLAĐENA SA NOVIM DIZAJNOM */}
+<section style={{ padding: '100px 10%', backgroundColor: '#080808' }}>
+    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{t.formTitle}</h2>
+            <p style={{ color: '#888' }}>{t.formSubtitle}</p>
+        </div>
 
-            {/* FORMA SEKCIJA */}
-            <section style={{ padding: '100px 10%', backgroundColor: '#080808' }}>
-                <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                        <h2 style={{ fontSize: '36px', fontWeight: '900', marginBottom: '10px' }}>{t.formTitle}</h2>
-                        <p style={{ color: '#888' }}>{t.formSubtitle}</p>
-                    </div>
+        <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+            {/* RED 1: Ime i Prezime */}
+            <HBInput 
+                name="FirstName" 
+                placeholder={t.labels.firstName} 
+                value={formData.FirstName} 
+                onChange={handleInputChange} 
+                required 
+            />
+            <HBInput 
+                name="LastName" 
+                placeholder={t.labels.lastName} 
+                value={formData.LastName} 
+                onChange={handleInputChange} 
+                required 
+            />
+            
+            {/* RED 2: Email i Telefon */}
+            <HBInput 
+                type="email" 
+                name="Email" 
+                placeholder={t.labels.email} 
+                value={formData.Email} 
+                onChange={handleInputChange} 
+                required 
+            />
+            <HBInput 
+                name="PhoneNumber" 
+                placeholder={t.labels.phone} 
+                value={formData.PhoneNumber} 
+                onChange={handleInputChange} 
+            />
+            
+            {/* RED 3: Kompanija i Select opcija */}
+            <HBInput 
+                name="CompanyName" 
+                placeholder={t.labels.company} 
+                value={formData.CompanyName} 
+                onChange={handleInputChange} 
+            />
+            
+            <HBSelect 
+                name="FourWaysToWorkWithUs" 
+                value={formData.FourWaysToWorkWithUs} 
+                onChange={handleInputChange} 
+                required
+            >
+                <option value="" disabled>{t.labels.placeholderInterest}</option>
+                {t.labels.options.map((opt, i) => (
+                    <option key={i} value={opt}>{opt}</option>
+                ))}
+            </HBSelect>
 
-                    <form onSubmit={handleFormSubmit}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
-                            <input type="text" name="FirstName" placeholder={t.labels.firstName} value={formData.FirstName} onChange={handleInputChange} style={inputStyle} required />
-                            <input type="text" name="LastName" placeholder={t.labels.lastName} value={formData.LastName} onChange={handleInputChange} style={inputStyle} required />
-                        </div>
-                        
-                        <input type="email" name="Email" placeholder={t.labels.email} value={formData.Email} onChange={handleInputChange} style={inputStyle} required />
-                        <input type="text" name="PhoneNumber" placeholder={t.labels.phone} value={formData.PhoneNumber} onChange={handleInputChange} style={inputStyle} />
-                        <input type="text" name="CompanyName" placeholder={t.labels.company} value={formData.CompanyName} onChange={handleInputChange} style={inputStyle} />
+            {/* RED 4: Poruka (Preko oba stuba) */}
+            <HBTextArea 
+                name="Message" 
+                placeholder={t.labels.message} 
+                value={formData.Message} 
+                onChange={handleInputChange} 
+                style={{ gridColumn: 'span 2' }} 
+            />
 
-                        {/* SELECT ZA 4 WAYS TO WORK */}
-                        <div style={{ marginBottom: '30px' }}>
-                            <label style={{ fontSize: '12px', color: '#555', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.labels.interest}</label>
-                            <select 
-                                name="FourWaysToWorkWithUs" 
-                                value={formData.FourWaysToWorkWithUs} 
-                                onChange={handleInputChange} 
-                                style={{ ...inputStyle, cursor: 'pointer', appearance: 'none' }}
-                                required
-                            >
-                                <option value="" disabled>{t.labels.placeholderInterest}</option>
-                                {t.labels.options.map((opt, i) => (
-                                    <option key={i} value={opt}>{opt}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <textarea name="Message" placeholder={t.labels.message} value={formData.Message} onChange={handleInputChange} style={{ ...inputStyle, minHeight: '100px', resize: 'vertical' }} />
-
-                        <motion.button
-                            whileHover={{ scale: 1.02, backgroundColor: '#fff', color: '#000' }}
-                            whileTap={{ scale: 0.98 }}
-                            type="submit"
-                            style={{
-                                width: '100%',
-                                padding: '20px',
-                                background: 'transparent',
-                                border: '1px solid #fff',
-                                color: '#fff',
-                                fontSize: '14px',
-                                fontWeight: 'bold',
-                                textTransform: 'uppercase',
-                                letterSpacing: '2px',
-                                cursor: 'pointer',
-                                marginTop: '20px',
-                                transition: '0.3s'
-                            }}
-                        >
-                            {t.labels.submit}
-                        </motion.button>
-                    </form>
-                </div>
-            </section>
+            {/* RED 5: Novo belo dugme (Preko oba stuba) */}
+            <HBButton type="submit" style={{ gridColumn: 'span 2' }}>
+                {t.labels.submit}
+            </HBButton>
+        </form>
+    </div>
+</section>
 
             <footer style={{
                 padding: '50px 10%',

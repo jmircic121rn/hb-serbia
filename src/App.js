@@ -27,7 +27,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [eclipseMenu, setEclipseMenu] = useState('main');
   const [language, setLanguage] = useState('sr');
   const [assessmentType, setAssessmentType] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -107,48 +106,7 @@ function App() {
       minHeight: '100vh',
       overflow: 'visible' 
     }}>
-      <aside className="pd-sidebar" style={{ 
-        width: isMobile ? '100%' : '380px', 
-        padding: isMobile ? '20px' : '0px', // Smanjujemo padding sidebara da kontrolišemo poziciju unutra
-        height: isMobile ? 'auto' : '100vh',
-        position: isMobile ? 'relative' : 'sticky',
-        top: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: isMobile ? 'center' : 'flex-start', // Desktop: levo poravnanje
-        borderRight: isMobile ? 'none' : '1px solid rgba(255,180,120,0.1)',
-        zIndex: 10,
-        flexShrink: 0,
-        backgroundColor: '#050505'
-      }}>
-        {/* UNUTRAŠNJI KONTEJNER - Ovde kontrolišeš tačnu poziciju */}
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'flex-start', // Pomera sadržaj ulevo
-          position: isMobile ? 'relative' : 'sticky',
-          top: 0,
-          paddingTop: isMobile ? '40px' : '150px', // POMERA DOLE (podesi vrednost po želji)
-          paddingLeft: isMobile ? '0' : '50px'     // ODMAK OD LEVE IVICE
-        }}>
-          <img 
-            src="/logo.png" 
-            alt="Logo" 
-            style={{ 
-              width: isMobile ? '150px' : '220px', 
-              marginBottom: '30px' 
-            }} 
-          />
-          <img 
-            src="/compass.png" 
-            alt="Compass" 
-            style={{ 
-              width: isMobile ? '130px' : '200px',
-              opacity: 0.9 // Suptilno smanjen intenzitet da ne odskače previše
-            }} 
-          />
-        </div>
-      </aside>
+      
 
       <main className="pd-content" style={{ 
         flex: 1, 
@@ -164,36 +122,6 @@ function App() {
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
-      {/* --- UNIVERZALNO BACK DUGME --- */}
-{(location.pathname !== '/' || eclipseMenu !== 'main') && !location.pathname.includes('loading') && (
-  <div 
-    onClick={() => {
-      // USLOV 1: Ako smo na početnoj, ali su prikazane 3 planete (assessment nivo)
-      if (location.pathname === '/' && eclipseMenu !== 'main') {
-        setEclipseMenu('main');
-      } 
-      // USLOV 2: Ako smo na prvoj strani assessment-a (/assessment), vrati nas na planete
-      else if (location.pathname === '/assessment') {
-        navigate('/');
-        setEclipseMenu('assessment'); // Opciono: postavi da odmah budu 3 planete kad se vratiš
-      }
-      // USLOV 3: Za sve ostalo, koristi istoriju pretraživača (pamti prethodnu stranu)
-      else {
-        navigate(-1);
-      }
-    }} 
-    className="back-btn-custom" 
-    style={{ 
-      position: 'fixed', top: '30px', left: '40px', cursor: 'pointer', zIndex: 99999,
-      display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '12px',
-      letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)',
-      padding: '10px 15px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)'
-    }}
-  >
-    <span>←</span> BACK
-  </div>
-)}
-
       <Routes>
         {/* 1. PLANETE (Pre-intro) */}
         <Route path="/" element={
@@ -205,8 +133,6 @@ function App() {
               else if (choice === 'INTERNAL_TRAININGS') navigate('/internal-trainings'); // 2. DODATA PUTANJA
               else navigate('/assessment'); // OVO SADA VODI NA URL /assessment
             }}
-            menuLevel={eclipseMenu}
-            setMenuLevel={setEclipseMenu}
             language={language}
             setLanguage={setLanguage}
           />

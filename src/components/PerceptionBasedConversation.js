@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { HBInput, HBTextArea, HBSelect, HBButton } from '../components/UIComponents';
 
 const PerceptionBasedConversation = () => {
     // Scroll to top on load
@@ -49,19 +50,6 @@ const PerceptionBasedConversation = () => {
         }
     };
 
-    const inputStyle = {
-        background: 'transparent',
-        border: 'none',
-        borderBottom: '1px solid rgba(255,255,255,0.2)',
-        padding: '15px 10px',
-        color: '#fff',
-        fontSize: '14px',
-        outline: 'none',
-        transition: 'border-color 0.3s',
-        width: '100%',
-        boxSizing: 'border-box'
-    };
-
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
             
@@ -80,74 +68,84 @@ const PerceptionBasedConversation = () => {
                 `}
             </style>
             
-            {/* HERO SEKCIJA SA EKLIPSOM (Efekti sačuvani) */}
-            <section style={{ 
-                height: '100vh', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                justifyContent: 'center', 
-                alignItems: 'center',
-                textAlign: 'center',
-                padding: '0 10%',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                <motion.div 
-                    style={{
-                        position: 'relative',
-                        width: '350px',
-                        height: '350px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '-20px',
-                        zIndex: 5
-                    }}
-                >
-                    <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-                                        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-                                        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                                        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                                        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
-                    <div style={{
-          position: 'relative',
-          width: '280px',
-          height: '280px',
-          backgroundColor: '#000',
-          borderRadius: '50%',
-          zIndex: 5,
-          boxShadow: '0 0 15px rgba(0,0,0,1)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
-        }}>
-          <motion.img
-            src="/logo.png"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            transition={{ delay: 1, duration: 2 }}
-            style={{
-              width: '220px',
-              height: 'auto',
-              objectFit: 'contain',
-              filter: 'grayscale(100%) brightness(1.5)'
-            }}
-          />
-        </div>                </motion.div>
+           {/* HERO SEKCIJA - UVEĆANA EKLIPSA I PREKLAPANJE TEKSTA */}
+<section style={{ 
+    height: '100vh', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    textAlign: 'center',
+    padding: '0 10%',
+    position: 'relative',
+    overflow: 'hidden'
+}}>
+    {/* KONTEJNER ZA EKLIPSU (Uvećan na 500px) */}
+    <motion.div 
+        style={{
+            position: 'relative',
+            width: '500px',
+            height: '500px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '-20px',
+            zIndex: 5
+        }}
+    >
+        {/* Pozadinski Glow */}
+        <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
+        
+        {/* Horizontalna linija */}
+        <div style={{ position: 'absolute', width: '300px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-100px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+        
+        {/* Svetlosni prstenovi (Uvećani na 404px) */}
+        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+        
+        {/* Diamond/Sparkle tačka (Pomerena na novu ivicu) */}
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '45px', top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
 
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10 }}>
-                    <h4 style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
-                        Intenzivna jednodnevna radionica
-                    </h4>
-                    <h1 style={{ fontSize: 'clamp(30px, 6vw, 60px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '900px', marginBottom: '30px' }}>
-                        Razgovor zasnovan <br /> na percepciji.
-                    </h1>
-                    <p style={{ fontSize: '18px', color: '#888', maxWidth: '800px', margin: '0 auto', fontStyle: 'italic', lineHeight: '1.6' }}>
-                        „Ne treba nam ništa!“ – Da li je ovo kraj razgovora ili početak uticaja?
-                    </p>
-                </motion.div>
-            </section>
+        {/* CENTRALNI CRNI DISK (Uvećan na 400px, bez logoa) */}
+        <div style={{
+            position: 'relative',
+            width: '400px',
+            height: '400px',
+            backgroundColor: '#000',
+            borderRadius: '50%',
+            zIndex: 5,
+            boxShadow: '0 0 20px rgba(0,0,0,1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden'
+        }}>
+            {/* Logo je uklonjen radi minimalističkog overlap efekta */}
+        </div>                
+    </motion.div>
+
+    {/* TEKST SEKCIJE (Podignut preko eklipse sa marginTop: -220px) */}
+    <motion.div 
+        initial={{ opacity: 0, y: 30 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 1 }} 
+        style={{ 
+            zIndex: 10, 
+            marginTop: '-160px', 
+            position: 'relative' 
+        }}
+    >
+        <h4 style={{ color: 'rgba(255,255,255,0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
+            Intenzivna jednodnevna radionica
+        </h4>
+        <h1 style={{ fontSize: 'clamp(30px, 6vw, 60px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '900px', marginBottom: '30px' }}>
+            Razgovor zasnovan <br /> na percepciji.
+        </h1>
+        <p style={{ fontSize: '18px', color: '#888', maxWidth: '800px', margin: '0 auto', fontStyle: 'italic', lineHeight: '1.6' }}>
+            „Ne treba nam ništa!“ – Da li je ovo kraj razgovora ili početak uticaja?
+        </p>
+    </motion.div>
+</section>
 
             {/* PETAR I ANA SEKCIJA */}
             <section style={{ padding: '100px 10%', display: 'grid', gridTemplateColumns: window.innerWidth > 992 ? '1fr 1fr' : '1fr', gap: '80px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
@@ -287,55 +285,90 @@ const PerceptionBasedConversation = () => {
                 </div>
             </section>
 
-            {/* KONTAKT FORMA */}
-            <section ref={formRef} style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
-                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-                    <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '20px' }}>Hajde da pričamo o postizanju Vaših ciljeva!</h2>
-                    <p style={{ color: '#666' }}>Popunite formular i kliknite na Pošalji da biste stupili u kontakt sa našim timom Hansen Beck u Srbiji. Odgovorićemo na Vaš upit u roku od 24 sata.</p>
-                </div>
+            {/* KONTAKT FORMA - MODERNIZOVANA SA UI KOMPONENTAMA */}
+<section ref={formRef} style={{ maxWidth: '1000px', margin: '100px auto', padding: '0 20px' }}>
+    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '20px' }}>Hajde da pričamo o postizanju Vaših ciljeva!</h2>
+        <p style={{ color: '#666' }}>Popunite formular i kliknite na Pošalji da biste stupili u kontakt sa našim timom Hansen Beck u Srbiji. Odgovorićemo na Vaš upit u roku od 24 sata.</p>
+    </div>
 
-                <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '30px' }}>
-                    <input name="ime" value={formData.ime} onChange={handleInputChange} placeholder="Ime" style={inputStyle} required />
-                    <input name="prezime" value={formData.prezime} onChange={handleInputChange} placeholder="Prezime" style={inputStyle} required />
-                    <input name="email" value={formData.email} onChange={handleInputChange} placeholder="E-Mail" type="email" style={inputStyle} required />
-                    <input name="telefon" value={formData.telefon} onChange={handleInputChange} placeholder="Broj telefona" style={inputStyle} required />
-                    <input name="kompanija" value={formData.kompanija} onChange={handleInputChange} placeholder="Naziv kompanije" style={inputStyle} />
-                    <input name="trening" value={formData.trening} style={{...inputStyle, opacity: 0.7}} readOnly />
-                    
-                    <select name="datum" value={formData.datum} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Izaberite datum</option>
-                        <option value="12. Maj">12. Maj</option>
-                        <option value="21. Maj">21. Maj</option>
-                    </select>
-                    
-                    <select name="vreme" value={formData.vreme} onChange={handleInputChange} style={inputStyle} required>
-                        <option value="" disabled>Izaberite vreme</option>
-                        <option value="09:00 - 17:00">09:00 - 17:00</option>
-                    </select>
+    <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+        <HBInput 
+            name="ime" 
+            placeholder="Ime" 
+            value={formData.ime} 
+            onChange={handleInputChange} 
+            required 
+        />
+        <HBInput 
+            name="prezime" 
+            placeholder="Prezime" 
+            value={formData.prezime} 
+            onChange={handleInputChange} 
+            required 
+        />
+        <HBInput 
+            name="email" 
+            type="email" 
+            placeholder="E-Mail" 
+            value={formData.email} 
+            onChange={handleInputChange} 
+            required 
+        />
+        <HBInput 
+            name="telefon" 
+            placeholder="Broj telefona" 
+            value={formData.telefon} 
+            onChange={handleInputChange} 
+            required 
+        />
+        <HBInput 
+            name="kompanija" 
+            placeholder="Naziv kompanije" 
+            value={formData.kompanija} 
+            onChange={handleInputChange} 
+        />
+        <HBInput 
+            name="trening" 
+            value={formData.trening} 
+            readOnly 
+            style={{ opacity: 0.7 }} 
+        />
+        
+        <HBSelect 
+            name="datum" 
+            value={formData.datum} 
+            onChange={handleInputChange} 
+            required
+        >
+            <option value="" disabled>Izaberite datum</option>
+            <option value="12. Maj">12. Maj</option>
+            <option value="21. Maj">21. Maj</option>
+        </HBSelect>
+        
+        <HBSelect 
+            name="vreme" 
+            value={formData.vreme} 
+            onChange={handleInputChange} 
+            required
+        >
+            <option value="" disabled>Izaberite vreme</option>
+            <option value="09:00 - 17:00">09:00 - 17:00</option>
+        </HBSelect>
 
-                    <textarea 
-                        name="poruka"
-                        value={formData.poruka}
-                        onChange={handleInputChange}
-                        placeholder="Vaš komentar" 
-                        style={{ ...inputStyle, gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', height: '120px' }} 
-                    />
+        <HBTextArea 
+            name="poruka" 
+            placeholder="Vaš komentar" 
+            value={formData.poruka} 
+            onChange={handleInputChange} 
+            style={{ gridColumn: 'span 2' }} 
+        />
 
-                    <button type="submit" style={{ 
-                        gridColumn: window.innerWidth > 768 ? 'span 2' : 'span 1', 
-                        padding: '20px', 
-                        background: '#fff', 
-                        color: '#000', 
-                        fontWeight: '900', 
-                        border: 'none', 
-                        cursor: 'pointer', 
-                        marginTop: '20px',
-                        letterSpacing: '2px'
-                    }}>
-                        POŠALJI PRIJAVU
-                    </button>
-                </form>
-            </section>
+        <HBButton type="submit" style={{ gridColumn: 'span 2' }}>
+            POŠALJI PRIJAVU
+        </HBButton>
+    </form>
+</section>
 
             <footer style={{ padding: '50px 10%', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', fontSize: '12px', color: '#444' }}>
                 © 2026 HANSEN BECK SRBIJA. SVA PRAVA ZADRŽANA.

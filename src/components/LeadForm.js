@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { translations } from '../data/translations';
+// Uvezi tvoje nove komponente (proveri putanju do fajla gde si ih definisala)
+import { HBInput, HBButton } from './UIComponents'; 
 
 const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) => {
   const [formData, setFormData] = useState({
@@ -8,13 +10,10 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
   });
 
   const [agreed, setAgreed] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
 
-  // Preuzimanje prevoda na osnovu jezika
   const t = translations[language].form;
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!agreed) {
@@ -26,7 +25,6 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
     localStorage.setItem('appLanguage', language); 
     
     try {
-      // Sada await radi jer je funkcija async
       await onNext(formData);
     } catch (err) {
       console.error(err);
@@ -39,14 +37,13 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
     setFormData({ ...formData, [field]: value });
   };
 
-  // KOMPONENTA ZA PROMENU JEZIKA (Ista kao na ostalim stranicama)
   const LanguagePicker = () => (
     <div style={{
       position: 'absolute', top: '20px', right: '40px', zIndex: 100,
       display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
       padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
       border: '1px solid rgba(255,255,255,0.1)',
-      width: 'fit-content' // Jako bitno da ne blokira ostatak forme
+      width: 'fit-content'
     }}>
       {['sr', 'en'].map((l) => (
         <span
@@ -66,19 +63,19 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
 
   return (
     <div className="bars-question-container" style={{ marginLeft: 100, position: 'relative' }}>
-      {/* Dodat birač jezika */}
       <LanguagePicker />
 
       <span className="category-tag">{t.tag}</span>
-      <h2 className="question-text">{t.title}</h2>
+      <h2 className="question-text" style={{ marginBottom: '40px' }}>{t.title}</h2>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
 
         {errorMsg && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
+              gridColumn: 'span 2',
               color: '#ff6b6b',
               fontSize: '13px',
               marginBottom: '20px',
@@ -93,37 +90,58 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
           </motion.div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-          <input required placeholder={t.firstName} className="hb-input"
-            onChange={e => handleChange('firstName', e.target.value)} />
-          <input required placeholder={t.lastName} className="hb-input"
-            onChange={e => handleChange('lastName', e.target.value)} />
-        </div>
+        {/* RED 1 */}
+        <HBInput 
+          required 
+          placeholder={t.firstName} 
+          value={formData.firstName}
+          onChange={e => handleChange('firstName', e.target.value)} 
+        />
+        <HBInput 
+          required 
+          placeholder={t.lastName} 
+          value={formData.lastName}
+          onChange={e => handleChange('lastName', e.target.value)} 
+        />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-          <input required type="email" placeholder={t.email} className="hb-input"
-            onChange={e => handleChange('email', e.target.value)} />
-          <input required type="tel" placeholder={t.phone} className="hb-input"
-            onChange={e => handleChange('phoneNumber', e.target.value)} />
-        </div>
+        {/* RED 2 */}
+        <HBInput 
+          required 
+          type="email" 
+          placeholder={t.email} 
+          value={formData.email}
+          onChange={e => handleChange('email', e.target.value)} 
+        />
+        <HBInput 
+          required 
+          type="tel" 
+          placeholder={t.phone} 
+          value={formData.phoneNumber}
+          onChange={e => handleChange('phoneNumber', e.target.value)} 
+        />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-          <input placeholder={t.company} className="hb-input"
-            onChange={e => handleChange('company', e.target.value)} />
-          <input placeholder={t.jobTitle} className="hb-input"
-            onChange={e => handleChange('jobTitle', e.target.value)} />
-        </div>
+        {/* RED 3 */}
+        <HBInput 
+          placeholder={t.company} 
+          value={formData.company}
+          onChange={e => handleChange('company', e.target.value)} 
+        />
+        <HBInput 
+          placeholder={t.jobTitle} 
+          value={formData.jobTitle}
+          onChange={e => handleChange('jobTitle', e.target.value)} 
+        />
 
-        <div style={{ display: 'flex', gap: '12px', marginTop: '20px', alignItems: 'flex-start' }}>
+        {/* GDPR - Pun red */}
+        <div style={{ gridColumn: 'span 2', display: 'flex', gap: '12px', marginTop: '10px', alignItems: 'flex-start' }}>
           <input
             type="checkbox"
             required
             id="gdpr-consent"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            style={{ marginTop: '4px', cursor: 'pointer', accentColor: '#f8f8f8' }}
+            style={{ marginTop: '4px', cursor: 'pointer', accentColor: '#fff' }}
           />
-          {/* Koristimo div umesto label-a za ceo tekst da izbegnemo automatsko okidanje checkboxa na klik linka */}
           <div style={{ fontSize: '12px', color: '#888', lineHeight: '1.6' }}>
             <span style={{ color: '#ffb478', marginRight: '6px', fontWeight: 'bold' }}>*</span>
             {t.gdprText}
@@ -139,7 +157,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
                 marginLeft: '4px',
                 cursor: 'pointer',
                 fontWeight: 'bold',
-                display: 'inline-block' // Povećava zonu klika
+                display: 'inline-block'
               }}
             >
               {t.privacyLink}
@@ -147,16 +165,17 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
           </div>
         </div>
 
-        <button 
-  type="submit" 
-  className="hb-primary-btn" 
-  style={{ marginTop: '20px' }}
-  disabled={isLoading} // Dodaj isLoading state u LeadForm kao što smo pričali u prethodnoj poruci
->
-  {isLoading ? '...' : t.btn}
-</button>
+        {/* DUGME - Pun red */}
+        <div style={{ gridColumn: 'span 2' }}>
+          <HBButton 
+            type="submit" 
+            isLoading={isLoading}
+          >
+            {t.btn}
+          </HBButton>
+        </div>
 
-        <p style={{ textAlign: 'center', fontSize: '11px', color: '#999', marginTop: '15px' }}>
+        <p style={{ gridColumn: 'span 2', textAlign: 'center', fontSize: '11px', color: '#666', marginTop: '10px' }}>
           {t.footerNote}
         </p>
       </form>

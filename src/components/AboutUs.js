@@ -346,7 +346,7 @@ contactPerson: "Contact person: Nikola Mircic",
       >
         nikola.mircic@traininganddevelopment.rs
       </a>
-      <p style={{ color: '#fff', fontSize: '16px', marginTop: '5px' }}>063 221910</p>
+      <p style={{ color: '#fff', fontSize: '16px', marginTop: '5px' }}>+381-63-221-910</p>
     </div>
 
   </div>

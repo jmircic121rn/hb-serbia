@@ -67,39 +67,34 @@ body {
     top: 0 !important;
 }
 
+/* Pronađi ovaj deo u tvom App.css i zameni ga: */
 body,
 html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Inter', sans-serif;
+  /* font-family: 'Inter', sans-serif;  <-- OVO IZBRIŠI */
+  font-family: 'PT Sans', sans-serif; /* PT Sans je glavni za UI elemente */
   background-color: var(--hb-black);
 }
 
+/* Dodaj ovo ispod da bi naslovi i važni tekstovi koristili PT Serif */
+h1, h2, h3, .question-text, .sidebar-header h1 {
+  font-family: 'PT Serif', serif !important;
+  font-weight: bold;
+}
+
+/* Opcije i dugmad neka ostanu u PT Sans jer su čitljiviji */
+.bars-option-btn, .hb-primary-btn, .category-tag {
+  font-family: 'PT Sans', sans-serif;
+}
+
 .pd-split-container {
-  display: flex;
-  min-height: 100vh;
-  background-color: #000;
-  /* overflow: hidden;  <-- OVO OBAVEZNO IZBRIŠI ILI STAVI NA visible */
-  overflow: visible; 
+  display: block; /* Promeni iz flex u block */
   width: 100%;
-}
-
-/* SIDEBAR - CRNI DEO */
-.pd-sidebar {
-  width: 380px; /* FIKSNA ŠIRINA umesto 30% */
   background-color: #050505;
-  border-right: 1px solid rgba(255, 180, 120, 0.1);
-  color: var(--hb-white);
-  padding: 60px 40px;
-  position: sticky; /* PROMENI IZ fixed U sticky */
-  height: 100vh;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  flex-shrink: 0; /* Ne dozvoljava skupljanje */
+  min-height: 100vh;
 }
-
 
 .category-tag {
   color: #666;
@@ -135,16 +130,13 @@ html {
 
 /* CONTENT - BELI DEO */
 .pd-content {
-  flex: 1;
-  background-color: #0a0a0a;
+  width: 100%;
+  max-width: 100%;
+  background-color: #050505; /* Neka bude ista crna kao LandingPage */
   min-height: 100vh;
-  /* overflow-y: auto; <-- OVO IZBRIŠI, skrol treba da bude na celom ekranu */
-  overflow: visible;
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-start;
-  padding-top: 100px;
+  display: block; /* Izbaci flex */
+  padding-top: 0; /* LandingPage već ima svoj padding */
+  margin: 0;
 }
 
 /* KARTICE I ELEMENTI */
@@ -228,4 +220,10 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
   backdrop-filter: blur(10px);
+}
+.main-layout-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #050505;
 }
