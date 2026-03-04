@@ -97,8 +97,8 @@ const ResultView = ({ userData, language = 'sr' }) => {
         }}>
             <p style={{ fontSize: '12px', color: '#555', fontStyle: 'italic', margin: 0, lineHeight: '1.5' }}>
                 {langKey === 'en' 
-                  ? 'Please check your inbox (and spam folder) within the next few minutes. The analysis is being processed by our AI engine.'
-                  : 'Molimo proveri inbox (i spam folder) u narednih nekoliko minuta. Analizu obrađuje naš AI engine.'}
+                  ? 'Please check your inbox (and spam folder) within the next few minutes.'
+                  : 'Molimo proveri inbox (i spam folder) u narednih nekoliko minuta.'}
             </p>
         </div>
 

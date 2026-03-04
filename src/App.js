@@ -21,6 +21,7 @@ import VerifyEmail from './components/VerifyEmail';
 import { translations } from './data/translations';
 import InternalTrainings from './components/InternalTrainings';
 import AssessmentIntro from './components/AssessmentIntro';
+import PdfDebugger from './components/PdfDebugger';
 
 
 function App() {
@@ -123,6 +124,7 @@ function App() {
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
       <Routes>
+        <Route path="/debug-pdf" element={<PdfDebugger />} />
         {/* 1. PLANETE (Pre-intro) */}
         <Route path="/" element={
           <EclipseIntro
