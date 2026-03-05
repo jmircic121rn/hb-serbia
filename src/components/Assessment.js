@@ -3,11 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { leaderQuestions40 } from '../data/leaderQuestions40';
 
 const Assessment = ({ onFinish, onQuestionChange, language: propsLanguage }) => {
-  const [language] = useState(() => {
-    if (propsLanguage) return propsLanguage === 'en' ? 'eng' : 'sr';
-    const savedLang = localStorage.getItem('appLanguage');
-    return savedLang === 'en' ? 'eng' : 'sr';
-  });
+  
+  const language = propsLanguage === 'en' ? 'eng' : 'sr';
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -137,8 +134,9 @@ return (
           transition={{ duration: 0.3 }}
         >
           {/* Pitanje - smanjen font-size i margin bottom za kompaktnost */}
-          <h2 style={{ 
+          <p style={{ 
             fontSize: 'clamp(18px, 3vw, 24px)', 
+            fontFamily: "'PT Sans', sans-serif",
             fontWeight: '400', 
             lineHeight: '1.4', 
             marginBottom: '30px', 
@@ -148,7 +146,7 @@ return (
             {currentQ.text.includes(':') && currentQ.text.length > 50
               ? currentQ.text.split(':').slice(1).join(':').trim() 
               : currentQ.text}
-          </h2>
+          </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {currentQ.options.map((option, idx) => (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Dodaj ovaj import
 
 // Importi komponenti
 import LandingPage from './components/LandingPage';
@@ -112,7 +113,7 @@ function App() {
       <main className="pd-content" style={{ 
         flex: 1, 
         overflow: 'visible',
-        paddingTop: isMobile ? '20px' : '100px'
+        paddingTop: isMobile ? '80px' : '120px'
       }}>
         {children}
       </main>
@@ -123,6 +124,7 @@ function App() {
   return (
     <div className="app-main-wrapper" style={{ backgroundColor: '#0a0a0a', minHeight: '100vh' }}>
 
+  <Navbar language={language} setLanguage={setLanguage} />
       <Routes>
         <Route path="/debug-pdf" element={<PdfDebugger />} />
         {/* 1. PLANETE (Pre-intro) */}
@@ -144,10 +146,9 @@ function App() {
         {/* 2. LANDING PAGE (Sada ima svoj URL /assessment) */}
         <Route path="/assessment" element={
           <AssessmentLayout>
-            <LandingPage 
-              onStart={(type) => { setAssessmentType(type); navigate('/assessment/form'); }} 
-              language={language} 
-              setLanguage={setLanguage} 
+            <LandingPage
+              onStart={(type) => { setAssessmentType(type); navigate('/assessment/form'); }}
+              language={language}
             />
           </AssessmentLayout>
         } />
@@ -155,12 +156,11 @@ function App() {
         {/* 3. FORMA */}
         <Route path="/assessment/form" element={
           <AssessmentLayout>
-            <LeadForm 
-              language={language} 
-              errorMsg={errorMsg} 
-              onNext={handleLeadSubmit} 
-              onPrivacyClick={() => navigate('/politika-privatnosti')} 
-              setLanguage={setLanguage} 
+            <LeadForm
+              language={language}
+              errorMsg={errorMsg}
+              onNext={handleLeadSubmit}
+              onPrivacyClick={() => navigate('/politika-privatnosti')}
             />
           </AssessmentLayout>
         } />
@@ -196,7 +196,7 @@ function App() {
         <Route path="/assessment/results" element={<AssessmentLayout><ResultView report={report} userData={userData} language={language} /></AssessmentLayout>} />
 
         {/* --- OSTALE RUTE --- */}
-        <Route path="/about" element={<AboutUs onBack={() => navigate('/')} />} />
+        <Route path="/about" element={<AboutUs onBack={() => navigate('/')} language={language} />} />
         <Route path="/trainers" element={<Trainers onBack={() => navigate('/')} />} />
         <Route path="/open-trainings" element={<OpenTrainings onNavigate={(path) => navigate(path)} />} />
         <Route path="/success-line" element={<SuccessLine />} />

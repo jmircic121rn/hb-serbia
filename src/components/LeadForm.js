@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { translations } from '../data/translations';
 import { HBInput, HBButton } from './UIComponents'; 
 
-const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) => {
+const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', company: '', jobTitle: '', phoneNumber: ''
   });
@@ -36,30 +36,6 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
     setFormData({ ...formData, [field]: value });
   };
 
-  const LanguagePicker = () => (
-    <div style={{
-      position: 'absolute', top: '-60px', right: '0', zIndex: 100,
-      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
-      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255,255,255,0.1)',
-      width: 'fit-content'
-    }}>
-      {['sr', 'en'].map((l) => (
-        <span
-          key={l}
-          onClick={() => setLanguage(l)}
-          style={{
-            cursor: 'pointer', fontSize: '11px', fontWeight: '900',
-            color: language === l ? '#ffffff' : '#666',
-            transition: '0.3s', letterSpacing: '1px'
-          }}
-        >
-          {l.toUpperCase()}
-        </span>
-      ))}
-    </div>
-  );
-
   return (
     /* GLAVNI KONTEJNER - CENTRIRAN */
     <div style={{ 
@@ -74,8 +50,6 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language, setLanguage }) =
     }}>
       
       <div style={{ width: '100%', position: 'relative', textAlign: 'center' }}>
-        <LanguagePicker />
-        
         <span style={{ 
             display: 'block', 
             fontSize: '11px', 

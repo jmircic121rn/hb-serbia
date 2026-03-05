@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { HBInput, HBTextArea, HBSelect, HBButton } from '../components/UIComponents';
 
 
-const InternalTrainings = () => {
-    const [language, setLanguage] = useState('sr');
+const InternalTrainings = ({ language }) => {
     const API_BASE_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -242,14 +241,8 @@ const InternalTrainings = () => {
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
 
-            {/* LANGUAGE SWITCHER */}
-            <div style={{ position: 'fixed', top: '30px', right: '40px', zIndex: 99999, display: 'flex', alignItems: 'center', gap: '15px', color: '#fff', fontSize: '12px', letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)' }}>
-                <span onClick={() => setLanguage('sr')} style={{ cursor: 'pointer', opacity: language === 'sr' ? 1 : 0.4, transition: '0.3s' }}>SR</span>
-                <span style={{ opacity: 0.2 }}>|</span>
-                <span onClick={() => setLanguage('en')} style={{ cursor: 'pointer', opacity: language === 'en' ? 1 : 0.4, transition: '0.3s' }}>EN</span>
-            </div>
 
-            {/* HERO SEKCIJA */}
+{/* HERO SEKCIJA */}
 <section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
     {/* 1. POVEĆAN KONTEJNER: sa 350px na 500px */}
     <motion.div style={{ position: 'relative', width: '500px', height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>

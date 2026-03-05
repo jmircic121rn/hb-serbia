@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-const AboutUs = ({ onBack }) => {
-  const [language, setLanguage] = useState('sr');
+const AboutUs = ({ onBack, language }) => {
 
   const content = {
     sr: {
@@ -166,14 +165,7 @@ contactPerson: "Contact person: Nikola Mircic",
   return (
     <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#000', color: '#fff', padding: '80px 20px', overflowX: 'hidden', position: 'relative' }}>
 
-      {/* Switcher */}
-      <div style={{ position: 'fixed', top: '30px', right: '40px', zIndex: 9999, display: 'flex', gap: '15px', color: '#fff', fontSize: '12px', letterSpacing: '2px', fontWeight: 'bold', background: 'rgba(0,0,0,0.5)', padding: '10px 20px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.2)' }}>
-        <span onClick={() => setLanguage('sr')} style={{ cursor: 'pointer', opacity: language === 'sr' ? 1 : 0.4, transition: '0.3s' }}>SR</span>
-        <span style={{ opacity: 0.2 }}>|</span>
-        <span onClick={() => setLanguage('en')} style={{ cursor: 'pointer', opacity: language === 'en' ? 1 : 0.4, transition: '0.3s' }}>EN</span>
-      </div>
-
-      <motion.button onClick={onBack} whileHover={{ x: -5 }} style={{ position: 'fixed', top: '40px', left: '40px', background: 'transparent', border: 'none', color: '#666', cursor: 'pointer', fontSize: '12px', letterSpacing: '2px', zIndex: 100 }}></motion.button>
+<motion.button onClick={onBack} whileHover={{ x: -5 }} style={{ position: 'fixed', top: '40px', left: '40px', background: 'transparent', border: 'none', color: '#666', cursor: 'pointer', fontSize: '12px', letterSpacing: '2px', zIndex: 100 }}></motion.button>
 
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '30px' }}>

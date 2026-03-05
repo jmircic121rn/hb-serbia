@@ -182,14 +182,14 @@ const LandingPage = ({ onStart, language }) => {
                   {t.form.tag}
                 </h4>
                 <h1 style={{
-                  fontSize: 'clamp(40px, 6vw, 72px)',
+                  fontSize: 'clamp(30px, 4vw, 72px)',
                   fontWeight: '900',
                   lineHeight: '1.1',
                   maxWidth: '900px',
                   marginBottom: '30px',
                   textShadow: '0 0 30px rgba(0,0,0,0.8)'
                 }}>
-                  HB Kompas – <br /> Vaš Vodič kroz Profesionalni Razvoj
+                  {t.compass.title}
                 </h1>
                 <p style={{
                   fontSize: '20px',
@@ -199,7 +199,7 @@ const LandingPage = ({ onStart, language }) => {
                   margin: '0 auto',
                   textShadow: '0 0 10px rgba(0,0,0,0.5)'
                 }}>
-                  U današnjem dinamičnom poslovnom svetu, uspeh ne zavisi samo od onoga što znate ili umete, već i od načina na koji razmišljate i utičete na druge. Brze promene i složeni izazovi zahtevaju od nas da budemo celoviti profesionalci koji razumeju svoj doprinos i inspirišu druge.
+                  {t.compass.description}
                 </p>
               </motion.div>
             </section>
