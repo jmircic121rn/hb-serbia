@@ -1,7 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const AboutUs = ({ onBack, language }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const h = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
 
   const content = {
     sr: {
@@ -170,7 +176,7 @@ contactPerson: "Contact person: Nikola Mircic",
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '30px' }}>
           <h2 style={{ fontSize: '10px', letterSpacing: '5px', color: 'rgba(255, 255, 255, 0.42)', textTransform: 'uppercase' }}>{t.heroTag}</h2>
-          <h1 style={{ fontSize: '48px', fontWeight: '900', margin: '20px 0' }}>{t.heroTitle}</h1>
+          <h1 style={{ fontSize: isMobile ? 'clamp(28px, 8vw, 42px)' : '48px', fontWeight: '900', margin: '20px 0' }}>{t.heroTitle}</h1>
         </motion.div>
 
         {/* VIDEO SEKCIJA NA KRAJU */}
@@ -239,7 +245,7 @@ contactPerson: "Contact person: Nikola Mircic",
 
         <section style={{ marginBottom: '120px' }}>
           <h3 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '60px' }}>{t.valuesTitle}</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '30px' : '60px' }}>
             <div>
               <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontWeight: 'bold' }}>{t.weAre}</p>
               <ValueItem title={t.v1[0]} desc={t.v1[1]} />
@@ -255,7 +261,7 @@ contactPerson: "Contact person: Nikola Mircic",
           </div>
         </section>
 
-        <motion.section style={{ marginBottom: '120px', background: 'rgba(198, 198, 198, 0.06)', padding: '60px', borderRadius: '2px' }}>
+        <motion.section style={{ marginBottom: '120px', background: 'rgba(198, 198, 198, 0.06)', padding: isMobile ? '30px 20px' : '60px', borderRadius: '2px' }}>
           <h3 style={{ fontSize: '28px', marginBottom: '30px', color: 'rgba(255, 255, 255, 0.8)' }}>{t.teamTitle}</h3>
           <p style={{ lineHeight: '1.8', color: '#ccc', fontSize: '17px' }}>{t.teamIntro}</p>
 
@@ -263,20 +269,20 @@ contactPerson: "Contact person: Nikola Mircic",
             <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '150px' }}>
                 {trainers.map((trainer, index) => (
-                  <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ display: 'flex', flexDirection: index % 2 === 0 ? 'row' : 'row-reverse', gap: '80px', flexWrap: 'wrap', alignItems: 'start' }}>
-                    <div style={{ position: 'relative', width: '320px', height: '400px', flexShrink: 0 }}>
+                  <motion.div key={index} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ display: 'flex', flexDirection: isMobile ? 'column' : (index % 2 === 0 ? 'row' : 'row-reverse'), gap: isMobile ? '30px' : '80px', alignItems: 'start' }}>
+                    <div style={{ position: 'relative', width: isMobile ? '100%' : '320px', height: isMobile ? '280px' : '400px', flexShrink: 0 }}>
                       <div style={{ position: 'absolute', top: '15px', left: index % 2 === 0 ? '-15px' : '15px', width: '100%', height: '100%', border: '1px solid rgba(198, 198, 198, 0.39)', zIndex: 0 }} />
                       <div style={{ width: '100%', height: '100%', backgroundColor: '#111', overflow: 'hidden', position: 'relative', zIndex: 1, border: '1px solid rgba(255,255,255,0.05)' }}>
                         <img src={trainer.image} alt={trainer.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     </div>
-                    <div style={{ flex: 1, minWidth: '300px' }}>
+                    <div style={{ flex: 1, minWidth: isMobile ? '0' : '300px', width: '100%' }}>
                       <h3 style={{ fontSize: '36px', fontWeight: '900', margin: '0' }}>{trainer.name}</h3>
                       <h4 style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', margin: '10px 0 30px 0' }}>{trainer.title}</h4>
                       <div style={{ fontSize: '16px', lineHeight: '1.8', color: '#aaa', marginBottom: '40px' }}>
                         {trainer.bio.map((para, i) => (<p key={i} style={{ marginBottom: '15px' }}>{para}</p>))}
                       </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '30px', borderTop: '1px solid #222', paddingTop: '30px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.5fr', gap: '30px', borderTop: '1px solid #222', paddingTop: '30px' }}>
                         <div>
                           <p style={{ fontSize: '11px', color: '#555', textTransform: 'uppercase', marginBottom: '10px' }}>{t.contact}</p>
                           <p style={{ fontSize: '14px', color: '#ccc', margin: '5px 0' }}>{trainer.phone}</p>
@@ -299,11 +305,11 @@ contactPerson: "Contact person: Nikola Mircic",
 
         <section style={{ paddingBottom: '100px' }}>
           <h4 style={{ color: '#666', letterSpacing: '3px', marginBottom: '20px' }}>{t.historyTitle}</h4>
-          <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '40px', alignItems: 'flex-start' }}>
             <div style={{ flex: 1, fontSize: '15px', lineHeight: '1.8', color: '#aaa' }}>
               {t.historyText}
             </div>
-            <div style={{ width: '300px', height: '375px', background: '#111', border: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#444' }}>
+            <div style={{ width: isMobile ? '100%' : '300px', height: isMobile ? '220px' : '375px', background: '#111', border: '1px solid #333', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#444' }}>
               <img src="/aboutus.jpg" alt="Hansen Beck Crew" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
           </div>

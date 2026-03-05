@@ -1,40 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { translations } from '../data/translations';
 
-const PrivacyPolicy = ({ language: initialLanguage = 'sr' }) => {
-  // Koristimo lokalni state za jezik kako bi birač radio u novom tabu
-  const [lang, setLang] = useState(initialLanguage);
-
+const PrivacyPolicy = ({ language = 'sr' }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const t = translations[lang].privacy;
-
-  // Birač jezika prilagođen za stranicu Politike privatnosti
-  const LanguagePicker = () => (
-    <div style={{ 
-      position: 'absolute', top: '40px', right: '10%', zIndex: 1000,
-      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
-      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(255,255,255,0.1)'
-    }}>
-      {['sr', 'en'].map((l) => (
-        <span 
-          key={l}
-          onClick={() => setLang(l)}
-          style={{ 
-            cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: lang === l ? '#ffffff' : '#666',
-            transition: '0.3s'
-          }}
-        >
-          {l.toUpperCase()}
-        </span>
-      ))}
-    </div>
-  );
+  const t = translations[language].privacy;
 
   return (
     <div style={{ 
@@ -45,10 +18,8 @@ const PrivacyPolicy = ({ language: initialLanguage = 'sr' }) => {
       lineHeight: '1.6',
       position: 'relative'
     }}>
-      <LanguagePicker />
-
-      <motion.div 
-        key={lang} // Ovo resetuje animaciju kada se promeni jezik
+      <motion.div
+        key={language}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}

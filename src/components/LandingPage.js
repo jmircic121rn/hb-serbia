@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { translations } from '../data/translations';
 import { HBButton } from './UIComponents';
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const h = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+  return isMobile;
+};
+
 // --- POMOĆNA KOMPONENTA ZA SLIKE (Centrirana) ---
 const ImageAccent = ({ src, width = '300px', margin = '0 auto 40px auto' }) => {
   const isPhoto = src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg');
@@ -81,7 +91,9 @@ const DetailView = ({ type, t, onBack, onProceed }) => {
 // --- GLAVNA LANDING PAGE KOMPONENTA ---
 const LandingPage = ({ onStart, language }) => {
   const [view, setView] = useState('MAIN');
+  const isMobile = useIsMobile();
   const t = translations[language];
+  const circleSize = isMobile ? Math.min(window.innerWidth * 0.85, 350) : 500;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -133,8 +145,8 @@ const LandingPage = ({ onStart, language }) => {
                 transition={{ duration: 1.5 }}
                 style={{
                   position: 'relative',
-                  width: '500px',
-                  height: '500px',
+                  width: `${circleSize}px`,
+                  height: `${circleSize}px`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -146,20 +158,20 @@ const LandingPage = ({ onStart, language }) => {
                 <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
 
                 {/* Horizontalna linija */}
-                <div style={{ position: 'absolute', width: '300px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-100px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', width: `${circleSize * 0.6}px`, height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: `${-circleSize * 0.2}px`, top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
 
                 {/* Svetlosni prstenovi */}
-                <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-                <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+                <div style={{ position: 'absolute', width: `${circleSize * 0.808}px`, height: `${circleSize * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+                <div style={{ position: 'absolute', width: `${circleSize * 0.808}px`, height: `${circleSize * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
 
                 {/* Diamond/Sparkle tačka */}
-                <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '45px', top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
+                <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: `${circleSize * 0.09}px`, top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
 
                 {/* CENTRALNI CRNI DISK */}
                 <div style={{
                   position: 'relative',
-                  width: '400px',
-                  height: '400px',
+                  width: `${circleSize * 0.8}px`,
+                  height: `${circleSize * 0.8}px`,
                   backgroundColor: '#000',
                   borderRadius: '50%',
                   zIndex: 5,
@@ -174,25 +186,26 @@ const LandingPage = ({ onStart, language }) => {
                 transition={{ duration: 1, delay: 0.5 }}
                 style={{
                   zIndex: 10,
-                  marginTop: '-160px',
-                  position: 'relative'
+                  marginTop: isMobile ? `-${circleSize * 0.35}px` : '-160px',
+                  position: 'relative',
+                  padding: isMobile ? '0 16px' : '0'
                 }}
               >
                 <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>
                   {t.form.tag}
                 </h4>
                 <h1 style={{
-                  fontSize: 'clamp(30px, 4vw, 72px)',
+                  fontSize: isMobile ? 'clamp(24px, 7vw, 40px)' : 'clamp(30px, 4vw, 72px)',
                   fontWeight: '900',
                   lineHeight: '1.1',
                   maxWidth: '900px',
-                  marginBottom: '30px',
+                  marginBottom: '20px',
                   textShadow: '0 0 30px rgba(0,0,0,0.8)'
                 }}>
                   {t.compass.title}
                 </h1>
                 <p style={{
-                  fontSize: '20px',
+                  fontSize: isMobile ? '16px' : '20px',
                   lineHeight: '1.8',
                   color: '#ccc',
                   maxWidth: '750px',

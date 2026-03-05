@@ -5,9 +5,13 @@ import { HBInput, HBTextArea, HBSelect, HBButton } from '../components/UICompone
 
 const InternalTrainings = ({ language }) => {
     const API_BASE_URL = process.env.REACT_APP_API_URL;
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        const h = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', h);
+        return () => window.removeEventListener('resize', h);
     }, []);
 
     const content = {
@@ -245,31 +249,24 @@ const InternalTrainings = ({ language }) => {
 {/* HERO SEKCIJA */}
 <section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
     {/* 1. POVEĆAN KONTEJNER: sa 350px na 500px */}
-    <motion.div style={{ position: 'relative', width: '500px', height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>
-        
-        {/* Glow efekat u pozadini (uvećan) */}
-        <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
-        
-        {/* Horizontalna linija (prilagođena širina) */}
-        <div style={{ position: 'absolute', width: '300px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-100px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-        
-        {/* 2. SVETLOSNI PRSTENOVI: sa 284px na 404px */}
-        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        <div style={{ position: 'absolute', width: '404px', height: '404px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        
-        {/* Mala bela tačka (Diamond/Sparkle) - Pomerena na novu ivicu (right: 45px) */}
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '45px', top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
-        
-        {/* 3. CENTRALNI CRNI KRUG: sa 280px na 400px */}
-        <div style={{ position: 'relative', width: '400px', height: '400px', backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 20px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        </div>
-    </motion.div>
+    {(() => {
+        const cs = isMobile ? Math.min(window.innerWidth * 0.85, 350) : 500;
+        return (
+        <motion.div style={{ position: 'relative', width: `${cs}px`, height: `${cs}px`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>
+            <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', width: `${cs * 0.6}px`, height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: `${-cs * 0.2}px`, top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+            <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: `${cs * 0.09}px`, top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
+            <div style={{ position: 'relative', width: `${cs * 0.8}px`, height: `${cs * 0.8}px`, backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 20px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }} />
+        </motion.div>
+        );
+    })()}
 
-    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10, marginTop: '-180px',  // Negativna margina koja vuče tekst "gore" preko kruga
-            position: 'relative' }}>
+    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10, marginTop: isMobile ? '-120px' : '-180px', position: 'relative', padding: isMobile ? '0 16px' : '0' }}>
         <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>{t.category}</h4>
-        <h1 style={{ fontSize: 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
-        <h2 style={{ fontSize: '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
+        <h1 style={{ fontSize: isMobile ? 'clamp(26px, 7vw, 48px)' : 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
+        <h2 style={{ fontSize: isMobile ? '18px' : '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
     </motion.div>
 </section>
 
@@ -361,7 +358,7 @@ const InternalTrainings = ({ language }) => {
             <p style={{ color: '#888' }}>{t.formSubtitle}</p>
         </div>
 
-        <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+        <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '30px' }}>
             {/* RED 1: Ime i Prezime */}
             <HBInput 
                 name="FirstName" 
@@ -420,11 +417,11 @@ const InternalTrainings = ({ language }) => {
                 placeholder={t.labels.message} 
                 value={formData.Message} 
                 onChange={handleInputChange} 
-                style={{ gridColumn: 'span 2' }} 
+                style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }} 
             />
 
             {/* RED 5: Novo belo dugme (Preko oba stuba) */}
-            <HBButton type="submit" style={{ gridColumn: 'span 2' }}>
+            <HBButton type="submit" style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}>
                 {t.labels.submit}
             </HBButton>
         </form>

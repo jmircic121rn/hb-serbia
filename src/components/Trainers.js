@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Trainers = ({ onBack }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const h = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
   const trainers = [
     {
       name: "Nikola Mirčić",
@@ -82,14 +88,13 @@ const Trainers = ({ onBack }) => {
               viewport={{ once: true }}
               style={{
                 display: 'flex',
-                flexDirection: index % 2 === 0 ? 'row' : 'row-reverse',
-                gap: '80px',
-                flexWrap: 'wrap',
+                flexDirection: isMobile ? 'column' : (index % 2 === 0 ? 'row' : 'row-reverse'),
+                gap: isMobile ? '30px' : '80px',
                 alignItems: 'start'
               }}
             >
               {/* VIZUELNI DEO SA OKVIROM (SUCCESS LINE STIL) */}
-              <div style={{ position: 'relative', width: '320px', height: '400px', flexShrink: 0 }}>
+              <div style={{ position: 'relative', width: isMobile ? '100%' : '320px', height: isMobile ? '260px' : '400px', flexShrink: 0 }}>
                 {/* Narandžasti okvir u pozadini */}
                 <div style={{ 
                   position: 'absolute', 
@@ -120,7 +125,7 @@ const Trainers = ({ onBack }) => {
               </div>
 
               {/* TEKSTUALNI DEO */}
-              <div style={{ flex: 1, minWidth: '300px' }}>
+              <div style={{ flex: 1, minWidth: isMobile ? '0' : '300px', width: '100%' }}>
                 <h3 style={{ fontSize: '36px', fontWeight: '900', margin: '0' }}>{trainer.name}</h3>
                 <h4 style={{ 
                   color: 'rgba(255, 180, 120, 0.9)', 
@@ -139,7 +144,7 @@ const Trainers = ({ onBack }) => {
                 </div>
 
                 {/* Kontakt i Specijalnosti */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '30px', borderTop: '1px solid #222', paddingTop: '30px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.5fr', gap: '30px', borderTop: '1px solid #222', paddingTop: '30px' }}>
                    <div>
                       <p style={{ fontSize: '11px', color: '#555', textTransform: 'uppercase', marginBottom: '10px' }}>Kontakt</p>
                       <p style={{ fontSize: '14px', color: '#ccc', margin: '5px 0' }}>{trainer.phone}</p>

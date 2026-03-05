@@ -67,7 +67,7 @@ const Assessment = ({ onFinish, onQuestionChange, language: propsLanguage }) => 
         minHeight: '100vh', backgroundColor: '#0a0a0a', color: '#fff', textAlign: 'center', padding: '0 20px'
       }}>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-          <h2 style={{ fontSize: '32px', marginBottom: '20px', color: '#ffb478' }}>
+          <h2 style={{ fontSize: '32px', marginBottom: '20px', color: '#ffffff' }}>
             {language === 'eng' ? 'Assessment Completed!' : 'Procena uspešno završena!'}
           </h2>
           <p style={{ fontSize: '18px', maxWidth: '600px', lineHeight: '1.6', color: 'rgba(255,255,255,0.7)' }}>
@@ -79,7 +79,7 @@ const Assessment = ({ onFinish, onQuestionChange, language: propsLanguage }) => 
             onClick={() => window.location.href = 'https://serbia.hansenbeck.com'}
             style={{
               marginTop: '40px', padding: '15px 35px', background: 'transparent', 
-              border: '1px solid #ffb478', color: '#ffb478', borderRadius: '8px', 
+              border: '1px solid #ffffff', color: '#ffffff', borderRadius: '8px', 
               cursor: 'pointer', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px'
             }}
           >

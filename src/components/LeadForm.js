@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { translations } from '../data/translations';
-import { HBInput, HBButton } from './UIComponents'; 
+import { HBInput, HBButton } from './UIComponents';
+import PrivacyPolicy from './PrivacyPolicy';
 
-const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
+const LeadForm = ({ onNext, errorMsg, language }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  useEffect(() => {
+    const h = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', company: '', jobTitle: '', phoneNumber: ''
   });
@@ -37,8 +45,9 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
   };
 
   return (
-    /* GLAVNI KONTEJNER - CENTRIRAN */
-    <div style={{ 
+    <>
+    {/* GLAVNI KONTEJNER - CENTRIRAN */}
+    <div style={{
         width: '100%', 
         maxWidth: '800px', // Širina forme
         margin: '0 auto',  // Centriranje horizontalno
@@ -73,7 +82,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
 
         <form onSubmit={handleSubmit} style={{ 
             display: 'grid', 
-            gridTemplateColumns: '1fr 1fr', 
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
             gap: '20px', 
             textAlign: 'left',
             width: '100%' 
@@ -84,7 +93,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               style={{
-                gridColumn: 'span 2',
+                gridColumn: isMobile ? 'span 1' : 'span 2',
                 color: '#ff6b6b',
                 fontSize: '13px',
                 marginBottom: '20px',
@@ -108,7 +117,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
           <HBInput placeholder={t.jobTitle} value={formData.jobTitle} onChange={e => handleChange('jobTitle', e.target.value)} />
 
           {/* GDPR */}
-          <div style={{ gridColumn: 'span 2', display: 'flex', gap: '12px', marginTop: '10px', alignItems: 'flex-start' }}>
+          <div style={{ gridColumn: isMobile ? 'span 1' : 'span 2', display: 'flex', gap: '12px', marginTop: '10px', alignItems: 'flex-start' }}>
             <input
               type="checkbox"
               required
@@ -124,7 +133,7 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  onPrivacyClick();
+                  setShowPrivacy(true);
                 }}
                 style={{
                   color: '#ffb478',
@@ -140,18 +149,44 @@ const LeadForm = ({ onNext, errorMsg, onPrivacyClick, language }) => {
           </div>
 
           {/* DUGME */}
-          <div style={{ gridColumn: 'span 2', marginTop: '20px' }}>
+          <div style={{ gridColumn: isMobile ? 'span 1' : 'span 2', marginTop: '20px' }}>
             <HBButton type="submit" isLoading={isLoading}>
               {t.btn}
             </HBButton>
           </div>
 
-          <p style={{ gridColumn: 'span 2', textAlign: 'center', fontSize: '11px', color: '#444', marginTop: '10px' }}>
+          <p style={{ gridColumn: isMobile ? 'span 1' : 'span 2', textAlign: 'center', fontSize: '11px', color: '#444', marginTop: '10px' }}>
             {t.footerNote}
           </p>
         </form>
       </div>
     </div>
+
+    {showPrivacy && (
+      <div
+        style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          backgroundColor: '#0a0a0a',
+          overflowY: 'auto'
+        }}
+      >
+        <button
+          onClick={() => setShowPrivacy(false)}
+          style={{
+            position: 'fixed', top: '20px', right: '20px', zIndex: 10000,
+            background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            color: '#fff', fontSize: '20px', width: '40px', height: '40px',
+            borderRadius: '50%', cursor: 'pointer', display: 'flex',
+            alignItems: 'center', justifyContent: 'center'
+          }}
+        >
+          ×
+        </button>
+        <PrivacyPolicy language={language} />
+      </div>
+    )}
+    </>
   );
 };
 
