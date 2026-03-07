@@ -158,7 +158,7 @@ const SuccessLine = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '120px' }}>
                         <MentorCard
                             name="Vesna Damjanić"
-                            image="/vesnadamjanic.png"
+                            image="/vesnadamjanic.jpeg"
                             title="Novinarka i glavna urednica Bloomberg Adria"
                             desc="Vesna Damjanić je istaknuta novinarka i glavna i odgovorna urednica Bloomberg Adria televizije, sa više od dve decenije iskustva u medijima i komunikacijama. Specijalizovana za ekonomske, finansijske i biznis teme, Vesna je izgradila karijeru u informativnom programu Radio-televizije Srbije, gde je 14 godina uređivala i vodila brojne emisije, žive programe i intervjue sa ključnim domaćim i svetskim akterima ekonomskih i političkih tokova."
                         />
