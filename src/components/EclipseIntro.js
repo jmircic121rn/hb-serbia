@@ -5,19 +5,25 @@ import { translations } from '../data/translations';
 
 const isMobile = window.innerWidth < 768;
 
-const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
+const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, small, noEntrance, dimmed, inline }) => {
+  const planetWidth = small
+    ? (isMobile ? '80px' : '110px')
+    : (isMobile ? '110px' : '180px');
+
+  const imgSize = small ? (isMobile ? '70px' : '90px') : (isMobile ? '90px' : '140px');
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={noEntrance ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
       animate={{
-        opacity: 1,
+        opacity: dimmed ? 0.35 : 1,
         scale: 1,
         y: [0, -10, 0],
         rotate: [0, 1, -1, 0]
       }}
       transition={{
-        opacity: { duration: 1, delay: delay },
-        scale: { duration: 1, delay: delay },
+        opacity: noEntrance ? {} : { duration: 1, delay: delay },
+        scale: noEntrance ? {} : { duration: 1, delay: delay },
         y: {
           duration: 4 + Math.random() * 2,
           repeat: Infinity,
@@ -31,66 +37,98 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
           delay: delay
         }
       }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: dimmed ? 1 : 1.05 }}
       onClick={onClick}
       style={{
-        cursor: 'pointer',
-        width: isMobile ? '110px' : '180px', 
+        cursor: dimmed ? 'default' : 'pointer',
+        width: inline ? 'auto' : planetWidth,
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: inline ? 'row' : 'column',
         alignItems: 'center',
+        gap: inline ? '14px' : 0,
         position: 'relative',
         transform: isMobile ? 'scale(0.85)' : 'scale(1)',
       }}
     >
-      <div style={{
-        position: 'absolute',
-        top: '10%',
-        width: '80%',
-        height: '60%',
-        background: glowColor,
-        filter: 'blur(35px)',
-        borderRadius: '50%',
-        opacity: 0.25,
-        zIndex: 0
-      }} />
-
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: isMobile ? '90px' : '140px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '15px',
-        zIndex: 2
-      }}>
-        <img 
-          src="/planet.png" 
-          alt={subtitle}
+      {/* Selected orbit ring */}
+      {isSelected && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.06, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           style={{
-            width: '90%',
-            height: '90%',
-            objectFit: 'contain',
-            filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.1))'
+            position: 'absolute',
+            top: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '120px',
+            height: '120px',
+            borderRadius: '50%',
+            border: '1px solid rgba(255, 255, 255, 0.5)',
+            boxShadow: '0 0 16px rgba(255, 255, 255, 0.12)',
+            zIndex: 8,
+            pointerEvents: 'none'
           }}
         />
-      </div>
+      )}
 
-      <div style={{ textAlign: 'center', zIndex: 10 }}>
-        <h3 style={{ 
-          fontSize: isMobile ? '7px' : '9px', 
-          letterSpacing: '2px', 
-          color: 'rgba(255,255,255,0.4)', 
-          marginBottom: '4px', 
+      {!inline && (
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          width: '80%',
+          height: '60%',
+          background: glowColor,
+          filter: 'blur(35px)',
+          borderRadius: '50%',
+          opacity: isSelected ? 0.35 : 0.25,
+          zIndex: 0
+        }} />
+      )}
+
+      {!inline && (
+        <div style={{
+          position: 'relative',
+          width: imgSize,
+          height: imgSize,
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '15px',
+          zIndex: 2
+        }}>
+          <img
+            src="/planet.png"
+            alt={subtitle}
+            style={{
+              width: '90%',
+              height: '90%',
+              objectFit: 'contain',
+              filter: dimmed
+                ? 'grayscale(1) brightness(0.5)'
+                : isSelected
+                  ? 'drop-shadow(0 0 14px rgba(255,255,255,0.3)) brightness(1.15)'
+                  : 'drop-shadow(0 0 10px rgba(255,255,255,0.1))'
+            }}
+          />
+        </div>
+      )}
+
+      <div style={{ textAlign: inline ? 'left' : 'center', zIndex: 10 }}>
+        <h3 style={{
+          fontSize: isMobile ? '7px' : '9px',
+          letterSpacing: '2px',
+          color: 'rgba(255,255,255,0.4)',
+          marginBottom: '4px',
           textTransform: 'uppercase',
-          fontFamily: "'PT Sans', sans-serif" 
+          fontFamily: "'PT Sans', sans-serif"
         }}>
           {title}
         </h3>
-        <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 auto 8px' }} />
+        <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: inline ? '0 0 8px' : '0 auto 8px' }} />
         <span style={{
-          fontSize: isMobile ? '10px' : '12px',
+          fontSize: small ? (isMobile ? '8px' : '10px') : (isMobile ? '10px' : '12px'),
           fontWeight: '700',
           letterSpacing: '1px',
           color: '#fff',
@@ -106,14 +144,27 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay }) => {
   );
 };
 
+const subContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+  exit:   { transition: { staggerChildren: 0.06, staggerDirection: -1 } }
+};
+
+const subPlanetVariants = {
+  hidden:   { opacity: 0, x: 35, scale: 0.75 },
+  visible:  { opacity: 1, x: 0,  scale: 1,    transition: { type: 'spring', stiffness: 240, damping: 24 } },
+  exit:     { opacity: 0, x: 25, scale: 0.78, transition: { duration: 0.2, ease: 'easeIn' } }
+};
+
 const EclipseIntro = ({ onProceed, language, setLanguage }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   
   const menuLevel = searchParams.get('menu') || 'main';
-  
+
   // Vraćamo showOptions i useEffect za početni sloj
   const [showOptions, setShowOptions] = useState(menuLevel !== 'main');
+  const [myJourneyExpanded, setMyJourneyExpanded] = useState(false);
   const t = translations[language].eclipse;
 
   useEffect(() => {
@@ -251,22 +302,71 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                justifyContent: 'center',
+                gap: '0px',
+              }}
             >
-              <SaturnPlanet
-                title={t.planets.whoWeAre.title}
-                subtitle={t.planets.whoWeAre.subtitle}
-                glowColor="rgba(255, 255, 255, 0.6)"
-                delay={0.1}
-                onClick={() => onProceed('ABOUT')}
-              />
-              <SaturnPlanet
-                title={t.planets.explore.title}
-                subtitle={t.planets.explore.subtitle}
-                glowColor="rgba(255, 255, 255, 0.6)"
-                delay={0.3}
-                onClick={() => navigate('/?menu=assessment')} 
-              />
+              {/* Main 2 planets */}
+              <div style={{ display: 'flex', gap: isMobile ? '10px' : '30px' }}>
+                <SaturnPlanet
+                  title={t.planets.whoWeAre.title}
+                  subtitle={t.planets.whoWeAre.subtitle}
+                  glowColor="rgba(255, 255, 255, 0.6)"
+                  delay={0.1}
+                  dimmed={myJourneyExpanded}
+                  onClick={() => onProceed('ABOUT')}
+                />
+                <SaturnPlanet
+                  title={t.planets.explore.title}
+                  subtitle={t.planets.explore.subtitle}
+                  glowColor="rgba(255, 255, 255, 0.6)"
+                  delay={0.3}
+                  onClick={() => isMobile ? navigate('/?menu=assessment') : setMyJourneyExpanded(prev => !prev)}
+                />
+              </div>
+
+              {/* Sub-planets — appear to the right on desktop only */}
+              <AnimatePresence>
+                {!isMobile && myJourneyExpanded && (
+                  <motion.div
+                    key="sub-planets"
+                    variants={subContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '6px',
+                      alignItems: 'flex-start',
+                      marginLeft: '16px',
+                      marginTop: '-10px',
+                    }}
+                  >
+                    {[
+                      { title: t.planets.b2b.title, subtitle: t.planets.b2b.subtitle, onClick: () => onProceed('INTERNAL_TRAININGS') },
+                      { title: t.planets.individual.title, subtitle: t.planets.individual.subtitle, onClick: () => onProceed('OPEN_TRAININGS') },
+                      { title: t.planets.analysis.title, subtitle: t.planets.analysis.subtitle, onClick: () => onProceed('INTRO') },
+                    ].map((planet, i) => (
+                      <motion.div key={i} variants={subPlanetVariants}>
+                        <SaturnPlanet
+                          title={planet.title}
+                          subtitle={planet.subtitle}
+                          glowColor="rgba(255, 255, 255, 0.6)"
+                          delay={0}
+                          small
+                          noEntrance
+                          inline
+                          onClick={planet.onClick}
+                        />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
           {showOptions && menuLevel === 'assessment' && (

@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { HBInput, HBTextArea, HBSelect, HBButton } from '../components/UIComponents';
 
 
 const InternalTrainings = ({ language }) => {
     const API_BASE_URL = process.env.REACT_APP_API_URL;
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [selectedLevel, setSelectedLevel] = useState(null);
+
+    const formRef = React.useRef(null);
+
+    const scrollToForm = () => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -14,10 +21,11 @@ const InternalTrainings = ({ language }) => {
         return () => window.removeEventListener('resize', h);
     }, []);
 
+
     const content = {
         en: {
-            category: "INTERNAL TRAININGS",
-            title: "Hansen Beck — Who We Are & How We Work",
+            category: "For My Team",
+            title: "Guided Journey with Hansen Beck",
             subtitle: "Your next conquest is within.",
             p1: "Your company's next great conquest isn't out there. It's within. It lives in the untapped potential of your people — in the way they communicate, collaborate, and lead one another through complexity. In a world demanding constant evolution, sustained success is rarely a matter of strategy alone. It is a matter of people: how they behave, how they connect, and how they grow.",
             p2: "You've heard it before — the endless promises of 'people development.' Programs that sound transformational but deliver little more than a day away from the office. The gap between rhetoric and real change is where most organizations quietly lose ground.",
@@ -206,69 +214,69 @@ const InternalTrainings = ({ language }) => {
 
     // Mala komponenta za prefinjenu sliku (akcenat)
     const ImageAccent = ({ src, float = 'none', width = '300px', margin = '0' }) => {
-    const isPhoto = src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg');
-    
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            style={{
-                width: width,
-                float: float,
-                margin: margin,
-                clear: float === 'none' ? 'both' : 'none',
-                zIndex: 2
-            }}
-        >
-            <img
-                src={src}
-                alt=""
+        const isPhoto = src.toLowerCase().endsWith('.jpg') || src.toLowerCase().endsWith('.jpeg');
+
+        return (
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
                 style={{
-                    width: '100%',
-                    height: 'auto',
-                    // Ako je JPG (slika čoveka), skidamo grayscale i pojačavamo toplinu i oštrinu
-                    filter: isPhoto 
-                        ? 'brightness(1.05) contrast(1.1) saturate(1.1)' 
-                        : 'grayscale(90%) brightness(1.1) contrast(1.05)',
-                    imageRendering: 'auto',
-                    borderRadius: '4px',
-                    display: 'block',
-                    boxShadow: isPhoto ? '0 15px 35px rgba(0,0,0,0.5)' : 'none'
+                    width: width,
+                    float: float,
+                    margin: margin,
+                    clear: float === 'none' ? 'both' : 'none',
+                    zIndex: 2
                 }}
-            />
-        </motion.div>
-    );
-};
+            >
+                <img
+                    src={src}
+                    alt=""
+                    style={{
+                        width: '100%',
+                        height: 'auto',
+                        // Ako je JPG (slika čoveka), skidamo grayscale i pojačavamo toplinu i oštrinu
+                        filter: isPhoto
+                            ? 'brightness(1.05) contrast(1.1) saturate(1.1)'
+                            : 'grayscale(90%) brightness(1.1) contrast(1.05)',
+                        imageRendering: 'auto',
+                        borderRadius: '4px',
+                        display: 'block',
+                        boxShadow: isPhoto ? '0 15px 35px rgba(0,0,0,0.5)' : 'none'
+                    }}
+                />
+            </motion.div>
+        );
+    };
 
     return (
         <div style={{ backgroundColor: '#050505', color: '#fff', minHeight: '100vh' }}>
 
 
-{/* HERO SEKCIJA */}
-<section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
-    {/* 1. POVEĆAN KONTEJNER: sa 350px na 500px */}
-    {(() => {
-        const cs = isMobile ? Math.min(window.innerWidth * 0.85, 350) : 500;
-        return (
-        <motion.div style={{ position: 'relative', width: `${cs}px`, height: `${cs}px`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>
-            <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', width: `${cs * 0.6}px`, height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: `${-cs * 0.2}px`, top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-            <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: `${cs * 0.09}px`, top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
-            <div style={{ position: 'relative', width: `${cs * 0.8}px`, height: `${cs * 0.8}px`, backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 20px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }} />
-        </motion.div>
-        );
-    })()}
+            {/* HERO SEKCIJA */}
+            <section style={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 10%', position: 'relative', overflow: 'hidden' }}>
+                {/* 1. POVEĆAN KONTEJNER: sa 350px na 500px */}
+                {(() => {
+                    const cs = isMobile ? Math.min(window.innerWidth * 0.85, 350) : 500;
+                    return (
+                        <motion.div style={{ position: 'relative', width: `${cs}px`, height: `${cs}px`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px', zIndex: 5 }}>
+                            <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '120%', height: '120%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.15) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(60px)', zIndex: 1 }} />
+                            <div style={{ position: 'absolute', width: `${cs * 0.6}px`, height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: `${-cs * 0.2}px`, top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+                            <div style={{ position: 'absolute', width: `${cs * 0.808}px`, height: `${cs * 0.808}px`, borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
+                            <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: `${cs * 0.09}px`, top: '50%', transform: 'translateY(-50%)', width: '10px', height: '10px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 30px 10px rgba(255, 255, 255, 0.9)' }} />
+                            <div style={{ position: 'relative', width: `${cs * 0.8}px`, height: `${cs * 0.8}px`, backgroundColor: '#000', borderRadius: '50%', zIndex: 5, boxShadow: '0 0 20px rgba(0,0,0,1)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }} />
+                        </motion.div>
+                    );
+                })()}
 
-    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10, marginTop: isMobile ? '-120px' : '-180px', position: 'relative', padding: isMobile ? '0 16px' : '0' }}>
-        <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>{t.category}</h4>
-        <h1 style={{ fontSize: isMobile ? 'clamp(26px, 7vw, 48px)' : 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
-        <h2 style={{ fontSize: isMobile ? '18px' : '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
-    </motion.div>
-</section>
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} style={{ zIndex: 10, marginTop: isMobile ? '-120px' : '-180px', position: 'relative', padding: isMobile ? '0 16px' : '0' }}>
+                    <h4 style={{ color: 'rgba(255, 255, 255, 0.8)', letterSpacing: '5px', textTransform: 'uppercase', fontSize: '12px', marginBottom: '20px' }}>{t.category}</h4>
+                    <h1 style={{ fontSize: isMobile ? 'clamp(26px, 7vw, 48px)' : 'clamp(32px, 5vw, 64px)', fontWeight: '900', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '20px' }}>{t.title}</h1>
+                    <h2 style={{ fontSize: isMobile ? '18px' : '24px', color: '#888', fontWeight: '400', letterSpacing: '1px' }}>{t.subtitle}</h2>
+                </motion.div>
+            </section>
 
             {/* MAIN CONTENT */}
             <section style={{ padding: '100px 10%', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
@@ -280,61 +288,268 @@ const InternalTrainings = ({ language }) => {
                         <p style={{ fontSize: '20px', lineHeight: '1.8', marginBottom: '40px' }}>{t.p1}</p>
                         <p style={{ fontSize: '18px', color: '#888', lineHeight: '1.8', marginBottom: '40px' }}>{t.p2}</p>
                         <p style={{ fontSize: '22px', fontWeight: '600', borderLeft: '3px solid rgba(255, 255, 255, 0.4)', paddingLeft: '30px' }}>{t.p3}</p>
+                        <HBButton
+                            onClick={scrollToForm}
+                            style={{
+                                width: 'auto',
+                                padding: '18px 60px',
+                                minWidth: '250px'
+                            }}
+                        >
+                            Prijavite se odmah!
+                        </HBButton>
                     </div>
+                </div>
+            </section>
+
+{/* ICE PILOTS — white */}
+<section style={{ padding: '100px 10%', backgroundColor: '#fff', color: '#111' }}>
+    <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
                     {/* Ice Pilots */}
-                    <div style={{ marginBottom: '100px', clear: 'both' }}>
-                        <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '40px' }}>{t.section2Title}</h2>
-                        <p style={{ fontSize: '18px', color: '#aaa', lineHeight: '1.8', marginBottom: '30px' }}>{t.p4}</p>
-                        <p style={{ fontSize: '18px', color: '#aaa', lineHeight: '1.8', marginBottom: '30px' }}>{t.p5}</p>
-                        <ImageAccent src="/images/3.png" width="400px" margin="60px auto" />
+                    <div style={{ marginBottom: '0' }}>
 
-                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)', padding: '40px', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '8px' }}>
+                        {/* Smanjen marginBottom sa 40px na 15px da bi naslov bio blizu teksta */}
+                        <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '15px' }}>{t.section2Title}</h2>
+
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: window.innerWidth > 992 ? 'row' : 'column',
+                            gap: '60px',
+                            alignItems: 'flex-start', // Promenjeno na flex-start da bi tekst počeo od vrha slike
+                            marginBottom: '60px'
+                        }}>
+                            {/* Tekstualna strana */}
+                            <div style={{ flex: 1 }}>
+                                <p style={{ fontSize: '18px', color: '#555', lineHeight: '1.8', marginBottom: '30px' }}>{t.p4}</p>
+                                <p style={{ fontSize: '18px', color: '#555', lineHeight: '1.8', marginBottom: '0' }}>{t.p5}</p>
+                            </div>
+
+                            {/* Slika desno */}
+                            <div style={{ flexShrink: 0 }}>
+                                <ImageAccent src="/images/3.1.png" width="400px" margin="0" />
+                            </div>
+                        </div>
+
+                        {/* Donja siva kutija ostaje ista */}
+                        <div style={{
+                            backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                            padding: '40px',
+                            border: '1px solid rgba(0, 0, 0, 0.08)',
+                            borderRadius: '8px'
+                        }}>
                             <ImageAccent src="/images/4.png" float="right" width="180px" margin="0 0 10px 20px" />
                             <p style={{ fontSize: '18px', lineHeight: '1.8' }}>{t.p6}</p>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    {/* Engagement Levels Detail */}
-                    <div style={{ marginBottom: '100px', clear: 'both' }}>
+            {/* ENGAGEMENT LEVELS — white */}
+            <section style={{ padding: '100px 10%', backgroundColor: '#fff', color: '#111' }}>
+                <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+
+                    {/* Engagement Levels Detail — Expedition Path */}
+                    <div style={{ marginBottom: '60px' }}>
                         <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '20px' }}>{t.section3Title}</h2>
-                        <p style={{ fontSize: '18px', color: '#888', marginBottom: '60px' }}>{t.p7}</p>
+                        <p style={{ fontSize: '18px', color: '#666', marginBottom: '80px' }}>{t.p7}</p>
 
-                        {t.levels.map((level, idx) => (
-                            <motion.div
-                                key={level.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                style={{
-                                    padding: '60px 40px',
-                                    background: 'rgba(255,255,255,0.02)',
-                                    border: '1px solid rgba(255,255,255,0.05)',
-                                    marginBottom: '40px',
-                                    borderRadius: '4px',
-                                    position: 'relative',
-                                    overflow: 'hidden'
-                                }}
-                            >
-                                {/* Slike 5, 6, 7, 8 kao mali "peek" akcenti unutar ili pored kartica */}
-                                {idx === 0 && <ImageAccent src="/images/t5.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
-                                {idx === 1 && <ImageAccent src="/images/t6.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
-                                {idx === 2 && <ImageAccent src="/images/t7.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
-                                {idx === 3 && <ImageAccent src="/images/t8.jpg" float="right" width="300px" margin="0 0 20px 20px" />}
+                        {/* Path graphic */}
+                        <div style={{
+                            position: 'relative',
+                            display: 'flex',
+                            flexDirection: isMobile ? 'column' : 'row',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-between',
+                            padding: isMobile ? '0 0 0 48px' : '0',
+                        }}>
+                            {/* Connecting dashed line */}
+                            <div style={{
+                                position: 'absolute',
+                                ...(isMobile ? {
+                                    left: '19px',
+                                    top: '38px',
+                                    bottom: '38px',
+                                    width: '1px',
+                                    background: 'repeating-linear-gradient(to bottom, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 6px, transparent 6px, transparent 14px)'
+                                } : {
+                                    top: '38px',
+                                    left: '10%',
+                                    right: '10%',
+                                    height: '1px',
+                                    background: 'repeating-linear-gradient(to right, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 8px, transparent 8px, transparent 18px)'
+                                })
+                            }} />
 
-                                <div style={{ fontSize: '12px', color: 'rgb(255, 255, 255)', fontWeight: 'bold', marginBottom: '15px', letterSpacing: '2px' }}>
-                                    LEVEL 0{level.id} — {level.dur}
-                                </div>
-                                <h3 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '10px' }}>{level.name}</h3>
-                                <h4 style={{ fontSize: '18px', color: '#888', marginBottom: '30px', fontStyle: 'italic' }}>{level.sub}</h4>
-                                <p style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '20px', color: '#fff' }}>{level.desc}</p>
-                                <p style={{ fontSize: '16px', lineHeight: '1.7', color: '#aaa' }}>{level.detail}</p>
-                                <p style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '20px', color: '#fff' }}>{level.desc1}</p>
-                                {level.desc2 && <p style={{ fontSize: '18px', lineHeight: '1.8', marginBottom: '20px', color: '#fff' }}>{level.desc2}</p>}
-                            </motion.div>
-                        ))}
+                            {t.levels.map((level, idx) => (
+                                <motion.div
+                                    key={level.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.15 }}
+                                    onClick={() => setSelectedLevel(level)}
+                                    whileHover={{ scale: 1.02 }}
+                                    style={{
+                                        flex: isMobile ? 'none' : 1,
+                                        display: 'flex',
+                                        flexDirection: isMobile ? 'row' : 'column',
+                                        alignItems: isMobile ? 'flex-start' : 'center',
+                                        textAlign: isMobile ? 'left' : 'center',
+                                        cursor: 'pointer',
+                                        padding: isMobile ? '0 0 60px 0' : '0 16px',
+                                        position: 'relative',
+                                        gap: isMobile ? '20px' : '0',
+                                    }}
+                                >
+                                    {/* Node circle */}
+                                    <motion.div
+                                        whileHover={{ boxShadow: '0 0 30px rgba(0,0,0,0.12)', borderColor: 'rgba(0,0,0,0.5)' }}
+                                        style={{
+                                            width: '76px',
+                                            minWidth: '76px',
+                                            height: '76px',
+                                            borderRadius: '50%',
+                                            border: '1px solid rgba(0,0,0,0.15)',
+                                            background: 'rgba(0,0,0,0.03)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginBottom: isMobile ? '0' : '24px',
+                                            position: 'relative',
+                                            zIndex: 2,
+                                            transition: 'box-shadow 0.3s, border-color 0.3s',
+                                        }}
+                                    >
+                                        <span style={{ fontSize: '8px', letterSpacing: '2px', color: 'rgba(0,0,0,0.4)', textTransform: 'uppercase', marginBottom: '2px' }}>LVL</span>
+                                        <span style={{ fontSize: '26px', fontWeight: '900', color: '#111', lineHeight: 1 }}>0{level.id}</span>
+                                    </motion.div>
+
+                                    {/* Text info */}
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ fontSize: '10px', letterSpacing: '2px', color: 'rgba(0,0,0,0.4)', marginBottom: '8px', textTransform: 'uppercase' }}>{level.dur}</div>
+                                        <div style={{ fontSize: isMobile ? '16px' : '13px', fontWeight: '700', color: '#111', marginBottom: '6px', lineHeight: 1.2 }}>{level.name}</div>
+                                        <div style={{ fontSize: '12px', color: '#999', fontStyle: 'italic', lineHeight: 1.4, marginBottom: '12px' }}>{level.sub}</div>
+                                        <div style={{
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            gap: '6px',
+                                            fontSize: '10px',
+                                            letterSpacing: '1.5px',
+                                            color: 'rgba(0,0,0,0.45)',
+                                            textTransform: 'uppercase',
+                                            borderBottom: '1px solid rgba(0,0,0,0.2)',
+                                            paddingBottom: '2px',
+                                        }}>
+                                            {language === 'sr' ? 'Istraži' : 'Explore'} →
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
 
+                    {/* Level Detail Modal */}
+                    <AnimatePresence>
+                        {selectedLevel && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setSelectedLevel(null)}
+                                style={{
+                                    position: 'fixed',
+                                    inset: 0,
+                                    background: 'rgba(0,0,0,0.88)',
+                                    zIndex: 1000,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    padding: '20px',
+                                    backdropFilter: 'blur(12px)',
+                                }}
+                            >
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.93, y: 10 }}
+                                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                                    onClick={e => e.stopPropagation()}
+                                    style={{
+                                        background: '#000000',
+                                        border: '1px solid rgba(255,255,255,0.08)',
+                                        borderRadius: '8px',
+                                        padding: isMobile ? '32px 24px' : '60px',
+                                        maxWidth: '720px',
+                                        width: '100%',
+                                        maxHeight: '70vh',
+                                        overflowY: 'auto',
+                                        position: 'relative',
+                                    }}
+                                >
+                                    <button
+                                        onClick={() => setSelectedLevel(null)}
+                                        style={{
+                                            position: 'absolute',
+                                            top: '20px',
+                                            right: '24px',
+                                            background: 'none',
+                                            border: 'none',
+                                            color: 'rgba(255,255,255,0.35)',
+                                            fontSize: '20px',
+                                            cursor: 'pointer',
+                                            lineHeight: 1,
+                                            padding: '4px 8px',
+                                        }}
+                                    >✕</button>
+
+                                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '2px', marginBottom: '16px', textTransform: 'uppercase' }}>
+                                        LEVEL 0{selectedLevel.id} — {selectedLevel.dur}
+                                    </div>
+                                    <h3 style={{color: '#fff', fontSize: isMobile ? '28px' : '36px', fontWeight: '900', marginBottom: '8px' }}>{selectedLevel.name}</h3>
+                                    <h4 style={{ fontSize: '16px', color: '#777', marginBottom: '36px', fontStyle: 'italic', fontWeight: '400' }}>{selectedLevel.sub}</h4>
+
+                                    <div style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.15)', marginBottom: '36px' }} />
+
+                                    {!isMobile && (
+                                        <ImageAccent
+                                            src={`/images/t${selectedLevel.id + 4}.jpg`}
+                                            float='right'
+                                            width='220px'
+                                            margin='0 0 20px 30px'
+                                        />
+                                    )}
+
+                                    <p style={{ fontSize: '17px', lineHeight: '1.85', marginBottom: '20px', color: '#fff' }}>{selectedLevel.desc}</p>
+                                    <p style={{ fontSize: '16px', lineHeight: '1.75', color: '#aaa', marginBottom: '20px' }}>{selectedLevel.detail}</p>
+                                    {selectedLevel.desc1 && <p style={{ fontSize: '17px', lineHeight: '1.85', color: '#fff', marginBottom: '20px' }}>{selectedLevel.desc1}</p>}
+                                    {selectedLevel.desc2 && <p style={{ fontSize: '17px', lineHeight: '1.85', color: '#fff' }}>{selectedLevel.desc2}</p>}
+
+                                    <div style={{
+                                        marginTop: '40px',
+                                        paddingTop: '30px',
+                                        borderTop: '1px solid rgba(255,255,255,0.07)',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                    }}>
+                                        <HBButton
+                                            onClick={() => { setSelectedLevel(null); setTimeout(scrollToForm, 100); }}
+                                            style={{ padding: '14px 40px', width: 'auto' }}
+                                        >
+                                            {language === 'sr' ? 'Prijavite se' : 'Apply Now'}
+                                        </HBButton>
+                                    </div>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </section>
+
+            {/* FINAL MESSAGE — dark */}
+            <section style={{ padding: '0 10% 100px', backgroundColor: '#050505' }}>
+                <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                     {/* FINAL MESSAGE */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
@@ -350,83 +565,83 @@ const InternalTrainings = ({ language }) => {
                     </motion.div>
                 </div>
             </section>
-{/* FORMA SEKCIJA - USKLAĐENA SA NOVIM DIZAJNOM */}
-<section style={{ padding: '100px 10%', backgroundColor: '#080808' }}>
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{t.formTitle}</h2>
-            <p style={{ color: '#888' }}>{t.formSubtitle}</p>
-        </div>
+            {/* FORMA SEKCIJA - USKLAĐENA SA NOVIM DIZAJNOM */}
+            <section ref={formRef} style={{ padding: '100px 10%', backgroundColor: '#080808' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                        <h2 style={{ fontSize: '42px', fontWeight: '900', marginBottom: '10px' }}>{t.formTitle}</h2>
+                        <p style={{ color: '#888' }}>{t.formSubtitle}</p>
+                    </div>
 
-        <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '30px' }}>
-            {/* RED 1: Ime i Prezime */}
-            <HBInput 
-                name="FirstName" 
-                placeholder={t.labels.firstName} 
-                value={formData.FirstName} 
-                onChange={handleInputChange} 
-                required 
-            />
-            <HBInput 
-                name="LastName" 
-                placeholder={t.labels.lastName} 
-                value={formData.LastName} 
-                onChange={handleInputChange} 
-                required 
-            />
-            
-            {/* RED 2: Email i Telefon */}
-            <HBInput 
-                type="email" 
-                name="Email" 
-                placeholder={t.labels.email} 
-                value={formData.Email} 
-                onChange={handleInputChange} 
-                required 
-            />
-            <HBInput 
-                name="PhoneNumber" 
-                placeholder={t.labels.phone} 
-                value={formData.PhoneNumber} 
-                onChange={handleInputChange} 
-            />
-            
-            {/* RED 3: Kompanija i Select opcija */}
-            <HBInput 
-                name="CompanyName" 
-                placeholder={t.labels.company} 
-                value={formData.CompanyName} 
-                onChange={handleInputChange} 
-            />
-            
-            <HBSelect 
-                name="FourWaysToWorkWithUs" 
-                value={formData.FourWaysToWorkWithUs} 
-                onChange={handleInputChange} 
-                required
-            >
-                <option value="" disabled>{t.labels.placeholderInterest}</option>
-                {t.labels.options.map((opt, i) => (
-                    <option key={i} value={opt}>{opt}</option>
-                ))}
-            </HBSelect>
+                    <form onSubmit={handleFormSubmit} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '30px' }}>
+                        {/* RED 1: Ime i Prezime */}
+                        <HBInput
+                            name="FirstName"
+                            placeholder={t.labels.firstName}
+                            value={formData.FirstName}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <HBInput
+                            name="LastName"
+                            placeholder={t.labels.lastName}
+                            value={formData.LastName}
+                            onChange={handleInputChange}
+                            required
+                        />
 
-            {/* RED 4: Poruka (Preko oba stuba) */}
-            <HBTextArea 
-                name="Message" 
-                placeholder={t.labels.message} 
-                value={formData.Message} 
-                onChange={handleInputChange} 
-                style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }} 
-            />
+                        {/* RED 2: Email i Telefon */}
+                        <HBInput
+                            type="email"
+                            name="Email"
+                            placeholder={t.labels.email}
+                            value={formData.Email}
+                            onChange={handleInputChange}
+                            required
+                        />
+                        <HBInput
+                            name="PhoneNumber"
+                            placeholder={t.labels.phone}
+                            value={formData.PhoneNumber}
+                            onChange={handleInputChange}
+                        />
 
-            {/* RED 5: Novo belo dugme (Preko oba stuba) */}
-            <HBButton type="submit" style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}>
-                {t.labels.submit}
-            </HBButton>
-        </form>
-    </div>
-</section>
+                        {/* RED 3: Kompanija i Select opcija */}
+                        <HBInput
+                            name="CompanyName"
+                            placeholder={t.labels.company}
+                            value={formData.CompanyName}
+                            onChange={handleInputChange}
+                        />
+
+                        <HBSelect
+                            name="FourWaysToWorkWithUs"
+                            value={formData.FourWaysToWorkWithUs}
+                            onChange={handleInputChange}
+                            required
+                        >
+                            <option value="" disabled>{t.labels.placeholderInterest}</option>
+                            {t.labels.options.map((opt, i) => (
+                                <option key={i} value={opt}>{opt}</option>
+                            ))}
+                        </HBSelect>
+
+                        {/* RED 4: Poruka (Preko oba stuba) */}
+                        <HBTextArea
+                            name="Message"
+                            placeholder={t.labels.message}
+                            value={formData.Message}
+                            onChange={handleInputChange}
+                            style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}
+                        />
+
+                        {/* RED 5: Novo belo dugme (Preko oba stuba) */}
+                        <HBButton type="submit" style={{ gridColumn: isMobile ? 'span 1' : 'span 2' }}>
+                            {t.labels.submit}
+                        </HBButton>
+                    </form>
+                </div>
+            </section>
 
             <footer style={{
                 padding: '50px 10%',
@@ -434,7 +649,7 @@ const InternalTrainings = ({ language }) => {
                 textAlign: 'center',
                 fontSize: '12px',
                 color: '#444',
-                textTransform: 'uppercase', // Opciono, da uvek bude velikim slovima
+                textTransform: 'uppercase',
                 letterSpacing: '1px'
             }}>
                 {t.copyright}

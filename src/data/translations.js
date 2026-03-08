@@ -186,7 +186,7 @@ export const translations = {
             back: "Back",
             startBtn: "Start self-assessment and see results",
             startJourney: "START MY JOURNEY",
-            selectPath: "Select your path:",
+            selectPath: "Choose Your Profile to Begin",
             learnMore: "LEARN MORE →"
         },
         eclipse: {
@@ -194,11 +194,11 @@ export const translations = {
             selectDest: "Choose your destination",
             selectSys: "Select your system",
             planets: {
-                whoWeAre: { title: "Hansen Beck", subtitle: "Your guide on the journey" },
-                explore: { title: "Destination: Excellence", subtitle: "Your journey" },
-                b2b: { title: "Team Development", subtitle: "Internal corporate trainings" },
-                individual: { title: "Individual Development", subtitle: "Open enrollment trainings" },
-                analysis: { title: "UNLOCK YOUR COMPASS", subtitle: "START THE EXPEDITION" }
+                whoWeAre: { title: "Hansen Beck", subtitle: "Your guides" },
+                explore: { title: "Destination: Excellence", subtitle: "My journey" },
+                b2b: { title: "Team Development", subtitle: "For My Team" },
+                individual: { title: "Individual Development", subtitle: "Join the Party" },
+                analysis: { title: "UNLOCK YOUR COMPASS", subtitle: "How Good I Am" }
             }
         },
         intro: {
@@ -280,25 +280,25 @@ export const translations = {
             backBtn: "Go Back"
         },
         compass: {
-            title: "HB Compass – Your Guide to Professional Development",
-            description: "In today's dynamic business world, success depends not only on what you know or can do, but also on how you think and how you influence others. Rapid changes and complex challenges require us to be more than just task executors – they require us to be well-rounded professionals who understand our contribution and inspire those around us.",
-            subquote: "HB Compass is a comprehensive framework, developed by the HubX team, for assessing and developing professional excellence. It is not just another performance management tool; it represents a paradigm shift in thinking about what truly makes an employee exceptional. Its strength lies in a holistic approach that encompasses four key dimensions:",
+            title: "HB Compass — Know Where You Stand. Know Where to Grow.",
+            description: "Most professionals have a genuine but incomplete picture of themselves. You know your strengths — at least the ones you are aware of. You know the areas you find challenging. But the gap between how you see yourself and how your work actually lands with others, how your thinking shapes your decisions, how your presence influences the people around you — that gap is where the most valuable development insight lives. The HB Compass self-assessment is designed to close that gap.",
+            subquote: "HB Compass is a professional development framework built on a simple but powerful idea: what makes someone genuinely excellent at their work is not one thing — it is four interconnected things, working together. Most development tools focus on skills or results. HB Compass goes further, assessing the full picture of what drives professional effectiveness — because sustainable excellence is never just about what you can do. It is equally about how you think, who you are in your relationships, and the impact you have on the people and environment around you.",
             dimensions: {
                 mindset: {
-                    title: "1. Mindset",
-                    text: "Explores your internal landscape – self-perception, beliefs, attitudes, and approaches to work and life."
+                    title: "Mindset — The Foundation",
+                    text: "How you think shapes everything else. Your beliefs about your own capacity to grow, your resilience when things get difficult, your openness to feedback, your sense of ownership over your work — these are not personality traits you are stuck with. They are patterns that can be understood, developed, and deliberately changed. The Mindset dimension helps you see clearly what is driving your behaviour, so you can build from your strengths and address the patterns that are holding you back."
                 },
                 skills: {
-                    title: "2. Skills",
-                    text: "Focuses on the practical abilities and knowledge you need to perform your job effectively."
+                    title: "Skills — The Toolkit",
+                    text: "Skills are the practical capabilities you bring to your role — how you manage your time and priorities, how you communicate, how you solve problems, how you develop the people around you. The Skills dimension assesses not just whether you have a capability, but how reliably and sophisticatedly you apply it in the real complexity of your work."
                 },
                 results: {
-                    title: "3. Results",
-                    text: "Measures your contribution to outcomes and effective execution, from short-term goals to long-term change."
+                    title: "Results — The Measure",
+                    text: "Results are the outcomes you create — in the short term through effective execution and goal achievement, and in the long term through strategic thinking, innovation, and building capability that outlasts any individual project. The Results dimension connects your day-to-day work to the larger contribution you make and helps you see where your impact is strongest and where it could be greater."
                 },
                 influence: {
-                    title: "4. Influence",
-                    text: "Examines how you interact with others and how you inspire and lead them."
+                    title: "Influence — The Multiplier",
+                    text: "How you affect the people around you determines whether your professional contribution stays with you or multiplies through others. The Influence dimension examines how you make people feel, whether you inspire trust and belonging, and whether you are able to move others toward action — not through authority, but through genuine connection and credibility."
                 }
             },
             extraInfo: "Each of these dimensions is further divided into pillars and detailed facets, with precisely defined proficiency levels, allowing you to clearly see where you stand and where you can go.",
@@ -309,34 +309,52 @@ export const translations = {
                 "Gain an objective perspective: Understand your performance and potential within the context of modern business demands."
             ],
             footer: "Whether you are starting your career, looking to advance, or are an experienced leader, HB Compass is your versatile instrument. It empowers you to strategically manage your professional development and align it with organizational goals, fostering a culture of continuous improvement.",
-            finalCall: "Do you want to discover your strengths and areas for development? Take our self-assessment based on HB Compass and begin your journey toward professional excellence. Find out where you are now and where you can go next!"
+            finalCall: "Do you want to discover your strengths and areas for development? Take our self-assessment based on HB Compass and begin your journey toward professional excellence. Find out where you are now and where you can go next!",
+            whyTitle: "Why Take a Self-Assessment?",
+            whyText: "Understanding where you currently are is the most practical thing you can do for your professional development. Not where you hope you are, or where you think you should be — where you actually are, honestly assessed against a clear description of what excellent looks like in your specific role.\n\nWhen you know that, development stops being vague. Instead of trying to improve everything at once, or investing energy in areas that feel productive but do not move the needle, you have a specific picture of your genuine strengths and your most valuable growth opportunities. You have a starting point.\n\nThe HB Compass self-assessment gives you that starting point — grounded in a framework that reflects the full reality of professional excellence, not just the parts that are easiest to measure.",
+            chooseTitle: "Choose Your Profile to Begin",
+            chooseText: "The HB Compass is built around ideal profiles — role-specific descriptions of what excellent performance looks like across every dimension, at every level of development. Your self-assessment is always anchored to the profile that matches your role, so the feedback you receive is relevant and specific — not a generic score against an abstract benchmark.",
+            chooseLabel: "Select the profile that best reflects your current role to begin your self-assessment:"
         },
         leader: {
-            title: "Inspiring Leadership 2.0",
-            subtitle: "A Guide for Transforming Leaders in the Modern Era",
-            mainDescription: "The role of a leader in the modern business world goes beyond traditional management and supervision. Today's leaders must be visionaries, strategists, and mentors – capable of inspiring action, nurturing trust, and shaping a culture of continuous growth. In a world that is constantly changing, a leader's true power lies in the ability to adapt, innovate, and motivate their teams toward shared success.",
-            frameworkInfo: "Inspiring Leadership 2.0 is a detailed profile of the future leader, developed based on the comprehensive HB Compass framework and grounded in the principles of Value-Based Communication (VBC). This profile provides a clear map of capabilities essential for a leader who wants to make a significant impact and transform their organization.",
-            capabilitiesTitle: "We focus on leaders who do not just manage, but also:",
+            title: "The Leader Others Choose to Follow",
+            subtitle: "HB Compass — Inspiring Leadership Profile",
+            mainDescription: "There is a difference between holding a leadership position and actually leading. Most people who manage teams, run projects, or carry responsibility for others' performance understand this instinctively — because they have experienced both kinds of leader themselves. They have worked for someone who made them want to give their best, and they have worked for someone who made them want to leave. The difference between those two experiences is not seniority, intelligence, or technical expertise. It is leadership.\n\nThe Inspiring Leadership profile describes what genuinely effective leadership looks like today — not as an abstract ideal, but as a set of observable, developable capabilities that real leaders at every level can understand, assess, and grow.",
+            whatTitle: "What Does an Inspiring Leader Look Like?",
+            whatText: "The Inspiring Leadership profile is built on a clear and honest view of what leadership demands in today's organisations. It goes well beyond managing performance or hitting targets. An inspiring leader does four things simultaneously — and the combination of all four is what makes the difference between someone who occupies a leadership role and someone who genuinely leads.",
             capabilities: [
-                { title: "Possess clear vision and strategic thinking", text: "Leaders who understand the broader context, anticipate future trends, and effectively align team efforts with a compelling long-term vision." },
-                { title: "Are masters of change management", text: "Leaders who successfully plan, execute, and sustain change initiatives while managing resistance and ensuring the engagement of all stakeholders." },
-                { title: "Cultivate a culture of growth and resilience", text: "Leaders who demonstrate deep self-awareness, believe in continuous development, learn from mistakes, and effectively recover from setbacks while maintaining focus and a positive attitude." },
-                { title: "Build trust and inclusivity", text: "Leaders who practice radical empathy, foster team commitment and collaboration, resolve conflicts constructively, and create an environment where everyone feels valued and empowered." },
-                { title: "Induce action and empowerment", text: "Leaders who inspire with vision, delegate effectively, promote ownership and accountability, and proactively advocate for change by persuading others with clear arguments." }
+                {
+                    title: "They Deliver Results — and Build the Capacity for Future Results",
+                    text: "An inspiring leader gets things done. They set clear, ambitious goals that their team understands and commits to. They make good decisions under pressure. They manage performance with both honesty and care — holding people to high standards while investing in their development. When things go wrong, they respond with composure and address root causes rather than symptoms.\n\nBut they do not stop at short-term delivery. They think strategically about where their team and organisation need to go. They lead change rather than simply managing it. They build capability in the people around them so that results are sustainable — not dependent on their own constant presence and effort.\n\nThis combination — delivering today while building for tomorrow — is one of the most demanding aspects of leadership, and one of the most important."
+                },
+                {
+                    title: "They Lead From the Right Mindset",
+                    text: "How a leader thinks shapes everything their team experiences. An inspiring leader brings a growth mindset to their role — they believe that capability is developed through effort and learning, not fixed by talent or circumstance. They model this belief in how they respond to their own challenges and setbacks, and they create an environment where their team feels safe to take risks, make mistakes, and learn.\n\nThey are self-aware — genuinely so, not performatively. They understand their own strengths and the edges of those strengths. They seek feedback and use it. They own their decisions and their outcomes without deflecting blame onto circumstances or other people.\n\nThey are also resilient and adaptable — not in the sense of being unaffected by pressure, but in the sense of maintaining effectiveness and perspective when things are difficult, and recovering quickly enough to keep leading well.\n\nAnd they are anchored in something beyond their own performance. They are genuinely committed to the organisation's mission and values — not because it is expected of them, but because they understand what they are building and why it matters."
+                },
+                {
+                    title: "They Have the Skills That Leadership Actually Requires",
+                    text: "Technical expertise gets people into leadership roles. What keeps them effective is a different set of capabilities entirely.\n\nAn inspiring leader manages their time and priorities with real sophistication — not just staying busy, but consistently focusing on what matters most. They communicate in ways that connect with different audiences and drive genuine understanding rather than mere compliance. They delegate with intention — not offloading tasks, but creating ownership. They have difficult conversations without damaging the relationship. They develop people deliberately and recognise their contributions in ways that actually motivate.\n\nThese skills are learnable. But they require honest assessment of where you currently are — because the gap between thinking you are good at delegation and actually being good at it is one of the most common and consequential blind spots in leadership."
+                },
+                {
+                    title: "They Create an Environment Others Want to Be Part Of",
+                    text: "The final dimension of inspiring leadership is perhaps the least tangible — and the most powerful. It is the experience a leader creates for the people around them.\n\nAn inspiring leader makes their team feel genuinely valued — not through generic praise, but through authentic presence, real empathy, and the kind of inclusion that ensures every voice contributes to outcomes. They build trust through consistency — doing what they say, saying what they mean, and being the same person in difficult conversations as they are in easy ones.\n\nAnd they move people to action — not through pressure or positional authority, but through vision that makes the work meaningful, empowerment that makes ownership feel natural, and influence that inspires commitment rather than compliance.\n\nThis is what separates a manager from a leader that people genuinely want to follow."
+                }
             ],
-            transformTitle: "Do you want to move from managing to inspiring? This profile is not just a list of characteristics; it is a call to transform your leadership. It helps you understand how to:",
-            transformItems: [
-                "Clearly articulate your strategic goals and ensure the entire team understands the 'why' behind every task.",
-                "Effectively manage crisis situations and transform them into opportunities for growth and learning.",
-                "Develop the ability to motivate and empower team members to take initiative and responsibility.",
-                "Build strong, trusting relationships and nurture an inclusive culture where every voice is valued."
+            levelsTitle: "The Five Levels of Leadership Development",
+            levelsIntro: "The Inspiring Leadership profile does not describe leadership as something you either have or do not have. It describes a developmental journey — one that every leader is somewhere on, and one that never truly ends. Across every capability in the profile, development is described at five levels:",
+            levels: [
+                { name: "Emerging", text: "You are building foundational understanding and beginning to develop this capability. Your approach may be inconsistent, and you benefit from guidance and structured support." },
+                { name: "Developing", text: "You are growing in this area and demonstrating the capability in straightforward situations. You are building confidence and consistency, though complex situations may still stretch you." },
+                { name: "Proficient", text: "You demonstrate this capability reliably and effectively across most situations. This is a genuine strength you can build on and that others can depend on." },
+                { name: "Advanced", text: "You demonstrate sophisticated, nuanced capability that goes beyond effective performance. You anticipate complexity, adapt skilfully, and help others develop in this area." },
+                { name: "Expert", text: "You demonstrate masterful, distinctive capability that shapes how others think about and practice this aspect of leadership. You are a recognised resource and a model for others." }
             ],
-            assessmentGoal: "Where are you on this path to Inspiring Leadership 2.0? Take our 'Inspiring Leader 2.0' self-assessment and get a clear picture of your leadership capabilities. Our assessment will provide you with:",
-            assessmentOutcomes: [
-                "A precise analysis of your current leadership skills and mindset.",
-                "Identification of your strengths, highlighting where you already excel.",
-                "Concrete areas for further development, with clear guidelines on how to improve your abilities to become a transformative leader."
-            ],
+            levelsFootnote: "Most leaders will find themselves at different levels across different capabilities — and that variation is exactly what makes the self-assessment useful. It shows you not just where you are strong, but where the most valuable development focus lies for you specifically.",
+            whoTitle: "Who This Profile Is For",
+            whoText: "The Inspiring Leadership profile is designed for anyone who carries responsibility for others — formally or informally. That includes team leaders and managers at every level, senior individual contributors who lead through influence rather than authority, professionals preparing for their first leadership role, and experienced leaders who want an honest, structured picture of where they stand today.\n\nLeadership is not a title. If you shape the direction, performance, or development of others — this profile is for you.",
+            assessTitle: "Take the Self-Assessment",
+            assessText: "The self-assessment takes approximately 30–40 minutes to complete. It presents realistic leadership scenarios and asks you to select the response that most honestly reflects how you typically behave — not how you aspire to behave, and not how you think you should behave.\n\nYour results will show you where you sit across every dimension of the Inspiring Leadership profile, where your self-perception aligns with how the framework describes each level, and where your most valuable development opportunities lie.\n\nThere are no right or wrong answers. There is only an honest picture of where you are — and a clear view of where you could go.",
+            privacyNote: "The self-assessment is a personal development tool. Your responses are private and used only to generate your individual results. No data is shared with your organisation or any third party.",
             footer: "Start your journey toward exceptional leadership today and discover your full potential to inspire, lead, and create lasting change!"
         },
         employee: {

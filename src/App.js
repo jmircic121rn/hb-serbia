@@ -23,6 +23,7 @@ import { translations } from './data/translations';
 import InternalTrainings from './components/InternalTrainings';
 import AssessmentIntro from './components/AssessmentIntro';
 import PdfDebugger from './components/PdfDebugger';
+import Report2Demo from './components/Report2Demo';
 
 
 const AssessmentLayout = ({ children, isMobile }) => (
@@ -129,6 +130,7 @@ function App() {
   <Navbar language={language} setLanguage={setLanguage} />
       <Routes>
         <Route path="/debug-pdf" element={<PdfDebugger />} />
+        <Route path="/report2-demo" element={<Report2Demo />} />
         {/* 1. PLANETE (Pre-intro) */}
         <Route path="/" element={
           <EclipseIntro

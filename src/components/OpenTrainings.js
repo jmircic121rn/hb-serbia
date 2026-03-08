@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 
 const TrainingGallerySidebar = () => {
   const images = [
-    "/images/t1.jpg", "/images/t2.jpg", "/images/t3.jpg", 
+    "/images/t1.jpg", "/images/t2.jpg", "/images/t3.jpg",
     "/images/t4.jpg", "/images/t5.jpg", "/images/t6.jpg", "/images/t7.jpg"
   ];
 
   return (
-    <div style={{ 
-      display: 'grid', 
+    <div style={{
+      display: 'grid',
       gridTemplateColumns: '1fr', // Jedna kolona za maksimalnu širinu slika
       gridAutoRows: '280px', // Mnogo veće slike
       gap: '20px',
@@ -32,11 +32,11 @@ const TrainingGallerySidebar = () => {
           }}
         />
       ))}
-      <div style={{ 
-        padding: '20px 0', 
-        fontSize: '10px', 
-        letterSpacing: '5px', 
-        color: '#222', 
+      <div style={{
+        padding: '20px 0',
+        fontSize: '10px',
+        letterSpacing: '5px',
+        color: '#222',
         textTransform: 'uppercase',
         textAlign: 'center'
       }}>
@@ -51,7 +51,7 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
   <motion.div
     whileHover={{ y: -5, backgroundColor: 'rgba(255,255,255,0.02)' }}
     style={{
-      background: 'linear-gradient(145deg, rgba(15,15,15,0.8) 0%, rgba(5,5,5,0.9) 100%)',
+      background: 'linear-gradient(145deg, rgba(15, 15, 15, 0.9) 0%, rgba(5,5,5,1) 100%)',
       border: '1px solid rgba(255, 255, 255, 0.25)',
       padding: '30px', // Smanjen padding
       borderRadius: '2px',
@@ -65,7 +65,7 @@ const TrainingCard = ({ title, description, duration, mentors, onClick }) => (
   >
     <div>
       <h4 style={{ color: '#ffffff', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '12px' }}>{duration}</h4>
-      <h3 style={{ fontSize: '25px', fontWeight: '800', marginBottom: '15px', lineHeight: '1.2' }}>{title}</h3>
+      <h3 style={{color: '#ffffff',fontSize: '25px', fontWeight: '800', marginBottom: '15px', lineHeight: '1.2' }}>{title}</h3>
       <div style={{ color: '#888', fontSize: '14px', lineHeight: '1.5', fontWeight: '300' }}>
         {description}
       </div>
@@ -136,13 +136,13 @@ const OpenTrainings = ({ onNavigate }) => {
         </header>
 
         {/* --- NOVI SPLIT LAYOUT (Slike levo, Kartice desno) --- */}
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: isMobile ? 'column' : 'row', 
+        <div style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           gap: '80px', // Veći razmak između slika i teksta
           alignItems: 'flex-start'
         }}>
-          
+
           {/* LEVA STRANA: Galerija (40%) */}
           <div style={{ flex: isMobile ? '1' : '0 0 40%', width: '100%' }}>
             <TrainingGallerySidebar />
@@ -151,66 +151,72 @@ const OpenTrainings = ({ onNavigate }) => {
           {/* DESNA STRANA: Kartice (60%) */}
           <div style={{ flex: '1', width: '100%' }}>
             <TrainingCard
-              title="Zatvaranje prodaje zasnovano na vrednosti"
-duration={
-  <div>
-    <div>
-      14. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00
-    </div>
-    <br/>
-    <div>
-      23. jun <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00
-    </div>
-  </div>
-}              description={<>Pretvorite „Skupo je!“ u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              title='Zatvaranje prodaje zasnovano na vrednosti'
+              duration={
+                <div>
+                  <div>14. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00</div>
+                  <br />
+                  <div>23. jun <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00</div>
+                </div>
+              }
+              description={
+                <>
+                  Pretvorite „Skupo je!” u „Potpisujem!”. Naučite kako da odbranite vrednost svoje ponude.
+                  <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                </>
+              }
               onClick={() => onNavigate('/value-based-closing')}
             />
 
             <TrainingCard
-              title="Razgovor zasnovan na percepciji"
-duration={
-  <div>
-    <div>
-      12. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00
-    </div>
-    <br/>
-    <div>
-      21. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00
-    </div>
-  </div>
-}                 description={<>Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              title='Razgovor zasnovan na percepciji'
+              duration={
+                <div>
+                  <div>12. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00</div>
+                  <br />
+                  <div>21. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 17:00</div>
+                </div>
+              }
+              description={
+                <>
+                  Učinite problem koji se ne vidi nemogućim za ignorisanje! Promenite percepciju klijenta.
+                  <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                </>
+              }
               onClick={() => onNavigate('/perception-based')}
             />
 
             <TrainingCard
-              title="Vrednost lične odgovornosti"
-duration={
-  <div>
-    <div>
-      19. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 13:00 | 14:00 - 18:00
-    </div>
-    <br/>
-    <div>
-      25. jun <span style={{ margin: '0 15px' }}>/</span> 09:00 - 13:00 | 14:00 - 18:00
-    </div>
-  </div>
-}                  description={<>Pretvorite „Ne mogu!“ u „Preuzimam kontrolu!”. Prepoznajte lične prepreke.<div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div></>}
+              title='Vrednost lične odgovornosti'
+              duration={
+                <div>
+                  <div>19. maj <span style={{ margin: '0 15px' }}>/</span> 09:00 - 13:00 | 14:00 - 18:00</div>
+                  <br />
+                  <div>25. jun <span style={{ margin: '0 15px' }}>/</span> 09:00 - 13:00 | 14:00 - 18:00</div>
+                </div>
+              }
+              description={
+                <>
+                  Pretvorite „Ne mogu!” u „Preuzimam kontrolu!”. Prepoznajte lične prepreke.
+                  <div style={{ marginTop: '15px', color: '#ffffff', fontSize: '11px' }}>Lokacija: {commonLocation}</div>
+                </>
+              }
               onClick={() => onNavigate('/personal-responsibility')}
             />
 
             <TrainingCard
-              title="Moć uticaja: Tanka linija uspeha"
-              duration="Specijalni Masterclass"
-              description="Od dobrog do nezaboravnog javnog nastupa. Zamislite da vaš glas pokreće promene."
-              mentors="Vesna Damjanić, Goran Bogdan, Nikola Mirčić"
+              title='Moć uticaja: Tanka linija uspeha'
+              duration='Specijalni Masterclass'
+              description='Od dobrog do nezaboravnog javnog nastupa. Da li se vaše reči samo čuju, ili i odjekuju? Otključajte svoj jedinstveni potencijal uz podršku uspešnih.'
+              mentors='Vesna Damjanić, Nikola Mirčić, Gost iznenađenja'
               onClick={() => onNavigate('/success-line')}
             />
 
             <TrainingCard
-              title="Inspirativno Liderstvo 1.0"
-              duration="4 meseca / 6 dana"
-              description="Program dizajniran za menadžere koji žele da unaprede liderske veštine i osiguraju trajne rezultate."
-              onClick={() => alert("Stranica u pripremi")}
+              title='Inspirativno Liderstvo 1.0'
+              duration='4 meseca / 6 dana'
+              description='Program dizajniran za menadžere koji žele da unaprede liderske veštine i osiguraju trajne rezultate.'
+              onClick={() => alert('Stranica u pripremi')}
             />
           </div>
         </div>
@@ -233,10 +239,10 @@ duration={
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
-                "Visokokvalitetni i specijalizovani kursevi iz oblasti liderstva, korporativne komunikacije,
+                “Visokokvalitetni i specijalizovani kursevi iz oblasti liderstva, korporativne komunikacije,
                 motivacije zaposlenih i prodajnih veština. Nikola stvara intenzivan i dinamičan ambijent
                 u kojem uvek želite da saznate i pružite više. Treninzi su vrlo praktični i inspirišući.
-                Nakon sedam godina saradnje, Hansen Beck bi uvek bio na prvom mestu ličnog izbora."
+                Nakon sedam godina saradnje, Hansen Beck bi uvek bio na prvom mestu ličnog izbora.”
               </p>
               <div style={{ marginTop: '20px' }}>
                 <h4 style={authorNameStyle}>Marija Čeleketić</h4>
@@ -250,10 +256,10 @@ duration={
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
-                "Trening sa Hansen Beck-om nije bio samo profesionalni razvoj – to je bilo iskustvo
+                “Trening sa Hansen Beck-om nije bio samo profesionalni razvoj – to je bilo iskustvo
                 koje menja način razmišljanja. Metodologija i pristup su me osvojili jer su praktični
                 i usmereni na stvarne promene. Hansen Beck mi je pomogao da postanem bolji lider,
-                bolji komunikator i na kraju bolji trener. Topla preporuka svima!"
+                bolji komunikator i na kraju bolji trener. Topla preporuka svima!”
               </p>
               <div style={{ marginTop: '20px' }}>
                 <h4 style={authorNameStyle}>Stojan Jovanović</h4>
@@ -267,10 +273,10 @@ duration={
               style={testimonialCardStyle}
             >
               <p style={testimonialTextStyle}>
-                "Stekli smo ključna znanja iz efikasne komunikacije, uticaja i prodaje ideja.
+                “Stekli smo ključna znanja iz efikasne komunikacije, uticaja i prodaje ideja.
                 Unapredili smo interne procese i identifikovali potrebu za proširenjem resursa.
                 Razvili smo strategije aktivnog slušanja kako bismo osnažili organizacionu
-                održivost i efikasnost u ostvarivanju misije."
+                održivost i efikasnost u ostvarivanju misije.”
               </p>
               <div style={{ marginTop: '20px' }}>
                 <h4 style={authorNameStyle}>Marija Simić Savić</h4>
