@@ -117,7 +117,7 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, 
 
       <div style={{ textAlign: inline ? 'left' : 'center', zIndex: 10 }}>
         <h3 style={{
-          fontSize: isMobile ? '7px' : '9px',
+          fontSize: isMobile ? '9px' : '11px',
           letterSpacing: '2px',
           color: 'rgba(255,255,255,0.4)',
           marginBottom: '4px',
@@ -128,7 +128,7 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, 
         </h3>
         <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: inline ? '0 0 8px' : '0 auto 8px' }} />
         <span style={{
-          fontSize: small ? (isMobile ? '8px' : '10px') : (isMobile ? '10px' : '12px'),
+fontSize: small ? (isMobile ? '12px' : '14px') : (isMobile ? '12px' : '16px'),
           fontWeight: '700',
           letterSpacing: '1px',
           color: '#fff',
