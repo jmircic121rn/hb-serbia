@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'; // Vraćen useState i useEffect
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { translations } from '../data/translations';
 
-const isMobile = window.innerWidth < 768;
-
-const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, small, noEntrance, dimmed, inline }) => {
+const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, small, noEntrance, dimmed, inline, isMobile }) => {
   const planetWidth = small
     ? (isMobile ? '80px' : '110px')
-    : (isMobile ? '110px' : '180px');
+    : (isMobile ? '100px' : '180px');
 
-  const imgSize = small ? (isMobile ? '70px' : '90px') : (isMobile ? '90px' : '140px');
+  const imgSize = small ? (isMobile ? '70px' : '90px') : (isMobile ? '80px' : '140px');
 
   return (
     <motion.div
@@ -47,10 +45,8 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, 
         alignItems: 'center',
         gap: inline ? '14px' : 0,
         position: 'relative',
-        transform: isMobile ? 'scale(0.85)' : 'scale(1)',
       }}
     >
-      {/* Selected orbit ring */}
       {isSelected && (
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
@@ -115,9 +111,14 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, 
         </div>
       )}
 
-      <div style={{ textAlign: inline ? 'left' : 'center', zIndex: 10 }}>
+      <div style={{
+        textAlign: inline ? 'left' : 'center',
+        zIndex: 10,
+        paddingTop: inline ? '18px' : '0px',
+        paddingLeft: inline ? '20px' : '0px'
+      }}>
         <h3 style={{
-          fontSize: isMobile ? '9px' : '11px',
+          fontSize: isMobile ? '9px' : '13px',
           letterSpacing: '2px',
           color: 'rgba(255,255,255,0.4)',
           marginBottom: '4px',
@@ -128,7 +129,7 @@ const SaturnPlanet = ({ title, subtitle, glowColor, onClick, delay, isSelected, 
         </h3>
         <div style={{ height: '1px', width: '20px', background: 'rgba(255,255,255,0.2)', margin: inline ? '0 0 8px' : '0 auto 8px' }} />
         <span style={{
-fontSize: small ? (isMobile ? '12px' : '14px') : (isMobile ? '12px' : '16px'),
+          fontSize: small ? (isMobile ? '10px' : '14px') : (isMobile ? '11px' : '16px'),
           fontWeight: '700',
           letterSpacing: '1px',
           color: '#fff',
@@ -159,10 +160,17 @@ const subPlanetVariants = {
 const EclipseIntro = ({ onProceed, language, setLanguage }) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const h = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+
   const menuLevel = searchParams.get('menu') || 'main';
 
-  // Vraćamo showOptions i useEffect za početni sloj
   const [showOptions, setShowOptions] = useState(menuLevel !== 'main');
   const [myJourneyExpanded, setMyJourneyExpanded] = useState(false);
   const t = translations[language].eclipse;
@@ -173,6 +181,15 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
     }
   }, [menuLevel]);
 
+  // Eclipse visual dimensions
+  const eclipseSize = isMobile ? 230 : 350;
+  const ringSize = isMobile ? 194 : 284;
+  const circleSize = isMobile ? 190 : 280;
+  const dotRight = isMobile ? 19 : 30;
+  const dotSize = isMobile ? 6 : 8;
+  const beamWidth = isMobile ? 130 : 200;
+  const beamRight = isMobile ? -40 : -65;
+
   const BrandLogo = () => (
     <motion.img
       src="/logo.png"
@@ -180,9 +197,9 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
       animate={{ opacity: 1, x: 0 }}
       style={{
         position: 'absolute',
-        top: '40px',
-        left: '40px',
-        width: isMobile ? '100px' : '180px',
+        top: isMobile ? '20px' : '40px',
+        left: isMobile ? '20px' : '40px',
+        width: isMobile ? '90px' : '180px',
         height: 'auto',
         zIndex: 100,
         filter: 'brightness(1.5)'
@@ -192,9 +209,16 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
 
   const LanguagePicker = () => (
     <div style={{
-      position: 'absolute', top: '40px', right: '40px', zIndex: 100,
-      display: 'flex', gap: '15px', background: 'rgba(255,255,255,0.05)',
-      padding: '8px 15px', borderRadius: '20px', backdropFilter: 'blur(10px)',
+      position: 'absolute',
+      top: isMobile ? '20px' : '40px',
+      right: isMobile ? '20px' : '40px',
+      zIndex: 100,
+      display: 'flex',
+      gap: '12px',
+      background: 'rgba(255,255,255,0.05)',
+      padding: isMobile ? '6px 12px' : '8px 15px',
+      borderRadius: '20px',
+      backdropFilter: 'blur(10px)',
       border: '1px solid rgba(255,255,255,0.1)'
     }}>
       {['sr', 'en'].map((l) => (
@@ -202,8 +226,10 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
           key={l}
           onClick={() => setLanguage(l)}
           style={{
-            cursor: 'pointer', fontSize: '12px', fontWeight: '900',
-            color: language === l ? '#ffff' : '#666',
+            cursor: 'pointer',
+            fontSize: isMobile ? '10px' : '12px',
+            fontWeight: '900',
+            color: language === l ? '#fff' : '#666',
             transition: '0.3s',
             letterSpacing: '1px'
           }}
@@ -231,43 +257,101 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
       <BrandLogo />
       <LanguagePicker />
 
+      {/* Eclipse visual */}
       <motion.div
-        animate={{ 
-            y: showOptions ? -60 : 0,
-            scale: showOptions ? (menuLevel !== 'main' ? 1.1 : 1.1) : 1.6 
+        animate={{
+          y: showOptions ? (isMobile ? -30 : -60) : 0,
+          scale: showOptions ? 0.9 : (isMobile ? 1.3 : 1.6)
         }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'relative', width: '350px', height: '350px', display: 'flex', alignItems: 'center',
-          justifyContent: 'center', marginBottom: '-60px', zIndex: 5,
-          transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+          position: 'relative',
+          width: `${eclipseSize}px`,
+          height: `${eclipseSize}px`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '-60px',
+          zIndex: 5,
         }}
       >
-        <motion.div animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity }} style={{ position: 'absolute', width: '110%', height: '110%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)', filter: 'blur(40px)', zIndex: 1 }} />
-        <div style={{ position: 'absolute', width: '200px', height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)', clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)', filter: 'blur(1px)', zIndex: 7, right: '-65px', top: '51%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        <div style={{ position: 'absolute', width: '284px', height: '284px', borderRadius: '50%', background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)', filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4 }} />
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', width: '8px', height: '8px', backgroundColor: '#fff', borderRadius: '50%', zIndex: 10, boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)' }} />
+        <motion.div
+          animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          style={{
+            position: 'absolute', width: '110%', height: '110%', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(255, 180, 120, 0.12) 0%, rgba(255, 100, 50, 0) 70%)',
+            filter: 'blur(40px)', zIndex: 1
+          }}
+        />
         <div style={{
-          position: 'relative', width: '280px', height: '280px', backgroundColor: '#000',
-          borderRadius: '50%', zIndex: 5, boxShadow: '0 0 15px rgba(0,0,0,1)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden'
-        }}>
-        </div>
+          position: 'absolute',
+          width: `${beamWidth}px`,
+          height: '5px',
+          background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 50%, transparent)',
+          clipPath: 'polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%)',
+          filter: 'blur(1px)',
+          zIndex: 7,
+          right: `${beamRight}px`,
+          top: '51%',
+          transform: 'translateY(-50%)',
+          pointerEvents: 'none'
+        }} />
+        <div style={{
+          position: 'absolute', width: `${ringSize}px`, height: `${ringSize}px`, borderRadius: '50%',
+          background: 'conic-gradient(from 260deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)',
+          filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4
+        }} />
+        <div style={{
+          position: 'absolute', width: `${ringSize}px`, height: `${ringSize}px`, borderRadius: '50%',
+          background: 'conic-gradient(from 80deg at 50% 50%, transparent 0%, rgba(255, 255, 255, 0.8) 15%, transparent 30%)',
+          filter: 'blur(2px)', transform: 'rotate(80deg)', zIndex: 4
+        }} />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          style={{
+            position: 'absolute',
+            right: `${dotRight}px`,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: `${dotSize}px`,
+            height: `${dotSize}px`,
+            backgroundColor: '#fff',
+            borderRadius: '50%',
+            zIndex: 10,
+            boxShadow: '0 0 25px 8px rgba(255, 255, 255, 0.9)'
+          }}
+        />
+        <div style={{
+          position: 'relative',
+          width: `${circleSize}px`,
+          height: `${circleSize}px`,
+          backgroundColor: '#000',
+          borderRadius: '50%',
+          zIndex: 5,
+          boxShadow: '0 0 15px rgba(0,0,0,1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden'
+        }} />
       </motion.div>
 
-      <div style={{ textAlign: 'center', zIndex: 20 }}>
+      {/* Text + menu */}
+      <div style={{ textAlign: 'center', zIndex: 20, width: '100%', padding: '0 16px', boxSizing: 'border-box' }}>
         <motion.h1
           animate={{
-            y: showOptions ? -50 : 0,
+            y: showOptions ? (isMobile ? -30 : -50) : 0,
             opacity: showOptions ? 0.4 : 1,
             scale: showOptions ? 0.9 : 1
           }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: isMobile ? '48px' : '82px',
+            fontSize: isMobile ? '36px' : '82px',
             fontWeight: '900',
             lineHeight: '0.9',
-            letterSpacing: '-3px',
+            letterSpacing: isMobile ? '-1px' : '-3px',
             margin: 0,
             fontFamily: "'PT Serif', serif"
           }}
@@ -276,18 +360,18 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
         </motion.h1>
 
         <motion.p
-          onClick={() => !showOptions && setShowOptions(true)} // AKTIVIRA PRVI NIVO
+          onClick={() => !showOptions && setShowOptions(true)}
           animate={{
             opacity: showOptions ? 0.3 : 1,
-            marginBottom: showOptions ? '40px' : '50px'
+            marginBottom: showOptions ? '30px' : '50px'
           }}
           whileHover={!showOptions ? { color: '#fff', letterSpacing: '6px' } : {}}
           style={{
-            fontSize: '11px',
+            fontSize: isMobile ? '9px' : '11px',
             color: '#666',
             letterSpacing: '4px',
             textTransform: 'uppercase',
-            marginTop: '20px',
+            marginTop: isMobile ? '14px' : '20px',
             cursor: showOptions ? 'default' : 'pointer',
             transition: 'all 0.3s ease'
           }}
@@ -309,8 +393,7 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                 gap: '0px',
               }}
             >
-              {/* Main 2 planets */}
-              <div style={{ display: 'flex', gap: isMobile ? '10px' : '30px' }}>
+              <div style={{ display: 'flex', gap: isMobile ? '16px' : '30px' }}>
                 <SaturnPlanet
                   title={t.planets.whoWeAre.title}
                   subtitle={t.planets.whoWeAre.subtitle}
@@ -318,6 +401,7 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                   delay={0.1}
                   dimmed={myJourneyExpanded}
                   onClick={() => onProceed('ABOUT')}
+                  isMobile={isMobile}
                 />
                 <SaturnPlanet
                   title={t.planets.explore.title}
@@ -325,10 +409,11 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                   glowColor="rgba(255, 255, 255, 0.6)"
                   delay={0.3}
                   onClick={() => isMobile ? navigate('/?menu=assessment') : setMyJourneyExpanded(prev => !prev)}
+                  isMobile={isMobile}
                 />
               </div>
 
-              {/* Sub-planets — appear to the right on desktop only */}
+              {/* Sub-planets — desktop only */}
               <AnimatePresence>
                 {!isMobile && myJourneyExpanded && (
                   <motion.div
@@ -340,10 +425,10 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '6px',
+                      gap: '0px',
                       alignItems: 'flex-start',
-                      marginLeft: '16px',
-                      marginTop: '-10px',
+                      marginLeft: '10px',
+                      marginTop: '15px',
                     }}
                   >
                     {[
@@ -361,6 +446,7 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                           noEntrance
                           inline
                           onClick={planet.onClick}
+                          isMobile={isMobile}
                         />
                       </motion.div>
                     ))}
@@ -369,6 +455,7 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
               </AnimatePresence>
             </motion.div>
           )}
+
           {showOptions && menuLevel === 'assessment' && (
             <motion.div
               key="assessment-menu"
@@ -377,18 +464,23 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
               exit={{ opacity: 0, x: -20 }}
               style={{
                 display: 'flex',
-                gap: isMobile ? '5px' : '30px',
+                flexWrap: isMobile ? 'wrap' : 'nowrap',
+                gap: isMobile ? '10px' : '30px',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
                 width: '100%',
-                maxWidth: '100vw'
-              }}            >
+                maxWidth: '100vw',
+                padding: isMobile ? '0 8px' : '0',
+                boxSizing: 'border-box',
+              }}
+            >
               <SaturnPlanet
                 title={t.planets.b2b.title}
                 subtitle={t.planets.b2b.subtitle}
                 glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.1}
                 onClick={() => onProceed('INTERNAL_TRAININGS')}
+                isMobile={isMobile}
               />
               <SaturnPlanet
                 title={t.planets.individual.title}
@@ -396,6 +488,7 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                 glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.2}
                 onClick={() => onProceed('OPEN_TRAININGS')}
+                isMobile={isMobile}
               />
               <SaturnPlanet
                 title={t.planets.analysis.title}
@@ -403,12 +496,20 @@ const EclipseIntro = ({ onProceed, language, setLanguage }) => {
                 glowColor="rgba(255, 255, 255, 0.6)"
                 delay={0.3}
                 onClick={() => onProceed('INTRO')}
+                isMobile={isMobile}
               />
               <div
-                onClick={() => navigate('/')} 
+                onClick={() => navigate('/')}
                 style={{
-                  position: 'absolute', bottom: '-40px', cursor: 'pointer',
-                  fontSize: '10px', opacity: 0.5, letterSpacing: '2px'
+                  width: '100%',
+                  textAlign: 'center',
+                  marginTop: isMobile ? '8px' : '0',
+                  position: isMobile ? 'relative' : 'absolute',
+                  bottom: isMobile ? 'auto' : '-40px',
+                  cursor: 'pointer',
+                  fontSize: '10px',
+                  opacity: 0.5,
+                  letterSpacing: '2px'
                 }}
               >
                 ← {translations[language].common.back.toUpperCase()}

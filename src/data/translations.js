@@ -100,86 +100,104 @@ export const translations = {
             backBtn: "Nazad"
         },
         compass: {
-            title: "HB Kompas – Vaš Vodič kroz Profesionalni Razvoj",
-            description: "U današnjem dinamičnom poslovnom svetu, uspeh ne zavisi samo od onoga što znate ili umete, već i od načina na koji razmišljate i utičete na druge. Brze promene i složeni izazovi zahtevaju od nas da budemo više od pukih izvršilaca zadataka – zahtevaju da budemo celoviti profesionalci koji razumeju svoj doprinos i inspirišu druge.",
-            subquote: "HB Kompas je sveobuhvatan okvir, razvijen od strane HubX tima, za procenu i razvoj profesionalne izvrsnosti. On nije samo još jedan alat za upravljanje performansama, već predstavlja promenu paradigme u razmišljanju o tome šta zaista čini izvanrednog zaposlenog. Njegova snaga leži u holističkom pristupu, koji obuhvata četiri ključne dimenzije:",
-            dimensions: {
-                mindset: {
-                    title: "1. Način razmišljanja (Mindset)",
-                    text: "Istražuje vaš unutrašnji svet – samopercepciju, uverenja, stavove i pristupe radu i životu."
-                },
-                skills: {
-                    title: "2. Veštine (Skills)",
-                    text: "Fokusira se na praktične sposobnosti i znanja koja su vam potrebna za efikasno obavljanje posla."
-                },
-                results: {
-                    title: "3. Rezultati (Results)",
-                    text: "Meri vaš doprinos ishodima i efikasnoj egzekuciji, od kratkoročnih ciljeva do dugoročnih promena."
-                },
-                influence: {
-                    title: "4. Uticaj (Influence)",
-                    text: "Proučava kako interaktujete sa drugima i kako ih inspirišete i vodite."
-                }
-            },
-            extraInfo: "Svaka od ovih dimenzija se dalje deli na stubove i detaljne fasete, sa precizno definisanim nivoima veštine, što vam omogućava da jasno vidite gde se nalazite i kuda možete da idete.",
-            benefitsTitle: "Zašto je HB Kompas važan za vas? Pružajući detaljnu mapu profesionalnih sposobnosti, HB Kompas vam omogućava da:",
-            benefits: [
-                "Razumete sebe u celosti: Sagledate svoje talente, ne samo kroz veštine i rezultate, već i kroz način razmišljanja i sposobnost uticaja.",
-                "Identifikujete jasne puteve za rast: Precizno odredite oblasti za razvoj i postavite merljive ciljeve za napredovanje.",
-                "Dobijete objektivnu perspektivu: Razumete svoj učinak i potencijal u kontekstu savremenih poslovnih zahteva."
-            ],
-            footer: "Bilo da ste početnik u karijeri, želite da napredujete, ili ste iskusni lider, HB Kompas je vaš svestrani instrument. On vas osnažuje da strateški upravljate svojim profesionalnim razvojem i uskladite ga sa organizacionim ciljevima, podstičući kulturu kontinuiranog poboljšanja.",
-            finalCall: "Želite li da otkrijete svoje snage i oblasti za razvoj? Uradite našu samoprocenu zasnovanu na HB Kompasu i započnite putovanje ka profesionalnoj izvrsnosti. Saznajte gde ste sada i kuda možete da idete!"
+    title: "HB Kompas — Saznajte gde se nalazite. Saznajte kako da budete bolji.",
+    description: "Većina profesionalaca ima iskrenu, ali nepotpunu sliku o sebi. Poznajete svoje prednosti — barem one kojih ste svesni. Poznajete oblasti koje su vam izazovne. Ali jaz između toga kako vidite sebe i toga kako se vaš rad zapravo odražava na druge, kako vaše razmišljanje oblikuje vaše odluke i kako vaše prisustvo utiče na ljude oko vas — u tom jazu se kriju najdragoceniji uvidi za vaš razvoj.",
+    subquote: "HB Kompas je model za profesionalni razvoj zasnovan na jednostavnoj, ali moćnoj ideji: ono što nekoga čini istinski izvrsnim u poslu nije jedna stvar — već četiri međusobno povezane stavke koje deluju zajedno. Većina razvojnih alata fokusira se na veštine ili rezultate. HB Kompas ide korak dalje, procenjujući potpunu sliku onoga što pokreće profesionalnu efikasnost — jer održiva izvrsnost nikada nije samo u onome što umete da uradite. Ona je podjednako i u tome kako razmišljate, ko ste u odnosima sa drugima i kakav uticaj ostavljate na ljude i okruženje oko sebe.",
+    dimensions: {
+        mindset: {
+            title: "Mindset (Način razmišljanja) — Osnova",
+            text: "To kako razmišljate oblikuje sve ostalo. Vaša uverenja o sopstvenom kapacitetu za rast, vaša otpornost kada postane teško, vaša otvorenost za povratne informacije i osećaj odgovornosti prema poslu — to nisu fiksne osobine ličnosti. To su obrasci koji se mogu razumeti, razvijati i namerno menjati. Dimenzija \"Mindset\" pomaže vam da jasno vidite šta pokreće vaše ponašanje, kako biste gradili na svojim snagama i rešili obrasce koji vas koče."
         },
-        leader: {
-            title: "Inspirativno Liderstvo 2.0",
-            subtitle: "Vodič za Transformaciju Lidera u Modernom Dobu",
-            mainDescription: "Uloga lidera u savremenom poslovnom svetu prevazilazi tradicionalno upravljanje i nadgledanje. Današnji lideri moraju biti vizionari, stratezi i mentori – sposobni da inspirišu akciju, neguju poverenje i oblikuju kulturu neprekidnog rasta. U svetu koji se neprestano menja, prava moć lidera leži u sposobnosti da se prilagođavaju, inoviraju i motivišu svoje timove ka zajedničkom uspehu.",
-            frameworkInfo: "Inspirativno Liderstvo 2.0 je detaljan profil lidera budućnosti, razvijen na osnovu sveobuhvatnog okvira HB Kompasa i temeljen na principima Komunikacije Zasnovane na Vrednostima (Value-Based Communication - VBC). Ovaj profil pruža jasnu mapu sposobnosti koje su ključne za lidera koji želi da ostvari značajan uticaj i transformiše svoju organizaciju.",
-            capabilitiesTitle: "Fokusiramo se na lidere koji ne samo da upravljaju, već i:",
-            capabilities: [
-                { title: "Poseduju jasnu viziju i strateško razmišljanje", text: "Lideri koji razumeju širi kontekst, predviđaju buduće trendove i efikasno usklađuju timske napore sa ubedljivom dugoročnom vizijom." },
-                { title: "Majstori su u upravljanju promenama", text: "Lideri koji uspešno planiraju, sprovode i održavaju inicijative za promene, dok upravljaju otporom i osiguravaju angažovanje svih zainteresovanih strana." },
-                { title: "Neguju kulturu rasta i otpornosti", text: "Lideri koji pokazuju duboku samosvest, veruju u kontinuirani razvoj, uče iz grešaka i efikasno se oporavljaju od neuspeha, održavajući fokus i pozitivan stav." },
-                { title: "Izgrađuju poverenje i inkluzivnost", text: "Lideri koji praktikuju radikalnu empatiju, podstiču timsku posvećenost i saradnju, rešavaju konflikte konstruktivno i stvaraju okruženje gde se svi osećaju vrednovanim i osnaženim." },
-                { title: "Podstiču akciju i osnaživanje", text: "Lideri koji inspirišu vizijom, efikasno delegiraju, promovišu vlasništvo i odgovornost, i aktivno zastupaju promene, ubeđujući druge jasnim argumentima." }
-            ],
-            transformTitle: "Želite li da pređete sa upravljanja na inspirisanje? Ovaj profil nije samo skup karakteristika; to je poziv na transformaciju vašeg liderstva. On vam pomaže da shvatite kako da:",
-            transformItems: [
-                "Jasno artikulišete svoje strateške ciljeve i osigurate da ceo tim razume 'zašto' stoji iza svakog zadatka.",
-                "Efikasno upravljate kriznim situacijama i transformišete ih u prilike za rast i učenje.",
-                "Razvijete sposobnost da motivišete i osnažite članove tima da preuzmu inicijativu i odgovornost.",
-                "Izgradite snažne, poverljive odnose i negujete inkluzivnu kulturu gde se svaki glas ceni."
-            ],
-            assessmentGoal: "Gde ste vi na ovom putu ka Inspirativnom Liderstvu 2.0? Uradite našu samoprocenu 'Inspirativni Lider 2.0' i dobijte jasnu sliku svojih liderskih sposobnosti. Naša procena će vam pružiti:",
-            assessmentOutcomes: [
-                "Preciznu analizu vaših trenutnih liderskih veština i načina razmišljanja.",
-                "Identifikaciju vaših jakih strana, gde već pokazujete izvanrednost.",
-                "Konkretne oblasti za dalji razvoj, sa jasnim smernicama kako da unapredite svoje sposobnosti da biste postali transformativni lider."
-            ],
-            footer: "Započnite svoje putovanje ka izvanrednom liderstvu danas i otkrijte svoj pun potencijal da inspirišete, vodite i stvarate trajnu promenu!"
+        skills: {
+            title: "Skills (Veštine) — Alat",
+            text: "Veštine su praktične sposobnosti koje donosite u svoju ulogu — kako upravljate vremenom i prioritetima, kako komunicirate, rešavate probleme i kako razvijate ljude oko sebe. Ova dimenzija ne procenjuje samo da li posedujete neku sposobnost, već koliko je pouzdano i sofisticirano primenjujete u realnoj složenosti vašeg posla."
         },
-        employee: {
-            title: "Idealni Profil Modernog Zaposlenog",
-            subtitle: "Više od Transakcija – Komunikacija Zasnovana na Vrednostima (VBC)",
-            mainDescription: "U današnjem brzom i složenom poslovnom okruženju, definicija 'idealnog zaposlenog' se menja. Nije dovoljno biti samo tehnički vešt ili fokusiran na zadatke; moderni uspeh zahteva sposobnost navigacije ljudskim interakcijama, razumevanje svrhe i stvaranje istinske vrednosti u svakoj komunikaciji.",
-            vbcFeaturesTitle: "Predstavljamo Idealni Profil Modernog Zaposlenog, kreiran na osnovu okvira HB Kompasa i duboko ukorenjenog u principima Komunikacije Zasnovane na Vrednostima (VBC). Šta karakteriše idealnog zaposlenog 'Više od Transakcija'?",
-            vbcFeatures: [
-                { title: "Ovladava VBC-om", text: "Sposoban je da privuče pažnju drugih, natera ih da razmišljaju o istinskoj vrednosti i efikasno podstakne akciju, premošćujući komunikacijske praznine i prevazilazeći inerciju." },
-                { title: "Radikalna empatija i strateško slušanje", text: "Duboko razume potrebe, motivacije i strahove drugih, 'čuje neizrečeno' i gradi smislene veze koje su temelj za uspešnu saradnju." },
-                { title: "Artikuliše vrednost i jasnoću", text: "Prevodite složene ideje u jasne, koncizne poruke koje rezoniraju sa primaocem, uvek objašnjavajući 'zašto je to važno' iz perspektive druge strane." },
-                { title: "Proaktivan je i agilan", text: "Pokreće inicijative, proaktivno zastupa promene i dosledno transformiše povratne informacije (čak i odbijanje) u vredne podatke za kontinuirano učenje, adaptaciju i poboljšanje." },
-                { title: "Gradi poverenje i inkluzivnost", text: "Stvara okruženje gde se osećaju sigurnost i pripadnost, gde se cene različite perspektive, a poverenje je temelj svih odnosa." }
-            ],
-            summary: "Ovo je profil pojedinca koji ne samo da uspeva, već i inspiriše, sarađuje i pokreće organizaciju napred, pretvarajući izazove u prilike i promovišući kulturu stalnog rasta.",
-            assessmentCall: "Gde ste vi na ovom putu? Pozivamo vas da uradite našu detaljnu samoprocenu i uporedite svoj trenutni profil sa ovim idealnim. Kao rezultat testa, dobićete preciznu procenu:",
-            assessmentOutcomes: [
-                "Vaše pozicije u odnosu na idealni profil: Jasno ćete videti kako se vaše sposobnosti uklapaju u tražene karakteristike.",
-                "Vaših jakih strana: Identifikovaćete veštine i načine razmišljanja gde ste već izvrsni.",
-                "Oblasti za razvoj: Precizno ćete locirati gde možete dodatno raditi na sebi kako biste maksimizirali svoj potencijal."
-            ],
-            footer: "Započnite svoje putovanje ka izvanrednosti danas i otkrijte kako možete postati agent promene u svojoj organizaciji!"
+        results: {
+            title: "Results (Rezultati) — Metrika",
+            text: "Rezultati su ishodi koje stvarate — kratkoročno kroz efikasno izvršenje i postizanje ciljeva, a dugoročno kroz strateško razmišljanje, inovacije i izgradnju kapaciteta koji nastavljaju da žive posle svakog pojedinačnog projekta. Dimenzija \"Results\" povezuje vaš svakodnevni rad sa širim doprinosom koji dajete i pomaže vam da vidite gde je vaše učešće u ukupnom rezultatu najjače, a gde bi moglo biti veće."
+        },
+        influence: {
+            title: "Influence (Uticaj) — Multiplikator",
+            text: "To kako utičete na ljude oko vas određuje da li vaš profesionalni doprinos ostaje samo na vama ili se umnožava kroz druge. Dimenzija \"Influence\" ispituje kako se ljudi osećaju pored vas, da li ulivate poverenje i osećaj pripadnosti, i da li ste u stanju da pokrenete druge na akciju — ne kroz autoritet, već kroz istinsku povezanost i kredibilitet."
         }
+    },
+    extraInfo: "Svaka od ovih dimenzija se dalje deli na stubove i detaljne fasete, sa precizno definisanim nivoima veštine, što vam omogućava da jasno vidite gde se nalazite i kuda možete da idete.",
+    benefitsTitle: "Zašto je HB Kompas važan za vas? Pružajući detaljnu mapu profesionalnih sposobnosti, HB Kompas vam omogućava da:",
+    benefits: [
+        "Razumete sebe u celosti: Sagledate svoje talente, ne samo kroz veštine i rezultate, već i kroz način razmišljanja i sposobnost uticaja.",
+        "Identifikujete jasne puteve za rast: Precizno odredite oblasti za razvoj i postavite merljive ciljeve za napredovanje.",
+        "Dobijete objektivnu perspektivu: Razumete svoj učinak i potencijal u kontekstu savremenih poslovnih zahteva."
+    ],
+    footer: "Bilo da ste početnik u karijeri, želite da napredujete, ili ste iskusni lider, HB Kompas je vaš svestrani instrument. On vas osnažuje da strateški upravljate svojim profesionalnim razvojem i uskladite ga sa organizacionim ciljevima, podstičući kulturu kontinuiranog poboljšanja.",
+    finalCall: "Želite li da otkrijete svoje snage i oblasti za razvoj? Uradite našu samoprocenu zasnovanu na HB Kompasu i započnite putovanje ka profesionalnoj izvrsnosti. Saznajte gde ste sada i kuda možete da idete!",
+    whyTitle: "Zašto uraditi samo-procenu?",
+    whyText: "Razumevanje toga gde se trenutno nalazite je najpraktičnija stvar koju možete uraditi za svoj profesionalni razvoj. Ne tamo gde se nadate da ste, ili gde mislite da bi trebalo da budete — već tamo gde zaista jeste, iskreno procenjeni u odnosu na jasan opis kako izgleda izvrsnost u vašoj specifičnoj ulozi.\n\nKada to znate, razvoj prestaje da bude nejasan. Umesto da pokušavate da unapredite sve odjednom ili ulažete energiju u oblasti koje deluju produktivno ali ne donose pomak, dobijate specifičnu sliku svojih stvarnih snaga i najvrednijih prilika za rast. Dobijate polaznu tačku.\n\nHB Kompas samo-procena vam daje tu polaznu tačku — utemeljenu u modelu koji odražava punu realnost profesionalne izvrsnosti, a ne samo delove koje je najlakše izmeriti.",
+    chooseTitle: "Izaberite svoj profil da biste počeli",
+    chooseText: "HB Kompas je izgrađen oko idealnih profila — opisa vrhunskog učinka specifičnih za svaku ulogu, na svakom nivou razvoja. Vaša samo-procena je uvek vezana za profil koji odgovara vašoj ulozi, tako da su povratne informacije koje dobijate relevantne i konkretne — a ne generički rezultat u odnosu na apstraktni standard.",
+    chooseLabel: "Izaberite profil koji najbolje odražava vašu trenutnu ulogu kako biste započeli samo-procenu:"
+},
+        leader: {
+    title: "Lider za kojim drugi dobrovoljno idu",
+    subtitle: "HB Kompas — Profil inspirativnog liderstva",
+    mainDescription: "Postoji razlika između toga da se zauzima liderska pozicija i toga da se zaista vodi. Većina ljudi koji upravljaju timovima, vode projekte ili snose odgovornost za tuđe rezultate ovo razume instinktivno — jer su i sami iskusili obe vrste lidera. Radili su za nekoga ko ih je terao da daju sve od sebe, i radili su za nekoga ko ih je terao da odu. Razlika između ta dva iskustva nije iskustvo, inteligencija ni tehnička stručnost. To je liderstvo.\n\nProfil inspirativnog liderstva opisuje kako izgleda zaista efikasno liderstvo danas — ne kao apstraktni ideal, već kao skup vidljivih, razvijenih sposobnosti koje pravi lideri na svakom nivou mogu da razumeju, procene i razvijaju.",
+    whatTitle: "Kako izgleda inspirativan lider?",
+    whatText: "Profil inspirativnog liderstva izgrađen je na jasnom i iskrenom pogledu na ono što liderstvo zahteva u današnjim organizacijama. On daleko prevazilazi upravljanje realizacijom ili postizanje ciljeva. Inspirativan lider istovremeno čini četiri stvari — i upravo kombinacija sve četiri pravi razliku između nekoga ko zauzima lidersku ulogu i nekoga ko zaista vodi.",
+    capabilities: [
+        {
+            title: "Postižu rezultate — i grade kapacitet za buduće rezultate",
+            text: "Inspirativan lider postiže stvari. Postavlja jasne, ambiciozne ciljeve koje njegov tim razume i kojima je posvećen. Donosi dobre odluke pod pritiskom. Upravlja realizacijom s iskrenošću i brigom istovremeno — drži ljude na visokim standardima, a istovremeno ulaže u njihov razvoj. Kada stvari krenu po zlu, reaguje smireno i rešava uzroke, a ne simptome.\n\nAli ne staje na kratkoročnim rezultatima. Strateški razmišlja o tome kuda treba da idu njegov tim i organizacija. Vodi promenu umesto da je samo prati. Gradi sposobnosti u ljudima oko sebe kako bi rezultati bili održivi — a ne zavisni od njegovog stalnog prisustva i napora.\n\nOva kombinacija — postizanje rezultata danas uz istovremenu gradnju za sutra — jedan je od najzahtevnijih aspekata liderstva, i jedan od najvažnijih."
+        },
+        {
+            title: "Vode iz ispravnog načina razmišljanja",
+            text: "Način na koji lider razmišlja oblikuje sve što njegov tim doživljava. Inspirativan lider donosi razvojni način razmišljanja u svoju ulogu — veruje da se sposobnosti razvijaju kroz trud i učenje, a ne da su fiksirane talentom ili okolnostima. Ovo uverenje modeluje kroz sopstveni odnos prema izazovima i neuspesima, i stvara okruženje u kome se tim oseća bezbedno da preuzima rizike, pravi greške i uči.\n\nSamosvestan je — iskreno, a ne za javnost. Razume sopstvene snage i granice tih snaga. Traži povratne informacije i koristi ih. Prihvata odgovornost za svoje odluke i rezultate, bez prebacivanja krivice na okolnosti ili druge ljude.\n\nTakođe je otporan i prilagodljiv — ne u smislu da ga pritisak ne dotiče, već u smislu da zadržava efikasnost i perspektivu kada su stvari teške, i oporavlja se dovoljno brzo da nastavi da vodi dobro.\n\nIskreno je posvećen misiji i vrednostima organizacije — ne zato što se to od njega očekuje, već zato što razume šta gradi i zašto to ima smisla."
+        },
+        {
+            title: "Poseduju veštine koje liderstvo zaista zahteva",
+            text: "Tehnička stručnost dovodi ljude do liderskih uloga. Ono što ih čini efikasnim je potpuno drugačiji skup sposobnosti.\n\nInspirativan lider upravlja svojim vremenom i prioritetima sa pravom sofisticiranošću — ne samo ostajući zauzet, već se dosledno fokusirajući na ono što je najvažnije. Komunicira na načine koji se povezuju s različitim auditorijumima i podstiču pravo razumevanje, a ne samo formalnu saglasnost. Delegira s namerom — ne prebacujući zadatke, već stvarajući osećaj vlasništva. Vodi teške razgovore bez narušavanja odnosa. Razvija ljude namerno i prepoznaje njihove doprinose na načine koji zaista motivišu.\n\nOve veštine se mogu naučiti. Ali zahtevaju iskren uvid u to gde se trenutno nalazite — jer razlika između uverenja da ste dobri u delegiranju i stvarnog bavljenja delegiranjem jedan je od najčešćih slepih tačaka u liderstvu."
+        },
+        {
+            title: "Stvaraju okruženje u kome drugi žele da budu",
+            text: "Poslednja dimenzija inspirativnog liderstva je možda najmanje opipljiva — i najmoćnija. To je iskustvo koje lider stvara za ljude oko sebe.\n\nInspirativan lider čini da se njegov tim oseća iskreno cenjeno — ne kroz generičke pohvale, već kroz autentičnu prisutnost, pravo empatiju i vrstu uključenosti koja osigurava da svaki glas doprinosi ishodima. Gradi poverenje kroz doslednost — radi ono što kaže, govori ono što misli i isti je čovek u teškim razgovorima kao i u lakim.\n\nI pokreće ljude na akciju — ne pritiskom ili autoritetom stečenim putem pozicije, već vizijom koja čini rad smislenim, osnaživanjem koje čini vlasništvo prirodnim i uticajem koji inspiriše posvećenost, a ne samo poslušnost.\n\nTo je ono što odvaja menadžera od lidera za kojim ljudi zaista dobrovoljno idu."
+        }
+    ],
+    levelsTitle: "Pet nivoa razvoja liderstva",
+    levelsIntro: "Profil inspirativnog liderstva ne opisuje liderstvo kao nešto što ili imate ili nemate. Opisuje razvojni put — put na kome se svaki lider negde nalazi i koji nikada zapravo ne završava. Kroz svaku sposobnost u profilu, razvoj je opisan na pet nivoa:",
+    levels: [
+        { name: "U nastajanju", text: "Gradite temeljno razumevanje i počinjete da razvijate novu sposobnost. Vaš pristup može biti nedosledan i koristite se od vođenja i strukturirane podrške." },
+        { name: "U razvoju", text: "Napredujete u ovoj oblasti i demonstrirate sposobnost u jednostavnim situacijama. Gradite samopouzdanje i doslednost, mada vas složene situacije još uvek mogu izazvati." },
+        { name: "Kompetentni", text: "Demonstrirate ovu sposobnost pouzdano i efikasno u većini situacija. Ovo je prava snaga na kojoj možete da gradite i na koju se drugi mogu osloniti." },
+        { name: "Napredni", text: "Demonstrirate sofisticiranu, nijansiranu sposobnost koja prevazilazi efikasan učinak. Anticipirate složenost, spretno se prilagođavate i pomažete drugima da se razvijaju u ovoj oblasti." },
+        { name: "Ekspertski", text: "Demonstrirate majstorsku, prepoznatljivu sposobnost koja oblikuje način na koji drugi razmišljaju i praktikuju ovaj aspekt liderstva. Vi ste prepoznati resurs i model za druge." }
+    ],
+    levelsFootnote: "Većina lidera će se naći na različitim nivoima u različitim sposobnostima — i upravo ta varijacija je ono što samo-procenu čini korisnom. Pokazuje vam ne samo gde ste jaki, već i gde leži najvrednije razvojno žarište upravo za vas.",
+    whoTitle: "Za koga je ovaj profil?",
+    whoText: "Profil inspirativnog liderstva dizajniran je za svakoga ko nosi odgovornost za druge — formalno ili neformalno. To uključuje lidere timova i menadžere na svakom nivou, visoko rangiranih individualnih saradnika koji vode kroz uticaj, a ne autoritet, profesionalce koji se pripremaju za svoju prvu lidersku ulogu, i iskusne lidere koji žele iskren, strukturiran uvid u to gde se danas nalaze.\n\nLiderstvo nije titula. Ako oblikujete pravac, realizaciju ili razvoj drugih — ovaj profil je za vas.",
+    assessTitle: "Uradite samo-procenu",
+    assessText: "Samo-ocenjivanje traje otprilike 30 minuta. Predstavlja vam realne liderske scenarije i pita vas da odaberete odgovor koji najiskrenije odražava kako se tipično ponašate — ne kako težite da se ponašate i ne kako mislite da biste trebali da se ponašate.\n\nVaši rezultati će vam pokazati gde se nalazite u svakoj dimenziji Profila inspirativnog liderstva, gde se vaša slika o sebi poklapa sa opisom svakog nivoa, i gde leže vaše najvrednije razvojne prilike.\n\nNema tačnih ni pogrešnih odgovora. Postoji samo iskrena slika o tome gde jeste — i jasan pogled na to gde možete da odete.",
+    privacyNote: "Samo-procena je alat za lični razvoj. Vaši odgovori su privatni i koriste se isključivo za generisanje vaših individualnih rezultata. Nikakvi podaci se ne dele sa vašom organizacijom ni trećim stranama.",
+    footer: "Započnite svoje putovanje ka izvanrednom liderstvu danas i otkrijte svoj pun potencijal da inspirišete, vodite i stvarate trajnu promenu!"
+},
+        employee: {
+    title: "Idealni profil modernog zaposlenog",
+    subtitle: "Više od transakcija – Komunikacija zasnovana na vrednostima (VBC)",
+    mainDescription: "U današnjem brzom i složenom poslovnom okruženju, definicija 'idealnog zaposlenog' se menja. Biti tehnički vešt ili fokusiran na zadatke više nije dovoljno — moderni uspeh zahteva sposobnost navigacije ljudskim interakcijama, razumevanje svrhe i stvaranje istinske vrednosti u svakoj komunikaciji.",
+    vbcFeaturesTitle: "Predstavljamo idealni profil modernog zaposlenog, kreiran na osnovu okvira HB Kompasa i duboko ukorenjenog u principima Komunikacije zasnovane na vrednostima (VBC). Šta karakteriše idealnog zaposlenog 'Više od transakcija'?",
+    vbcFeatures: [
+        { title: "Savladava VBC", text: "Sposoban je da privuče pažnju, natera druge da razmišljaju o istinskoj vrednosti i efikasno podstakne akciju — premošćujući komunikacijske praznine i prevazilazeći inerciju." },
+        { title: "Radikalna empatija i strateško slušanje", text: "Duboko razume potrebe, motivacije i strahove drugih, 'čuje neizrečeno' i gradi smislene veze koje su temelj uspešne saradnje." },
+        { title: "Artikuliše vrednost i jasnoću", text: "Prevodi složene ideje u jasne, koncizne poruke koje rezonuju sa primaocem, uvek objašnjavajući 'zašto je to važno' iz perspektive druge strane." },
+        { title: "Proaktivan i agilan", text: "Pokreće inicijative, proaktivno zastupa promene i dosledno transformiše povratne informacije (čak i odbijanje) u vredne podatke za kontinuirano učenje, adaptaciju i poboljšanje." },
+        { title: "Gradi poverenje i inkluzivnost", text: "Stvara okruženje u kome se osećaju sigurnost i pripadnost, gde se cene različite perspektive, a poverenje je temelj svih odnosa." }
+    ],
+    summary: "Ovo je profil pojedinca koji ne samo da uspeva, već i inspiriše, sarađuje i pokreće organizaciju napred — pretvarajući izazove u prilike i promovišući kulturu stalnog rasta.",
+    assessmentCall: "Gde ste vi na ovom putu? Pozivamo vas da uradite našu detaljnu samo-procenu i uporedite svoj trenutni profil sa ovim idealnim. Kao rezultat testa, dobićete preciznu procenu:",
+    assessmentOutcomes: [
+        "Vaše pozicije u odnosu na idealni profil: Jasno ćete videti kako se vaše sposobnosti uklapaju u tražene karakteristike.",
+        "Vaših jakih strana: Identifikovaćete veštine i načine razmišljanja gde ste već izvrsni.",
+        "Oblast za razvoj: Precizno ćete locirati gde možete dodatno raditi na sebi kako biste maksimizirali svoj potencijal."
+    ],
+    footer: "Započnite svoje putovanje ka izvanrednosti danas i otkrijte kako možete postati pokretač promena u svojoj organizaciji!"
+}
     },
     en: {
         common: {
