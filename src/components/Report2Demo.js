@@ -1,148 +1,308 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 const DEMO_EMAIL = 'janamircic17@gmail.com';
 const DEMO_LANG = 'en';
 
 const SAMPLE_ANSWERS = [
-  // RESULTS - SHORT-TERM GOALS
-  { id: 'R_STG_1.1C', score: 1, facet: 'Goal Setting & Operational Focus', pillar: 'SHORT-TERM GOALS', dimension: 'RESULTS', type: 'core',
+  // REZULTATI - KRATKOROČNI CILJEVI
+  { 
+    id: 'R_KC_1.1C', score: 1, 
+    facet: 'Postavljanje ciljeva i operativni fokus, Rešavanje problema i donošenje odluka, Upravljanje učinkom tima, Reagovanje u kriznim situacijama', 
+    pillar: 'KRATKOROČNI CILJEVI', dimension: 'REZULTATI', type: 'core',
     questionText: 'SA - Core Scenario 1.1: It is the start of a busy quarter...',
-    selectedText: 'B. Assign tasks based on immediate priorities and monitor progress as issues emerge...' },
-  { id: 'R_STG_1.1R', score: 3, facet: 'Goal Setting & Operational Focus', pillar: 'SHORT-TERM GOALS', dimension: 'RESULTS', type: 'reflection',
+    selectedText: 'B. Assign tasks based on immediate priorities and monitor progress as issues emerge...' 
+  },
+  { 
+    id: 'R_KC_1.1R', score: 3, 
+    facet: 'Postavljanje ciljeva i operativni fokus, Rešavanje problema i donošenje odluka, Upravljanje učinkom tima, Reagovanje u kriznim situacijama', 
+    pillar: 'KRATKOROČNI CILJEVI', dimension: 'REZULTATI', type: 'reflection',
     questionText: 'SA - Reflection on Impact 1.1: When performance gaps emerge during a quarter...',
-    selectedText: 'B. Initially clear goals sometimes need adjustment due to new information or external factors...' },
-  { id: 'R_STG_1.2C', score: 3, facet: 'Problem-Solving & Decision Making', pillar: 'SHORT-TERM GOALS', dimension: 'RESULTS', type: 'core',
+    selectedText: 'B. Initially clear goals sometimes need adjustment due to new information or external factors...' 
+  },
+  { 
+    id: 'R_KC_1.2C', score: 3, 
+    facet: 'Postavljanje ciljeva i operativni fokus, Rešavanje problema i donošenje odluka, Upravljanje učinkom tima, Reagovanje u kriznim situacijama', 
+    pillar: 'KRATKOROČNI CILJEVI', dimension: 'REZULTATI', type: 'core',
     questionText: 'SA - Core Scenario 1.2: A critical operational error occurs unexpectedly...',
-    selectedText: 'C. I remain calm, organize the team to diagnose the problem, and make a structured decision...' },
-  { id: 'R_STG_1.2R', score: 5, facet: 'Problem-Solving & Decision Making', pillar: 'SHORT-TERM GOALS', dimension: 'RESULTS', type: 'reflection',
+    selectedText: 'C. I remain calm, organize the team to diagnose the problem, and make a structured decision...' 
+  },
+  { 
+    id: 'R_KC_1.2R', score: 5, 
+    facet: 'Postavljanje ciljeva i operativni fokus, Rešavanje problema i donošenje odluka, Upravljanje učinkom tima, Reagovanje u kriznim situacijama', 
+    pillar: 'KRATKOROČNI CILJEVI', dimension: 'REZULTATI', type: 'reflection',
     questionText: 'SA - Reflection on Impact 1.2: When you resolve an operational crisis...',
-    selectedText: 'C. Similar problems rarely recur. The systemic fixes we implement tend to hold...' },
+    selectedText: 'C. Similar problems rarely recur. The systemic fixes we implement tend to hold...' 
+  },
 
-  // RESULTS - LONG-TERM CHANGE
-  { id: 'R_LTC_1.3C', score: 5, facet: 'Strategic Thinking & Vision', pillar: 'LONG-TERM CHANGE', dimension: 'RESULTS', type: 'core',
+  // REZULTATI - DUGOROČNE PROMENE
+  { 
+    id: 'R_DP_1.3C', score: 5, 
+    facet: 'Strateško razmišljanje i vizija, Inovacije i optimizacija procesa, Upravljanje promenama, Izgradnja dugoročnih sposobnosti', 
+    pillar: 'DUGOROČNE PROMENE', dimension: 'REZULTATI', type: 'core',
     questionText: 'SA - Core Scenario 1.3: Your industry is experiencing rapid shifts...',
-    selectedText: 'B. Translate market dynamics into a clear vision for where the team needs to go...' },
-  { id: 'R_LTC_1.3R', score: 1, facet: 'Strategic Thinking & Vision', pillar: 'LONG-TERM CHANGE', dimension: 'RESULTS', type: 'reflection',
+    selectedText: 'B. Translate market dynamics into a clear vision for where the team needs to go...' 
+  },
+  { 
+    id: 'R_DP_1.3R', score: 1, 
+    facet: 'Strateško razmišljanje i vizija, Inovacije i optimizacija procesa, Upravljanje promenama, Izgradnja dugoročnih sposobnosti', 
+    pillar: 'DUGOROČNE PROMENE', dimension: 'REZULTATI', type: 'reflection',
     questionText: 'SA - Reflection on Impact 1.3: When your team pursues long-term capability development...',
-    selectedText: 'B. Team members struggle to prioritize learning alongside daily work...' },
-  { id: 'R_LTC_1.4C', score: 1, facet: 'Innovation & Process Optimization', pillar: 'LONG-TERM CHANGE', dimension: 'RESULTS', type: 'core',
+    selectedText: 'B. Team members struggle to prioritize learning alongside daily work...' 
+  },
+  { 
+    id: 'R_DP_1.4C', score: 1, 
+    facet: 'Strateško razmišljanje i vizija, Inovacije i optimizacija procesa, Upravljanje promenama, Izgradnja dugoročnih sposobnosti', 
+    pillar: 'DUGOROČNE PROMENE', dimension: 'REZULTATI', type: 'core',
     questionText: 'SA - Core Scenario 1.4: A significant, complex process in your team needs optimization...',
-    selectedText: 'B. I prioritize getting my team aligned with the organizational transformation...' },
-  { id: 'R_LTC_1.4R', score: 1, facet: 'Innovation & Process Optimization', pillar: 'LONG-TERM CHANGE', dimension: 'RESULTS', type: 'reflection',
+    selectedText: 'B. I prioritize getting my team aligned with the organizational transformation...' 
+  },
+  { 
+    id: 'R_DP_1.4R', score: 1, 
+    facet: 'Strateško razmišljanje i vizija, Inovacije i optimizacija procesa, Upravljanje promenama, Izgradnja dugoročnih sposobnosti', 
+    pillar: 'DUGOROČNE PROMENE', dimension: 'REZULTATI', type: 'reflection',
     questionText: 'SA - Reflection on Impact 1.4: When you have led a significant organizational change initiative...',
-    selectedText: 'A. Other teams saw the value but encountered obstacles in their own context...' },
+    selectedText: 'A. Other teams saw the value but encountered obstacles in their own context...' 
+  },
 
-  // MINDSET - TOWARDS ONESELF
-  { id: 'M_TO_2.1C', score: 1, facet: 'Self-Awareness & Growth Mindset', pillar: 'TOWARDS ONESELF', dimension: 'MINDSET', type: 'core',
+  // MENTALNI SKLOP - PREMA SEBI
+  { 
+    id: 'M_PS_2.1C', score: 1, 
+    facet: 'Samosvest i mindset rasta, Spremnost na promene', 
+    pillar: 'PREMA SEBI', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.1: You receive significant constructive feedback from a colleague...',
-    selectedText: 'B. I listen to the feedback but find myself initially defending my approach...' },
-  { id: 'M_TO_2.1R', score: 5, facet: 'Self-Awareness & Growth Mindset', pillar: 'TOWARDS ONESELF', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'B. I listen to the feedback but find myself initially defending my approach...' 
+  },
+  { 
+    id: 'M_PS_2.1R', score: 5, 
+    facet: 'Samosvest i mindset rasta, Spremnost na promene', 
+    pillar: 'PREMA SEBI', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.1: When you receive feedback that challenges your approach...',
-    selectedText: 'A. I\'m genuinely curious about feedback, even when it\'s difficult to hear...' },
-  { id: 'M_TO_2.2C', score: 1, facet: 'Change Readiness', pillar: 'TOWARDS ONESELF', dimension: 'MINDSET', type: 'core',
+    selectedText: 'A. I\'m genuinely curious about feedback, even when it\'s difficult to hear...' 
+  },
+  { 
+    id: 'M_PS_2.2C', score: 1, 
+    facet: 'Samosvest i mindset rasta, Spremnost na promene', 
+    pillar: 'PREMA SEBI', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.2: The company announces a significant organizational change...',
-    selectedText: 'A. I acknowledge that change is disruptive and prefer to maintain my established work methods...' },
-  { id: 'M_TO_2.2R', score: 5, facet: 'Change Readiness', pillar: 'TOWARDS ONESELF', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'A. I acknowledge that change is disruptive and prefer to maintain my established work methods...' 
+  },
+  { 
+    id: 'M_PS_2.2R', score: 5, 
+    facet: 'Samosvest i mindset rasta, Spremnost na promene', 
+    pillar: 'PREMA SEBI', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.2: When you face a significant change you didn\'t choose...',
-    selectedText: 'B. I view change as normal and inevitable, and I use the disruption as a chance to reconsider...' },
+    selectedText: 'B. I view change as normal and inevitable, and I use the disruption as a chance to reconsider...' 
+  },
 
-  // MINDSET - TOWARDS OTHERS
-  { id: 'M_TO_2.3C', score: 5, facet: 'Empathy & Conflict Resolution', pillar: 'TOWARDS OTHERS', dimension: 'MINDSET', type: 'core',
+  // MENTALNI SKLOP - PREMA DRUGIMA
+  { 
+    id: 'M_PD_2.3C', score: 5, 
+    facet: 'Empatija i rešavanje konflikata, Posvećenost timu i kolaboracija', 
+    pillar: 'PREMA DRUGIMA', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.3: Two colleagues are engaged in a heated disagreement...',
-    selectedText: 'C. I see conflict as an opportunity for the team to strengthen working relationships...' },
-  { id: 'M_TO_2.3R', score: 3, facet: 'Empathy & Conflict Resolution', pillar: 'TOWARDS OTHERS', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'C. I see conflict as an opportunity for the team to strengthen working relationships...' 
+  },
+  { 
+    id: 'M_PD_2.3R', score: 3, 
+    facet: 'Empatija i rešavanje konflikata, Posvećenost timu i kolaboracija', 
+    pillar: 'PREMA DRUGIMA', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.3: In conflicts or disagreements you\'ve witnessed...',
-    selectedText: 'C. I listen carefully and ask clarifying questions to understand what each person really cares about...' },
-  { id: 'M_TO_2.4C', score: 3, facet: 'Team Commitment & Collaboration', pillar: 'TOWARDS OTHERS', dimension: 'MINDSET', type: 'core',
+    selectedText: 'C. I listen carefully and ask clarifying questions to understand what each person really cares about...' 
+  },
+  { 
+    id: 'M_PD_2.4C', score: 3, 
+    facet: 'Empatija i rešavanje konflikata, Posvećenost timu i kolaboracija', 
+    pillar: 'PREMA DRUGIMA', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.4: Your team is facing a complex, high-stakes project...',
-    selectedText: 'C. I participate in team activities and share my knowledge when asked...' },
-  { id: 'M_TO_2.4R', score: 1, facet: 'Team Commitment & Collaboration', pillar: 'TOWARDS OTHERS', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'C. I participate in team activities and share my knowledge when asked...' 
+  },
+  { 
+    id: 'M_PD_2.4R', score: 1, 
+    facet: 'Empatija i rešavanje konflikata, Posvećenost timu i kolaboracija', 
+    pillar: 'PREMA DRUGIMA', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.4: When a colleague is struggling or working in isolation...',
-    selectedText: 'B. I often don\'t notice, or I assume they\'re handling it independently...' },
+    selectedText: 'B. I often don\'t notice, or I assume they\'re handling it independently...' 
+  },
 
-  // MINDSET - TOWARDS COMPANY
-  { id: 'M_CP_2.5C', score: 5, facet: 'Accountability & Ownership', pillar: 'TOWARDS COMPANY & POSITION', dimension: 'MINDSET', type: 'core',
+  // MENTALNI SKLOP - PREMA KOMPANIJI
+  { 
+    id: 'M_PK_2.5C', score: 5, 
+    facet: 'Odgovornost i vlasništvo (Ownership), Strateško vlasništvo', 
+    pillar: 'PREMA KOMPANIJI', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.5: A high-visibility project you are leading encounters a major setback...',
-    selectedText: 'B. I take full accountability for the setback and work to understand what systemic factors contributed...' },
-  { id: 'M_CP_2.5R', score: 1, facet: 'Accountability & Ownership', pillar: 'TOWARDS COMPANY & POSITION', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'B. I take full accountability for the setback and work to understand what systemic factors contributed...' 
+  },
+  { 
+    id: 'M_PK_2.5R', score: 1, 
+    facet: 'Odgovornost i vlasništvo (Ownership), Strateško vlasništvo', 
+    pillar: 'PREMA KOMPANIJI', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.5: When you\'ve made a difficult decision that wasn\'t popular...',
-    selectedText: 'B. I defended my decision but listened to concerns...' },
-  { id: 'M_CP_2.6C', score: 3, facet: 'Strategic Ownership', pillar: 'TOWARDS COMPANY & POSITION', dimension: 'MINDSET', type: 'core',
+    selectedText: 'B. I defended my decision but listened to concerns...' 
+  },
+  { 
+    id: 'M_PK_2.6C', score: 3, 
+    facet: 'Odgovornost i vlasništvo (Ownership), Strateško vlasništvo', 
+    pillar: 'PREMA KOMPANIJI', dimension: 'MENTALNI SKLOP', type: 'core',
     questionText: 'SA - Core Scenario 2.6: You identify a significant opportunity for the company...',
-    selectedText: 'C. I build a strong business case and actively engage key stakeholders...' },
-  { id: 'M_CP_2.6R', score: 5, facet: 'Strategic Ownership', pillar: 'TOWARDS COMPANY & POSITION', dimension: 'MINDSET', type: 'reflection',
+    selectedText: 'C. I build a strong business case and actively engage key stakeholders...' 
+  },
+  { 
+    id: 'M_PK_2.6R', score: 5, 
+    facet: 'Odgovornost i vlasništvo (Ownership), Strateško vlasništvo', 
+    pillar: 'PREMA KOMPANIJI', dimension: 'MENTALNI SKLOP', type: 'reflection',
     questionText: 'SA - Reflection on Impact 2.6: When you\'ve proposed a strategic initiative that met resistance...',
-    selectedText: 'C. I continued to advocate and engage stakeholders, building a compelling case...' },
+    selectedText: 'C. I continued to advocate and engage stakeholders, building a compelling case...' 
+  },
 
-  // SKILLS - PERSONAL EFFICIENCY
-  { id: 'S_PE_3.1C', score: 5, facet: 'Priority & Time Management', pillar: 'PERSONAL EFFICIENCY', dimension: 'SKILLS', type: 'core',
+  // VEŠTINE - LIČNA EFIKASNOST
+  { 
+    id: 'V_LE_3.1C', score: 5, 
+    facet: 'Upravljanje prioritetima i vremenom, Lično rešavanje problema', 
+    pillar: 'LIČNA EFIKASNOST', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.1: You are managing a heavy workload with multiple competing priorities...',
-    selectedText: 'C. I thoughtfully design a priority system for my team that accounts for different types of work...' },
-  { id: 'S_PE_3.1R', score: 5, facet: 'Priority & Time Management', pillar: 'PERSONAL EFFICIENCY', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'C. I thoughtfully design a priority system for my team that accounts for different types of work...' 
+  },
+  { 
+    id: 'V_LE_3.1R', score: 5, 
+    facet: 'Upravljanje prioritetima i vremenom, Lično rešavanje problema', 
+    pillar: 'LIČNA EFIKASNOST', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.1: When your team has had to adapt to significant changes in tools...',
-    selectedText: 'A. The team adapted relatively quickly to the change...' },
-  { id: 'S_PE_3.2C', score: 3, facet: 'Personal Problem Solving', pillar: 'PERSONAL EFFICIENCY', dimension: 'SKILLS', type: 'core',
+    selectedText: 'A. The team adapted relatively quickly to the change...' 
+  },
+  { 
+    id: 'V_LE_3.2C', score: 3, 
+    facet: 'Upravljanje prioritetima i vremenom, Lično rešavanje problema', 
+    pillar: 'LIČNA EFIKASNOST', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.2: Your team encounters a recurring, complex problem...',
-    selectedText: 'C. I use problem-solving steps to analyse the recurring issue, identify contributing factors...' },
-  { id: 'S_PE_3.2R', score: 3, facet: 'Personal Problem Solving', pillar: 'PERSONAL EFFICIENCY', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'C. I use problem-solving steps to analyse the recurring issue, identify contributing factors...' 
+  },
+  { 
+    id: 'V_LE_3.2R', score: 3, 
+    facet: 'Upravljanje prioritetima i vremenom, Lično rešavanje problema', 
+    pillar: 'LIČNA EFIKASNOST', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.2: When you\'ve solved a recurring problem in your team...',
-    selectedText: 'A. The solution addressed the immediate issue effectively and has generally held up...' },
+    selectedText: 'A. The solution addressed the immediate issue effectively and has generally held up...' 
+  },
 
-  // SKILLS - COMMUNICATION
-  { id: 'S_CO_3.3C', score: 1, facet: 'Value-Based Communication', pillar: 'COMMUNICATION', dimension: 'SKILLS', type: 'core',
+  // VEŠTINE - KOMUNIKACIJA
+  { 
+    id: 'V_KO_3.3C', score: 1, 
+    facet: 'Komunikacija zasnovana na vrednostima, Navigacija kroz stejkholdere', 
+    pillar: 'KOMUNIKACIJA', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.3: You need to explain a complex new strategic initiative to a sceptical senior stakeholder...',
-    selectedText: 'B. I prepare a thorough explanation of the initiative\'s strategic benefits and present the details comprehensively...' },
-  { id: 'S_CO_3.3R', score: 1, facet: 'Value-Based Communication', pillar: 'COMMUNICATION', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'B. I prepare a thorough explanation of the initiative\'s strategic benefits and present the details comprehensively...' 
+  },
+  { 
+    id: 'V_KO_3.3R', score: 1, 
+    facet: 'Komunikacija zasnovana na vrednostima, Navigacija kroz stejkholdere', 
+    pillar: 'KOMUNIKACIJA', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.3: When you\'ve communicated a new initiative to a sceptical stakeholder...',
-    selectedText: 'A. The stakeholder remained sceptical or declined...' },
-  { id: 'S_CO_3.4C', score: 3, facet: 'Stakeholder Navigation', pillar: 'COMMUNICATION', dimension: 'SKILLS', type: 'core',
+    selectedText: 'A. The stakeholder remained sceptical or declined...' 
+  },
+  { 
+    id: 'V_KO_3.4C', score: 3, 
+    facet: 'Komunikacija zasnovana na vrednostima, Navigacija kroz stejkholdere', 
+    pillar: 'KOMUNIKACIJA', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.4: You need to secure a critical resource or gain approval...',
-    selectedText: 'C. I reach out to the other department, explain my project need, and ask about their priorities...' },
-  { id: 'S_CO_3.4R', score: 5, facet: 'Stakeholder Navigation', pillar: 'COMMUNICATION', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'C. I reach out to the other department, explain my project need, and ask about their priorities...' 
+  },
+  { 
+    id: 'V_KO_3.4R', score: 5, 
+    facet: 'Komunikacija zasnovana na vrednostima, Navigacija kroz stejkholdere', 
+    pillar: 'KOMUNIKACIJA', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.4: When you\'ve requested cross-functional support...',
-    selectedText: 'C. The other department understood the request and was able to help...' },
+    selectedText: 'C. The other department understood the request and was able to help...' 
+  },
 
-  // SKILLS - TEAM & PEOPLE DEVELOPMENT
-  { id: 'S_TPD_3.5C', score: 3, facet: 'Empowering Delegation', pillar: 'TEAM & PEOPLE DEVELOPMENT', dimension: 'SKILLS', type: 'core',
+  // VEŠTINE - RAZVOJ TIMA I LJUDI
+  { 
+    id: 'V_RT_3.5C', score: 3, 
+    facet: 'Delegiranje koje osnažuje, Teški razgovori', 
+    pillar: 'RAZVOJ TIMA I LJUDI', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.5: You have a high-potential team member ready for a stretch assignment...',
-    selectedText: 'C. I select the stretch assignment with both the project need and the person\'s development in mind...' },
-  { id: 'S_TPD_3.5R', score: 3, facet: 'Empowering Delegation', pillar: 'TEAM & PEOPLE DEVELOPMENT', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'C. I select the stretch assignment with both the project need and the person\'s development in mind...' 
+  },
+  { 
+    id: 'V_RT_3.5R', score: 3, 
+    facet: 'Delegiranje koje osnažuje, Teški razgovori', 
+    pillar: 'RAZVOJ TIMA I LJUDI', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.5: When you delegate a challenging assignment to a team member...',
-    selectedText: 'A. The team member works through the challenges with periodic check-ins from me...' },
-  { id: 'S_TPD_3.6C', score: 3, facet: 'Difficult Conversations', pillar: 'TEAM & PEOPLE DEVELOPMENT', dimension: 'SKILLS', type: 'core',
+    selectedText: 'A. The team member works through the challenges with periodic check-ins from me...' 
+  },
+  { 
+    id: 'V_RT_3.6C', score: 3, 
+    facet: 'Delegiranje koje osnažuje, Teški razgovori', 
+    pillar: 'RAZVOJ TIMA I LJUDI', dimension: 'VEŠTINE', type: 'core',
     questionText: 'SA - Core Scenario 3.6: You need to address a direct report\'s consistent negative behaviour...',
-    selectedText: 'A. I prepare concrete examples and schedule a private conversation to discuss the negative behaviour...' },
-  { id: 'S_TPD_3.6R', score: 1, facet: 'Difficult Conversations', pillar: 'TEAM & PEOPLE DEVELOPMENT', dimension: 'SKILLS', type: 'reflection',
+    selectedText: 'A. I prepare concrete examples and schedule a private conversation to discuss the negative behaviour...' 
+  },
+  { 
+    id: 'V_RT_3.6R', score: 1, 
+    facet: 'Delegiranje koje osnažuje, Teški razgovori', 
+    pillar: 'RAZVOJ TIMA I LJUDI', dimension: 'VEŠTINE', type: 'reflection',
     questionText: 'SA - Reflection on Impact 3.6: When you\'ve given difficult feedback to a team member...',
-    selectedText: 'C. The conversation felt awkward or defensive...' },
+    selectedText: 'C. The conversation felt awkward or defensive...' 
+  },
 
-  // INFLUENCE - HOW DO I MAKE MY TEAM FEEL?
-  { id: 'I_MTF_4.1C', score: 3, facet: 'Emotional Intelligence & Inclusion', pillar: 'HOW DO I MAKE MY TEAM FEEL?', dimension: 'INFLUENCE', type: 'core',
+  // UTICAJ - KAKO SE TIM OSEĆA
+  { 
+    id: 'U_TO_4.1C', score: 3, 
+    facet: 'Emocionalna inteligencija i inkluzija, Izgradnja poverenja', 
+    pillar: 'KAKO SE TIM OSEĆA', dimension: 'UTICAJ', type: 'core',
     questionText: 'SA - Core Scenario 4.1: You are leading a team meeting discussing a sensitive organizational change...',
-    selectedText: 'A. I acknowledge that change can create anxiety and invite the team to share their concerns...' },
-  { id: 'I_MTF_4.1R', score: 1, facet: 'Emotional Intelligence & Inclusion', pillar: 'HOW DO I MAKE MY TEAM FEEL?', dimension: 'INFLUENCE', type: 'reflection',
+    selectedText: 'A. I acknowledge that change can create anxiety and invite the team to share their concerns...' 
+  },
+  { 
+    id: 'U_TO_4.1R', score: 1, 
+    facet: 'Emocionalna inteligencija i inkluzija, Izgradnja poverenja', 
+    pillar: 'KAKO SE TIM OSEĆA', dimension: 'UTICAJ', type: 'reflection',
     questionText: 'SA - Reflection on Impact 4.1: When you\'ve led a meeting with anxious or hesitant team members...',
-    selectedText: 'A. Some team members remained visibly anxious or withdrawn throughout the meeting...' },
-  { id: 'I_MTF_4.2C', score: 1, facet: 'Trust Building', pillar: 'HOW DO I MAKE MY TEAM FEEL?', dimension: 'INFLUENCE', type: 'core',
+    selectedText: 'A. Some team members remained visibly anxious or withdrawn throughout the meeting...' 
+  },
+  { 
+    id: 'U_TO_4.2C', score: 1, 
+    facet: 'Emocionalna inteligencija i inkluzija, Izgradnja poverenja', 
+    pillar: 'KAKO SE TIM OSEĆA', dimension: 'UTICAJ', type: 'core',
     questionText: 'SA - Core Scenario 4.2: You\'ve made a difficult leadership decision that negatively impacts a few individuals...',
-    selectedText: 'B. I communicate the decision clearly and directly, explaining the business rationale...' },
-  { id: 'I_MTF_4.2R', score: 5, facet: 'Trust Building', pillar: 'HOW DO I MAKE MY TEAM FEEL?', dimension: 'INFLUENCE', type: 'reflection',
+    selectedText: 'B. I communicate the decision clearly and directly, explaining the business rationale...' 
+  },
+  { 
+    id: 'U_TO_4.2R', score: 5, 
+    facet: 'Emocionalna inteligencija i inkluzija, Izgradnja poverenja', 
+    pillar: 'KAKO SE TIM OSEĆA', dimension: 'UTICAJ', type: 'reflection',
     questionText: 'SA - Reflection on Impact 4.2: When you\'ve communicated a difficult decision that negatively affected some people...',
-    selectedText: 'C. People understood the decision and the reasoning behind it...' },
+    selectedText: 'C. People understood the decision and the reasoning behind it...' 
+  },
 
-  // INFLUENCE - HOW DO I INDUCE ACTION?
-  { id: 'I_HIA_4.3C', score: 1, facet: 'Empowerment & Accountability', pillar: 'HOW DO I INDUCE ACTION?', dimension: 'INFLUENCE', type: 'core',
+  // UTICAJ - KAKO PODSTIČEM AKCIJU
+  { 
+    id: 'U_PA_4.3C', score: 1, 
+    facet: 'Osnaživanje i odgovornost, Strateški uticaj', 
+    pillar: 'KAKO PODSTIČEM AKCIJU', dimension: 'UTICAJ', type: 'core',
     questionText: 'SA - Core Scenario 4.3: Your team is facing a complex, high-stakes project with a critical deadline...',
-    selectedText: 'B. I focus on delivering excellence in my assigned responsibilities and assume others are doing the same...' },
-  { id: 'I_HIA_4.3R', score: 5, facet: 'Empowerment & Accountability', pillar: 'HOW DO I INDUCE ACTION?', dimension: 'INFLUENCE', type: 'reflection',
+    selectedText: 'B. I focus on delivering excellence in my assigned responsibilities and assume others are doing the same...' 
+  },
+  { 
+    id: 'U_PA_4.3R', score: 5, 
+    facet: 'Osnaživanje i odgovornost, Strateški uticaj', 
+    pillar: 'KAKO PODSTIČEM AKCIJU', dimension: 'UTICAJ', type: 'reflection',
     questionText: 'SA - Reflection on Impact 4.3: When you\'ve tried to inspire ownership or drive action...',
-    selectedText: 'C. Team members took more ownership after my engagement...' },
-  { id: 'I_HIA_4.4C', score: 5, facet: 'Strategic Influence', pillar: 'HOW DO I INDUCE ACTION?', dimension: 'INFLUENCE', type: 'core',
+    selectedText: 'C. Team members took more ownership after my engagement...' 
+  },
+  { 
+    id: 'U_PA_4.4C', score: 5, 
+    facet: 'Osnaživanje i odgovornost, Strateški uticaj', 
+    pillar: 'KAKO PODSTIČEM AKCIJU', dimension: 'UTICAJ', type: 'core',
     questionText: 'SA - Core Scenario 4.4: You identify a new, ambitious strategic direction...',
-    selectedText: 'A. I think carefully about who needs to support the initiative and engage them in understanding the proposal...' },
-  { id: 'I_HIA_4.4R', score: 1, facet: 'Strategic Influence', pillar: 'HOW DO I INDUCE ACTION?', dimension: 'INFLUENCE', type: 'reflection',
+    selectedText: 'A. I think carefully about who needs to support the initiative and engage them in understanding the proposal...' 
+  },
+  { 
+    id: 'U_PA_4.4R', score: 1, 
+    facet: 'Osnaživanje i odgovornost, Strateški uticaj', 
+    pillar: 'KAKO PODSTIČEM AKCIJU', dimension: 'UTICAJ', type: 'reflection',
     questionText: 'SA - Reflection on Impact 4.4: When you\'ve advocated for a strategic initiative that faced resistance...',
-    selectedText: 'B. The initiative was declined or significantly delayed...' },
+    selectedText: 'B. The initiative was declined or significantly delayed...' 
+  }
 ];
 
 const PILLAR_COLORS = {
@@ -170,6 +330,9 @@ export default function Report2Demo() {
   const [errorMsg, setErrorMsg] = useState('');
   const [generatedText, setGeneratedText] = useState('');
   const [pdfError, setPdfError] = useState('');
+  const [pollSeconds, setPollSeconds] = useState(0);
+  const pollIntervalRef = useRef(null);
+  const pollSecondsRef = useRef(0);
 
   const grouped = SAMPLE_ANSWERS.reduce((acc, q) => {
     if (!acc[q.pillar]) acc[q.pillar] = [];
@@ -207,10 +370,78 @@ export default function Report2Demo() {
     }
   };
 
+  const stopPolling = () => {
+    if (pollIntervalRef.current) {
+      clearInterval(pollIntervalRef.current);
+      pollIntervalRef.current = null;
+    }
+    pollSecondsRef.current = 0;
+    setPollSeconds(0);
+  };
+
+  const startPolling = (jobId) => {
+    const MAX_SECONDS = 900;
+
+    pollIntervalRef.current = setInterval(async () => {
+      pollSecondsRef.current += 5;
+      setPollSeconds(pollSecondsRef.current);
+
+      if (pollSecondsRef.current >= MAX_SECONDS) {
+        stopPolling();
+        setErrorMsg('Timeout — generisanje je trajalo predugo. Pokušajte ponovo.');
+        setStatus('error');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/public-assessment/report-status/${jobId}`);
+        const data = await res.json();
+
+        if (!res.ok) {
+          stopPolling();
+          setErrorMsg(data.message || `Greška ${res.status}`);
+          setStatus('error');
+          return;
+        }
+
+        if (data.status === 'done') {
+          stopPolling();
+          const reportText = data.report || '';
+          setGeneratedText(reportText);
+
+          // Sačuvaj report u bazu da /report2-pdf može da ga nađe
+          try {
+            await fetch(`${API_BASE_URL}/api/public-assessment/save-authorized-report`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, report: reportText }),
+            });
+          } catch (saveErr) {
+            console.error('Save report error:', saveErr);
+          }
+
+          setStatus('done');
+        } else if (data.status === 'error') {
+          stopPolling();
+          setErrorMsg(data.message || 'Greška pri generisanju izveštaja.');
+          setStatus('error');
+        }
+        // status === 'pending' → nastavljamo polling
+      } catch (err) {
+        stopPolling();
+        setErrorMsg('Konekcija prekinuta tokom čekanja: ' + err.message);
+        setStatus('error');
+      }
+    }, 5000);
+  };
+
   const handleGenerate = async () => {
     setStatus('loading');
     setErrorMsg('');
     setGeneratedText('');
+    setPollSeconds(0);
+    pollSecondsRef.current = 0;
+
     try {
       const res = await fetch(`${API_BASE_URL}/api/public-assessment/generate-authorized-report`, {
         method: 'POST',
@@ -218,11 +449,19 @@ export default function Report2Demo() {
         body: JSON.stringify({ email, lang: DEMO_LANG }),
       });
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (!res.ok) {
+        setErrorMsg(data.message || `Greška ${res.status}`);
+        setStatus('error');
+        return;
+      }
+      if (data.jobId) {
+        startPolling(data.jobId);
+      } else if (data.success) {
+        // Backend vratio direktno (sinhrono)
         setGeneratedText(data.report || '');
         setStatus('done');
       } else {
-        setErrorMsg(data.message || 'Greška pri generisanju izveštaja.');
+        setErrorMsg(data.message || 'Nije vraćen jobId ni report.');
         setStatus('error');
       }
     } catch (err) {
@@ -347,7 +586,9 @@ export default function Report2Demo() {
                 ))}
               </div>
               <span style={{ fontSize: '13px', color: '#888' }}>
-                AI analizira odgovore — može trajati 30–60 sekundi...
+                {pollSeconds > 0
+                  ? `AI analizira odgovore — ${pollSeconds}s...`
+                  : 'Pokretanje generisanja...'}
               </span>
             </div>
           )}
